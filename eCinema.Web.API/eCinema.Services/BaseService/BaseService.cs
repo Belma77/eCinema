@@ -29,7 +29,7 @@ namespace eCinema.Services
         {
             var query = _context.Set<TDatabase>().AsQueryable();
 
-            query = AddFilter(query, search);
+           query = AddFilter(query, search);
 
             query= AddInclude(query, search);
 

@@ -5,6 +5,7 @@ using eCinema.Services.BaseService;
 using eCinema.Services.CRUDservice;
 using eCinema.Services.DirectorService;
 using eCinema.Services.GenresServices;
+using eCinema.Services.HallServices;
 using eCinema.Services.MoviesServices;
 using eCinema.Services.ProducerServices;
 using eCinema.Services.Profiles;
@@ -56,6 +57,7 @@ public class Program
         builder.Services.AddTransient<IProducerService, ProducerService>();
         builder.Services.AddTransient<IScheduleService, ScheduleService>();
         builder.Services.AddTransient<IGenresSerice, GenresService>();
+        builder.Services.AddTransient<IHallService, HallService>();
 
         builder.Services.AddMvc().AddNewtonsoftJson();
         builder.Services.AddControllers()

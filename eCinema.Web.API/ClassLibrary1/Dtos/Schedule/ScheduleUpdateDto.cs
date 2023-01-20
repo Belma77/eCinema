@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Schedule
 {
-    public class GetSchedulesDto
+    public class ScheduleUpdateDto
     {
         public int Id { get; set; }
+        public int MovieId { get; set; }
         public MovieDto Movie { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }

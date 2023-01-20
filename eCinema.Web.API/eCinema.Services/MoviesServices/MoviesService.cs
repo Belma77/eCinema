@@ -53,7 +53,7 @@ namespace eCinema.Services.MoviesServices
             var filteredQuery = base.AddFilter(query, search);
             if(!string.IsNullOrEmpty(search?.Title))
             {
-                filteredQuery = query.Where(x => x.Title == search.Title);
+                filteredQuery = query.Where(x => x.Title.StartsWith(search.Title));
             }
 
             return filteredQuery;

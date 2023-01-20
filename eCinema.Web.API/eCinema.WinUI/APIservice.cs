@@ -1,4 +1,5 @@
-﻿using eCInema.Models.Dtos;
+﻿using eCInema.Models;
+using eCInema.Models.Dtos;
 using Flurl.Http;
 using System;
 using System.Collections.Generic;
@@ -21,16 +22,17 @@ namespace eCinema.WinUI
 
         public async Task<T> Get<T>(object search = null)
         {
-            //var query = "";
-            //if (search != null)
-            //{
-            //    query = await search.ToQueryString();
-            //}
+            var query = "";
+            if (search != null)
+            {
+                query = await search.ToQueryString();
+            }
 
-            var list = await $"{_endpoint}{_resource}".GetJsonAsync<T>();
+            var list = await $"{_endpoint}{_resource}?{query}".GetJsonAsync<T>();
 
             return list;
         }
+
         public async Task<T> GetById<T>(object id)
         {
             var result = await $"{_endpoint}{_resource}/{id}".GetJsonAsync<T>();

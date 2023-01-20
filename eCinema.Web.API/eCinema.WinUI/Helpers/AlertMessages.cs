@@ -8,8 +8,11 @@ namespace eCinema.WinUI.Helpers
 {
     public class AlertMessages
     {
-        public const string RequiredField = "RequiredField";
-        public const string NotEmptyField = "Enter at least one First and Last Name";
+        public const string RequiredField = "Required Field!";
+        public const string NotEmptyField = "Enter at least one First and Last Name!";
+        public const string SuccessfulyAdded = "Successfuly Added!";
+        public const string Delete = "Are you sure you want to delete selected item?";
+
 
     }
 }

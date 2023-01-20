@@ -5,15 +5,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Schedule
 {
-    public class ScheduleUpdateDto
+    public class GetSchedulesDto
     {
-        public int MovieId { get; set; }
+        public int Id { get; set; }
         public MovieDto Movie { get; set; }
+        public int MovieId { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int NoHall { get; set; }
+        public int NoAvailabelSeats { get; set; }
     }
 }

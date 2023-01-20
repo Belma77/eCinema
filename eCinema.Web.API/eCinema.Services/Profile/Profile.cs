@@ -3,6 +3,8 @@ using eCInema.Data.Dtos;
 using eCInema.Data.Entities;
 using eCInema.Models;
 using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Hall;
+using eCInema.Models.Dtos.Schedule;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using System;
@@ -61,7 +63,11 @@ namespace eCinema.Services.Profiles
             CreateMap<ScheduleInsertDto, Schedule>();
             CreateMap<ScheduleUpdateDto, Schedule>();
 
+            CreateMap<Schedule, GetSchedulesDto>();
+            CreateMap<GetSchedulesDto,Schedule>();
 
+            CreateMap<HallDto, Hall>();
+            CreateMap<Hall, HallDto>();
 
         }
 

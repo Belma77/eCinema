@@ -1,5 +1,5 @@
 ﻿using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Schedule;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;

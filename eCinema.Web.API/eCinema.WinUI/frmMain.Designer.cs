@@ -72,6 +72,7 @@
             this.scheduleOfProjectionsToolStripMenuItem.Name = "scheduleOfProjectionsToolStripMenuItem";
             this.scheduleOfProjectionsToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
             this.scheduleOfProjectionsToolStripMenuItem.Text = "Schedule of projections";
+            this.scheduleOfProjectionsToolStripMenuItem.Click += new System.EventHandler(this.scheduleOfProjectionsToolStripMenuItem_Click);
             // 
             // reservationsToolStripMenuItem
             // 

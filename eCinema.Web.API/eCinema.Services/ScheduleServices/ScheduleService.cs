@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Schedule;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
 using Microsoft.EntityFrameworkCore;
