@@ -1,4 +1,5 @@
-﻿using eCinema.WinUI.ScheduleForms;
+﻿using eCinema.WinUI.Customers;
+using eCinema.WinUI.ScheduleForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,6 +29,18 @@ namespace eCinema.WinUI
         private void scheduleOfProjectionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmSchedule frm=new frmSchedule();
+            frm.ShowDialog();
+        }
+
+        private void usersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmCustomers frm = new frmCustomers();
+            frm.ShowDialog();
+        }
+
+        private void reservationsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmReservations frm = new frmReservations();
             frm.ShowDialog();
         }
     }

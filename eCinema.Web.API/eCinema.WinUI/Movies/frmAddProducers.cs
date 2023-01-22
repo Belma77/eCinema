@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using eCInema.Data.Dtos;
+using eCInema.Models.Dtos.Movies;
 
 namespace eCinema.WinUI
 {

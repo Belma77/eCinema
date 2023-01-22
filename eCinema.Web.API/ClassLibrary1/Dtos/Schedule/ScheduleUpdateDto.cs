@@ -1,4 +1,5 @@
-﻿using eCInema.Models.SearchObjects;
+﻿using eCInema.Models.Dtos.Movies;
+using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;

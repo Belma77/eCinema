@@ -22,15 +22,32 @@ namespace eCinema.WinUI
 
         public async Task<T> Get<T>(object search = null)
         {
-            var query = "";
-            if (search != null)
+            try
             {
-                query = await search.ToQueryString();
+                var query = "";
+                if (search != null)
+                {
+                    query = await search.ToQueryString();
+                }
+
+                var list = await $"{_endpoint}{_resource}?{query}".GetJsonAsync<T>();
+
+                return list;
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
             }
 
-            var list = await $"{_endpoint}{_resource}?{query}".GetJsonAsync<T>();
-
-            return list;
         }
 
         public async Task<T> GetById<T>(object id)
@@ -42,8 +59,23 @@ namespace eCinema.WinUI
 
         public async Task Delete(int id)
         {
-           await $"{_endpoint}{_resource}/{id}".DeleteAsync();
-           
+            try
+            {
+                await $"{_endpoint}{_resource}/{id}".DeleteAsync();
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //return default(T);
+            }
         }
 
         public async Task DeleteObject<T>(List<T> delete)
@@ -71,9 +103,25 @@ namespace eCinema.WinUI
         
         public async Task<T> Put<T>(object id, object request)
         {
-            var result = await $"{_endpoint}{_resource}/{id}".PutJsonAsync(request).ReceiveJson<T>();
+            try
+            {
+                var result = await $"{_endpoint}{_resource}/{id}".PutJsonAsync(request).ReceiveJson<T>();
 
-            return result;
+                return result;
+            }
+            catch (FlurlHttpException ex)
+            {
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
+
+                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return default(T);
+            }
         }
 
         public async Task<T> PostArray<T>(object id,List<T> request)

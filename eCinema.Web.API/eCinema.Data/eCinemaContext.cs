@@ -28,6 +28,9 @@ namespace eCinema.Data
         public DbSet<Producer> Producers { get; set; }
         public DbSet<ProducerMovies> ProducersMovies { get; set; }
         public DbSet<Hall> Halls { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Reservation> Reservations { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

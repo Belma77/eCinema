@@ -10,8 +10,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eCinema.WinUI.Helpers;
-using eCInema.Data.Dtos;
 using MediaBrowser.Model.Services;
+using eCInema.Models.Dtos.Movies;
 
 namespace eCinema.WinUI
 {

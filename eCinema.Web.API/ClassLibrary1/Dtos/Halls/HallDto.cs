@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos.Hall
+namespace eCInema.Models.Dtos.Halls
 {
     public class HallDto
     {

@@ -1,5 +1,5 @@
 ﻿using eCinema.Services.HallServices;
-using eCInema.Models.Dtos.Hall;
+using eCInema.Models.Dtos.Halls;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

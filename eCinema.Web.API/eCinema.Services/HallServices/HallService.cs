@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos.Hall;
+using eCInema.Models.Dtos.Halls;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,6 @@
 using eCInema.Models;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movies;
+using eCInema.Models.SearchObjects;
 using Flurl.Http;
 
 namespace eCinema.WinUI
@@ -21,7 +22,10 @@ namespace eCinema.WinUI
 
         public async Task LoadMovies()
         {
-            var list = await _service.Get<List<MovieDetailsDto>>();
+            var search = new MoviesSearchObject();
+            search.Title=txtTitle.Text;
+            
+            var list = await _service.Get<List<MovieDetailsDto>>(search);
             dgvMovies.AutoGenerateColumns = false;
             if(list!= null)
             dgvMovies.DataSource = list;
@@ -51,6 +55,11 @@ namespace eCinema.WinUI
             this.Hide();
             frmAddMovie frm = new frmAddMovie();
             frm.ShowDialog();
+        }
+
+        private async void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            await LoadMovies();
         }
     }
 }

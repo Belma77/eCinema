@@ -40,7 +40,7 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).BeginInit();
             this.SuspendLayout();
@@ -54,12 +54,12 @@
             this.Duration,
             this.Country,
             this.Details});
-            this.dgvMovies.Location = new System.Drawing.Point(12, 101);
+            this.dgvMovies.Location = new System.Drawing.Point(18, 128);
             this.dgvMovies.Name = "dgvMovies";
             this.dgvMovies.RowHeadersWidth = 51;
             this.dgvMovies.RowTemplate.Height = 29;
             this.dgvMovies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvMovies.Size = new System.Drawing.Size(697, 244);
+            this.dgvMovies.Size = new System.Drawing.Size(700, 244);
             this.dgvMovies.TabIndex = 0;
             this.dgvMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovies_CellContentClick);
             // 
@@ -135,7 +135,7 @@
             this.label1.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(75, 28);
             this.label1.TabIndex = 1;
@@ -143,7 +143,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(615, 364);
+            this.btnAdd.Location = new System.Drawing.Point(624, 390);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
             this.btnAdd.TabIndex = 2;
@@ -151,17 +151,18 @@
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // textBox1
+            // txtTitle
             // 
-            this.textBox1.Location = new System.Drawing.Point(62, 52);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(647, 27);
-            this.textBox1.TabIndex = 3;
+            this.txtTitle.Location = new System.Drawing.Point(71, 72);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(647, 27);
+            this.txtTitle.TabIndex = 3;
+            this.txtTitle.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 56);
+            this.label2.Location = new System.Drawing.Point(12, 79);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(38, 20);
             this.label2.TabIndex = 4;
@@ -171,9 +172,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(721, 405);
+            this.ClientSize = new System.Drawing.Size(730, 431);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtTitle);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvMovies);
@@ -199,7 +200,7 @@
         private DataGridViewButtonColumn Details;
         private Label label1;
         private Button btnAdd;
-        private TextBox textBox1;
+        private TextBox txtTitle;
         private Label label2;
     }
 }

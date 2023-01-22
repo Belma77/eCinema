@@ -10,11 +10,12 @@ namespace eCInema.Models.Entities
     {
         public int Id { get; set; }
         public int MovieId { get; set; }
-        public Movies? Movie { get; set; } //nullable?
+        public Movies Movie { get; set; } //nullable?
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
-        public int NoHall { get; set; }
+        public int HallId { get; set; }
+        public Hall Hall { get; set; }
         public int NoAvailableSeats { get; set; }
     }
 }

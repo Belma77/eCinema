@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
-using eCInema.Data.Dtos;
 using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movies;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;

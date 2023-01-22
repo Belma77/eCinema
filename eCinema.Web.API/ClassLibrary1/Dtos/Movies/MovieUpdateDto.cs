@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Data.Dtos
+namespace eCInema.Models.Dtos.Movies
 {
-    public  class MovieUpdateDto
+    public class MovieUpdateDto
     {
 
         public string? Title { get; set; }

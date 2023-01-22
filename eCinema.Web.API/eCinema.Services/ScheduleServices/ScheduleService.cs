@@ -22,7 +22,25 @@ namespace eCinema.Services.ScheduleServices
 
         public override IQueryable<Schedule> AddInclude(IQueryable<Schedule> query, ScheduleSearchObject searchObject = null)
         {
-            return query = query.Include(a => a.Movie);
+            return query = query.Include(a => a.Movie).Include(x=>x.Hall);
+        }
+
+        public override IQueryable<Schedule> AddFilter(IQueryable<Schedule> query, ScheduleSearchObject search = null)
+        {           
+            if(!String.IsNullOrEmpty(search.Title))
+            {
+                query = query.Where(x => x.Movie.Title.StartsWith(search.Title));
+            }
+
+            else if(search.Date.HasValue)
+            {
+                query = query.Where(x => x.Date.Date.Equals(search.Date.Value));
+            }    
+
+            else if(search.NoOfHall.HasValue)
+                query = query.Where(x => x.Hall.NoOfHall==search.NoOfHall);
+
+            return query;
         }
 
         public override GetSchedulesDto GetById(int id)
@@ -33,20 +51,29 @@ namespace eCinema.Services.ScheduleServices
 
         }
 
-        public override void BeforeInsert(ScheduleInsertDto insert, Schedule entity)
+        public override GetSchedulesDto Insert(ScheduleInsertDto insert)
         {
-            var movie = _context.Movies.FirstOrDefault(x=>x.Title==insert.Movie.Title);
+            var movie = _context.Movies.FirstOrDefault(x=>x.Title==insert.Title);
+            var hall = _context.Halls.FirstOrDefault(x => x.NoOfHall == insert.NoHall);
 
-      
             if (movie != null)
             {
-                entity.Movie = movie;
+                insert.MovieId = movie.Id;
             }
 
             else
                 throw new Exception("Movie not found");
 
-            base.BeforeInsert(insert, entity);
+            if(hall!=null)
+                insert.HallId = hall.Id;
+
+            else
+            {
+                throw new Exception("Hall not found");
+
+            }
+
+           return base.Insert(insert);
         }
 
     }

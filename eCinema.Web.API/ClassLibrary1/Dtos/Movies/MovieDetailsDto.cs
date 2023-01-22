@@ -10,11 +10,11 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movies
 {
     public class MovieDetailsDto
     {
-        public  int Id { get; set; }
+        public int Id { get; set; }
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public int ReleaseYear { get; set; }

@@ -3,17 +3,18 @@ using eCinema.Services;
 using eCinema.Services.ActorService;
 using eCinema.Services.BaseService;
 using eCinema.Services.CRUDservice;
+using eCinema.Services.CustomerServices;
 using eCinema.Services.DirectorService;
 using eCinema.Services.GenresServices;
 using eCinema.Services.HallServices;
 using eCinema.Services.MoviesServices;
 using eCinema.Services.ProducerServices;
 using eCinema.Services.Profiles;
+using eCinema.Services.Resrevations;
 using eCinema.Services.ScheduleServices;
 using eCinema.Services.WritersServices;
-using eCInema.Data.Dtos;
 using eCInema.Models;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movies;
 using eCInema.Models.SearchObjects;
 using MediaBrowser.Model.Services;
 using Microsoft.AspNetCore.Hosting;
@@ -58,14 +59,12 @@ public class Program
         builder.Services.AddTransient<IScheduleService, ScheduleService>();
         builder.Services.AddTransient<IGenresSerice, GenresService>();
         builder.Services.AddTransient<IHallService, HallService>();
+        builder.Services.AddTransient<ICustomerService, CustomerService>();
+        builder.Services.AddTransient<IReservationService, ReservationService>();
+
 
         builder.Services.AddMvc().AddNewtonsoftJson();
-        builder.Services.AddControllers()
-        .AddJsonOptions(options =>
-        {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
-       
-        });
+     
         var app = builder.Build();
 
 

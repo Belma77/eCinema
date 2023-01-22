@@ -1,8 +1,7 @@
 ﻿using eCinema.Services.BaseService;
 using eCinema.Services.CRUDservice;
-using eCInema.Data.Dtos;
 using eCInema.Models;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movies;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;

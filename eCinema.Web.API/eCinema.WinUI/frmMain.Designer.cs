@@ -79,12 +79,14 @@
             this.reservationsToolStripMenuItem.Name = "reservationsToolStripMenuItem";
             this.reservationsToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
             this.reservationsToolStripMenuItem.Text = "Reservations";
+            this.reservationsToolStripMenuItem.Click += new System.EventHandler(this.reservationsToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(58, 24);
             this.usersToolStripMenuItem.Text = "Users";
+            this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // reportsToolStripMenuItem
             // 

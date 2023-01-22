@@ -1,5 +1,5 @@
 ﻿using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos.Hall;
+using eCInema.Models.Dtos.Halls;
 using System;
 using System.Collections.Generic;
 using System.Linq;

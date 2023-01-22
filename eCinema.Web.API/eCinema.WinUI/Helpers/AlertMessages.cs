@@ -12,7 +12,9 @@ namespace eCinema.WinUI.Helpers
         public const string NotEmptyField = "Enter at least one First and Last Name!";
         public const string SuccessfulyAdded = "Successfuly Added!";
         public const string Delete = "Are you sure you want to delete selected item?";
-
+        public const string Cancel = "Are you sure you want to cancel selected reservation?";
+        public const string SuccessfulyCanceled = "Successfuly Canceled!";
+        public const string AlreadyCanceled = "Reservation has been already canceled!";
 
     }
 }

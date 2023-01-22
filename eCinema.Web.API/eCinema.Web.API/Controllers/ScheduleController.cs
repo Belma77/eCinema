@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.ScheduleServices;
-using eCInema.Data.Dtos;
 using eCInema.Models.Dtos.Schedule;
 using eCInema.Models.SearchObjects;
 using Microsoft.AspNetCore.Http;

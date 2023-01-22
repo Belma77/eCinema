@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movies
 {
     public class GetMoviesDto
     {
@@ -16,6 +16,6 @@ namespace eCInema.Models.Dtos
         public int ReleaseYear { get; set; }
         public int Duration { get; set; }
         public string Country { get; set; }
-       
+
     }
 }

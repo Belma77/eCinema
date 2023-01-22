@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
-using eCInema.Models.Dtos;
-using eCInema.Models.Dtos.Hall;
+using eCInema.Models.Dtos.Halls;
+using eCInema.Models.Dtos.Movies;
 using eCInema.Models.Dtos.Schedule;
 using eCInema.Models.SearchObjects;
 using System;
@@ -59,23 +59,6 @@ namespace eCinema.WinUI.ScheduleForms
             }
         }
 
-        private async void btnAdd_Click(object sender, EventArgs e)
-        {
-            if(Validate())
-            {
-                var insert = new ScheduleInsertDto();
-                var title = cmbMovies.SelectedItem;
-                insert.Movie = listOfMovies.Where(x => x.Title == title.ToString()).FirstOrDefault();
-                insert.StartTime = dtStartTime.Value;
-                insert.EndTime = dtEndTime.Value;
-                insert.Date=dtpDate.Value;
-                insert.NoHall = int.Parse(cbHall.SelectedItem.ToString());
-                await service.Post<GetSchedulesDto>(insert);
-                MessageBox.Show(AlertMessages.SuccessfulyAdded);
-                this.Close();
-            }
-        }
-
         private bool Validate()
         {
             return Validator.Validate(cmbMovies, err, AlertMessages.RequiredField) &&
@@ -83,6 +66,23 @@ namespace eCinema.WinUI.ScheduleForms
                 Validator.Validate(dtStartTime, err, AlertMessages.RequiredField) &&
                 Validator.Validate(dtEndTime, err, AlertMessages.RequiredField) &&
                 Validator.Validate(cbHall, err, AlertMessages.RequiredField);
+        }
+
+        private async void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (Validate())
+            {
+                var insert = new ScheduleInsertDto();
+                var title = cmbMovies.SelectedItem.ToString();
+                insert.Title = title;
+                insert.StartTime = dtStartTime.Value;
+                insert.EndTime = dtEndTime.Value;
+                insert.Date = dtpDate.Value;
+                insert.NoHall = int.Parse(cbHall.SelectedItem.ToString());
+                await service.Post<GetSchedulesDto>(insert);
+                MessageBox.Show(AlertMessages.SuccessfulyAdded);
+                this.Close();
+            }
         }
     }
 }

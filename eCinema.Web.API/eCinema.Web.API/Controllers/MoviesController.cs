@@ -1,6 +1,5 @@
 ﻿using eCinema.Services.MoviesServices;
-using eCInema.Data.Dtos;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movies;
 using eCInema.Models.SearchObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

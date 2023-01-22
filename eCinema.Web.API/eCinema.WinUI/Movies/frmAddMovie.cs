@@ -1,5 +1,4 @@
 ﻿using eCinema.WinUI.Helpers;
-using eCInema.Data.Dtos;
 using eCInema.Models.Dtos;
 using eCInema.Models.Enums;
 using System;
@@ -13,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
+using eCInema.Models.Dtos.Movies;
 
 namespace eCinema.WinUI
 {
