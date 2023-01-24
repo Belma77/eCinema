@@ -2,15 +2,19 @@
 using eCinema.Data;
 using eCinema.Services.ScheduleServices;
 using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using AuthorizeAttribute = eCinema.Web.API.Auth.CustomAuthorizeAttribute;
 
 namespace eCinema.Web.API.Controllers
 {
     [Route("Schedule")]
     [ApiController]
-
+    
     public class ScheduleController : BaseCRUDController<GetSchedulesDto, ScheduleSearchObject, ScheduleInsertDto, ScheduleUpdateDto>
     {
         public ScheduleController(IScheduleService service):base(service)
@@ -18,7 +22,12 @@ namespace eCinema.Web.API.Controllers
 
         }
 
-
+        [AllowAnonymous]
+        [Authorize(UserRole.Admin, UserRole.Customer)]
+        public override IActionResult Get([FromQuery] ScheduleSearchObject? search = null)
+        {
+            return base.Get(search);
+        }
 
     }
 }

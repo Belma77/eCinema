@@ -19,6 +19,9 @@ namespace eCinema.Services.Resrevations
         {
 
         }
+
+
+      
         public override IQueryable<Reservation> AddInclude(IQueryable<Reservation> query, ReservationSearchObject search = null)
         {
            return query=query.Include(x=>x.Schedule).ThenInclude(x=>x.Movie).Include(x=>x.Customer);

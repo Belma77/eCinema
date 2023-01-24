@@ -10,7 +10,6 @@ namespace eCInema.Models.Dtos.Schedule
 {
     public class ScheduleUpdateDto
     {
-        public int Id { get; set; }
         public int MovieId { get; set; }
         public MovieDto Movie { get; set; }
         public DateTime Date { get; set; }

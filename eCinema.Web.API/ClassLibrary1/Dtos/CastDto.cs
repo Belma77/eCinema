@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eCInema.Models.Dtos
 {
-    public class CastDto:BaseSearchObject
+    public class CastDto
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

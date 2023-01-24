@@ -1,4 +1,5 @@
 ﻿using eCInema.Data.Entities;
+using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Dtos.Movies;
 using System;
 using System.Collections;

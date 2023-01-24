@@ -8,7 +8,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Genres
 {
     public class GenresDto
     {
@@ -18,9 +18,9 @@ namespace eCInema.Models.Dtos
         public override bool Equals(object? obj)
         {
             var item = obj as GenresDto;
-            if(item == null) return false;
+            if (item == null) return false;
 
-            return this.Genre == item.Genre;
+            return Genre == item.Genre;
         }
 
         public override string ToString()

@@ -45,8 +45,7 @@ namespace eCinema.Services.ScheduleServices
 
         public override GetSchedulesDto GetById(int id)
         {
-            var query = base.Get();
-            var schedule = query.FirstOrDefault(x => x.Id == id);
+            var schedule = _context.Schedules.FirstOrDefault(x => x.Id == id);
             return _mapper.Map<GetSchedulesDto>(schedule);
 
         }

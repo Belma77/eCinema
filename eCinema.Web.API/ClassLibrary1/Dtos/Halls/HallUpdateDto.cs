@@ -8,7 +8,6 @@ namespace eCInema.Models.Dtos.Halls
 {
     public class HallUpdateDto
     {
-        public int Id { get; set; }
         public int NoOfHall { get; set; }
         public int NumberOfSeats { get; set; }
     }

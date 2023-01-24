@@ -58,8 +58,6 @@ namespace eCinema.Services.CRUDservice
         }
 
         
-
-
         public virtual Tmodel Update(int id, TUpdate update)
         {
             var set = _context.Set<TDatabase>();

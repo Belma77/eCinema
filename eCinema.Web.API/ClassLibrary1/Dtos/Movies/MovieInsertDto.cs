@@ -1,5 +1,5 @@
 ﻿using eCInema.Data.Entities;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using MediaBrowser.Model.Globalization;
@@ -16,7 +16,6 @@ namespace eCInema.Models.Dtos.Movies
         public string Title { get; set; }
         public string Synopsis { get; set; }
         public int ReleaseYear { get; set; }
-        //public List<int>? GenresIdList { get; set; }
         public List<GenresDto> Genres { get; set; }
         public int Duration { get; set; }
         public string Country { get; set; }

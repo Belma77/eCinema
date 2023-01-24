@@ -1,6 +1,7 @@
 ﻿using eCInema.Data.Entities;
 using eCInema.Models;
 using eCInema.Models.Entities;
+using eCInema.Models.Enums;
 using MediaBrowser.Model.Globalization;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,7 +31,8 @@ namespace eCinema.Data
         public DbSet<Hall> Halls { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
-
+        public DbSet<User> Users { get; set; }
+        public DbSet<Schedule> Schedules { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -40,6 +42,10 @@ namespace eCinema.Data
             builder.Entity<DirectorsMovies>().HasKey(x => new { x.MovieId, x.DirectorId });
             builder.Entity<WritersMovies>().HasKey(x => new { x.MovieId, x.WriterId });
             builder.Entity<ProducerMovies>().HasKey(x => new { x.MovieId, x.ProducerId });
+
+            builder.Entity<User>().HasDiscriminator<UserRole>("Discriminator")
+                .HasValue<Customer>(UserRole.Customer)
+                .HasValue<User>(UserRole.Admin);
 
         }
     }

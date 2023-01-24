@@ -1,5 +1,5 @@
 ﻿using eCInema.Data.Entities;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using MediaBrowser.Model.Globalization;

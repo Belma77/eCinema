@@ -43,5 +43,10 @@ namespace eCinema.WinUI
             frmReservations frm = new frmReservations();
             frm.ShowDialog();
         }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

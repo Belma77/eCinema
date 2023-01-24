@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.DirectorService
 {
-    public class DirectorsService: BaseCRUDService<DirectorDto, Actor, CastSearchObject, DirectorDto, DirectorDto>, IDirectorService
+    public class DirectorsService: BaseCRUDService<DirectorDto, Director, CastSearchObject, DirectorDto, DirectorDto>, IDirectorService
     {
         
         public DirectorsService(eCinemaContext context,IMapper mapper):base(context, mapper)

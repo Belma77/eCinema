@@ -3,10 +3,12 @@ using eCInema.Data.Entities;
 using eCInema.Models;
 using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Customer;
+using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Dtos.Halls;
 using eCInema.Models.Dtos.Movies;
 using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Users;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using System;
@@ -42,6 +44,7 @@ namespace eCinema.Services.Profiles
             CreateMap<MoviesGenresDto, MoviesGenres>();
             CreateMap<MoviesGenresUpdateDto, MoviesGenres>();
             CreateMap<GenresDto, Genres>();
+            CreateMap<GenresUpsertDto, Genres>();
             CreateMap<Genres, GenresDto>();
 
             CreateMap<Director, DirectorDto>();
@@ -65,6 +68,7 @@ namespace eCinema.Services.Profiles
             CreateMap<ScheduleUpdateDto, Schedule>();
 
             CreateMap<HallDto, Hall>();
+            CreateMap<HallUpdateDto, Hall>();
             CreateMap<Hall, HallDto>();
 
             CreateMap<CustomerDto, Customer>();
@@ -75,6 +79,11 @@ namespace eCinema.Services.Profiles
             CreateMap<ReservationInsertDto, Reservation>();
             CreateMap<ReservationUpdateDto, Reservation>();
             CreateMap<ReservationDto, Reservation>();
+
+            CreateMap<UserDto, User>();
+            CreateMap<User, UserDto>();
+            CreateMap<UserInsertDto, User>();
+            CreateMap<UserUpdateDto, User>();
 
         }
 

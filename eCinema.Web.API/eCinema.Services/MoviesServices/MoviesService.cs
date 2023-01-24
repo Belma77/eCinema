@@ -84,26 +84,26 @@ namespace eCinema.Services.MoviesServices
         {
             var entity = base.Update(id, update);
 
-            if (update.Actors != null)
-            {
-                var actors = _mapper.Map<List<Actor>>(update?.Actors);
-                _context.Actor.AddRangeIfNotExists(actors, _context);
-                foreach (var actor in update.Actors)
-                {
-                    var actorMoviesExists = _context.ActorsMovies.Where(x => x.Actor.Equals(actor) && id == x.MovieId);
-                    if (actorMoviesExists == null)
-                    {
-                        var actorMovies = new ActorsMovies
-                        {
-                            MovieId = entity.Id,
-                            Actor = _context.Actor.FirstOrDefault(x => x.FirstName == actor.Actor.FirstName && x.LastName == actor.Actor.LastName),
-                        };
+            //if (update.Actors != null)
+            //{
+            //    var actors = _mapper.Map<List<Actor>>(update?.Actors);
+            //    _context.Actor.AddRangeIfNotExists(actors, _context);
+            //    foreach (var actor in update.Actors)
+            //    {
+            //        var actorMoviesExists = _context.ActorsMovies.Where(x => x.Actor.Equals(actor) && id == x.MovieId);
+            //        if (actorMoviesExists == null)
+            //        {
+            //            var actorMovies = new ActorsMovies
+            //            {
+            //                MovieId = entity.Id,
+            //                Actor = _context.Actor.FirstOrDefault(x => x.FirstName == actor.Actor.FirstName && x.LastName == actor.Actor.LastName),
+            //            };
 
-                        _context.ActorsMovies.Add(actorMovies);
-                        _context.SaveChanges();
-                    }
-                }
-            }
+            //            _context.ActorsMovies.Add(actorMovies);
+            //            _context.SaveChanges();
+            //        }
+            //    }
+            //}
 
             //if (update.Directors != null)
             //{
