@@ -11,7 +11,8 @@ namespace eCInema.Models.Entities
     public class Reservation
     {
         public  int Id { get; set; }
-        public Customer Customer { get; set; }
+        // public User Customer { get; set; }
+        public User Customer{ get; set; }
         public int CustomerId { get; set; }
         public int ScheduleId { get; set; }
         public Schedule Schedule { get; set; }

@@ -179,6 +179,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvMovies);
             this.Name = "frmMovies";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.frmMovies_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).EndInit();

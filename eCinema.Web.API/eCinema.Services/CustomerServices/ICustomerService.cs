@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.CustomerServices
 {
-    public interface ICustomerService:IBaseCRUDService<CustomerDto, CustomerSearchObject, CustomerDto, UpdateCustomerDto>
+    public interface ICustomerService:IBaseCRUDService<CustomerDto, CustomerSearchObject, CustomerInsertDto, UpdateCustomerDto>
     {
         
     }

@@ -13,9 +13,11 @@ namespace eCInema.Models.Dtos.Schedule
     public class GetSchedulesDto
     {
         public int Id { get; set; }
-        public MovieDto Movie { get; set; }
+      //  public MovieDto Movie { get; set; }
+        public MovieDetailsDto Movie { get; set; }  
         public int MovieId { get; set; }
         public DateTime Date { get; set; }
+        public string DayOfWeek { get => Date.DayOfWeek.ToString(); }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public HallDto Hall { get; set; }

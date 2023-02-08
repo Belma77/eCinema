@@ -1,4 +1,5 @@
-﻿using System;
+﻿using eCInema.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,5 +15,6 @@ namespace eCInema.Models.Dtos.Users
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
+        public CustomerTypeEnum CustomerType { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace eCInema.Models.SearchObjects
 {
     public class UserSearchObject
     {
-        public string? FirstName { get; set; }
-        public  string? LastName { get; set; }
+        public string? Name { get; set; }   
     }
 }

@@ -43,11 +43,11 @@ namespace eCinema.WinUI
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if ((dgvReservations.Rows[e.RowIndex].DataBoundItem != null) &&
-      (dgvReservations.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
+               (dgvReservations.Columns[e.ColumnIndex].DataPropertyName.Contains(".")))
             {
                 e.Value = BindProperty(
-                              dgvReservations.Rows[e.RowIndex].DataBoundItem,
-                             dgvReservations.Columns[e.ColumnIndex].DataPropertyName
+                 dgvReservations.Rows[e.RowIndex].DataBoundItem,
+                 dgvReservations.Columns[e.ColumnIndex].DataPropertyName
                             );
             }
         }

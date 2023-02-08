@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace eCInema.Models.Enums
 {
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum GenresEnum
     {
         Action,

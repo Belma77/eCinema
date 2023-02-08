@@ -12,11 +12,17 @@ namespace eCinema.Web.API.Controllers
     [Route("Customer")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class CustomersController : BaseCRUDController<CustomerDto, CustomerSearchObject, CustomerDto, UpdateCustomerDto>
+    public class CustomersController : BaseCRUDController<CustomerDto, CustomerSearchObject, CustomerInsertDto, UpdateCustomerDto>
     {
         public CustomersController(ICustomerService service):base(service)
         {
 
+        }
+
+        [AllowAnonymous]
+        public override IActionResult Insert(CustomerInsertDto insert)
+        {
+            return base.Insert(insert);
         }
     }
 }

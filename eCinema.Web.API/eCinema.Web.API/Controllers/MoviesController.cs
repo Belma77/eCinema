@@ -39,5 +39,12 @@ namespace eCinema.Web.API.Controllers
         {
             return base.GetById(id);
         }
+
+        [HttpGet("{id}/Recommend")]
+        [AllowAnonymous]
+        public List<MovieDetailsDto> Recommend(int id)
+        {
+            return _service.Recommend(id);
+        }
     }
 }

@@ -34,9 +34,9 @@
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Phone = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CustomerType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AddLoyaltyClub = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
@@ -51,13 +51,14 @@
             this.Email,
             this.Phone,
             this.CustomerType,
+            this.AddLoyaltyClub,
             this.Delete});
             this.dgvCustomers.Location = new System.Drawing.Point(12, 115);
             this.dgvCustomers.Name = "dgvCustomers";
             this.dgvCustomers.RowHeadersWidth = 51;
             this.dgvCustomers.RowTemplate.Height = 29;
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCustomers.Size = new System.Drawing.Size(804, 220);
+            this.dgvCustomers.Size = new System.Drawing.Size(913, 220);
             this.dgvCustomers.TabIndex = 0;
             this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
@@ -101,6 +102,17 @@
             this.CustomerType.Name = "CustomerType";
             this.CustomerType.Width = 125;
             // 
+            // AddLoyaltyClub
+            // 
+            this.AddLoyaltyClub.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.AddLoyaltyClub.HeaderText = "Add to Loyalty Club";
+            this.AddLoyaltyClub.MinimumWidth = 6;
+            this.AddLoyaltyClub.Name = "AddLoyaltyClub";
+            this.AddLoyaltyClub.Text = "Add";
+            this.AddLoyaltyClub.ToolTipText = "Add";
+            this.AddLoyaltyClub.UseColumnTextForButtonValue = true;
+            this.AddLoyaltyClub.Width = 105;
+            // 
             // Delete
             // 
             this.Delete.HeaderText = "Delete";
@@ -121,16 +133,6 @@
             this.label1.Size = new System.Drawing.Size(91, 23);
             this.label1.TabIndex = 1;
             this.label1.Text = "Customers";
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(722, 353);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(94, 29);
-            this.btnAdd.TabIndex = 2;
-            this.btnAdd.Text = "Add User";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label2
             // 
@@ -153,13 +155,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(833, 394);
+            this.ClientSize = new System.Drawing.Size(940, 362);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvCustomers);
             this.Name = "frmCustomers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmCustomers";
             this.Load += new System.EventHandler(this.frmCustomers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
@@ -172,14 +174,14 @@
 
         private DataGridView dgvCustomers;
         private Label label1;
-        private Button btnAdd;
+        private Label label2;
+        private TextBox txtName;
         private DataGridViewTextBoxColumn FirstName;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Email;
         private DataGridViewTextBoxColumn Phone;
         private DataGridViewTextBoxColumn CustomerType;
+        private DataGridViewButtonColumn AddLoyaltyClub;
         private DataGridViewButtonColumn Delete;
-        private Label label2;
-        private TextBox txtName;
     }
 }

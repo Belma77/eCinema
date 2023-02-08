@@ -89,5 +89,6 @@ namespace eCinema.WinUI
             LoadMovieDetails();
             this.Show();
         }
+
     }
 }

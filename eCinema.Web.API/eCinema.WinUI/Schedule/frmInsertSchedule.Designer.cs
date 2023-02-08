@@ -177,6 +177,7 @@
             this.Controls.Add(this.dtpDate);
             this.Controls.Add(this.cmbMovies);
             this.Name = "frmInsertSchedule";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmInsertSchedule";
             this.Load += new System.EventHandler(this.frmInsertSchedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();

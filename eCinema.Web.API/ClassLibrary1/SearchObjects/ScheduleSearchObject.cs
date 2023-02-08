@@ -9,7 +9,9 @@ namespace eCInema.Models.SearchObjects
     public class ScheduleSearchObject:BaseSearchObject
     {
         public string? Title { get; set; }
+        public int? MovieId { get; set; }
         public DateTime? Date { get; set; }
+        public string? DayOfWeek { get; set; }
         public int? NoOfHall { get; set; }
     }
 }

@@ -17,5 +17,7 @@ namespace eCInema.Models.Entities
         public int HallId { get; set; }
         public Hall Hall { get; set; }
         public int NoAvailableSeats { get; set; }
+
+       
     }
 }

@@ -150,6 +150,7 @@
             this.Controls.Add(this.lblStep);
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmAddProducers";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddProducers";
             this.Load += new System.EventHandler(this.frmAddProducers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

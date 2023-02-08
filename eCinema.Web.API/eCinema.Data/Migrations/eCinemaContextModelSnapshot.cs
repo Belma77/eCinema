@@ -455,7 +455,7 @@ namespace eCinema.Data.Migrations
             modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
                 {
                     b.HasOne("eCInema.Models.Entities.Customer", "Customer")
-                        .WithMany()
+                        .WithMany("Reservations")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -542,6 +542,11 @@ namespace eCinema.Data.Migrations
                     b.Navigation("Schedules");
 
                     b.Navigation("WritersMovies");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.Customer", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

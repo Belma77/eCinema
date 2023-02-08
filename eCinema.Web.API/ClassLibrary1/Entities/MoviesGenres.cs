@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eCInema.Data.Entities;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace eCInema.Models.Entities
 {
@@ -13,6 +15,8 @@ namespace eCInema.Models.Entities
     {
         public Movies Movie { get; set; }
         public int MovieId { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public Genres Genre { get; set; }
         public int GenreId { get; set; }
         public override bool Equals(object? obj)

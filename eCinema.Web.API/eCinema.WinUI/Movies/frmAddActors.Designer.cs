@@ -149,6 +149,7 @@
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmAddActors";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddActors";
             this.Load += new System.EventHandler(this.frmAddActors_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

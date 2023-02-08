@@ -18,6 +18,7 @@ namespace eCinema.Web.API.Controllers
         {
 
         }
+
         [AllowAnonymous]
         [Authorize(UserRole.Customer, UserRole.Admin)]
         public override IActionResult Insert(ReservationInsertDto insert)

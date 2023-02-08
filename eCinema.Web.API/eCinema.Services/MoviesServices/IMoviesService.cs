@@ -2,6 +2,7 @@
 using eCinema.Services.CRUDservice;
 using eCInema.Models;
 using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
@@ -14,5 +15,6 @@ namespace eCinema.Services.MoviesServices
     public interface IMoviesService:IBaseCRUDService<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
         //void DeleteDirectorsMovies(DirectorsMoviesDto delete);
+        List<MovieDetailsDto> Recommend(int id);
     }
 }

@@ -5,6 +5,7 @@ using eCInema.Models.Dtos.Users;
 using eCInema.Models.Entities;
 using eCInema.Models.Exceptions;
 using eCInema.Models.SearchObjects;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,15 +37,49 @@ namespace eCinema.Services.UserServices
             return _mapper.Map<UserDto>(entity);
         }
 
-       
-        public override void BeforeInsert(UserInsertDto insert, User entity)
+        public override IQueryable<User> AddFilter(IQueryable<User> query, UserSearchObject search = null)
+        {
+            if(!String.IsNullOrEmpty(search.Name))
+                query = query.Where(x => x.UserName.ToLower().Contains(search.Name.ToLower()));
+            return query;
+        }
+
+        public override void BeforeInsert(UserInsertDto insert, User? entity)
         {
             var salt = GenerateSalt();
             entity.PasswordSalt = salt;
             entity.PasswordHash = GenerateHash(salt, insert.Password);
-            entity.UserRole = insert.UserRole;
-            
+            if (entity.UserRole == eCInema.Models.Enums.UserRole.Customer)
+            {
+                var customer = _mapper.Map<Customer>(entity);
+                customer.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
+            }
             base.BeforeInsert(insert, entity);
+        }
+
+        public override UserDto Insert(UserInsertDto insert)
+        {
+            var entity = _mapper.Map<User>(insert);
+            var salt = GenerateSalt();
+            entity.PasswordSalt = salt;
+            entity.PasswordHash = GenerateHash(salt, insert.Password);
+
+            if (entity.UserRole == eCInema.Models.Enums.UserRole.Customer&&insert.CustomerType==null)
+            {
+                var customer = _mapper.Map<Customer>(entity);
+                customer.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
+                _context.Customers.Add(customer);
+                
+            }
+            else
+            {
+
+                _context.Users.Add(entity);
+            }
+            _context.SaveChanges();
+            return _mapper.Map<UserDto>(entity);
+
+
         }
 
         public static string GenerateSalt()

@@ -24,7 +24,6 @@ namespace eCInema.Models
         public List<ProducerMovies> ProducersMovies { get; set; }
         public List<WritersMovies> WritersMovies { get; set; }
         public byte[] Poster { get; set; }
-
         public List<Schedule>? Schedules { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace eCInema.Models.SearchObjects
 {
     public class GenresSearchObject:BaseSearchObject
     {
-        public GenresDto Genres{ get; set; }
+        public GenresDto? Genres{ get; set; }
 
     }
 }

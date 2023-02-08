@@ -29,13 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvSchedules = new System.Windows.Forms.DataGridView();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtTitle = new System.Windows.Forms.TextBox();
@@ -44,6 +37,13 @@
             this.cmbHall = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.dtmDate = new System.Windows.Forms.DateTimePicker();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedules)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,66 +67,6 @@
             this.dgvSchedules.TabIndex = 0;
             this.dgvSchedules.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedules_CellContentClick);
             this.dgvSchedules.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            // 
-            // Title
-            // 
-            this.Title.DataPropertyName = "Movie";
-            this.Title.HeaderText = "Title";
-            this.Title.MinimumWidth = 6;
-            this.Title.Name = "Title";
-            this.Title.ToolTipText = "Title";
-            this.Title.Width = 125;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "Date";
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 6;
-            this.Date.Name = "Date";
-            this.Date.Width = 125;
-            // 
-            // StartTime
-            // 
-            this.StartTime.DataPropertyName = "StartTime";
-            this.StartTime.HeaderText = "Start Time";
-            this.StartTime.MinimumWidth = 6;
-            this.StartTime.Name = "StartTime";
-            this.StartTime.Width = 125;
-            // 
-            // EndTime
-            // 
-            this.EndTime.DataPropertyName = "EndTime";
-            this.EndTime.HeaderText = "End Time";
-            this.EndTime.MinimumWidth = 6;
-            this.EndTime.Name = "EndTime";
-            this.EndTime.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Hall.NoOfHall";
-            this.dataGridViewTextBoxColumn1.HeaderText = "No of Hall";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // Seats
-            // 
-            this.Seats.DataPropertyName = "NoAvailableSeats";
-            this.Seats.HeaderText = "Seats Available";
-            this.Seats.MinimumWidth = 6;
-            this.Seats.Name = "Seats";
-            this.Seats.Width = 125;
-            // 
-            // Remove
-            // 
-            this.Remove.DataPropertyName = "SeatsAvailable";
-            this.Remove.HeaderText = "Remove";
-            this.Remove.MinimumWidth = 6;
-            this.Remove.Name = "Remove";
-            this.Remove.Text = "Remove";
-            this.Remove.ToolTipText = "Remove";
-            this.Remove.UseColumnTextForButtonValue = true;
-            this.Remove.Width = 125;
             // 
             // label1
             // 
@@ -202,6 +142,66 @@
             this.dtmDate.Value = new System.DateTime(2023, 1, 22, 0, 0, 0, 0);
             this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
             // 
+            // Title
+            // 
+            this.Title.DataPropertyName = "Movie.Title";
+            this.Title.HeaderText = "Title";
+            this.Title.MinimumWidth = 6;
+            this.Title.Name = "Title";
+            this.Title.ToolTipText = "Title";
+            this.Title.Width = 125;
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "Date";
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 6;
+            this.Date.Name = "Date";
+            this.Date.Width = 125;
+            // 
+            // StartTime
+            // 
+            this.StartTime.DataPropertyName = "StartTime";
+            this.StartTime.HeaderText = "Start Time";
+            this.StartTime.MinimumWidth = 6;
+            this.StartTime.Name = "StartTime";
+            this.StartTime.Width = 125;
+            // 
+            // EndTime
+            // 
+            this.EndTime.DataPropertyName = "EndTime";
+            this.EndTime.HeaderText = "End Time";
+            this.EndTime.MinimumWidth = 6;
+            this.EndTime.Name = "EndTime";
+            this.EndTime.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Hall.NoOfHall";
+            this.dataGridViewTextBoxColumn1.HeaderText = "No of Hall";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // Seats
+            // 
+            this.Seats.DataPropertyName = "NoAvailableSeats";
+            this.Seats.HeaderText = "Seats Available";
+            this.Seats.MinimumWidth = 6;
+            this.Seats.Name = "Seats";
+            this.Seats.Width = 125;
+            // 
+            // Remove
+            // 
+            this.Remove.DataPropertyName = "SeatsAvailable";
+            this.Remove.HeaderText = "Remove";
+            this.Remove.MinimumWidth = 6;
+            this.Remove.Name = "Remove";
+            this.Remove.Text = "Remove";
+            this.Remove.ToolTipText = "Remove";
+            this.Remove.UseColumnTextForButtonValue = true;
+            this.Remove.Width = 125;
+            // 
             // frmSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -217,6 +217,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvSchedules);
             this.Name = "frmSchedule";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSchedule";
             this.Load += new System.EventHandler(this.frmSchedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedules)).EndInit();
@@ -230,6 +231,12 @@
         private DataGridView dgvSchedules;
         private Label label1;
         private Button btnAdd;
+        private TextBox txtTitle;
+        private Label label2;
+        private Label label3;
+        private ComboBox cmbHall;
+        private Label label4;
+        private DateTimePicker dtmDate;
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn Date;
         private DataGridViewTextBoxColumn StartTime;
@@ -237,11 +244,5 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn Seats;
         private DataGridViewButtonColumn Remove;
-        private TextBox txtTitle;
-        private Label label2;
-        private Label label3;
-        private ComboBox cmbHall;
-        private Label label4;
-        private DateTimePicker dtmDate;
     }
 }

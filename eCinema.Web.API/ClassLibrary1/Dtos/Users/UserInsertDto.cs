@@ -16,5 +16,7 @@ namespace eCInema.Models.Dtos.Users
         public string Password { get; set; }
         public string Phone { get; set; }
         public UserRole UserRole { get; set; }
+        public CustomerTypeEnum? CustomerType { get; set; }
+
     }
 }

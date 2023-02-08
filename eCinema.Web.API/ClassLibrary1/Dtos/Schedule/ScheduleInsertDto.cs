@@ -12,12 +12,10 @@ namespace eCInema.Models.Dtos.Schedule
     public class ScheduleInsertDto
     {
         public string Title{ get; set; }
-        public int MovieId { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int NoHall { get; set; }
-        public int HallId { get; set; }
 
     }
 }

@@ -41,10 +41,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
-        //builder.Services.AddControllers(x =>
-        //{
-        //    x.Filters.Add<ErrorFilter>();
-        //});
+        
         builder.Services.AddControllers().AddNewtonsoftJson(options =>
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -71,8 +68,8 @@ public class Program
         });
 
         builder.Services.AddAuthentication("BasicAuthentication").AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
-
-            
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
         var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         builder.Services.AddDbContext<eCinemaContext>(options =>
             options.UseSqlServer(connectionString));
@@ -94,7 +91,13 @@ public class Program
         builder.Services.AddTransient<IUserService, UserService>();
         builder.Services.AddTransient<ErrorHandlingMiddleware>();
         builder.Services.AddMvc().AddNewtonsoftJson();
-     
+
+
+        builder.Services.AddControllers()
+        .AddJsonOptions(options =>
+        {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
         var app = builder.Build();
 
 

@@ -1,5 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos.Customer;
+using eCInema.Models.Dtos.Users;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
@@ -33,28 +34,42 @@ namespace eCinema.WinUI.Customers
 
             var customers = await service.Get<List<CustomerDto>>(search);
             dgvCustomers.AutoGenerateColumns = false;
-            dgvCustomers.DataSource = customers;
+            dgvCustomers.DataSource = customers.ToList();
 
-        }
-
-        private async void btnAdd_Click(object sender, EventArgs e)
-        {
-            frmAddCustomer frmAddCustomer = new frmAddCustomer();
-            frmAddCustomer.ShowDialog();
-            await LoadCustomers();
         }
 
         private async void dgvCustomers_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var data = dgvCustomers.SelectedRows[0].DataBoundItem as CustomerDto;
-
-            if(data!= null)
+            
+            if (e.ColumnIndex == 5)
             {
-                if (MessageBox.Show(AlertMessages.Delete,"", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (data.CustomerType == eCInema.Models.Enums.CustomerTypeEnum.Premium)
+                    MessageBox.Show("Customer already added to loyalty club!");
+                
+                else
                 {
-                    await service.Delete(data.Id);
+                    var update = new UpdateCustomerDto();
+                    update.FirstName = data.FirstName;
+                    update.LastName = data.LastName;
+                    update.Phone = data.Phone;
+                    update.Email = data.Email;
+                    update.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Premium;
+                    await service.Put<CustomerDto>(data.Id, update);
                     await LoadCustomers();
+                }
+            }  
+            
+            if (e.ColumnIndex == 6)
+                {   
+                if (data != null)
+                {
+                    if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        await service.Delete(data.Id);
+                        await LoadCustomers();
 
+                    }
                 }
             }
         }

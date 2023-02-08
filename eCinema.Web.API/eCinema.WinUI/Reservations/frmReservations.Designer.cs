@@ -191,6 +191,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvReservations);
             this.Name = "frmReservations";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmReservations";
             this.Load += new System.EventHandler(this.frmReservations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).EndInit();

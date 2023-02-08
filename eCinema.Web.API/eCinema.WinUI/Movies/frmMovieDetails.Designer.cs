@@ -197,6 +197,7 @@
             this.pbPoster.Location = new System.Drawing.Point(28, 73);
             this.pbPoster.Name = "pbPoster";
             this.pbPoster.Size = new System.Drawing.Size(258, 381);
+            this.pbPoster.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbPoster.TabIndex = 19;
             this.pbPoster.TabStop = false;
             // 
@@ -300,6 +301,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTitle);
             this.Name = "frmMovieDetails";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmMovieDetails";
             this.Load += new System.EventHandler(this.MovieDetailsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).EndInit();

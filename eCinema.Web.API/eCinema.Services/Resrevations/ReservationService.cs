@@ -19,12 +19,11 @@ namespace eCinema.Services.Resrevations
         {
 
         }
-
-
       
         public override IQueryable<Reservation> AddInclude(IQueryable<Reservation> query, ReservationSearchObject search = null)
         {
-           return query=query.Include(x=>x.Schedule).ThenInclude(x=>x.Movie).Include(x=>x.Customer);
+            var filtered= query.Include(c => c.Customer).Include(a => a.Schedule).ThenInclude(x=>x.Movie);
+            return filtered; 
         }
 
         public override IQueryable<Reservation> AddFilter(IQueryable<Reservation> query, ReservationSearchObject search = null)
@@ -32,7 +31,7 @@ namespace eCinema.Services.Resrevations
             if (!String.IsNullOrEmpty(search.CustomerName))
                 query = query.Where(x => x.Customer.FirstName.ToLower().Equals(search.CustomerName.ToLower())
                 || x.Customer.LastName.ToLower().Equals(search.CustomerName.ToLower())
-                ||(x.Customer.FirstName+ " "+x.Customer.LastName).ToLower().StartsWith(search.CustomerName.ToLower()));
+                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().StartsWith(search.CustomerName.ToLower()));
 
             if (!String.IsNullOrEmpty(search.Movie))
                 query = query.Where(x => x.Schedule.Movie.Title.ToLower().StartsWith(search.Movie.ToLower()));

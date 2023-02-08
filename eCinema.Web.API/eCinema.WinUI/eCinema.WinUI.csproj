@@ -9,13 +9,38 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Reports\Report1.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\Report1.rdlc" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Bia.Countries" Version="3.0.0" />
     <PackageReference Include="Flurl.Http" Version="3.2.4" />
     <PackageReference Include="ReportViewerCore.WinForms" Version="15.1.17" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.5" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ClassLibrary1\eCInema.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="_190036DataSet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>_190036DataSet.xsd</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="_190036DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_190036DataSet.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

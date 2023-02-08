@@ -152,6 +152,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.lblStep);
             this.Name = "frmAddDirectors";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddDirectors";
             this.Load += new System.EventHandler(this.frmAddDirectors_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

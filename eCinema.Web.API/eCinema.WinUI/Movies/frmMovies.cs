@@ -23,8 +23,7 @@ namespace eCinema.WinUI
         public async Task LoadMovies()
         {
             var search = new MoviesSearchObject();
-            search.Title=txtTitle.Text;
-            
+            search.Title=txtTitle.Text;          
             var list = await _service.Get<List<MovieDetailsDto>>(search);
             dgvMovies.AutoGenerateColumns = false;
             if(list!= null)
