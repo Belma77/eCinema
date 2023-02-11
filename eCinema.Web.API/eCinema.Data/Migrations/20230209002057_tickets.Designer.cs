@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using eCinema.Data;
 
@@ -11,9 +12,11 @@ using eCinema.Data;
 namespace eCinema.Data.Migrations
 {
     [DbContext(typeof(eCinemaContext))]
-    partial class eCinemaContextModelSnapshot : ModelSnapshot
+    [Migration("20230209002057_tickets")]
+    partial class tickets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -127,27 +130,6 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Halls");
-                });
-
-            modelBuilder.Entity("eCInema.Models.Entities.LoyalCard", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("price")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("LoyalCards");
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.MoviesGenres", b =>
@@ -445,17 +427,6 @@ namespace eCinema.Data.Migrations
                     b.Navigation("Director");
 
                     b.Navigation("Movie");
-                });
-
-            modelBuilder.Entity("eCInema.Models.Entities.LoyalCard", b =>
-                {
-                    b.HasOne("eCInema.Models.Entities.Customer", "Customer")
-                        .WithMany()
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.MoviesGenres", b =>

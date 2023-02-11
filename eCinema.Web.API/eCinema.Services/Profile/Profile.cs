@@ -5,6 +5,7 @@ using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Dtos.Halls;
+using eCInema.Models.Dtos.LoyaltyCard;
 using eCInema.Models.Dtos.Movies;
 using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.Dtos.Schedule;
@@ -88,6 +89,8 @@ namespace eCinema.Services.Profiles
             CreateMap<UserInsertDto, User>();
             CreateMap<UserUpdateDto, User>();
 
+            CreateMap<LoyalCard, LoyalCardDto>();
+            CreateMap<LoyalCardInsertDto, LoyalCard>();
         }
 
     }

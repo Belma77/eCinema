@@ -1,11 +1,16 @@
+import 'package:ecinemamobile/env.dart';
 import 'package:ecinemamobile/models/Movies/movies.dart';
+import 'package:ecinemamobile/providers/loyalty.club.dart';
 import 'package:ecinemamobile/providers/movies.provider.dart';
 import 'package:ecinemamobile/providers/schedule.provider.dart';
 import 'package:ecinemamobile/providers/user.provider.dart';
-import 'package:ecinemamobile/screens/loginScreen.dart';
+import 'package:ecinemamobile/screens/login.screen.dart';
+import 'package:ecinemamobile/screens/loyalty.club.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
 import 'package:ecinemamobile/screens/schedule.dart';
+import 'package:ecinemamobile/screens/user.profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 void main() {
@@ -14,11 +19,14 @@ void main() {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
         ChangeNotifierProvider(create: (_) => MoviesProvider()),
-        ChangeNotifierProvider(create: (_) => ScheduleProvider())
+        ChangeNotifierProvider(create: (_) => ScheduleProvider()),
+        ChangeNotifierProvider(create: (_) => LoyaltyClubProvider()),
       ],
       child: const MyApp(),
     ),
   );
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = stripePublishableKey;
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +52,7 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
             displayLarge:
                 TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
-            titleLarge: TextStyle(fontSize: 26.0, fontStyle: FontStyle.italic),
+            titleLarge: TextStyle(fontSize: 18.0, fontStyle: FontStyle.italic),
           ),
         ),
         home: LoginScreen(),
@@ -52,6 +60,14 @@ class MyApp extends StatelessWidget {
           if (settings.name == MoviesListScreen.route) {
             return MaterialPageRoute(
                 builder: ((context) => const MoviesListScreen()));
+          }
+          if (settings.name == UserProfile.route) {
+            return MaterialPageRoute(
+                builder: ((context) => const UserProfile()));
+          }
+          if (settings.name == LoyaltyClubScreen.route) {
+            return MaterialPageRoute(
+                builder: ((context) => const LoyaltyClubScreen()));
           }
           var uri = Uri.parse(settings.name!);
           if (uri.pathSegments.length == 2 &&

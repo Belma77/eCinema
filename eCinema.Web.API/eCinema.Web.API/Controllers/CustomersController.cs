@@ -14,9 +14,10 @@ namespace eCinema.Web.API.Controllers
     [Authorize(UserRole.Admin)]
     public class CustomersController : BaseCRUDController<CustomerDto, CustomerSearchObject, CustomerInsertDto, UpdateCustomerDto>
     {
+        ICustomerService _service;
         public CustomersController(ICustomerService service):base(service)
         {
-
+            _service=service;
         }
 
         [AllowAnonymous]
@@ -24,5 +25,34 @@ namespace eCinema.Web.API.Controllers
         {
             return base.Insert(insert);
         }
+
+
+        [AllowAnonymous]
+        [Authorize(UserRole.Customer)]
+        [HttpPut("{id}")]
+        public override IActionResult Update(int id, UpdateCustomerDto update)
+        {
+            return base.Update(id, update);
+        }
+
+
+        [AllowAnonymous]
+        [Authorize(UserRole.Customer, UserRole.Admin)]
+        [HttpDelete("{id}")]
+        public override IActionResult Delete(int id)
+        {
+            return base.Delete(id);
+        }
+
+
+        [AllowAnonymous]
+        [Authorize(UserRole.Admin, UserRole.Customer)]
+        [HttpGet("Current")]
+        public IActionResult GetCurrent()
+        {
+            return Ok(_service.getCurrent());
+        }
+
+
     }
 }

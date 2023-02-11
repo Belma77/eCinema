@@ -94,7 +94,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           builtProjectionInfo(),
         ])),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      /*  bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -106,7 +106,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
         backgroundColor: Colors.blue,
         fixedColor: Colors.white,
         unselectedItemColor: Colors.red,
-      ),
+      ), */
     );
   }
 

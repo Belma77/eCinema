@@ -8,6 +8,7 @@ namespace eCInema.Models.SearchObjects
 {
     public class CustomerSearchObject:BaseSearchObject
     {
+        public string? Username { get; set; }
         public string? Name { get; set; }
     }
 }

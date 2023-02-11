@@ -4,18 +4,21 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import '../models/Authorization/authorization.dart';
+import '../providers/movies.provider.dart';
+import '../providers/schedule.provider.dart';
 import '../providers/user.provider.dart';
 import 'movies.screen.dart';
 
 class LoginScreen extends StatelessWidget {
+  static const route = "Login";
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  late UserProvider _userProvider;
+  late ScheduleProvider _scheduleProvider;
   LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    _userProvider = Provider.of<UserProvider>(context, listen: false);
+    _scheduleProvider = Provider.of<ScheduleProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
@@ -63,7 +66,7 @@ class LoginScreen extends StatelessWidget {
                 try {
                   Authorization.username = _usernameController.text;
                   Authorization.password = _passwordController.text;
-                  await _userProvider.get();
+                  await _scheduleProvider.get();
                   Navigator.pushNamed(context, MoviesListScreen.route);
                 } catch (e) {
                   showDialog(

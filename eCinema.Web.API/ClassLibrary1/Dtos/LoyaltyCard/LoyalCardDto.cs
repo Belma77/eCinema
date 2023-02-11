@@ -1,22 +1,21 @@
-﻿using eCInema.Models.Enums;
+﻿using eCInema.Models.Dtos.Customer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos.Customer
+namespace eCInema.Models.Dtos.LoyaltyCard
 {
-    public class UpdateCustomerDto
+    public class LoyalCardDto
     {
-        public UpdateCustomerDto() { }
+        public int CustomerId { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        public byte[]? Picture { get; set; }
         public string? City { get; set; }
         public string? IdentificationNumber { get; set; }
-        public CustomerTypeEnum? CustomerType { get; set; }
+        public double price { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace eCInema.Models.Entities
         public UserRole UserRole { get; set; }
         public string PasswordHash { get; set; }
         public string PasswordSalt { get; set; }
+        public byte[]? ProfilePicture { get; set; }
         public List<Reservation>? Reservations { get; set; }
     }
 }

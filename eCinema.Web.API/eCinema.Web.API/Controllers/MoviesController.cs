@@ -26,14 +26,14 @@ namespace eCinema.Web.API.Controllers
         //    _service.DeleteDirectorsMovies(delete);
         //}
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         public override IActionResult Get([FromQuery] MoviesSearchObject? search = null)
         {
             return base.Get(search);
         }
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         public override IActionResult GetById(int id)
         {
@@ -42,6 +42,7 @@ namespace eCinema.Web.API.Controllers
 
         [HttpGet("{id}/Recommend")]
         [AllowAnonymous]
+        [Authorize(UserRole.Admin, UserRole.Customer)]
         public List<MovieDetailsDto> Recommend(int id)
         {
             return _service.Recommend(id);

@@ -11,6 +11,6 @@ namespace eCinema.Services.CustomerServices
 {
     public interface ICustomerService:IBaseCRUDService<CustomerDto, CustomerSearchObject, CustomerInsertDto, UpdateCustomerDto>
     {
-        
+        CustomerDto getCurrent();
     }
 }

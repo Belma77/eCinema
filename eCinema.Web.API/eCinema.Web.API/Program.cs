@@ -27,6 +27,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
+using Stripe;
+using Stripe.Checkout;
+using CustomerService = eCinema.Services.CustomerServices.CustomerService;
+using eCinema.Services.LoyalCardServices;
 
 public class Program
 {
@@ -46,8 +50,8 @@ public class Program
         options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
-
-        builder.Services.AddSwaggerGen(c=>
+        StripeConfiguration.ApiKey = "sk_test_51Kw0aQKRuZYR6PFus0Cn01uZYmWxF3IL34UpJnQ5U6hzDOTz4yfP3G8tvnix1sfmShOEPDXBi8ZNALIJdumNl05l00CKD7fURm";
+         builder.Services.AddSwaggerGen(c=>
         {
             c.AddSecurityDefinition("basicAuth", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
             {
@@ -89,6 +93,8 @@ public class Program
         builder.Services.AddTransient<ICustomerService, CustomerService>();
         builder.Services.AddTransient<IReservationService, ReservationService>();
         builder.Services.AddTransient<IUserService, UserService>();
+        builder.Services.AddTransient<ILoyalCardService, LoyalCardService>();
+
         builder.Services.AddTransient<ErrorHandlingMiddleware>();
         builder.Services.AddMvc().AddNewtonsoftJson();
 

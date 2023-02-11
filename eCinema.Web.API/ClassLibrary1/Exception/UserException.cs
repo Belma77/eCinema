@@ -25,7 +25,11 @@ namespace eCInema.Models.Exceptions
     {
         public ForbbidenException(string message) : base(message) { }
     }
-   
+    public class BadRequestException : UserException
+    {
+        public BadRequestException(string message) : base(message) { }
+    }
+
 
 
 

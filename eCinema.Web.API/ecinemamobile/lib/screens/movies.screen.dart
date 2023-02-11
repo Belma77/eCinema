@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:ecinemamobile/models/Schedules/projection.dart';
 import 'package:ecinemamobile/models/Schedules/schedule.dart';
 import 'package:ecinemamobile/screens/schedule.dart';
+import 'package:ecinemamobile/screens/user.profile.dart';
+import 'package:ecinemamobile/widgets/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/projection.provider.dart';
@@ -48,12 +50,12 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-            automaticallyImplyLeading: false,
             title: const Center(
-              child: Text(
-                "eCinema",
-              ),
-            )),
+          child: Text(
+            "eCinema",
+          ),
+        )),
+        drawer: const DrawerWidget(),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10),

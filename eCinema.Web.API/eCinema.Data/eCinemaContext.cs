@@ -33,6 +33,8 @@ namespace eCinema.Data
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Schedule> Schedules { get; set; }
+        public DbSet<LoyalCard> LoyalCards { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -1,4 +1,30 @@
-class User {
+import 'dart:ui';
+
+import 'package:ecinemamobile/models/Movies/movies.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'user.g.dart';
+
+@JsonSerializable()
+class Customer {
+  int? Id;
+  String? firstName;
+  String? lastName;
+  String? phone;
+  String? email;
   String? username;
-  String? password;
+  //String? picture;
+
+  Customer(
+    this.Id,
+    this.firstName,
+    this.lastName,
+    this.phone,
+    this.email,
+    this.username,
+  );
+
+  Customer.paramterless();
+  factory Customer.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 }

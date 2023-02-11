@@ -1,12 +1,12 @@
 import '../models/Users/user.dart';
 import 'base.provider.dart';
 
-class UserProvider extends BaseProvider<User> {
+class UserProvider extends BaseProvider<Customer> {
   UserProvider() : super("Customer");
 
   @override
-  User fromJson(data) {
+  Customer fromJson(data) {
     // TODO: implement fromJson
-    return User();
+    return Customer.fromJson(data);
   }
 }

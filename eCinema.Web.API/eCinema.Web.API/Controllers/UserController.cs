@@ -23,9 +23,7 @@ namespace eCinema.Web.API.Controllers
         public override IActionResult Insert(UserInsertDto insert)
         {
             return base.Insert(insert);
-        }
-
-      
+        }  
 
     }
 }

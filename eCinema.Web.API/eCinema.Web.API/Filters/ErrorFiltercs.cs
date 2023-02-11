@@ -30,6 +30,12 @@ namespace eCinema.Web.API.Filters
                 context.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 await context.Response.WriteAsync(e.Message);
             }
+
+            catch (BadRequestException e)
+            {
+                context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+                await context.Response.WriteAsync(e.Message);
+            }
             catch (Exception e)
             {
                 context.Response.StatusCode = 500;

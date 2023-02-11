@@ -1,15 +1,20 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
+import 'package:ecinemamobile/env.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import 'package:flutter/foundation.dart';
 
 import '../models/Authorization/authorization.dart';
+import '../models/Users/user.loyalty.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
-  String? _endpoint;
+  static String? _endpoint;
+  static Map<String, dynamic>? paymentIntent;
 
   HttpClient client = new HttpClient();
   IOClient? http;
@@ -27,6 +32,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     client.badCertificateCallback = (cert, host, port) => true;
     http = IOClient(client);
   }
+  String? get getbaseUrl => _baseUrl;
 
   Future<T> getById(int id, [dynamic additionalData]) async {
     var url = Uri.parse("$_baseUrl$_endpoint/$id");
@@ -48,9 +54,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Future<List<T>> get([
-    dynamic search,
-  ]) async {
+  Future<List<T>> get([dynamic search]) async {
     var url = "$_baseUrl$_endpoint";
 
     if (search != null) {
@@ -92,6 +96,60 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
+  Future<void> makePayment() async {
+    try {
+      await Stripe.instance
+          .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+                  paymentIntentClientSecret: paymentIntent!['client_secret'],
+                  style: ThemeMode.dark,
+                  merchantDisplayName: 'Merchant Name'))
+          .then((value) => {});
+    } catch (err) {}
+  }
+
+  createPaymentIntent(String amount, String currency) async {
+    try {
+      Map<String, dynamic> body = {
+        'amount': amount,
+        'currency': currency,
+        'payment_method_types[]': 'card'
+      };
+      var url = "https://api.stripe.com/v1/payment_intents";
+      var response = await http!.post(Uri.parse(url),
+          headers: {
+            'Authorization': 'Bearer $SECRET_KEY',
+            'Content-Type': 'application/x-www-form-urlencoded'
+          },
+          body: body);
+      paymentIntent = jsonDecode(response.body);
+      await makePayment();
+      return jsonDecode(response.body);
+    } catch (err) {
+      print('error${err.toString()}');
+    }
+  }
+
+  Future<T> getUser() async {
+    var url = "$_baseUrl$_endpoint/Current";
+
+    var uri = Uri.parse(url);
+
+    Map<String, String> headers = createHeaders();
+    print("get me");
+    var response = await http!.get(uri, headers: headers);
+    print("done $response");
+    if (isValidResponseCode(response)) {
+      print("uspjesno");
+      var data = jsonDecode(response.body);
+      print(data);
+      var map = fromJson(data);
+      return map;
+    } else {
+      throw Exception("Exception... handle this gracefully");
+    }
+  }
+
   Future<T?> insert(dynamic request) async {
     var url = "$_baseUrl$_endpoint";
     var uri = Uri.parse(url);
@@ -102,7 +160,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return fromJson(data) as T;
+      return fromJson(data);
     } else {
       return null;
     }
@@ -122,6 +180,25 @@ abstract class BaseProvider<T> with ChangeNotifier {
       return fromJson(data) as T;
     } else {
       return null;
+    }
+  }
+
+  Future<List<T>> delete(int id) async {
+    var url = Uri.parse("$_baseUrl$_endpoint/$id");
+
+    Map<String, String> headers = createHeaders();
+
+    var response = await http!.delete(url, headers: headers);
+    print("done $response");
+
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      print(data);
+      print("uspjesno");
+
+      return data.map((x) => fromJson(x)).cast<T>().toList();
+    } else {
+      throw Exception("Exception... handle this gracefully");
     }
   }
 

@@ -15,6 +15,7 @@ namespace eCInema.Models.Entities
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
         public int HallId { get; set; }
+        public double TicketPrice { get; set; }
         public Hall Hall { get; set; }
         public int NoAvailableSeats { get; set; }
 
