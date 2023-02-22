@@ -1,7 +1,7 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos.Halls;
 using eCInema.Models.Dtos.Movies;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
@@ -84,5 +84,7 @@ namespace eCinema.WinUI.ScheduleForms
                 this.Close();
             }
         }
+
+      
     }
 }

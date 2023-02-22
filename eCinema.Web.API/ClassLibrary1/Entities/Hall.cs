@@ -11,5 +11,8 @@ namespace eCInema.Models.Entities
         public int Id { get; set; }
         public int NoOfHall { get; set; }
         public int NumberOfSeats { get; set; }
+        public int NumberOfRows { get; set; }
+        public int NumberOfColumns { get; set; }
+        public ICollection<Seat> Seats { get; set; }
     }
 }

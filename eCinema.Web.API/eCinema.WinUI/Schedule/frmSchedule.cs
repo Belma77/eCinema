@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos.Halls;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
 using System;
@@ -20,6 +20,8 @@ namespace eCinema.WinUI.ScheduleForms
     {
         private APIservice service = new APIservice("Schedule");
         private bool dateChanged=false;
+        private bool timeChanged = false;
+
         public frmSchedule()
         {
             InitializeComponent();
@@ -28,14 +30,8 @@ namespace eCinema.WinUI.ScheduleForms
         private async void frmSchedule_Load(object sender, EventArgs e)
         {
             await LoadSchedules();
-            LoadHallCmb();
         }
-        private async void LoadHallCmb()
-        {
-            var hallService = new APIservice("Hall");
-            var halls = await hallService.Get<List<HallDto>>();
-            cmbHall.DataSource = halls.Select(x=>x.NoOfHall).ToList();
-        }
+       
 
         private async Task LoadSchedules()
         {
@@ -48,8 +44,11 @@ namespace eCinema.WinUI.ScheduleForms
                 dateChanged = false;
             }
 
-            if(cmbHall.SelectedIndex!=-1)
-            search.NoOfHall = int.Parse(cmbHall.SelectedItem.ToString());
+            if (timeChanged)
+            {
+                search.StartTime = dtmTime.Value;
+                timeChanged = false;
+            }
 
             var schedules=await service.Get<List<GetSchedulesDto>>(search);
 
@@ -70,19 +69,21 @@ namespace eCinema.WinUI.ScheduleForms
 
         private async void dgvSchedules_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            
             var schedule = dgvSchedules.SelectedRows[0].DataBoundItem as GetSchedulesDto;
-
-            if (schedule != null)
-            {
-                if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+           
+                if (schedule != null)
                 {
-                    if (schedule != null)
+                    if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                     {
-                        await service.Delete(schedule.Id);
-                        await LoadSchedules();
+                        if (schedule != null)
+                        {
+                            await service.Delete(schedule.Id);
+                            await LoadSchedules();
 
+                        }
                     }
-                }
+
             }
         }
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -148,6 +149,12 @@ namespace eCinema.WinUI.ScheduleForms
 
         private async void cmbHall_SelectedIndexChanged(object sender, EventArgs e)
         {
+            await LoadSchedules();
+        }
+
+        private async void dtmTime_ValueChanged(object sender, EventArgs e)
+        {
+            timeChanged = true;
             await LoadSchedules();
         }
     }

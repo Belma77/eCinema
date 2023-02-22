@@ -61,25 +61,6 @@ namespace eCinema.Services.LoyalCardServices
 
             throw new BadRequestException("Something went wrong");
         }
-        public List<SessionLineItemOptions> CreatesessionLineItemOptions(LoyalCardInsertDto card)
-        {
-            var LineItems = new List<SessionLineItemOptions>();
-
-                var option = new SessionLineItemOptions
-                {
-                    PriceData = new SessionLineItemPriceDataOptions
-                    {
-                        UnitAmount = (long?)(23.90 * 100),
-                        Currency = "bam",
-                        ProductData = new SessionLineItemPriceDataProductDataOptions
-                        {
-                            Name = "Loyal card",
-                        },
-                    },
-                    Quantity = 1,
-                };
-                LineItems.Add(option);
-            return LineItems;
-        }
+       
     }
 }

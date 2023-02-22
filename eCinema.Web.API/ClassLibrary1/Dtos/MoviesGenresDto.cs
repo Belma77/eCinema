@@ -14,7 +14,7 @@ namespace eCInema.Models.Dtos
     public class MoviesGenresDto
     {
         public GenresDto Genre { get; set; }
-        public MovieDetailsDto Movie { get; set; }
+       // public MovieDetailsDto Movie { get; set; }
         public int MovieId { get; set; }
         public override string ToString()
         {

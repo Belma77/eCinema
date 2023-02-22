@@ -1,5 +1,5 @@
 ﻿using eCInema.Data.Entities;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Entities;
 using Newtonsoft.Json.Converters;
 using System;
@@ -27,7 +27,7 @@ namespace eCInema.Models.Dtos.Movies
         public List<DirectorsMoviesDto>? DirectorsMovies { get; set; }
         public List<ProducersMoviesDto>? ProducersMovies { get; set; }
         public List<WritersMoviesDto>? WritersMovies { get; set; }
-        public List<GetSchedulesDto>? Schedules { get; set; }
+        public List<ScheduleDto>? Schedules { get; set; }
         public byte[] Poster { get; set; }
     }
 }

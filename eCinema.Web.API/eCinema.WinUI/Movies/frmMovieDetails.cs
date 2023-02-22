@@ -69,8 +69,12 @@ namespace eCinema.WinUI
                 var actors = _movie.ActorsMovies?.Select(x => (x?.Actor?.FirstName + " " + x?.Actor?.LastName)).ToList();
                 cmbActors.DataSource = actors;
 
-                if (_movie.Poster != null)
+                if (_movie.Poster != null && _movie.Poster.Length>1)
                     pbPoster.Image = ImageHelper.FromByteToImage(_movie.Poster);
+                else
+                {
+                    pbPoster.Image = null;
+                }
 
             }
         }
@@ -90,5 +94,6 @@ namespace eCinema.WinUI
             this.Show();
         }
 
+       
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Entities;
 using eCInema.Models.Exceptions;
 using eCInema.Models.SearchObjects;
@@ -45,8 +45,8 @@ namespace eCinema.Services.ScheduleServices
                 query = query.Where(x => x.MovieId==search.MovieId);
             }
 
-            else if (search.NoOfHall.HasValue)
-                query = query.Where(x => x.Hall.NoOfHall == search.NoOfHall);
+            else if (search.StartTime.HasValue)
+                query = query.Where(x => x.StartTime.Minute.Equals(search.StartTime.Value.Minute));
 
             return query;
         }
@@ -64,13 +64,13 @@ namespace eCinema.Services.ScheduleServices
         public override GetSchedulesDto GetById(int id)
         {
             var schedule = _context.Schedules
-                .Include(x=>x.Movie).
-                ThenInclude(x=>x.MoviesGenres).ThenInclude(x=>x.Genre).
-                Include(x=>x.Movie).ThenInclude(y=>y.WritersMovies).ThenInclude(z => z.Writer).
-                Include(x => x.Movie).ThenInclude(y => y.DirectorsMovies).ThenInclude(z=>z.Director).
+                .Include(x => x.Movie).
+                ThenInclude(x => x.MoviesGenres).ThenInclude(x => x.Genre).
+                Include(x => x.Movie).ThenInclude(y => y.WritersMovies).ThenInclude(z => z.Writer).
+                Include(x => x.Movie).ThenInclude(y => y.DirectorsMovies).ThenInclude(z => z.Director).
                 Include(x => x.Movie).ThenInclude(y => y.ActorsMovies).ThenInclude(z => z.Actor).
                 Include(x => x.Movie).ThenInclude(y => y.ProducersMovies).ThenInclude(z => z.Producer).
-                Include(y=>y.Hall).
+                Include(y => y.Hall).ThenInclude(y=>y.Seats).Include(x=>x.ScheduleSeats).
                 FirstOrDefault(x => x.Id == id);
 
             if (schedule == null)
@@ -93,8 +93,9 @@ namespace eCinema.Services.ScheduleServices
                 throw new NotFoundException("Movie not found");
 
             if (hall != null)
-                schedule.HallId=hall.Id;
-
+            {
+                schedule.HallId = hall.Id;
+            }
             else
             {
                 throw new NotFoundException("Hall not found");

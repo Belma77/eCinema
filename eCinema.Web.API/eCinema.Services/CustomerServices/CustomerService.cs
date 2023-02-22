@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using eCinema.Data;
-using eCinema.Data.Migrations;
 using eCinema.Services.CRUDservice;
 using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Users;
@@ -34,7 +33,16 @@ namespace eCinema.Services.CustomerServices
                 || (x.FirstName + " " + x.LastName).ToLower().StartsWith(search.Name.ToLower()));
 
             if (!String.IsNullOrEmpty(search.Username))
-                query = query.Where(x => x.UserName==search.Username);
+                query = query.Where(x => x.UserName.ToLower()==search.Username.ToLower());
+
+            if(!String.IsNullOrEmpty(search.FirstName))
+            {
+                query = query.Where(x => x.FirstName.ToLower().StartsWith(search.FirstName.ToLower()));
+            }
+            if (!String.IsNullOrEmpty(search.LastName))
+            {
+                query = query.Where(x => x.LastName.ToLower().StartsWith(search.LastName.ToLower()));
+            }
 
             return query;
         }
@@ -62,9 +70,8 @@ namespace eCinema.Services.CustomerServices
 
         public CustomerDto getCurrent()
         {
-            var user=_accessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            if (user == null)
-                throw new NotFoundException("Customer not found");
+            var user=_accessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
+           
             var customer = _context.Customers.FirstOrDefault(x => x.UserName == user);
 
             if (customer == null)

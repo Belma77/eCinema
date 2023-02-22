@@ -8,7 +8,9 @@ using eCInema.Models.Dtos.Halls;
 using eCInema.Models.Dtos.LoyaltyCard;
 using eCInema.Models.Dtos.Movies;
 using eCInema.Models.Dtos.Reservations;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
+using eCInema.Models.Dtos.SchedulesSeats;
+using eCInema.Models.Dtos.Seats;
 using eCInema.Models.Dtos.Users;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
@@ -65,6 +67,7 @@ namespace eCinema.Services.Profiles
 
             CreateMap<Schedule, GetSchedulesDto>();
             CreateMap<GetSchedulesDto, Schedule>();
+            CreateMap<Schedule, ScheduleDto>();
             CreateMap<ScheduleInsertDto, Schedule>();
             CreateMap<ScheduleUpdateDto, Schedule>();
 
@@ -91,6 +94,13 @@ namespace eCinema.Services.Profiles
 
             CreateMap<LoyalCard, LoyalCardDto>();
             CreateMap<LoyalCardInsertDto, LoyalCard>();
+
+            CreateMap<Hall, HallDto>();
+            CreateMap<Seat, SeatDto>();
+
+            CreateMap<ScheduleSeatDto, ScheduleSeat>();
+            CreateMap<ScheduleSeat, ScheduleSeatDto>();
+
         }
 
     }

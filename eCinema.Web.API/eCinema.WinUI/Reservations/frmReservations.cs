@@ -1,4 +1,5 @@
 ﻿using eCinema.WinUI.Helpers;
+using eCinema.WinUI.Reservations;
 using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;
@@ -125,6 +126,12 @@ namespace eCinema.WinUI
                     }
                 }
             }
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAddReservation frm = new frmAddReservation();
+            frm.ShowDialog();
         }
     }
 }

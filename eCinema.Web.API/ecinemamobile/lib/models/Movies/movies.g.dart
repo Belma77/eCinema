@@ -9,7 +9,7 @@ Movies _$MoviesFromJson(Map<String, dynamic> json) {
   List<WritersMovies> _writersMovies = [];
   List<ProducersMovies> _producersMovies = [];
   List<GenresMovies> _genresMovies = [];
-  List<Schedule> _schedules = [];
+  List<ScheduleMovie> _schedules = [];
 
   var genresMovies = json['moviesGenres'] as List;
   _genresMovies = genresMovies.map((x) => GenresMovies.fromJson(x)).toList();
@@ -28,9 +28,10 @@ Movies _$MoviesFromJson(Map<String, dynamic> json) {
   _producersMovies =
       producersMovies.map((x) => ProducersMovies.fromJson(x)).toList();
 
-  /*  var schedules = json['schedules'] as List;
-  _schedules = schedules.map((x) => Schedule.fromJson(x)).toList(); */
-
+  if (json['schedules'] != null) {
+    var schedules = json['schedules'] as List;
+    _schedules = schedules.map((x) => ScheduleMovie.fromJson(x)).toList();
+  }
   return Movies(
       json['id'] as int,
       json['title'] as String,
@@ -43,8 +44,8 @@ Movies _$MoviesFromJson(Map<String, dynamic> json) {
       _actorsMovies,
       _directorsMovies,
       _writersMovies,
-      _producersMovies);
-  //     _schedules);
+      _producersMovies,
+      _schedules);
 }
 
 Map<String, dynamic> _$MoviesToJson(Movies instance) => <String, dynamic>{
@@ -60,5 +61,5 @@ Map<String, dynamic> _$MoviesToJson(Movies instance) => <String, dynamic>{
       'directorsMovies': instance.directorsMovies,
       'writersMovies': instance.writersMovies,
       'producersMovies': instance.producersMovies,
-      //  'schedules': instance.schedules
+      'schedules': instance.schedules
     };

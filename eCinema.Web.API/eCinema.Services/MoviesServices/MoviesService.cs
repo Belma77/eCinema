@@ -92,6 +92,7 @@ namespace eCinema.Services.MoviesServices
                 .Include(d => d.WritersMovies)
                 .ThenInclude(d => d.Writer).
                  Include(x=>x.Schedules).
+                 ThenInclude(x=>x.Hall).
                  FirstOrDefault(x => x.Id == id);
 
             return _mapper.Map<MovieDetailsDto>(movie);
@@ -271,10 +272,10 @@ namespace eCinema.Services.MoviesServices
 
         static MLContext mlContext = null;
         static ITransformer model = null;
-        public List<MovieDetailsDto> Recommend(int id)
+        public List<GetMoviesDto> Recommend(int id)
         {
             var user = _accessor.HttpContext.User.Identity.Name;
-            var dbUser=_context.Users.FirstOrDefault(x=>x.UserName==user).Id;  
+            var dbUser=_context.Customers.FirstOrDefault(x=>x.UserName==user).Id;  
 
             var tmpData = _context.Reservations.Include(x=>x.Customer).Include(x=>x.Schedule).ThenInclude(y=>y.Movie).ToList();
 
@@ -336,7 +337,7 @@ namespace eCinema.Services.MoviesServices
             var finalResult = predictionResult.OrderByDescending(x => x.Item2)
                 .Select(x => x.Item1).Take(3).ToList();
 
-            return _mapper.Map<List<MovieDetailsDto>>(finalResult);
+            return _mapper.Map<List<GetMoviesDto>>(finalResult);
         }
 
     }

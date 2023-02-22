@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget {
           ),
           Container(
             height: 50,
-            margin: EdgeInsets.fromLTRB(40, 20, 40, 10),
+            margin: const EdgeInsets.fromLTRB(40, 20, 40, 10),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10), color: Colors.blue),
             child: InkWell(

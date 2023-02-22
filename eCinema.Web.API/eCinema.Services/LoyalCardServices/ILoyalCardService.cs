@@ -16,6 +16,5 @@ namespace eCinema.Services.LoyalCardServices
     public interface ILoyalCardService:IBaseService<LoyalCardDto, LoyalCardSearchObject>
     {
         LoyalCardDto Insert(LoyalCardInsertDto insert);
-        List<SessionLineItemOptions> CreatesessionLineItemOptions(LoyalCardInsertDto card);
     }
 }

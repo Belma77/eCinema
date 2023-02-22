@@ -21,6 +21,7 @@ namespace eCinema.Web.API.Controllers
         {
             _service = service;
         }
+
         [HttpPost]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         public IActionResult Add(LoyalCardInsertDto insert)
@@ -28,35 +29,6 @@ namespace eCinema.Web.API.Controllers
             return Ok(_service.Insert(insert));
 
         }
-        [HttpPost]
-        [Route("Pay")]
-        [AllowAnonymous]
-        //[Authorize]
-        public void CreateSession([FromBody] LoyalCardInsertDto card)
-        {
-            var url = "localhost:7239";
-            try
-            {
-                var options = new SessionCreateOptions
-                {
-                    LineItems = _service.CreatesessionLineItemOptions(card),
-
-                    Mode = "payment",
-                    SuccessUrl = "http://localhost:4200/checkout",
-                    CancelUrl = "http://localhost:4200/cancel",
-                };
-
-                var service = new SessionService();
-                Session session = service.Create(options);
-                Response.Headers.Add("Location", session.Url);
-                Response.WriteAsJsonAsync(session.Url);
-
-            }
-            catch (Exception)
-            {
-                throw new Exception();
-            }
-
-        }
+       
     }
 }

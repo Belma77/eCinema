@@ -30,6 +30,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
   }
 
   Future loadData(String? day) async {
+    ScheduleProvider();
     var tmpData = await _scheduleProvider?.get({'DayOfWeek': day});
     setState(() {
       data = tmpData!;
@@ -135,7 +136,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                         Text(
                           item.movie!.title.toString() + "\n",
                           style: const TextStyle(
-                            fontSize: 25,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

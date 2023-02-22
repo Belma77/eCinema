@@ -2,11 +2,13 @@ import 'package:ecinemamobile/env.dart';
 import 'package:ecinemamobile/models/Movies/movies.dart';
 import 'package:ecinemamobile/providers/loyalty.club.dart';
 import 'package:ecinemamobile/providers/movies.provider.dart';
+import 'package:ecinemamobile/providers/reservation.provider.dart';
 import 'package:ecinemamobile/providers/schedule.provider.dart';
 import 'package:ecinemamobile/providers/user.provider.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:ecinemamobile/screens/loyalty.club.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
+import 'package:ecinemamobile/screens/reservation.dart';
 import 'package:ecinemamobile/screens/schedule.dart';
 import 'package:ecinemamobile/screens/user.profile.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +23,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => MoviesProvider()),
         ChangeNotifierProvider(create: (_) => ScheduleProvider()),
         ChangeNotifierProvider(create: (_) => LoyaltyClubProvider()),
+        ChangeNotifierProvider(create: (_) => ReservationProvider()),
       ],
       child: const MyApp(),
     ),
@@ -74,6 +77,12 @@ class MyApp extends StatelessWidget {
               "/${uri.pathSegments.first}" == ScheduleScreen.routeName) {
             var id = uri.pathSegments[1];
             return MaterialPageRoute(builder: (context) => ScheduleScreen(id));
+          }
+          if (uri.pathSegments.length == 2 &&
+              "/${uri.pathSegments.first}" == ReservationScreen.route) {
+            var id = uri.pathSegments[1];
+            return MaterialPageRoute(
+                builder: (context) => ReservationScreen(id));
           }
         });
   }

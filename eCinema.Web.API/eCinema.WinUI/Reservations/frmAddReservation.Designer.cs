@@ -28,52 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.components = new System.ComponentModel.Container();
+            this.cmbFirstName = new System.Windows.Forms.ComboBox();
+            this.cmbLastName = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.comboBox4 = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.comboBox5 = new System.Windows.Forms.ComboBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
+            this.cmbMovie = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnSeats = new System.Windows.Forms.Button();
+            this.cmbDate = new System.Windows.Forms.ComboBox();
+            this.cmbTime = new System.Windows.Forms.ComboBox();
+            this.err = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label6 = new System.Windows.Forms.Label();
+            this.cmbStatus = new System.Windows.Forms.ComboBox();
+            ((System.ComponentModel.ISupportInitialize)(this.err)).BeginInit();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // cmbFirstName
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(148, 80);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(177, 28);
-            this.comboBox1.TabIndex = 0;
+            this.cmbFirstName.FormattingEnabled = true;
+            this.cmbFirstName.Location = new System.Drawing.Point(148, 80);
+            this.cmbFirstName.Name = "cmbFirstName";
+            this.cmbFirstName.Size = new System.Drawing.Size(177, 28);
+            this.cmbFirstName.TabIndex = 0;
+            this.cmbFirstName.SelectedIndexChanged += new System.EventHandler(this.cmbFirstName_SelectedIndexChanged);
+            this.cmbFirstName.TextChanged += new System.EventHandler(this.cmbFirstName_TextChanged);
             // 
-            // comboBox2
+            // cmbLastName
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(148, 127);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(177, 28);
-            this.comboBox2.TabIndex = 1;
-            // 
-            // comboBox3
-            // 
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(148, 178);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(177, 28);
-            this.comboBox3.TabIndex = 2;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(148, 338);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(177, 27);
-            this.textBox1.TabIndex = 3;
+            this.cmbLastName.FormattingEnabled = true;
+            this.cmbLastName.Location = new System.Drawing.Point(148, 127);
+            this.cmbLastName.Name = "cmbLastName";
+            this.cmbLastName.Size = new System.Drawing.Size(177, 28);
+            this.cmbLastName.TabIndex = 1;
+            this.cmbLastName.SelectedIndexChanged += new System.EventHandler(this.cmbLastName_SelectedIndexChanged);
+            this.cmbLastName.TextChanged += new System.EventHandler(this.cmbLastName_TextChanged);
             // 
             // label1
             // 
@@ -93,67 +85,6 @@
             this.label2.TabIndex = 5;
             this.label2.Text = "Last Name";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 186);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 20);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "Movie";
-            // 
-            // comboBox4
-            // 
-            this.comboBox4.FormattingEnabled = true;
-            this.comboBox4.Location = new System.Drawing.Point(148, 232);
-            this.comboBox4.Name = "comboBox4";
-            this.comboBox4.Size = new System.Drawing.Size(177, 28);
-            this.comboBox4.TabIndex = 7;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 240);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 20);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Date";
-            // 
-            // comboBox5
-            // 
-            this.comboBox5.FormattingEnabled = true;
-            this.comboBox5.Location = new System.Drawing.Point(148, 287);
-            this.comboBox5.Name = "comboBox5";
-            this.comboBox5.Size = new System.Drawing.Size(177, 28);
-            this.comboBox5.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 295);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(77, 20);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Start Time";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 345);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(130, 20);
-            this.label6.TabIndex = 11;
-            this.label6.Text = "Number of Tickets";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(148, 390);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(177, 29);
-            this.button1.TabIndex = 12;
-            this.button1.Text = "Add";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -163,27 +94,114 @@
             this.label7.TabIndex = 13;
             this.label7.Text = "Add New Reservation";
             // 
+            // cmbMovie
+            // 
+            this.cmbMovie.FormattingEnabled = true;
+            this.cmbMovie.Location = new System.Drawing.Point(148, 179);
+            this.cmbMovie.Name = "cmbMovie";
+            this.cmbMovie.Size = new System.Drawing.Size(177, 28);
+            this.cmbMovie.TabIndex = 14;
+            this.cmbMovie.SelectedIndexChanged += new System.EventHandler(this.cmbMovie_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 235);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 20);
+            this.label3.TabIndex = 17;
+            this.label3.Text = "Date";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 293);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 20);
+            this.label4.TabIndex = 18;
+            this.label4.Text = "Start Time";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 187);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(50, 20);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Movie";
+            // 
+            // btnSeats
+            // 
+            this.btnSeats.Location = new System.Drawing.Point(148, 391);
+            this.btnSeats.Name = "btnSeats";
+            this.btnSeats.Size = new System.Drawing.Size(177, 29);
+            this.btnSeats.TabIndex = 20;
+            this.btnSeats.Text = "Select Seats";
+            this.btnSeats.UseVisualStyleBackColor = true;
+            this.btnSeats.Click += new System.EventHandler(this.btnSeats_Click);
+            // 
+            // cmbDate
+            // 
+            this.cmbDate.FormattingEnabled = true;
+            this.cmbDate.Location = new System.Drawing.Point(148, 227);
+            this.cmbDate.Name = "cmbDate";
+            this.cmbDate.Size = new System.Drawing.Size(177, 28);
+            this.cmbDate.TabIndex = 21;
+            // 
+            // cmbTime
+            // 
+            this.cmbTime.FormattingEnabled = true;
+            this.cmbTime.Location = new System.Drawing.Point(148, 285);
+            this.cmbTime.Name = "cmbTime";
+            this.cmbTime.Size = new System.Drawing.Size(177, 28);
+            this.cmbTime.TabIndex = 22;
+            // 
+            // err
+            // 
+            this.err.ContainerControl = this;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(15, 346);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 20);
+            this.label6.TabIndex = 23;
+            this.label6.Text = "Status";
+            // 
+            // cmbStatus
+            // 
+            this.cmbStatus.FormattingEnabled = true;
+            this.cmbStatus.Location = new System.Drawing.Point(148, 338);
+            this.cmbStatus.Name = "cmbStatus";
+            this.cmbStatus.Size = new System.Drawing.Size(177, 28);
+            this.cmbStatus.TabIndex = 24;
+            this.cmbStatus.SelectedIndexChanged += new System.EventHandler(this.cmbStatus_SelectedIndexChanged);
+            // 
             // frmAddReservation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(357, 443);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(348, 442);
+            this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.label6);
+            this.Controls.Add(this.cmbTime);
+            this.Controls.Add(this.cmbDate);
+            this.Controls.Add(this.btnSeats);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.comboBox5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.cmbMovie);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbLastName);
+            this.Controls.Add(this.cmbFirstName);
             this.Name = "frmAddReservation";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddReservation";
+            this.Load += new System.EventHandler(this.frmAddReservation_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -191,19 +209,20 @@
 
         #endregion
 
-        private ComboBox comboBox1;
-        private ComboBox comboBox2;
-        private ComboBox comboBox3;
-        private TextBox textBox1;
+        private ComboBox cmbFirstName;
+        private ComboBox cmbLastName;
         private Label label1;
         private Label label2;
-        private Label label3;
-        private ComboBox comboBox4;
-        private Label label4;
-        private ComboBox comboBox5;
-        private Label label5;
-        private Label label6;
-        private Button button1;
         private Label label7;
+        private ComboBox cmbMovie;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private Button btnSeats;
+        private ComboBox cmbDate;
+        private ComboBox cmbTime;
+        private ErrorProvider err;
+        private ComboBox cmbStatus;
+        private Label label6;
     }
 }

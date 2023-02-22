@@ -15,6 +15,6 @@ namespace eCinema.Services.MoviesServices
     public interface IMoviesService:IBaseCRUDService<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
         //void DeleteDirectorsMovies(DirectorsMoviesDto delete);
-        List<MovieDetailsDto> Recommend(int id);
+        List<GetMoviesDto> Recommend(int id);
     }
 }

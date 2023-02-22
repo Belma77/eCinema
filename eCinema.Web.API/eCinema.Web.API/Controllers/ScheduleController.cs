@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.ScheduleServices;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;
 using Microsoft.AspNetCore.Authorization;
@@ -29,6 +29,12 @@ namespace eCinema.Web.API.Controllers
             return base.Get(search);
         }
 
-
+        [AllowAnonymous]
+        [Authorize(UserRole.Admin, UserRole.Customer)]
+        [HttpGet("{id}")]
+        public override IActionResult GetById(int id)
+        {
+            return base.GetById(id);
+        }
     }
 }

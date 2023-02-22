@@ -17,7 +17,7 @@ namespace eCinema.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.1")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -36,6 +36,23 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Genres");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Genre = 0
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Genre = 2
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Genre = 9
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Actor", b =>
@@ -57,6 +74,14 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actor");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Daniel",
+                            LastName = "Radcliffe"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.ActorsMovies", b =>
@@ -72,6 +97,13 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("ActorId");
 
                     b.ToTable("ActorsMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            ActorId = 1
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Director", b =>
@@ -93,6 +125,14 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Directors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Chris",
+                            LastName = "Columbus"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.DirectorsMovies", b =>
@@ -108,6 +148,13 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("DirectorId");
 
                     b.ToTable("DirectorsMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            DirectorId = 1
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Hall", b =>
@@ -121,12 +168,68 @@ namespace eCinema.Data.Migrations
                     b.Property<int>("NoOfHall")
                         .HasColumnType("int");
 
+                    b.Property<int>("NumberOfColumns")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfRows")
+                        .HasColumnType("int");
+
                     b.Property<int>("NumberOfSeats")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.ToTable("Halls");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            NoOfHall = 1,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            NoOfHall = 2,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        },
+                        new
+                        {
+                            Id = 3,
+                            NoOfHall = 3,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        },
+                        new
+                        {
+                            Id = 4,
+                            NoOfHall = 4,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        },
+                        new
+                        {
+                            Id = 5,
+                            NoOfHall = 5,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        },
+                        new
+                        {
+                            Id = 6,
+                            NoOfHall = 6,
+                            NumberOfColumns = 10,
+                            NumberOfRows = 5,
+                            NumberOfSeats = 50
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.LoyalCard", b =>
@@ -163,6 +266,13 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("GenreId");
 
                     b.ToTable("MoviesGenres");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            GenreId = 1
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Producer", b =>
@@ -184,6 +294,14 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Producers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Duncan",
+                            LastName = "Henderson"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.ProducerMovies", b =>
@@ -199,6 +317,13 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("ProducerId");
 
                     b.ToTable("ProducersMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            ProducerId = 1
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
@@ -214,6 +339,9 @@ namespace eCinema.Data.Migrations
 
                     b.Property<int>("NumberOfTickets")
                         .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
 
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
@@ -253,6 +381,9 @@ namespace eCinema.Data.Migrations
                     b.Property<int>("NoAvailableSeats")
                         .HasColumnType("int");
 
+                    b.Property<int?>("ScheduleSeatId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("datetime2");
 
@@ -266,6 +397,428 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("MovieId");
 
                     b.ToTable("Schedules");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Date = new DateTime(2023, 2, 19, 18, 41, 7, 247, DateTimeKind.Local).AddTicks(6503),
+                            EndTime = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            HallId = 1,
+                            MovieId = 1,
+                            NoAvailableSeats = 50,
+                            StartTime = new DateTime(2023, 2, 19, 18, 41, 7, 247, DateTimeKind.Local).AddTicks(6567),
+                            TicketPrice = 7.5
+                        });
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.ScheduleSeat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ScheduleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SeatId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("isTaken")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
+
+                    b.HasIndex("ScheduleId");
+
+                    b.HasIndex("SeatId");
+
+                    b.ToTable("ScheduleSeats");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.Seat", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Column")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("HallId")
+                        .IsRequired()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Row")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HallId");
+
+                    b.ToTable("Seats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Column = 1,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Column = 2,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Column = 3,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Column = 4,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Column = 5,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Column = 6,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Column = 7,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Column = 8,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Column = 9,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Column = 10,
+                            HallId = 1,
+                            Row = "A"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Column = 1,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Column = 2,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Column = 3,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Column = 4,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Column = 5,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Column = 6,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Column = 7,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Column = 8,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Column = 9,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Column = 10,
+                            HallId = 1,
+                            Row = "B"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Column = 1,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Column = 2,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Column = 3,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Column = 4,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Column = 5,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Column = 6,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Column = 7,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Column = 8,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Column = 9,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Column = 10,
+                            HallId = 1,
+                            Row = "C"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Column = 1,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Column = 2,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Column = 3,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Column = 4,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Column = 5,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Column = 6,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Column = 7,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Column = 8,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Column = 9,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Column = 10,
+                            HallId = 1,
+                            Row = "D"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Column = 1,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Column = 2,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Column = 3,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Column = 4,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Column = 5,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Column = 6,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Column = 7,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Column = 8,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Column = 9,
+                            HallId = 1,
+                            Row = "E"
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Column = 10,
+                            HallId = 1,
+                            Row = "E"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.User", b =>
@@ -320,6 +873,20 @@ namespace eCinema.Data.Migrations
                     b.HasDiscriminator<int>("Discriminator").HasValue(0);
 
                     b.UseTphMappingStrategy();
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "admin@gmail.com",
+                            FirstName = "Admin",
+                            LastName = "Admin",
+                            PasswordHash = "pT6+O41e8uAPiPi2wHkJpRSPchI=",
+                            PasswordSalt = "x+D01pkHyndDddlVLnHpJQ==",
+                            Phone = "041233234",
+                            UserName = "Admin",
+                            UserRole = 0
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Writer", b =>
@@ -341,6 +908,14 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Writers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            FirstName = "Steve",
+                            LastName = "Kloves"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.WritersMovies", b =>
@@ -356,6 +931,13 @@ namespace eCinema.Data.Migrations
                     b.HasIndex("WriterId");
 
                     b.ToTable("WritersMovies");
+
+                    b.HasData(
+                        new
+                        {
+                            MovieId = 1,
+                            WriterId = 1
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Movies", b =>
@@ -374,7 +956,6 @@ namespace eCinema.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<byte[]>("Poster")
-                        .IsRequired()
                         .HasColumnType("varbinary(max)");
 
                     b.Property<int>("ReleaseYear")
@@ -391,6 +972,17 @@ namespace eCinema.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Country = "USA",
+                            Duration = 120,
+                            ReleaseYear = 2001,
+                            Synopsis = "Harry Potter, an eleven-year-old orphan, discovers that he is a wizard and is invited to study at Hogwarts. Even as he escapes a dreary life and enters a world of magic, he finds trouble awaiting him.",
+                            Title = "Harry Potter and the Philosopher's Stone"
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Customer", b =>
@@ -407,6 +999,21 @@ namespace eCinema.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue(1);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            Email = "customer@gmail.com",
+                            FirstName = "Customer",
+                            LastName = "Customer",
+                            PasswordHash = "pT6+O41e8uAPiPi2wHkJpRSPchI=",
+                            PasswordSalt = "x+D01pkHyndDddlVLnHpJQ==",
+                            Phone = "041233234",
+                            UserName = "Customer",
+                            UserRole = 1,
+                            CustomerType = 0
+                        });
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.ActorsMovies", b =>
@@ -498,7 +1105,7 @@ namespace eCinema.Data.Migrations
 
             modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
                 {
-                    b.HasOne("eCInema.Models.Entities.User", "Customer")
+                    b.HasOne("eCInema.Models.Entities.Customer", "Customer")
                         .WithMany("Reservations")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -520,7 +1127,7 @@ namespace eCinema.Data.Migrations
                     b.HasOne("eCInema.Models.Entities.Hall", "Hall")
                         .WithMany()
                         .HasForeignKey("HallId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.HasOne("eCInema.Models.Movies", "Movie")
@@ -532,6 +1139,39 @@ namespace eCinema.Data.Migrations
                     b.Navigation("Hall");
 
                     b.Navigation("Movie");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.ScheduleSeat", b =>
+                {
+                    b.HasOne("eCInema.Models.Entities.Reservation", null)
+                        .WithMany("ScheduleSeat")
+                        .HasForeignKey("ReservationId");
+
+                    b.HasOne("eCInema.Models.Entities.Schedule", "Schedule")
+                        .WithMany("ScheduleSeats")
+                        .HasForeignKey("ScheduleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("eCInema.Models.Entities.Seat", "Seat")
+                        .WithMany()
+                        .HasForeignKey("SeatId")
+                        .IsRequired();
+
+                    b.Navigation("Schedule");
+
+                    b.Navigation("Seat");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.Seat", b =>
+                {
+                    b.HasOne("eCInema.Models.Entities.Hall", "Hall")
+                        .WithMany("Seats")
+                        .HasForeignKey("HallId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Hall");
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.WritersMovies", b =>
@@ -563,14 +1203,24 @@ namespace eCinema.Data.Migrations
                     b.Navigation("ActorsMovies");
                 });
 
+            modelBuilder.Entity("eCInema.Models.Entities.Hall", b =>
+                {
+                    b.Navigation("Seats");
+                });
+
             modelBuilder.Entity("eCInema.Models.Entities.Producer", b =>
                 {
                     b.Navigation("ProducerMovies");
                 });
 
-            modelBuilder.Entity("eCInema.Models.Entities.User", b =>
+            modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
                 {
-                    b.Navigation("Reservations");
+                    b.Navigation("ScheduleSeat");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.Schedule", b =>
+                {
+                    b.Navigation("ScheduleSeats");
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Writer", b =>
@@ -591,6 +1241,11 @@ namespace eCinema.Data.Migrations
                     b.Navigation("Schedules");
 
                     b.Navigation("WritersMovies");
+                });
+
+            modelBuilder.Entity("eCInema.Models.Entities.Customer", b =>
+                {
+                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

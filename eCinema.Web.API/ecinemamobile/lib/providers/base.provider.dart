@@ -32,7 +32,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
     client.badCertificateCallback = (cert, host, port) => true;
     http = IOClient(client);
   }
-  String? get getbaseUrl => _baseUrl;
 
   Future<T> getById(int id, [dynamic additionalData]) async {
     var url = Uri.parse("$_baseUrl$_endpoint/$id");

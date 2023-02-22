@@ -5,6 +5,7 @@ import 'package:ecinemamobile/models/Movies/movies.actors.dart';
 import 'package:ecinemamobile/models/Schedules/schedule.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../Schedules/schedule.movie.dart';
 import 'movies.directors.dart';
 import 'movies.producer.dart';
 import 'movies.writers.dart';
@@ -24,7 +25,7 @@ class Movies {
   List<DirectorsMovies>? directorsMovies = [];
   List<WritersMovies>? writersMovies = [];
   List<ProducersMovies>? producersMovies = [];
-  // List<Schedule>? schedules = [];
+  List<ScheduleMovie>? schedules = [];
 
   Movies(
       this.id,
@@ -38,8 +39,8 @@ class Movies {
       this.actorsMovies,
       this.directorsMovies,
       this.writersMovies,
-      this.producersMovies);
-  //  this.schedules);
+      this.producersMovies,
+      [this.schedules]);
 
   factory Movies.fromJson(Map<String, dynamic> json) => _$MoviesFromJson(json);
 

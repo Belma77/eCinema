@@ -14,16 +14,17 @@ namespace eCinema.Web.API.Controllers
     [ApiController]
     public class ReservationController : BaseCRUDController<ReservationDto, ReservationSearchObject, ReservationInsertDto, ReservationUpdateDto>
     {
+        IReservationService _service;
         public ReservationController(IReservationService service):base(service)
         {
-
+            _service = service;
         }
 
         [AllowAnonymous]
         [Authorize(UserRole.Customer, UserRole.Admin)]
-        public override IActionResult Insert(ReservationInsertDto insert)
+        public override IActionResult Insert(ReservationInsertDto reservation)
         {
-            return base.Insert(insert);
+            return Ok(_service.Insert(reservation));
         }
 
     }

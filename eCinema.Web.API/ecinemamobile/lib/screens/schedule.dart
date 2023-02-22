@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:ecinemamobile/models/Movies/movies.dart';
 import 'package:ecinemamobile/providers/schedule.provider.dart';
+import 'package:ecinemamobile/screens/reservation.dart';
 import 'package:ecinemamobile/utils/date.formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/Schedules/schedule.dart';
+import '../models/Schedules/schedule.movie.dart';
 import '../providers/movies.provider.dart';
 import '../utils/image.convertor.dart';
 
@@ -19,11 +21,11 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  late ScheduleProvider? _scheduleProvider = null;
-  late MoviesProvider? _moviesProvider = null;
+  //late ScheduleProvider? _scheduleProvider;
+  late MoviesProvider? _moviesProvider;
   Movies? item;
   int? MovieId;
-  List<Schedule>? schedules;
+  List<ScheduleMovie>? schedules;
   List<Schedule>? items;
   List<Movies>? movies;
 
@@ -31,11 +33,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   void initState() {
     super.initState();
+    MoviesProvider();
     _moviesProvider = context.read<MoviesProvider>();
-    _scheduleProvider = context.read<ScheduleProvider>();
     loadData();
-    loadSchedule();
-    getRecommendations();
+    // _scheduleProvider = context.read<ScheduleProvider>();
+    // loadSchedule();
+    //getRecommendations();
   }
 
   Future loadData() async {
@@ -43,21 +46,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     var tmpData = await _moviesProvider?.getById(MovieId!);
     setState(() {
       item = tmpData!;
-    });
-  }
-
-  Future loadSchedule() async {
-    var tmpData = await _scheduleProvider!.get({'MovieId': MovieId});
-    setState(() {
-      items = tmpData;
-      schedules =
-          tmpData.where((element) => element.dayOfWeek == days[0]).toList();
+      schedules = item!.schedules;
+      filterSchedule(days[0]);
     });
   }
 
   Future filterSchedule(String day) async {
     setState(() {
-      schedules = items!.where((x) => x.dayOfWeek == day).toList();
+      schedules = item!.schedules!.where((x) => x.dayOfWeek == day).toList();
     });
   }
 
@@ -223,7 +219,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ),
                 )),
             buildProjectionSchedule(),
-            buildRecommendation(),
+            // buildRecommendation(),
           ])),
     );
   }
@@ -295,19 +291,27 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               itemCount: schedules!.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                    margin: const EdgeInsets.all(5),
-                    width: 80,
-                    height: 45,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                            color: Colors.grey,
-                            width: 1.0,
-                            style: BorderStyle.solid),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                        child: Text(formatDate(schedules![index].startTime!))));
+                return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        Navigator.pushNamed(context,
+                            "${ReservationScreen.route}/${schedules![index].id}");
+                      });
+                    },
+                    child: Container(
+                        margin: const EdgeInsets.all(5),
+                        width: 80,
+                        height: 45,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(
+                                color: Colors.grey,
+                                width: 1.0,
+                                style: BorderStyle.solid),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Center(
+                            child: Text(
+                                formatTime(schedules![index].startTime!)))));
               },
             ),
           ),

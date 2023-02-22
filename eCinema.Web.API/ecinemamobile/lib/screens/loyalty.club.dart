@@ -58,7 +58,6 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
     try {
       paymentIntent =
           await _loyaltyClubProvider!.createPaymentIntent('2395', 'BAM');
-
       displayPaymentSheet();
       var loyal = joinLoyalty();
       await _loyaltyClubProvider?.insert(loyal);

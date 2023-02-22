@@ -31,6 +31,9 @@ using Stripe;
 using Stripe.Checkout;
 using CustomerService = eCinema.Services.CustomerServices.CustomerService;
 using eCinema.Services.LoyalCardServices;
+using Newtonsoft.Json;
+using eCInema.Models.Enums;
+using System;
 
 public class Program
 {
@@ -98,7 +101,6 @@ public class Program
         builder.Services.AddTransient<ErrorHandlingMiddleware>();
         builder.Services.AddMvc().AddNewtonsoftJson();
 
-
         builder.Services.AddControllers()
         .AddJsonOptions(options =>
         {
@@ -123,4 +125,5 @@ public class Program
 
         app.Run();
     }
+  
 }

@@ -46,8 +46,8 @@ namespace eCinema.Web.API.Auth
 
             var claims = new List<Claim>
             {
-            new Claim(ClaimTypes.NameIdentifier, username),
-            new Claim(ClaimTypes.Name, user.Email),
+            new Claim(ClaimTypes.NameIdentifier, user.Email),
+            new Claim(ClaimTypes.Name, user.UserName),
             new Claim(ClaimTypes.Role, user.UserRole.ToString())
             };
 

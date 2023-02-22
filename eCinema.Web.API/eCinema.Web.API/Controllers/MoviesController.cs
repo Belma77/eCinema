@@ -43,7 +43,7 @@ namespace eCinema.Web.API.Controllers
         [HttpGet("{id}/Recommend")]
         [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
-        public List<MovieDetailsDto> Recommend(int id)
+        public List<GetMoviesDto> Recommend(int id)
         {
             return _service.Recommend(id);
         }

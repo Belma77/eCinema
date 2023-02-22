@@ -1,6 +1,6 @@
 ﻿using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Movies;
-using eCInema.Models.Dtos.Schedule;
+using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Enums;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace eCInema.Models.Dtos.Reservations
         public int ScheduleId { get; set; }
         public int NumberOfTickets { get; set; }
         public ReservationStatusEnum Status { get; set; }
-     
+        public double Price { get; set; }
+
     }
 }

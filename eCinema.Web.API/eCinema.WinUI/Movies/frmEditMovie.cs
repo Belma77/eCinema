@@ -58,7 +58,7 @@ namespace eCinema.WinUI
                 cmbCountry.DataSource = ListOfCountries.CountryNames();
                 cmbCountry.Text = movie.Country;
                 txtSynopsis.Text = movie?.Synopsis;
-                pbPoster.Image = ImageHelper.FromByteToImage(movie?.Poster);
+                pbPoster.Image =movie.Poster.Length>1?ImageHelper.FromByteToImage(movie?.Poster):null;
                 LoadCastClb();
             }
         }
@@ -363,6 +363,6 @@ namespace eCinema.WinUI
                 Validator.Validate(pbPoster, err, AlertMessages.RequiredField);
         }
 
-        
+      
     }
 }

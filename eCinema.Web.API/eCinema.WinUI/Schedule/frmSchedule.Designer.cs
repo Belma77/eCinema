@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.dgvSchedules = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.txtTitle = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cmbHall = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.dtmDate = new System.Windows.Forms.DateTimePicker();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,6 +36,14 @@
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Seats = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnAdd = new System.Windows.Forms.Button();
+            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.dtmDate = new System.Windows.Forms.DateTimePicker();
+            this.dtmTime = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedules)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,6 +67,66 @@
             this.dgvSchedules.TabIndex = 0;
             this.dgvSchedules.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedules_CellContentClick);
             this.dgvSchedules.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
+            // 
+            // Title
+            // 
+            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Title.DataPropertyName = "Movie.Title";
+            this.Title.HeaderText = "Title";
+            this.Title.MinimumWidth = 6;
+            this.Title.Name = "Title";
+            this.Title.ToolTipText = "Title";
+            // 
+            // Date
+            // 
+            this.Date.DataPropertyName = "DateOnly";
+            this.Date.HeaderText = "Date";
+            this.Date.MinimumWidth = 6;
+            this.Date.Name = "Date";
+            this.Date.Width = 125;
+            // 
+            // StartTime
+            // 
+            this.StartTime.DataPropertyName = "TimeOnly";
+            this.StartTime.HeaderText = "Start Time";
+            this.StartTime.MinimumWidth = 6;
+            this.StartTime.Name = "StartTime";
+            this.StartTime.Width = 125;
+            // 
+            // EndTime
+            // 
+            this.EndTime.DataPropertyName = "EndTime";
+            this.EndTime.HeaderText = "End Time";
+            this.EndTime.MinimumWidth = 6;
+            this.EndTime.Name = "EndTime";
+            this.EndTime.Width = 125;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "Hall.NoOfHall";
+            this.dataGridViewTextBoxColumn1.HeaderText = "No of Hall";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Width = 125;
+            // 
+            // Seats
+            // 
+            this.Seats.DataPropertyName = "NoAvailableSeats";
+            this.Seats.HeaderText = "Seats Available";
+            this.Seats.MinimumWidth = 6;
+            this.Seats.Name = "Seats";
+            this.Seats.Width = 125;
+            // 
+            // Remove
+            // 
+            this.Remove.DataPropertyName = "SeatsAvailable";
+            this.Remove.HeaderText = "Remove";
+            this.Remove.MinimumWidth = 6;
+            this.Remove.Name = "Remove";
+            this.Remove.Text = "Remove";
+            this.Remove.ToolTipText = "Remove";
+            this.Remove.UseColumnTextForButtonValue = true;
+            this.Remove.Width = 125;
             // 
             // label1
             // 
@@ -115,23 +175,14 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "Date";
             // 
-            // cmbHall
-            // 
-            this.cmbHall.FormattingEnabled = true;
-            this.cmbHall.Location = new System.Drawing.Point(733, 73);
-            this.cmbHall.Name = "cmbHall";
-            this.cmbHall.Size = new System.Drawing.Size(215, 28);
-            this.cmbHall.TabIndex = 8;
-            this.cmbHall.SelectedIndexChanged += new System.EventHandler(this.cmbHall_SelectedIndexChanged);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(653, 80);
+            this.label4.Location = new System.Drawing.Point(653, 78);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(78, 20);
+            this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 9;
-            this.label4.Text = "No of Hall";
+            this.label4.Text = "Start Time";
             // 
             // dtmDate
             // 
@@ -142,74 +193,25 @@
             this.dtmDate.Value = new System.DateTime(2023, 1, 22, 0, 0, 0, 0);
             this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
             // 
-            // Title
+            // dtmTime
             // 
-            this.Title.DataPropertyName = "Movie.Title";
-            this.Title.HeaderText = "Title";
-            this.Title.MinimumWidth = 6;
-            this.Title.Name = "Title";
-            this.Title.ToolTipText = "Title";
-            this.Title.Width = 125;
-            // 
-            // Date
-            // 
-            this.Date.DataPropertyName = "Date";
-            this.Date.HeaderText = "Date";
-            this.Date.MinimumWidth = 6;
-            this.Date.Name = "Date";
-            this.Date.Width = 125;
-            // 
-            // StartTime
-            // 
-            this.StartTime.DataPropertyName = "StartTime";
-            this.StartTime.HeaderText = "Start Time";
-            this.StartTime.MinimumWidth = 6;
-            this.StartTime.Name = "StartTime";
-            this.StartTime.Width = 125;
-            // 
-            // EndTime
-            // 
-            this.EndTime.DataPropertyName = "EndTime";
-            this.EndTime.HeaderText = "End Time";
-            this.EndTime.MinimumWidth = 6;
-            this.EndTime.Name = "EndTime";
-            this.EndTime.Width = 125;
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "Hall.NoOfHall";
-            this.dataGridViewTextBoxColumn1.HeaderText = "No of Hall";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.Width = 125;
-            // 
-            // Seats
-            // 
-            this.Seats.DataPropertyName = "NoAvailableSeats";
-            this.Seats.HeaderText = "Seats Available";
-            this.Seats.MinimumWidth = 6;
-            this.Seats.Name = "Seats";
-            this.Seats.Width = 125;
-            // 
-            // Remove
-            // 
-            this.Remove.DataPropertyName = "SeatsAvailable";
-            this.Remove.HeaderText = "Remove";
-            this.Remove.MinimumWidth = 6;
-            this.Remove.Name = "Remove";
-            this.Remove.Text = "Remove";
-            this.Remove.ToolTipText = "Remove";
-            this.Remove.UseColumnTextForButtonValue = true;
-            this.Remove.Width = 125;
+            this.dtmTime.CustomFormat = "HH:mm";
+            this.dtmTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtmTime.Location = new System.Drawing.Point(736, 73);
+            this.dtmTime.Name = "dtmTime";
+            this.dtmTime.ShowUpDown = true;
+            this.dtmTime.Size = new System.Drawing.Size(212, 27);
+            this.dtmTime.TabIndex = 11;
+            this.dtmTime.ValueChanged += new System.EventHandler(this.dtmTime_ValueChanged);
             // 
             // frmSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 402);
+            this.ClientSize = new System.Drawing.Size(965, 402);
+            this.Controls.Add(this.dtmTime);
             this.Controls.Add(this.dtmDate);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.cmbHall);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtTitle);
@@ -234,9 +236,9 @@
         private TextBox txtTitle;
         private Label label2;
         private Label label3;
-        private ComboBox cmbHall;
         private Label label4;
         private DateTimePicker dtmDate;
+        private DateTimePicker dtmTime;
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn Date;
         private DataGridViewTextBoxColumn StartTime;

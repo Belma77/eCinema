@@ -17,13 +17,22 @@ class CustomDateTimeConverter implements JsonConverter<DateTime, String> {
   String toJson(DateTime json) => json.toIso8601String();
 }
 
+String formatTime(DateTime date) {
+  if (dynamic == null) {
+    return "";
+  }
+
+  var f = DateFormat.jm();
+
+  return f.format(date);
+}
+
 String formatDate(DateTime date) {
   if (dynamic == null) {
     return "";
   }
-  // DateTime tempDate = new DateFormat("yyyy-MM-dd hh:mm:ss").parse(date);
-  // var f = DateFormat.MEd();
-  var f = DateFormat.jm();
+
+  var f = DateFormat.yMMMMd();
 
   return f.format(date);
 }
