@@ -54,16 +54,11 @@ namespace eCinema.Services.CustomerServices
             entity.PasswordSalt = salt;
             entity.PasswordHash = GenerateHash(salt, insert.Password);
 
-            if (entity.UserRole == eCInema.Models.Enums.UserRole.Customer && insert.CustomerType == null)
-            {
-                var customer = _mapper.Map<Customer>(entity);
-                customer.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
-                _context.Customers.Add(customer);
-            }
-            else
-            {
-                _context.Users.Add(entity);
-            }
+           
+            var customer = _mapper.Map<Customer>(entity);
+            customer.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
+            _context.Customers.Add(customer);
+          
             _context.SaveChanges();
             return _mapper.Map<CustomerDto>(entity);
         }

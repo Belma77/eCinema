@@ -85,6 +85,6 @@ namespace eCinema.WinUI.ScheduleForms
             }
         }
 
-      
+       
     }
 }

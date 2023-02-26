@@ -8,6 +8,7 @@ import 'package:ecinemamobile/providers/user.provider.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:ecinemamobile/screens/loyalty.club.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
+import 'package:ecinemamobile/screens/register.dart';
 import 'package:ecinemamobile/screens/reservation.dart';
 import 'package:ecinemamobile/screens/schedule.dart';
 import 'package:ecinemamobile/screens/user.profile.dart';
@@ -64,9 +65,16 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(
                 builder: ((context) => const MoviesListScreen()));
           }
+          if (settings.name == RegisterScreen.route) {
+            return MaterialPageRoute(
+                builder: ((context) => const RegisterScreen()));
+          }
           if (settings.name == UserProfile.route) {
             return MaterialPageRoute(
                 builder: ((context) => const UserProfile()));
+          }
+          if (settings.name == LoginScreen.route) {
+            return MaterialPageRoute(builder: ((context) => LoginScreen()));
           }
           if (settings.name == LoyaltyClubScreen.route) {
             return MaterialPageRoute(

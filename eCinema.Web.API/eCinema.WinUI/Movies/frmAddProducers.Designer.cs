@@ -50,7 +50,7 @@
             this.FirstName,
             this.LastName,
             this.Remove});
-            this.dataGridView1.Location = new System.Drawing.Point(14, 102);
+            this.dataGridView1.Location = new System.Drawing.Point(23, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
@@ -96,16 +96,15 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(14, 66);
+            this.label1.Location = new System.Drawing.Point(23, 66);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(197, 23);
             this.label1.TabIndex = 9;
             this.label1.Text = "Add Producers To Movie";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(380, 335);
+            this.btnSave.Location = new System.Drawing.Point(389, 335);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(94, 29);
             this.btnSave.TabIndex = 10;
@@ -115,7 +114,7 @@
             // 
             // btnBack
             // 
-            this.btnBack.Location = new System.Drawing.Point(12, 335);
+            this.btnBack.Location = new System.Drawing.Point(23, 335);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(94, 29);
             this.btnBack.TabIndex = 11;
@@ -129,7 +128,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(380, 16);
+            this.btnAdd.Location = new System.Drawing.Point(389, 18);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
             this.btnAdd.TabIndex = 12;
@@ -142,7 +141,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 386);
+            this.ClientSize = new System.Drawing.Size(514, 397);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSave);
@@ -152,7 +151,6 @@
             this.Name = "frmAddProducers";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddProducers";
-            this.Load += new System.EventHandler(this.frmAddProducers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);

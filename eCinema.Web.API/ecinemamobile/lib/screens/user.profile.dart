@@ -69,11 +69,14 @@ class _UserProfileState extends State<UserProfile> {
     edit.phone = phone;
     edit.email = email;
     edit.username = Authorization.username;
-    await _userProvider!.update(user!.Id!, edit);
+    try {
+      await _userProvider!.update(user!.id!, edit);
+      Navigator.pop(context);
+    } catch (err) {}
   }
 
   Future Delete() async {
-    await _userProvider!.delete(user!.Id!);
+    await _userProvider!.delete(user!.id!);
   }
 
   FillControllers() {
@@ -110,7 +113,6 @@ class _UserProfileState extends State<UserProfile> {
                       child: ElevatedButton(
                         onPressed: () {
                           Edit();
-                          Navigator.pushNamed(context, LoginScreen.route);
                         },
                         child: const Text("Save changes"),
                       ),

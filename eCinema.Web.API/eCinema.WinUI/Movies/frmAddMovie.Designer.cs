@@ -189,7 +189,6 @@
             this.clbGenres.Name = "clbGenres";
             this.clbGenres.Size = new System.Drawing.Size(251, 92);
             this.clbGenres.TabIndex = 27;
-            this.clbGenres.SelectedIndexChanged += new System.EventHandler(this.clbGenres_SelectedIndexChanged);
             // 
             // cmbCountries
             // 
@@ -216,7 +215,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(652, 432);
+            this.ClientSize = new System.Drawing.Size(672, 452);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cmbCountries);
             this.Controls.Add(this.clbGenres);

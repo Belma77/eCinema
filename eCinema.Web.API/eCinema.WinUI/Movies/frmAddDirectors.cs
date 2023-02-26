@@ -78,7 +78,7 @@ namespace eCinema.WinUI
                 }
                 //service.Post<ActorDto>(actor);
             }
-            else if(_movie!=null)
+            else if (_movie != null)
             {
                 List<DirectorDto> list = new List<DirectorDto>();
 
@@ -93,13 +93,14 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Directors");
-                await service.PostArray<DirectorDto>(_movie.Id,list);
+                await service.PostArray<DirectorDto>(_movie.Id, list);
             }
+            
         }
 
         private bool Validate()
         {
-            return Validator.Validate(dataGridView1, errorProvider1, AlertMessages.NotEmptyField);
+            return Validator.Validate(dataGridView1, errorProvider1, AlertMessages.CastNotEmptyField);
         }
 
          private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

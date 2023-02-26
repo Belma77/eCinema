@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:ecinemamobile/env.dart';
+import 'package:ecinemamobile/models/Users/customer.insert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart';
@@ -22,7 +23,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
   BaseProvider(String endpoint) {
     _baseUrl = const String.fromEnvironment("baseUrl",
         defaultValue: "https://10.0.2.2:7239/");
-    print("baseurl: $_baseUrl");
 
     if (_baseUrl!.endsWith("/") == false) {
       _baseUrl = _baseUrl! + "/";
@@ -39,12 +39,9 @@ abstract class BaseProvider<T> with ChangeNotifier {
     Map<String, String> headers = createHeaders();
 
     var response = await http!.get(url, headers: headers);
-    print("done $response");
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      print(data);
-      print("uspjesno");
 
       var map = fromJson(data);
       return map;
@@ -64,31 +61,11 @@ abstract class BaseProvider<T> with ChangeNotifier {
     var uri = Uri.parse(url);
 
     Map<String, String> headers = createHeaders();
-    print("get me");
     var response = await http!.get(uri, headers: headers);
-    print("done $response");
-    if (isValidResponseCode(response)) {
-      print("uspjesno");
-      var data = jsonDecode(response.body);
-      print(data);
-      return data.map((x) => fromJson(x)).cast<T>().toList();
-    } else {
-      throw Exception("Exception... handle this gracefully");
-    }
-  }
 
-  Future<List<T>> getRecommendation(int id, String path) async {
-    var url = "$_baseUrl$_endpoint/$id/$path";
-    var uri = Uri.parse(url);
-
-    Map<String, String> headers = createHeaders();
-    print("get me");
-    var response = await http!.get(uri, headers: headers);
-    print("done $response");
+    print(response);
     if (isValidResponseCode(response)) {
-      print("uspjesno");
       var data = jsonDecode(response.body);
-      print(data);
       return data.map((x) => fromJson(x)).cast<T>().toList();
     } else {
       throw Exception("Exception... handle this gracefully");
@@ -124,29 +101,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
       paymentIntent = jsonDecode(response.body);
       await makePayment();
       return jsonDecode(response.body);
-    } catch (err) {
-      print('error${err.toString()}');
-    }
-  }
-
-  Future<T> getUser() async {
-    var url = "$_baseUrl$_endpoint/Current";
-
-    var uri = Uri.parse(url);
-
-    Map<String, String> headers = createHeaders();
-    print("get me");
-    var response = await http!.get(uri, headers: headers);
-    print("done $response");
-    if (isValidResponseCode(response)) {
-      print("uspjesno");
-      var data = jsonDecode(response.body);
-      print(data);
-      var map = fromJson(data);
-      return map;
-    } else {
-      throw Exception("Exception... handle this gracefully");
-    }
+    } catch (err) {}
   }
 
   Future<T?> insert(dynamic request) async {
@@ -173,7 +128,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     var response =
         await http!.put(uri, headers: headers, body: jsonEncode(request));
-
+    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data) as T;
@@ -188,12 +143,9 @@ abstract class BaseProvider<T> with ChangeNotifier {
     Map<String, String> headers = createHeaders();
 
     var response = await http!.delete(url, headers: headers);
-    print("done $response");
 
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      print(data);
-      print("uspjesno");
 
       return data.map((x) => fromJson(x)).cast<T>().toList();
     } else {
@@ -271,7 +223,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     } else if (response.statusCode == 500) {
       throw Exception("Internal server error");
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("Upss.. something went wrong");
     }
   }
 }

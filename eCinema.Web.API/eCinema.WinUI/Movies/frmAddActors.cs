@@ -87,7 +87,7 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
-            return Validator.Validate(dataGridView1, err, Helpers.AlertMessages.NotEmptyField);
+            return Validator.Validate(dataGridView1, err, AlertMessages.CastNotEmptyField);
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)

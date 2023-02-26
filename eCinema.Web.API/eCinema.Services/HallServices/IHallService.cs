@@ -1,5 +1,6 @@
 ﻿using eCinema.Services.CRUDservice;
 using eCInema.Models.Dtos.Halls;
+using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.HallServices
 {
-    public interface IHallService:IBaseCRUDService<HallDto, HallDto, HallDto, HallUpdateDto>
+    public interface IHallService:IBaseCRUDService<HallDto, HallSearchObject, HallDto, HallUpdateDto>
     {
         
     }

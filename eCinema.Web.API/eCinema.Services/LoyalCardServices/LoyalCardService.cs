@@ -37,8 +37,6 @@ namespace eCinema.Services.LoyalCardServices
             if (customer == null)
                 throw new NotFoundException("Customer not found");
 
-            insert.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Premium;
-
             var customerUpdate = new UpdateCustomerDto();
             customerUpdate.FirstName = insert.FirstName;
             customerUpdate.LastName = insert.LastName;
@@ -46,6 +44,7 @@ namespace eCinema.Services.LoyalCardServices
             customerUpdate.Email = insert.Email;
             customerUpdate.Phone = insert.Phone;
             customerUpdate.IdentificationNumber=insert.IdentificationNumber;
+            customerUpdate.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Premium;
 
             var update=_customerService.Update(insert.CustomerId, customerUpdate);
 

@@ -76,7 +76,7 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
-            return Validator.Validate(dataGridView1, errorProvider1, AlertMessages.NotEmptyField);
+            return Validator.Validate(dataGridView1, errorProvider1, AlertMessages.CastNotEmptyField);
         }
 
 

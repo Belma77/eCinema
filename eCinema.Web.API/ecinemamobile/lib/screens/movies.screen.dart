@@ -41,7 +41,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
     "Monday",
     "Tuesday",
     "Wednesday",
-    "Thurday",
+    "Thursday",
     "Friday",
     "Saturday",
     "Sunday",
@@ -56,7 +56,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
             "eCinema",
           ),
         )),
-        drawer: const DrawerWidget(),
+        drawer: DrawerWidget(),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(10),

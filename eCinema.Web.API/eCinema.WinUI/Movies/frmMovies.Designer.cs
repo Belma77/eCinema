@@ -30,11 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.dgvMovies = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ReleaseYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Details = new System.Windows.Forms.DataGridViewButtonColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +37,11 @@
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ReleaseYear = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Duration = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Country = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Details = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,50 +62,6 @@
             this.dgvMovies.Size = new System.Drawing.Size(700, 244);
             this.dgvMovies.TabIndex = 0;
             this.dgvMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMovies_CellContentClick);
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
-            this.dataGridViewTextBoxColumn2.HeaderText = "Title";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.Width = 125;
-            // 
-            // ReleaseYear
-            // 
-            this.ReleaseYear.DataPropertyName = "ReleaseYear";
-            this.ReleaseYear.HeaderText = "Release Year";
-            this.ReleaseYear.MinimumWidth = 6;
-            this.ReleaseYear.Name = "ReleaseYear";
-            this.ReleaseYear.Width = 125;
-            // 
-            // Duration
-            // 
-            this.Duration.DataPropertyName = "Duration";
-            this.Duration.HeaderText = "Duration (min)";
-            this.Duration.MinimumWidth = 6;
-            this.Duration.Name = "Duration";
-            this.Duration.Width = 125;
-            // 
-            // Country
-            // 
-            this.Country.DataPropertyName = "Country";
-            this.Country.HeaderText = "Country";
-            this.Country.MinimumWidth = 6;
-            this.Country.Name = "Country";
-            this.Country.Width = 125;
-            // 
-            // Details
-            // 
-            this.Details.HeaderText = "Details";
-            this.Details.MinimumWidth = 6;
-            this.Details.Name = "Details";
-            this.Details.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.Details.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.Details.Text = "Details";
-            this.Details.ToolTipText = "Details";
-            this.Details.UseColumnTextForButtonValue = true;
-            this.Details.Width = 125;
             // 
             // contextMenuStrip1
             // 
@@ -168,6 +124,51 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Title";
             // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Title";
+            this.dataGridViewTextBoxColumn2.HeaderText = "Title";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ToolTipText = "Title";
+            // 
+            // ReleaseYear
+            // 
+            this.ReleaseYear.DataPropertyName = "ReleaseYear";
+            this.ReleaseYear.HeaderText = "Release Year";
+            this.ReleaseYear.MinimumWidth = 6;
+            this.ReleaseYear.Name = "ReleaseYear";
+            this.ReleaseYear.Width = 125;
+            // 
+            // Duration
+            // 
+            this.Duration.DataPropertyName = "Duration";
+            this.Duration.HeaderText = "Duration (min)";
+            this.Duration.MinimumWidth = 6;
+            this.Duration.Name = "Duration";
+            this.Duration.Width = 125;
+            // 
+            // Country
+            // 
+            this.Country.DataPropertyName = "Country";
+            this.Country.HeaderText = "Country";
+            this.Country.MinimumWidth = 6;
+            this.Country.Name = "Country";
+            this.Country.Width = 125;
+            // 
+            // Details
+            // 
+            this.Details.HeaderText = "Details";
+            this.Details.MinimumWidth = 6;
+            this.Details.Name = "Details";
+            this.Details.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Details.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
+            this.Details.Text = "Details";
+            this.Details.ToolTipText = "Details";
+            this.Details.UseColumnTextForButtonValue = true;
+            this.Details.Width = 125;
+            // 
             // frmMovies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -194,14 +195,14 @@
         private ContextMenuStrip contextMenuStrip1;
         private DataGridViewTextBoxColumn Title;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private Label label1;
+        private Button btnAdd;
+        private TextBox txtTitle;
+        private Label label2;
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
         private DataGridViewTextBoxColumn ReleaseYear;
         private DataGridViewTextBoxColumn Duration;
         private DataGridViewTextBoxColumn Country;
         private DataGridViewButtonColumn Details;
-        private Label label1;
-        private Button btnAdd;
-        private TextBox txtTitle;
-        private Label label2;
     }
 }

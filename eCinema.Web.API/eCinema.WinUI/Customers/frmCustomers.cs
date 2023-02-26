@@ -1,4 +1,5 @@
 ﻿using eCinema.WinUI.Helpers;
+using eCinema.WinUI.LoyalClub;
 using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Users;
 using eCInema.Models.SearchObjects;
@@ -49,14 +50,8 @@ namespace eCinema.WinUI.Customers
                 
                 else
                 {
-                    var update = new UpdateCustomerDto();
-                    update.FirstName = data.FirstName;
-                    update.LastName = data.LastName;
-                    update.Phone = data.Phone;
-                    update.Email = data.Email;
-                    update.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Premium;
-                    await service.Put<CustomerDto>(data.Id, update);
-                    await LoadCustomers();
+                    frmLoyalClub frm = new frmLoyalClub(data);
+                    frm.ShowDialog();
                 }
             }  
             

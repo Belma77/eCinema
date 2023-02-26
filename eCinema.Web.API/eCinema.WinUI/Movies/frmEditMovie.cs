@@ -352,9 +352,9 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
-            return Validator.Validate(txtTitle, err, AlertMessages.NotEmptyField) &&
-                Validator.Validate(txtYear, err, AlertMessages.NotEmptyField) &&
-                Validator.Validate(cmbCountry, err, AlertMessages.NotEmptyField) &&
+            return Validator.Validate(txtTitle, err, AlertMessages.RequiredField) &&
+                Validator.Validate(txtYear, err, AlertMessages.RequiredField) &&
+                Validator.Validate(cmbCountry, err, AlertMessages.RequiredField) &&
                 Validator.Validate(clbActors, err, AlertMessages.RequiredField) &&
                 Validator.Validate(clbDirectors, err, AlertMessages.RequiredField) &&
                 Validator.Validate(clbProducers, err, AlertMessages.RequiredField) &&

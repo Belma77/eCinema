@@ -34,6 +34,8 @@ using eCinema.Services.LoyalCardServices;
 using Newtonsoft.Json;
 using eCInema.Models.Enums;
 using System;
+using FluentValidation.AspNetCore;
+using System.Reflection;
 
 public class Program
 {
@@ -100,11 +102,11 @@ public class Program
 
         builder.Services.AddTransient<ErrorHandlingMiddleware>();
         builder.Services.AddMvc().AddNewtonsoftJson();
-
-        builder.Services.AddControllers()
-        .AddJsonOptions(options =>
+        builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
+      
+        builder.Services.AddControllers().AddJsonOptions(options =>
         {
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
         });
         var app = builder.Build();
 

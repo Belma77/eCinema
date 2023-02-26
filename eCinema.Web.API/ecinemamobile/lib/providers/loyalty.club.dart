@@ -9,7 +9,6 @@ class LoyaltyClubProvider extends BaseProvider<LoyalCard> {
   LoyaltyClubProvider() : super("LoyaltyClub");
   @override
   LoyalCard fromJson(data) {
-    // TODO: implement fromJson
     return LoyalCard.fromJson(data);
   }
 }

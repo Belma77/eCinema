@@ -1,14 +1,20 @@
+import 'package:ecinemamobile/models/Authorization/authorization.dart';
+import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/schedule.provider.dart';
 import '../screens/loyalty.club.dart';
 import '../screens/user.profile.dart';
 
 class DrawerWidget extends StatelessWidget {
-  const DrawerWidget({super.key});
+  DrawerWidget({super.key});
+  late ScheduleProvider _scheduleProvider;
 
   @override
   Widget build(BuildContext context) {
+    _scheduleProvider = Provider.of<ScheduleProvider>(context, listen: false);
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -28,7 +34,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Edit profile'),
             onTap: () {
-              Navigator.pushNamed(context, "${UserProfile.route}");
+              Navigator.pushNamed(context, UserProfile.route);
             },
           ),
           ListTile(
@@ -37,7 +43,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             title: const Text('Join loyalty club'),
             onTap: () {
-              Navigator.pushNamed(context, "${LoyaltyClubScreen.route}");
+              Navigator.pushNamed(context, LoyaltyClubScreen.route);
             },
           ),
           ListTile(
@@ -45,8 +51,26 @@ class DrawerWidget extends StatelessWidget {
               Icons.logout,
             ),
             title: const Text('Sing out'),
-            onTap: () {
-              Navigator.pop(context);
+            onTap: () async {
+              try {
+                Authorization.username = "";
+                Authorization.password = "";
+                await _scheduleProvider.get();
+              } catch (e) {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                          title: const Text("Logout"),
+                          content: const Text("Successfuly logged out"),
+                          actions: [
+                            TextButton(
+                              child: const Text("Ok"),
+                              onPressed: () => Navigator.pushNamed(
+                                  context, LoginScreen.route),
+                            )
+                          ],
+                        ));
+              }
             },
           ),
         ],

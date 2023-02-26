@@ -40,7 +40,6 @@ namespace eCinema.WinUI.Customers
                 this.Close();
             }
         }
-
         private void frmAddCustomer_Load(object sender, EventArgs e)
         {
             LoadCmb();

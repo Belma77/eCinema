@@ -6,7 +6,7 @@ part 'user.g.dart';
 
 @JsonSerializable()
 class Customer {
-  int? Id;
+  int? id;
   String? firstName;
   String? lastName;
   String? phone;
@@ -15,7 +15,7 @@ class Customer {
   //String? picture;
 
   Customer(
-    this.Id,
+    this.id,
     this.firstName,
     this.lastName,
     this.phone,

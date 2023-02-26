@@ -31,18 +31,35 @@ namespace eCinema.WinUI.Helpers
 
             else if (control is DataGridView)
             {
-               
-                //foreach (DataGridViewRow rw in (control as DataGridView).Rows)
-                //{
-                    
-                //    //for (int i = 0; i < rw.Cells.Count; i++)
-                //    //{
-                //    //    if (rw.Cells[i].Value == null || rw.Cells[i].Value == DBNull.Value || String.IsNullOrWhiteSpace(rw.Cells[i].Value.ToString()))
-                //    //    {
-                //    //        _setError = true;
-                //    //    }
-                //    //}
-                //}
+                if ((control as DataGridView).Rows.Count >= 2)
+                {
+
+                    foreach (DataGridViewRow row in (control as DataGridView).Rows)
+                    {
+
+                        if (!row.IsNewRow)
+                        {
+                            foreach (DataGridViewCell cell in row.Cells)
+                            {
+                                if (cell.Value == null)
+                                    _setError = true;
+                            }
+                        }
+
+                    }
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in (control as DataGridView).Rows)
+                    {
+                            foreach (DataGridViewCell cell in row.Cells)
+                            {
+                                if (cell.Value == null)
+                                    _setError = true;
+                            }
+
+                    }
+                }
             }
 
                 if (_setError)

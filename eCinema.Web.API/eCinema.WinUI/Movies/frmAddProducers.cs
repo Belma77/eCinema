@@ -40,10 +40,6 @@ namespace eCinema.WinUI
 
         }
 
-        private void frmAddProducers_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -74,7 +70,7 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
-            return Helpers.Validator.Validate(dataGridView1, err, Helpers.AlertMessages.NotEmptyField);
+            return Helpers.Validator.Validate(dataGridView1, err, Helpers.AlertMessages.CastNotEmptyField);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -82,10 +78,6 @@ namespace eCinema.WinUI
             this.Hide();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {

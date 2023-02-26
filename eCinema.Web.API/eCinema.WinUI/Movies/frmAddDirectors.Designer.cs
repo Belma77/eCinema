@@ -60,7 +60,7 @@
             this.FirstName,
             this.LastName,
             this.Remove});
-            this.dataGridView1.Location = new System.Drawing.Point(12, 94);
+            this.dataGridView1.Location = new System.Drawing.Point(17, 94);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 29;
@@ -131,7 +131,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(357, 20);
+            this.btnAdd.Location = new System.Drawing.Point(362, 20);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
             this.btnAdd.TabIndex = 9;
@@ -144,7 +144,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 369);
+            this.ClientSize = new System.Drawing.Size(490, 388);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSave);

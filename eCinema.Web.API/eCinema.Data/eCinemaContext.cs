@@ -131,6 +131,7 @@ namespace eCinema.Data
             builder.Entity<ProducerMovies>().HasData(
                 new ProducerMovies() { MovieId = 1, ProducerId = 1 }
                 );
+
         }
 
         private void SeedMoviesDirectors(ModelBuilder builder)

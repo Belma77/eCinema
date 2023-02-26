@@ -92,30 +92,29 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
+            int result;
+            if (!int.TryParse(txtYear.Text, out result))
+            {
+                err.SetError(txtYear, AlertMessages.OnlyNumbersAllowed);
+                return false;
+            }
+
+            else if (!int.TryParse(txtDuration.Text, out result))
+            {
+                err.SetError(txtDuration, AlertMessages.OnlyNumbersAllowed);
+                return false;
+            }
+
             return
                 Validator.Validate(txtTitle, err, AlertMessages.RequiredField) &&
                 Validator.Validate(txtYear, err, AlertMessages.RequiredField) &&
                 Validator.Validate(txtDuration, err, AlertMessages.RequiredField) &&
                 Validator.Validate(cmbCountries, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbGenres, err, AlertMessages.RequiredField)&&
-                Validator.Validate(txtSynopsis, err, AlertMessages.RequiredField)&&
+                Validator.Validate(clbGenres, err, AlertMessages.RequiredField) &&
+                Validator.Validate(txtSynopsis, err, AlertMessages.RequiredField) &&
                 Validator.Validate(pbPoster, err, AlertMessages.RequiredField);
 
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnDirectors_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void clbGenres_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }

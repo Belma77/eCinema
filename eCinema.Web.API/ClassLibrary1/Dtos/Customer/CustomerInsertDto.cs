@@ -15,9 +15,6 @@ namespace eCInema.Models.Dtos.Customer
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Phone { get; set; }
-        public byte[]? Picture { get; set; }
-        public UserRole UserRole { get; set; }
-        public CustomerTypeEnum CustomerType { get; set; }
 
     }
 }
