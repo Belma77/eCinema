@@ -48,4 +48,27 @@ class UserProvider extends BaseProvider<Customer> {
       return null;
     }
   }
+
+  Future<List<Customer>> getByUsername([dynamic search]) async {
+    var url = "$_baseUrl$_endpoint";
+
+    if (search != null) {
+      String queryString = getQueryString(search);
+      url = url + "?" + queryString;
+    }
+
+    var uri = Uri.parse(url);
+    var headers = {
+      "Content-Type": "application/json",
+    };
+    var response = await http!.get(uri, headers: headers);
+
+    print(response);
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return data.map((x) => fromJson(x)).cast<Customer>().toList();
+    } else {
+      throw Exception("Exception... handle this gracefully");
+    }
+  }
 }

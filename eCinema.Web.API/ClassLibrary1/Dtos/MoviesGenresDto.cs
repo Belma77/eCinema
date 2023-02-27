@@ -1,6 +1,6 @@
 ﻿using eCInema.Data.Entities;
 using eCInema.Models.Dtos.Genres;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using System;
 using System.Collections;
 using System.Collections.Generic;

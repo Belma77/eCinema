@@ -2,14 +2,14 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <Body>
     <ReportItems>
-      <Textbox Name="Textbox1">
+      <Textbox Name="Textbox9">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
         <Paragraphs>
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Reservations per Movie</Value>
+                <Value>Sales per customer Report</Value>
                 <Style>
                   <FontSize>11pt</FontSize>
                   <FontWeight>Bold</FontWeight>
@@ -22,17 +22,32 @@
             <TextRuns>
               <TextRun>
                 <Value />
-                <Style />
+                <Style>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+            </TextRuns>
+            <Style />
+          </Paragraph>
+          <Paragraph>
+            <TextRuns>
+              <TextRun>
+                <Value />
+                <Style>
+                  <FontSize>11pt</FontSize>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
           </Paragraph>
         </Paragraphs>
-        <rd:DefaultName>Textbox1</rd:DefaultName>
-        <Top>0.4572cm</Top>
-        <Left>5.61247cm</Left>
+        <rd:DefaultName>Textbox9</rd:DefaultName>
+        <Top>0.62654cm</Top>
+        <Left>5.6477cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.659cm</Width>
+        <Width>5.421cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -43,42 +58,43 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Tablix Name="Tablix2">
+      <Tablix Name="Tablix1">
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>3.75589cm</Width>
+              <Width>3.06621cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.75589cm</Width>
+              <Width>3.06621cm</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>3.75589cm</Width>
+              <Width>3.06621cm</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>3.06621cm</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.81167cm</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox18">
+                    <Textbox Name="Textbox1">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Movie Id</Value>
+                              <Value>Customer Id</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox18</rd:DefaultName>
+                      <rd:DefaultName>Textbox1</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -94,23 +110,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox20">
+                    <Textbox Name="Textbox3">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Title</Value>
+                              <Value>First Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox20</rd:DefaultName>
+                      <rd:DefaultName>Textbox3</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -126,23 +140,60 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox22">
+                    <Textbox Name="Textbox5">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Count Of Reservations</Value>
+                              <Value>Last Name</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox22</rd:DefaultName>
+                      <rd:DefaultName>Textbox5</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Textbox7">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>Sales (BAM)</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value />
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Textbox7</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -159,27 +210,25 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.81167cm</Height>
+              <Height>0.6cm</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="MovieId">
+                    <Textbox Name="CustomerId">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!MovieId.Value</Value>
+                              <Value>=Fields!CustomerId.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>MovieId</rd:DefaultName>
+                      <rd:DefaultName>CustomerId</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -195,23 +244,21 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Title">
+                    <Textbox Name="FirstName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!Title.Value</Value>
+                              <Value>=Fields!FirstName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Title</rd:DefaultName>
+                      <rd:DefaultName>FirstName</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -227,23 +274,51 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="CountOfReservations">
+                    <Textbox Name="LastName">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!CountOfReservations.Value</Value>
+                              <Value>=Fields!LastName.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
-                          <Style>
-                            <TextAlign>Center</TextAlign>
-                          </Style>
+                          <Style />
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>CountOfReservations</rd:DefaultName>
+                      <rd:DefaultName>LastName</rd:DefaultName>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>Solid</Style>
+                        </Border>
+                        <PaddingLeft>2pt</PaddingLeft>
+                        <PaddingRight>2pt</PaddingRight>
+                        <PaddingTop>2pt</PaddingTop>
+                        <PaddingBottom>2pt</PaddingBottom>
+                      </Style>
+                    </Textbox>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell>
+                  <CellContents>
+                    <Textbox Name="Sales">
+                      <CanGrow>true</CanGrow>
+                      <KeepTogether>true</KeepTogether>
+                      <Paragraphs>
+                        <Paragraph>
+                          <TextRuns>
+                            <TextRun>
+                              <Value>=Fields!Sales.Value</Value>
+                              <Style />
+                            </TextRun>
+                          </TextRuns>
+                          <Style />
+                        </Paragraph>
+                      </Paragraphs>
+                      <rd:DefaultName>Sales</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -266,6 +341,7 @@
             <TablixMember />
             <TablixMember />
             <TablixMember />
+            <TablixMember />
           </TablixMembers>
         </TablixColumnHierarchy>
         <TablixRowHierarchy>
@@ -274,15 +350,15 @@
               <KeepWithGroup>After</KeepWithGroup>
             </TablixMember>
             <TablixMember>
-              <Group Name="Details1" />
+              <Group Name="Details" />
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>ID_190036DataSet</DataSetName>
-        <Top>1.96004cm</Top>
-        <Left>1.85658cm</Left>
-        <Height>1.62334cm</Height>
-        <Width>11.26767cm</Width>
+        <DataSetName>dsSales</DataSetName>
+        <Top>1.83304cm</Top>
+        <Left>2.19287cm</Left>
+        <Height>1.2cm</Height>
+        <Width>12.26484cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
           <Border>
@@ -291,17 +367,17 @@
         </Style>
       </Tablix>
     </ReportItems>
-    <Height>1.95in</Height>
+    <Height>1.33333in</Height>
     <Style />
   </Body>
-  <Width>6.25592in</Width>
+  <Width>6.83925in</Width>
   <Page>
     <PageHeader>
-      <Height>1.60867cm</Height>
+      <Height>1.27cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox5">
+        <Textbox Name="UserID">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -315,9 +391,9 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox5</rd:DefaultName>
-          <Top>0.4572cm</Top>
-          <Left>12.98787cm</Left>
+          <rd:DefaultName>UserID</rd:DefaultName>
+          <Top>0.5207cm</Top>
+          <Left>13.87687cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <Style>
@@ -338,11 +414,11 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>2.4765cm</Height>
+      <Height>2.22138cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
-        <Textbox Name="Textbox2">
+        <Textbox Name="ExecutionTime">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -356,11 +432,11 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>1.24037cm</Top>
-          <Left>0.54187cm</Left>
+          <rd:DefaultName>ExecutionTime</rd:DefaultName>
+          <Top>0.88055cm</Top>
+          <Left>0.60537cm</Left>
           <Height>0.6cm</Height>
-          <Width>2.96567cm</Width>
+          <Width>2.5cm</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -371,7 +447,7 @@
             <PaddingBottom>2pt</PaddingBottom>
           </Style>
         </Textbox>
-        <Textbox Name="Textbox4">
+        <Textbox Name="PageNumber">
           <CanGrow>true</CanGrow>
           <KeepTogether>true</KeepTogether>
           <Paragraphs>
@@ -385,9 +461,9 @@
               <Style />
             </Paragraph>
           </Paragraphs>
-          <rd:DefaultName>Textbox4</rd:DefaultName>
-          <Top>1.24037cm</Top>
-          <Left>12.67037cm</Left>
+          <rd:DefaultName>PageNumber</rd:DefaultName>
+          <Top>0.88055cm</Top>
+          <Left>14.34253cm</Left>
           <Height>0.6cm</Height>
           <Width>2.5cm</Width>
           <ZIndex>1</ZIndex>
@@ -419,44 +495,48 @@
   </Page>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ID_190036DataSet">
+    <DataSource Name="dsSales">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
-      <rd:DataSourceID>598c726f-487f-4ab9-9cae-ef1d7522c38a</rd:DataSourceID>
+      <rd:DataSourceID>475b1e05-33cd-46ef-8809-12d553a3d5ad</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="ID_190036DataSet">
+    <DataSet Name="dsSales">
       <Query>
-        <DataSourceName>ID_190036DataSet</DataSourceName>
+        <DataSourceName>dsSales</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="MovieId">
-          <DataField>MovieId</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="Title">
-          <DataField>Title</DataField>
+        <Field Name="CustomerId">
+          <DataField>CustomerId</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="CountOfReservations">
-          <DataField>CountOfReservations</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+        <Field Name="FirstName">
+          <DataField>FirstName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="LastName">
+          <DataField>LastName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sales">
+          <DataField>Sales</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
-        <rd:DataSetName>_190036DataSet</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\user\Desktop\eKino\eCinema\eCinema.Web.API\eCinema.WinUI\_190036DataSet.xsd</rd:SchemaPath>
-        <rd:TableName>ReservationsMoviesQuery</rd:TableName>
-        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
-        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>ReservationsMoviesQueryTableAdapter</rd:TableAdapterName>
+        <rd:DataSetName>dsSales</rd:DataSetName>
+        <rd:SchemaPath>C:\Users\user\Desktop\eKino\eCinema\eCinema.Web.API\eCinema.WinUI\Reports\dsSales.xsd</rd:SchemaPath>
+        <rd:TableName>SalesPerCustomer</rd:TableName>
+        <rd:TableAdapterFillMethod />
+        <rd:TableAdapterGetDataMethod />
+        <rd:TableAdapterName />
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
-  <rd:ReportID>2cc27e33-79b8-440a-a2ef-6f416b979e96</rd:ReportID>
+  <rd:ReportID>bc6b933a-78aa-4e70-8044-7add62311c66</rd:ReportID>
 </Report>

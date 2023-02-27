@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Globalization;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Dtos.Genres;
 
 namespace eCinema.WinUI

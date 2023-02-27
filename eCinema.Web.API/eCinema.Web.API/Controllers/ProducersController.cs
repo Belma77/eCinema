@@ -16,21 +16,21 @@ namespace eCinema.Web.API.Controllers
     [ApiController]
     [Authorize(UserRole.Admin)]
 
-    public class ProducersController : BaseCRUDController<ProducersMoviesDto, CastSearchObject, ProducersMoviesDto, ProducersMoviesDto>
+    public class ProducersController : ControllerBase
     {
         IProducerService _service;
-        public ProducersController(IProducerService service) : base(service)
+        public ProducersController(IProducerService service) : base()
         {
             _service=service;   
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("AddToMovie/{id}")]
         public void Add(int id, List<ProducerDto> insert)
         {
              _service.Add(id, insert);
         }
 
-        [HttpDelete]
+        [HttpDelete("FromMovie")]
         public void Delete(List<ProducersMoviesDto> delete)
         {
             _service.DeleteProducersMovies(delete);

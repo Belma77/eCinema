@@ -20,12 +20,17 @@ namespace eCinema.Web.API.Controllers
             _service = service;
         }
 
-        [AllowAnonymous]
         [Authorize(UserRole.Customer, UserRole.Admin)]
         public override IActionResult Insert(ReservationInsertDto reservation)
         {
             return Ok(_service.Insert(reservation));
         }
 
+        [HttpGet("ByCustomer")]
+        [Authorize(UserRole.Admin)]
+        public IActionResult GetReservationsByCustomer()
+        {
+            return Ok(_service.GetReservationsByCustomer());
+        }
     }
 }

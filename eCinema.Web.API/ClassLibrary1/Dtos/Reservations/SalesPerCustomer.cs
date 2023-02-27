@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos.LoyaltyCard
+namespace eCInema.Models.Dtos.Reservations
 {
-    public class LoyalCardDto
+    public class SalesPerCustomer
     {
-        public int CustomerId { get; set; }
-        public double price { get; set; }
+        public CustomerDto Customer { get; set; }
+        public double Sales { get; set; }
     }
 }

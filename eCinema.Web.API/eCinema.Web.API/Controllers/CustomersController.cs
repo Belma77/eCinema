@@ -11,7 +11,6 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Customer")]
     [ApiController]
-    [Authorize(UserRole.Admin)]
     public class CustomersController : BaseCRUDController<CustomerDto, CustomerSearchObject, CustomerInsertDto, UpdateCustomerDto>
     {
         ICustomerService _service;
@@ -26,8 +25,13 @@ namespace eCinema.Web.API.Controllers
             return base.Insert(insert);
         }
 
-
         [AllowAnonymous]
+        public override IActionResult Get(CustomerSearchObject? search)
+        {
+            return base.Get(search);
+        }
+
+
         [Authorize(UserRole.Customer)]
         [HttpPut("{id}")]
         public override IActionResult Update(int id, UpdateCustomerDto update)
@@ -36,7 +40,6 @@ namespace eCinema.Web.API.Controllers
         }
 
 
-        [AllowAnonymous]
         [Authorize(UserRole.Customer, UserRole.Admin)]
         [HttpDelete("{id}")]
         public override IActionResult Delete(int id)
@@ -45,7 +48,6 @@ namespace eCinema.Web.API.Controllers
         }
 
 
-        [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         [HttpGet("Current")]
         public IActionResult GetCurrent()

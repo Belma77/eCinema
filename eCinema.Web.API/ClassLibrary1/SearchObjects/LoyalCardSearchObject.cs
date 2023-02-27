@@ -9,6 +9,6 @@ namespace eCInema.Models.SearchObjects
 {
     public class LoyalCardSearchObject
     {
-        public CustomerSearchObject? Customer { get; set; }
+        public string? Name { get; set; }
     }
 }

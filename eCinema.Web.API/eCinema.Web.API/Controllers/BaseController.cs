@@ -10,7 +10,7 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(UserRole.Admin)]
+    //[Authorize(UserRole.Admin)]
     public class BaseController<Tmodel, TSearchObject> : ControllerBase where Tmodel : class where TSearchObject : class
     {
         protected IBaseService<Tmodel, TSearchObject> _service;

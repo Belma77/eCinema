@@ -37,8 +37,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? password;
   String? email;
   bool _obscureText = true;
-
+  List<Customer> usernameExists = [];
+  Customer? customer;
   late UserProvider _userProvider;
+
   @override
   void initState() {
     super.initState();
@@ -47,11 +49,30 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future registerUser() async {
     UserProvider();
-    CustomerInsert customer =
+    await getCustomerByUsername(_usernameController.text);
+    var customer =
         CustomerInsert(firstName, lastName, phone, email, username, password);
     if (_formKey.currentState!.validate()) {
       await _userProvider.register(customer);
       Navigator.pushNamed(context, LoginScreen.route);
+    }
+  }
+
+  Future getCustomerByUsername(String username) async {
+    UserProvider();
+    usernameExists = await _userProvider.getByUsername({'Username': username});
+    setState(() {
+      customer = usernameExists[0];
+    });
+  }
+
+  String? validateUsername(String? value) {
+    if (value!.isEmpty) {
+      return ErrorMessages.notEmptyValue;
+    } else if (customer != null) {
+      return ErrorMessages.usernameUnique;
+    } else {
+      return null;
     }
   }
 
@@ -178,7 +199,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           onChanged: (String value) {
                             username = value;
                           },
-                          validator: Validator.validateName,
+                          validator: validateUsername,
                           keyboardType: TextInputType.text,
                           style: const TextStyle(
                               fontSize: 18.0, height: 1.5, color: Colors.black),
@@ -186,6 +207,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             labelText: 'Username',
                             labelStyle: TextStyle(fontSize: 15),
                             hintText: "Username",
+                            errorStyle: TextStyle(fontSize: 12),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   width: 1,

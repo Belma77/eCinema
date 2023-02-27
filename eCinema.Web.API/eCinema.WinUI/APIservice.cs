@@ -24,38 +24,6 @@ namespace eCinema.WinUI
             _resource = resource;
         }
 
-        public async Task<T> Login<T>(T login)
-        {
-            try
-            {
-                var result = await $"{_endpoint}{_resource}/{"Login"}".WithBasicAuth(Username, Password).PostJsonAsync(login).ReceiveJson<T>();
-                return result;
-            }
-
-            catch (FlurlHttpException ex)
-            {
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
-                {
-                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-                {
-                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                throw;
-
-            }
-        }
 
         public async Task<T> Get<T>(object search = null)
         {
@@ -102,9 +70,41 @@ namespace eCinema.WinUI
 
             return result;
         }
-
-        public async Task Delete(int id)
+        public async Task<T> Post<T>(object request)
         {
+            try
+            {
+                var result = await $"{_endpoint}{_resource}".WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
+                return result;
+            }
+
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                throw;
+
+            }
+        }
+
+            public async Task Delete(int id)
+            {
             try
             {
                 await $"{_endpoint}{_resource}/{id}".WithBasicAuth(Username, Password).DeleteAsync();
@@ -134,38 +134,6 @@ namespace eCinema.WinUI
         }
         }
 
-        public async Task DeleteObject<T>(List<T> delete)
-        {
-            try
-            {
-               await $"{_endpoint}{_resource}".WithBasicAuth(Username, Password).SendJsonAsync(HttpMethod.Delete, delete);
-            }
-
-            catch (FlurlHttpException ex)
-            {
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-                {
-                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
-                {
-                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
-                {
-                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
-                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
-                {
-                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                throw;
-            
-        }
-     }
-      
         public async Task<T> Put<T>(object id, object request)
         {
             try
@@ -198,12 +166,11 @@ namespace eCinema.WinUI
             }
         }
 
-        public async Task<T> PostArray<T>(object id,List<T> request)
+        public async Task DeleteFromMovie<T>(List<T> delete)
         {
             try
             {
-                var result = await $"{_endpoint}{_resource}/{id}".WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
-                return result;
+               await $"{_endpoint}{_resource}/{"FromMovie"}".WithBasicAuth(Username, Password).SendJsonAsync(HttpMethod.Delete, delete);
             }
 
             catch (FlurlHttpException ex)
@@ -228,14 +195,15 @@ namespace eCinema.WinUI
                 }
                 throw;
             
-            }
         }
+     }
+      
 
-        public async Task<T> Post<T>(object request)
+        public async Task<T> AddToMovie<T>(object id, List<T> request)
         {
             try
             {
-                var result = await $"{_endpoint}{_resource}".WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
+                var result = await $"{_endpoint}{_resource}/{"AddToMovie"}/{id}".WithBasicAuth(Username, Password).PostJsonAsync(request).ReceiveJson<T>();
                 return result;
             }
 
@@ -260,9 +228,44 @@ namespace eCinema.WinUI
                     MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 throw;
-            
+
+            }
+        }
+        public async Task<T> GetSales<T>(string path)
+        {
+            try
+            {
+               
+                var list = await $"{_endpoint}{_resource}/{path}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
+
+                return list;
             }
 
+            catch (FlurlHttpException ex)
+            {
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                throw;
+            }
         }
+
     }
-}
+    }
+

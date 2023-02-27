@@ -9,11 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Reports\Report1.rdlc" />
+    <None Remove="Reports\SalesPerCustomer.rdlc" />
+    <None Remove="Reports\SalesPerMovie.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Reports\Report1.rdlc" />
+    <EmbeddedResource Include="Reports\SalesPerCustomer.rdlc" />
+    <EmbeddedResource Include="Reports\SalesPerMovie.rdlc" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +30,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Reports\dsMovie.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsMovie.xsd</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\dsSales.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>dsSales.xsd</DependentUpon>
+    </Compile>
     <Compile Update="_190036DataSet.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -36,6 +48,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Reports\dsMovie.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMovie.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Reports\dsSales.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsSales.Designer.cs</LastGenOutput>
+    </None>
     <None Update="_190036DataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>_190036DataSet.Designer.cs</LastGenOutput>

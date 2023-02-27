@@ -52,6 +52,7 @@ namespace eCinema.WinUI.Customers
                 {
                     frmLoyalClub frm = new frmLoyalClub(data);
                     frm.ShowDialog();
+                    await LoadCustomers();
                 }
             }  
             

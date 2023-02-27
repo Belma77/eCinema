@@ -49,7 +49,7 @@ namespace eCinema.WinUI
                 e.Value = BindProperty(
                  dgvReservations.Rows[e.RowIndex].DataBoundItem,
                  dgvReservations.Columns[e.ColumnIndex].DataPropertyName
-                            );
+                 );
             }
         }
 

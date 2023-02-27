@@ -65,6 +65,10 @@ namespace eCinema.Data
                 .HasValue<Customer>(UserRole.Customer)
                 .HasValue<User>(UserRole.Admin);
 
+            builder.Entity<User>()
+            .HasIndex(u => u.UserName)
+            .IsUnique();
+
             SeedData(builder);
             SeedActors(builder);
             SeedMoviesActors(builder);

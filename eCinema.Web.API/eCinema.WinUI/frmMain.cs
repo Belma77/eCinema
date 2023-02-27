@@ -48,16 +48,17 @@ namespace eCinema.WinUI
             frm.ShowDialog();
         }
 
-        private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
+
+        private void salesPerCustomerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmReport frm = new frmReport();
-            frm.MdiParent = this;
-            frm.Show();
+            frmSalesPerCustomerReport frm = new frmSalesPerCustomerReport();
+            frm.ShowDialog();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        private void salesPerMovieToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            frmSalesPerMovie frm= new frmSalesPerMovie();
+            frm.ShowDialog();
         }
     }
 }

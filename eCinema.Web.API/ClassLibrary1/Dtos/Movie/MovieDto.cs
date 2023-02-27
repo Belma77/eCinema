@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos.Movies
+namespace eCInema.Models.Dtos.Movie
 {
     public class MovieDto
     {

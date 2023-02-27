@@ -14,24 +14,31 @@ namespace eCinema.Web.API.Controllers
     [Route("Genres")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class GenresController : BaseCRUDController<GenresDto, GenresSearchObject, GenresUpsertDto, GenresUpsertDto>
+    public class GenresController : ControllerBase /*BaseCRUDController<GenresDto, GenresSearchObject, GenresUpsertDto, GenresUpsertDto>*/
     {
         IGenresSerice _service;
-        public GenresController(IGenresSerice service) : base(service)
+        public GenresController(IGenresSerice service) : base()
         {
             _service = service;
         }
 
-        [HttpDelete]
+        [HttpPost("AddToMovie/{id}")]
+        public void AddGenresToMovie(int id, List<GenresDto> insert)
+        {
+            _service.AddGenresToMovie(id, insert);
+        }
+
+        [HttpDelete("FromMovie")]
         public List<MoviesGenresUpdateDto> Delete(List<MoviesGenresUpdateDto> delete)
         {
             return _service.DeleteMoviesGenres(delete);
         }
 
-        [HttpPost("{id}")]
-        public void AddGenresToMovie(int id, List<GenresDto> insert)
+        [HttpGet]
+        public List<GenresDto> Get()
         {
-            _service.AddGenresToMovie(id, insert);
+            return _service.Get();
         }
+
     }
 }

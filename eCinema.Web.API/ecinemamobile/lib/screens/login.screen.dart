@@ -22,8 +22,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController _passwordController = TextEditingController();
   late ScheduleProvider _scheduleProvider;
   bool _obscureText = true;
-  bool _validateUsername = true;
-  bool _validatePassword = true;
   final _formKey = GlobalKey<FormState>();
 
   Future login() async {

@@ -16,23 +16,23 @@ namespace eCinema.Web.API.Controllers
     [Route("Directors")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class DirectorsController : BaseCRUDController<DirectorDto, CastSearchObject, DirectorDto, DirectorDto>
+    public class DirectorsController : ControllerBase/*BaseCRUDController<DirectorDto, CastSearchObject, DirectorDto, DirectorDto>*/
     {
 
         IDirectorService _service;
-        public DirectorsController(IDirectorService service) : base(service)
+        public DirectorsController(IDirectorService service) : base()
         {
             _service = service;
         }
 
-        [HttpPost("{id}")]
+        [HttpPost("AddToMovie/{id}")]
         public void Add(int id, List<DirectorDto> insert)
         {
             _service.Add(id, insert);
         }
 
 
-        [HttpDelete]
+        [HttpDelete("FromMovie")]
         public void Delete(List<DirectorsMoviesDto> delete)
         {
             _service.DeleteDirectorsMovies(delete);

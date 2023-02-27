@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
+using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.Dtos.SchedulesSeats;
 using eCInema.Models.Entities;
@@ -101,6 +102,19 @@ namespace eCinema.Services.Resrevations
             return _mapper.Map<ReservationDto>(reservation);
 
         }
-
+        public List<SalesPerCustomer> GetReservationsByCustomer()
+        {
+            var reservations = _context.Reservations.Where(x => x.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid).Include(x => x.Customer)  
+           .GroupBy(x=>x.Customer).
+                Select(x=>new SalesPerCustomer
+                {
+                    Customer=_mapper.Map<CustomerDto>(x.Key),
+                    Sales=x.Sum(y=>y.Price)
+                }).
+                ToList();
+            return reservations;
+            
+        }
+        
     }
 }

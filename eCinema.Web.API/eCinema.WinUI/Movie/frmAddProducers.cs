@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 
 namespace eCinema.WinUI
 {
@@ -96,9 +96,10 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Producers");
-                await service.PostArray<ProducerDto>(_movie.Id, list);
+                await service.AddToMovie<ProducerDto>(_movie.Id, list);
                 this.Close();
             }
         }
+
     }
 }

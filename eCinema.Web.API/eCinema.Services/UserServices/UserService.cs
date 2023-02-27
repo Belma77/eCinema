@@ -67,8 +67,6 @@ namespace eCinema.Services.UserServices
             _context.SaveChanges();
 
             return _mapper.Map<UserDto>(entity);
-
-
         }
 
         public static string GenerateSalt()

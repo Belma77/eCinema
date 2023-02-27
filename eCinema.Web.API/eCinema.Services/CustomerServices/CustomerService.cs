@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
+using eCinema.Services.UserServices;
 using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Users;
 using eCInema.Models.Entities;
@@ -23,6 +24,7 @@ namespace eCinema.Services.CustomerServices
         public CustomerService(eCinemaContext context, IMapper mapper, IHttpContextAccessor accessor):base(context, mapper)    
         {
             _accessor = accessor;
+
         }
 
         public override IQueryable<Customer> AddFilter(IQueryable<Customer> query, CustomerSearchObject search = null)
@@ -49,6 +51,11 @@ namespace eCinema.Services.CustomerServices
 
         public override CustomerDto Insert(CustomerInsertDto insert)
         {
+            var customerExists = _context.Customers.FirstOrDefault(x => x.UserName == insert.UserName);
+            if(customerExists != null)
+            {
+                throw new BadRequestException("Customer with that username already exists");
+            }
             var entity = _mapper.Map<Customer>(insert);
             var salt = GenerateSalt();
             entity.PasswordSalt = salt;

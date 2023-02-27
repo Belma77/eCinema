@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -107,7 +107,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Actors");
-                await service.PostArray<ActorDto>(_movie.Id, list);
+                await service.AddToMovie<ActorDto>(_movie.Id, list);
                 this.Close();
             }
         }

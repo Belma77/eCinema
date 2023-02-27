@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using eCinema.WinUI.Helpers;
 using MediaBrowser.Model.Services;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 
 namespace eCinema.WinUI
 {
@@ -110,7 +110,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Writers");
-                await service.PostArray<WriterDto>(_movie.Id, list);
+                await service.AddToMovie<WriterDto>(_movie.Id, list);
                 this.Close();
             }
         }

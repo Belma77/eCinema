@@ -12,6 +12,5 @@ namespace eCinema.Services.UserServices
     public interface IUserService:IBaseCRUDService<UserDto, UserSearchObject, UserInsertDto, UserUpdateDto>
     {
         UserDto Login(UserLoginDto login);
-
     }
 }

@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos.Movies
+namespace eCInema.Models.Dtos.Movie
 {
     public class MovieInsertDto
     {
@@ -23,6 +23,6 @@ namespace eCInema.Models.Dtos.Movies
         public List<DirectorDto>? Directors { get; set; }
         public List<WriterDto>? Writers { get; set; }
         public List<ProducerDto>? Producers { get; set; }
-        public byte[] Poster { get; set; }
+        public byte[]? Poster { get; set; }
     }
 }

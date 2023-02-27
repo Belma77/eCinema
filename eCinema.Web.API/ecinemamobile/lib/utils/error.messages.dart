@@ -6,4 +6,6 @@ class ErrorMessages {
       "Phone has to contains only numbers and 9 digits";
   static const String passwordNotValid =
       "Password has to contains at least 6 digits";
+  static const String usernameUnique =
+      "Username already taken, please try different one";
 }

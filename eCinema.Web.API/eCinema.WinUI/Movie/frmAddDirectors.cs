@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -68,15 +68,12 @@ namespace eCinema.WinUI
 
                     }
 
-                    //await service.PostArray<DirectorDto>(MovieId, list);
                     insert.Directors = new List<DirectorDto>(list);
-                    //await service.Post<MovieDetailsDto>(insert);
                     this.Hide();
                     frmAddProducers frm = new frmAddProducers(insert);
                     frm.ShowDialog();
                     this.Show();
                 }
-                //service.Post<ActorDto>(actor);
             }
             else if (_movie != null)
             {
@@ -93,7 +90,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Directors");
-                await service.PostArray<DirectorDto>(_movie.Id, list);
+                await service.AddToMovie<DirectorDto>(_movie.Id, list);
             }
             
         }
@@ -135,7 +132,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Directors");
-                await service.PostArray<DirectorDto>(_movie.Id, list);
+                await service.AddToMovie<DirectorDto>(_movie.Id, list);
                 this.Close();
 
             }

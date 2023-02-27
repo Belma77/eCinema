@@ -1,5 +1,5 @@
 ﻿using eCinema.Services.MoviesServices;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;
 using Microsoft.AspNetCore.Authorization;
@@ -11,6 +11,7 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Movies")]
     [ApiController]
+    [Authorize(UserRole.Admin)]
     public class MoviesController : BaseCRUDController<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
         IMoviesService _service;
@@ -19,33 +20,30 @@ namespace eCinema.Web.API.Controllers
             _service=service;
         }
 
-        //[HttpDelete]
-        //[Route("Directors")]
-        //public void Delete(DirectorsMoviesDto delete)
-        //{
-        //    _service.DeleteDirectorsMovies(delete);
-        //}
 
-        [AllowAnonymous]
-        [Authorize(UserRole.Admin, UserRole.Customer)]
         public override IActionResult Get([FromQuery] MoviesSearchObject? search = null)
         {
             return base.Get(search);
         }
 
-        [AllowAnonymous]
-        [Authorize(UserRole.Admin, UserRole.Customer)]
         public override IActionResult GetById(int id)
         {
             return base.GetById(id);
         }
 
         [HttpGet("{id}/Recommend")]
-        [AllowAnonymous]
-        [Authorize(UserRole.Admin, UserRole.Customer)]
+        [Authorize(UserRole.Customer)]
         public List<GetMoviesDto> Recommend(int id)
         {
             return _service.Recommend(id);
         }
+
+        [HttpGet("Sales")]
+        [AllowAnonymous]
+        public IActionResult SalesPerMovie()
+        {
+            return Ok(_service.SalesByMovie());
+        }
+
     }
 }

@@ -1,5 +1,5 @@
 ﻿using eCInema.Models.Dtos.Customer;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using System;
 using System.Collections.Generic;
 using System.Linq;

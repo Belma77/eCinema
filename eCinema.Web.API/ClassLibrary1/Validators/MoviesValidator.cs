@@ -1,4 +1,4 @@
-﻿using eCInema.Models.Dtos.Movies;
+﻿using eCInema.Models.Dtos.Movie;
 using FluentValidation;
 using System;
 using System.Collections.Generic;

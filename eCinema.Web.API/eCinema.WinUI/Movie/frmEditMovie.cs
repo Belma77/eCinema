@@ -2,7 +2,7 @@
 using eCInema.Models;
 using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Genres;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using Microsoft.VisualBasic.Devices;
 using System;
@@ -118,7 +118,7 @@ namespace eCinema.WinUI
 
         private async void Save_Click(object sender, EventArgs e)
         {
-            if (Validate())
+            //if (Validate())
             {
                 var update = new MovieUpdateDto();
                 update.Title = txtTitle.Text;
@@ -159,7 +159,7 @@ namespace eCinema.WinUI
             if(addItems.Count>0)
             {               
                 APIservice genresService = new APIservice("Genres");
-                await genresService.PostArray<GenresDto>(movie.Id, addItems);
+                await genresService.AddToMovie<GenresDto>(movie.Id, addItems);
             }
 
             if(removeItems.Count>0)
@@ -175,7 +175,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice genresService = new APIservice("Genres");
-                await genresService.DeleteObject(list);
+                await genresService.DeleteFromMovie(list);
             }
         }
 
@@ -214,7 +214,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice _service = new APIservice("Directors");
-                await _service.DeleteObject(removeItems);
+                await _service.DeleteFromMovie(removeItems);
             }
             
         }
@@ -245,7 +245,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Producers");
-                await service.DeleteObject(removeItems);
+                await service.DeleteFromMovie(removeItems);
             }
 
         }
@@ -276,7 +276,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice _service = new APIservice("Writers");
-                await _service.DeleteObject(removeItems);
+                await _service.DeleteFromMovie(removeItems);
             }
 
         }
@@ -308,7 +308,7 @@ namespace eCinema.WinUI
                 }
 
                 APIservice service = new APIservice("Actors");
-                await service.DeleteObject(removeItems);
+                await service.DeleteFromMovie(removeItems);
             }
 
         }

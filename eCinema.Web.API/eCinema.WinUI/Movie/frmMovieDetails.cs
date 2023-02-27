@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using Microsoft.VisualBasic.Devices;
 using System;

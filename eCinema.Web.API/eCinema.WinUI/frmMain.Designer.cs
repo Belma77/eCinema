@@ -35,6 +35,8 @@
             this.reservationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesPerCustomerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.salesPerMovieToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -90,10 +92,26 @@
             // 
             // reportsToolStripMenuItem
             // 
+            this.reportsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.salesPerCustomerToolStripMenuItem,
+            this.salesPerMovieToolStripMenuItem});
             this.reportsToolStripMenuItem.Name = "reportsToolStripMenuItem";
             this.reportsToolStripMenuItem.Size = new System.Drawing.Size(74, 24);
             this.reportsToolStripMenuItem.Text = "Reports";
-            this.reportsToolStripMenuItem.Click += new System.EventHandler(this.reportsToolStripMenuItem_Click);
+            // 
+            // salesPerCustomerToolStripMenuItem
+            // 
+            this.salesPerCustomerToolStripMenuItem.Name = "salesPerCustomerToolStripMenuItem";
+            this.salesPerCustomerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salesPerCustomerToolStripMenuItem.Text = "Sales per Customer";
+            this.salesPerCustomerToolStripMenuItem.Click += new System.EventHandler(this.salesPerCustomerToolStripMenuItem_Click);
+            // 
+            // salesPerMovieToolStripMenuItem
+            // 
+            this.salesPerMovieToolStripMenuItem.Name = "salesPerMovieToolStripMenuItem";
+            this.salesPerMovieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salesPerMovieToolStripMenuItem.Text = "Sales per Movie";
+            this.salesPerMovieToolStripMenuItem.Click += new System.EventHandler(this.salesPerMovieToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -105,7 +123,6 @@
             this.Name = "frmMain";
             this.Text = "frmMain";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -122,5 +139,7 @@
         private ToolStripMenuItem reservationsToolStripMenuItem;
         private ToolStripMenuItem usersToolStripMenuItem;
         private ToolStripMenuItem reportsToolStripMenuItem;
+        private ToolStripMenuItem salesPerCustomerToolStripMenuItem;
+        private ToolStripMenuItem salesPerMovieToolStripMenuItem;
     }
 }

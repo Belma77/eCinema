@@ -1,5 +1,5 @@
 using eCInema.Models;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.SearchObjects;
 using Flurl.Http;
 

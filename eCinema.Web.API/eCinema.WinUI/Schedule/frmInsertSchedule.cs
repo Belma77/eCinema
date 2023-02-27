@@ -1,6 +1,6 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models.Dtos.Halls;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.SearchObjects;
 using System;

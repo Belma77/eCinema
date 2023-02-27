@@ -1,4 +1,4 @@
-﻿using eCInema.Models.Dtos.Movies;
+﻿using eCInema.Models.Dtos.Movie;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
@@ -10,7 +10,6 @@ namespace eCInema.Models.Dtos.Schedules
 {
     public class ScheduleUpdateDto
     {
-        public int MovieId { get; set; }
         public MovieDto Movie { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }

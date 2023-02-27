@@ -17,7 +17,7 @@ using eCinema.Services.WritersServices;
 using eCinema.Web.API.Auth;
 using eCinema.Web.API.Filters;
 using eCInema.Models;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.SearchObjects;
 using MediaBrowser.Model.Services;
 using Microsoft.AspNetCore.Authentication;

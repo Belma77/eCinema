@@ -1,5 +1,5 @@
 ﻿using eCInema.Models.Dtos.Halls;
-using eCInema.Models.Dtos.Movies;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.SearchObjects;
 using System;
 using System.Collections.Generic;
