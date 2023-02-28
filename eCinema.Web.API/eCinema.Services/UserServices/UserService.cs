@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
+using eCinema.Services.Helpers;
 using eCInema.Models.Dtos.Users;
 using eCInema.Models.Entities;
 using eCInema.Models.Exceptions;
@@ -29,7 +30,7 @@ namespace eCinema.Services.UserServices
             if (entity == null)
                 throw new NotFoundException("User not found");
 
-            var hash = GenerateHash(entity.PasswordSalt, login.Password);
+            var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, login.Password);
 
             if (hash != entity.PasswordHash)
                 return null;
@@ -46,9 +47,9 @@ namespace eCinema.Services.UserServices
 
         public override void BeforeInsert(UserInsertDto insert, User? entity)
         {
-            var salt = GenerateSalt();
+            var salt = PasswordHelper.GenerateSalt();
             entity.PasswordSalt = salt;
-            entity.PasswordHash = GenerateHash(salt, insert.Password);
+            entity.PasswordHash = PasswordHelper.GenerateHash(salt, insert.Password);
             if (entity.UserRole == eCInema.Models.Enums.UserRole.Customer)
             {
                 var customer = _mapper.Map<Customer>(entity);
@@ -60,35 +61,13 @@ namespace eCinema.Services.UserServices
         public override UserDto Insert(UserInsertDto insert)
         {
             var entity = _mapper.Map<User>(insert);
-            var salt = GenerateSalt();
+            var salt = PasswordHelper.GenerateSalt();
             entity.PasswordSalt = salt;
-            entity.PasswordHash = GenerateHash(salt, insert.Password);
+            entity.PasswordHash = PasswordHelper.GenerateHash(salt, insert.Password);
             _context.Users.Add(entity); 
             _context.SaveChanges();
 
             return _mapper.Map<UserDto>(entity);
-        }
-
-        public static string GenerateSalt()
-        {
-            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-            var byteArray = new byte[16];
-            provider.GetBytes(byteArray);
-            return Convert.ToBase64String(byteArray);
-        }
-
-        public static string GenerateHash(string salt, string password)
-        {
-            byte[] src = Convert.FromBase64String(salt);
-            byte[] bytes = Encoding.Unicode.GetBytes(password);
-            byte[] dst = new byte[src.Length + bytes.Length];
-
-            System.Buffer.BlockCopy(src, 0, dst, 0, src.Length);
-            System.Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
-
-            HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
-            byte[] inArray = algorithm.ComputeHash(dst);
-            return Convert.ToBase64String(inArray);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCinema.WinUI.Reservations;
 using eCInema.Models.Dtos.Reservations;
+using eCInema.Models.Dtos.Schedules;
+using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;
 using System;
@@ -19,6 +21,11 @@ namespace eCinema.WinUI
     public partial class frmReservations : Form
     {
         private APIservice service = new APIservice("Reservation");
+        int pageNumber = 1;
+        int pageSize = 10;
+
+        bool isLoaded = false;
+        ReservationSearchObject search = new ReservationSearchObject();
         public frmReservations()
         {
             InitializeComponent();
@@ -27,14 +34,21 @@ namespace eCinema.WinUI
         private async void frmReservations_Load(object sender, EventArgs e)
         {
             await LoadReservations();
+            LoadCmb();
+        }
+
+        private void LoadCmb()
+        {
+            cmbPageSize.DataSource = service.ItemsPerPage;
         }
 
         private async Task LoadReservations()
         {
-            var search = new ReservationSearchObject();
+           
             search.CustomerName = txtFirstName.Text;
             search.Movie = txtMovie.Text;
-
+            search.PageNumber = pageNumber;
+            search.PageSize = pageSize;
             var res = await service.Get<List<ReservationDto>>(search);
             dgvReservations.AutoGenerateColumns = false;
             dgvReservations.DataSource = res;
@@ -132,6 +146,36 @@ namespace eCinema.WinUI
         {
             frmAddReservation frm = new frmAddReservation();
             frm.ShowDialog();
+        }
+
+        private async void button2_Click(object sender, EventArgs e)
+        {
+            if(pageNumber>1)
+            {
+                pageNumber--;
+                await LoadReservations();
+            }
+        }
+
+        private async void btnNext_ClickAsync(object sender, EventArgs e)
+        {
+            
+                pageNumber++;
+                await LoadReservations();
+            
+        }
+
+        private async void cmbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isLoaded)
+            {
+                isLoaded = true;
+            }
+            else
+            {
+                pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
+                await LoadReservations();
+            }
         }
     }
 }

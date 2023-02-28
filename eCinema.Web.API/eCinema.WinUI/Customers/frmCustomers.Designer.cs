@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.btnPrevoius = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbPageSize = new System.Windows.Forms.ComboBox();
             this.FirstName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -36,9 +43,6 @@
             this.CustomerType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AddLoyaltyClub = new System.Windows.Forms.DataGridViewButtonColumn();
             this.Delete = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtName = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,17 +62,83 @@
             this.dgvCustomers.RowHeadersWidth = 51;
             this.dgvCustomers.RowTemplate.Height = 29;
             this.dgvCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvCustomers.Size = new System.Drawing.Size(913, 220);
+            this.dgvCustomers.Size = new System.Drawing.Size(942, 220);
             this.dgvCustomers.TabIndex = 0;
             this.dgvCustomers.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomers_CellContentClick);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(12, 25);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(91, 23);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Customers";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 74);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(134, 20);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "Name of Customer";
+            // 
+            // txtName
+            // 
+            this.txtName.Location = new System.Drawing.Point(167, 67);
+            this.txtName.Name = "txtName";
+            this.txtName.Size = new System.Drawing.Size(787, 27);
+            this.txtName.TabIndex = 6;
+            this.txtName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
+            // 
+            // btnPrevoius
+            // 
+            this.btnPrevoius.Location = new System.Drawing.Point(12, 359);
+            this.btnPrevoius.Name = "btnPrevoius";
+            this.btnPrevoius.Size = new System.Drawing.Size(116, 29);
+            this.btnPrevoius.TabIndex = 7;
+            this.btnPrevoius.Text = "Prevoius Page";
+            this.btnPrevoius.UseVisualStyleBackColor = true;
+            this.btnPrevoius.Click += new System.EventHandler(this.btnPrevoius_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(860, 359);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(94, 29);
+            this.btnNext.TabIndex = 8;
+            this.btnNext.Text = "Next Page";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(361, 367);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 20);
+            this.label3.TabIndex = 9;
+            this.label3.Text = "Items per Page";
+            // 
+            // cmbPageSize
+            // 
+            this.cmbPageSize.FormattingEnabled = true;
+            this.cmbPageSize.Location = new System.Drawing.Point(474, 359);
+            this.cmbPageSize.Name = "cmbPageSize";
+            this.cmbPageSize.Size = new System.Drawing.Size(105, 28);
+            this.cmbPageSize.TabIndex = 10;
+            this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
+            // 
             // FirstName
             // 
+            this.FirstName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.FirstName.DataPropertyName = "FirstName";
             this.FirstName.HeaderText = "First Name";
             this.FirstName.MinimumWidth = 6;
             this.FirstName.Name = "FirstName";
-            this.FirstName.Width = 125;
             // 
             // LastName
             // 
@@ -123,39 +193,15 @@
             this.Delete.UseColumnTextForButtonValue = true;
             this.Delete.Width = 125;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(12, 25);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Customers";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(134, 20);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Name of Customer";
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(167, 67);
-            this.txtName.Name = "txtName";
-            this.txtName.Size = new System.Drawing.Size(649, 27);
-            this.txtName.TabIndex = 6;
-            this.txtName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
-            // 
             // frmCustomers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(940, 362);
+            this.ClientSize = new System.Drawing.Size(974, 412);
+            this.Controls.Add(this.cmbPageSize);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPrevoius);
             this.Controls.Add(this.txtName);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -176,6 +222,10 @@
         private Label label1;
         private Label label2;
         private TextBox txtName;
+        private Button btnPrevoius;
+        private Button btnNext;
+        private Label label3;
+        private ComboBox cmbPageSize;
         private DataGridViewTextBoxColumn FirstName;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Email;

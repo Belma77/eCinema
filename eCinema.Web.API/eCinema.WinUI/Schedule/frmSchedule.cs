@@ -3,6 +3,7 @@ using eCInema.Models.Dtos.Halls;
 using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
+using MediaBrowser.Model.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -21,7 +22,9 @@ namespace eCinema.WinUI.ScheduleForms
         private APIservice service = new APIservice("Schedule");
         private bool dateChanged=false;
         private bool timeChanged = false;
-
+        private int pageNumber = 1;
+        private int pageSize = 10;
+        private bool isLoaded = false;
         public frmSchedule()
         {
             InitializeComponent();
@@ -30,8 +33,13 @@ namespace eCinema.WinUI.ScheduleForms
         private async void frmSchedule_Load(object sender, EventArgs e)
         {
             await LoadSchedules();
+            LoadCmb();
         }
-       
+
+        private void LoadCmb()
+        {
+            cmbPageSize.DataSource = service.ItemsPerPage;
+        }
 
         private async Task LoadSchedules()
         {
@@ -50,6 +58,8 @@ namespace eCinema.WinUI.ScheduleForms
                 timeChanged = false;
             }
 
+            search.PageNumber = pageNumber;
+            search.PageSize = pageSize;
             var schedules=await service.Get<List<GetSchedulesDto>>(search);
 
             if(schedules != null)
@@ -156,6 +166,34 @@ namespace eCinema.WinUI.ScheduleForms
         {
             timeChanged = true;
             await LoadSchedules();
+        }
+
+        private async void btnPrevious_Click(object sender, EventArgs e)
+        {
+            if (pageNumber > 1)
+            {
+                pageNumber--;
+                await LoadSchedules();
+            }
+        }
+
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            pageNumber++;
+            await LoadSchedules();
+        }
+
+        private async void cmbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (!isLoaded)
+            {
+                isLoaded = true;
+            }
+            else
+            {
+                pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
+                await LoadSchedules();
+            }
         }
     }
 }

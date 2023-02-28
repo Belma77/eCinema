@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace eCInema.Models.SearchObjects
 {
-    public class ReservationSearchObject
+    public class ReservationSearchObject:BaseSearchObject
     {
         public string? CustomerName { get; set; }
         public string? Movie { get; set; }

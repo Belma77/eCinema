@@ -18,7 +18,7 @@ namespace eCinema.WinUI
 
         public static string Username = null;
         public static string Password = null;
-
+        public List<int> ItemsPerPage = new List<int>{ 5, 10, 20, 50 };
         public APIservice(string resource)
         {
             _resource = resource;

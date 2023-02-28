@@ -18,6 +18,9 @@ namespace eCinema.WinUI.Customers
     public partial class frmCustomers : Form
     {
         private APIservice service = new APIservice("Customer");
+        int pageSize = 10;
+        int pageNumber=1;
+        bool isLoaded = false;
         public frmCustomers()
         {
             InitializeComponent();
@@ -26,13 +29,20 @@ namespace eCinema.WinUI.Customers
         private async void frmCustomers_Load(object sender, EventArgs e)
         {
             await LoadCustomers();
+            LoadCmb();
+        }
+
+        private void LoadCmb()
+        {
+            cmbPageSize.DataSource = service.ItemsPerPage;6
         }
 
         private async Task LoadCustomers()
         {
             var search = new CustomerSearchObject();
             search.Name = txtName.Text;
-
+            search.PageNumber = pageNumber;
+            search.PageSize = pageSize;
             var customers = await service.Get<List<CustomerDto>>(search);
             dgvCustomers.AutoGenerateColumns = false;
             dgvCustomers.DataSource = customers.ToList();
@@ -75,5 +85,32 @@ namespace eCinema.WinUI.Customers
             await LoadCustomers();
         }
 
+        private async void btnNext_Click(object sender, EventArgs e)
+        {
+            pageNumber++;
+            await LoadCustomers();
+        }
+
+        private async void btnPrevoius_Click(object sender, EventArgs e)
+        {
+            if(pageNumber>1)
+            {
+                pageNumber--;
+                await LoadCustomers();
+            }
+        }
+
+        private async void cmbPageSize_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(!isLoaded)
+            {
+                isLoaded = true;
+            }
+            else
+            {
+                pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
+                await LoadCustomers();
+            }
+        }
     }
 }

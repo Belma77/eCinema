@@ -71,7 +71,6 @@ namespace eCinema.WinUI.Reservations
                 schedule = cmbMovie.SelectedItem as GetSchedulesDto;
                 cmbDate.DataSource = schedules.Where(x => x.Id == schedule.Id).Select(y => y.DateOnly).ToList();
                 cmbTime.DataSource = schedules.Where(x => x.Id == schedule.Id).Select(x => x.TimeOnly).ToList();
-                isLoaded= false;    
             }
         }
 

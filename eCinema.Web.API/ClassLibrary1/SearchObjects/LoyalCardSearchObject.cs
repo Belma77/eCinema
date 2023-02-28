@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace eCInema.Models.SearchObjects
 {
-    public class LoyalCardSearchObject
+    public class LoyalCardSearchObject:BaseSearchObject
     {
         public string? Name { get; set; }
     }

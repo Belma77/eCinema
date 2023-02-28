@@ -3,6 +3,7 @@ using eCinema.Data;
 using eCinema.Services.BaseService;
 using eCInema.Models.SearchObjects;
 using Microsoft.EntityFrameworkCore;
+using Stripe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using static System.Net.WebRequestMethods;
 
 namespace eCinema.Services
 {
-    public class BaseService<Tmodel, TDatabase, TSearchObject>:IBaseService<Tmodel, TSearchObject> where Tmodel : class where TSearchObject : class where TDatabase:class
+    public class BaseService<Tmodel, TDatabase, TSearchObject>:IBaseService<Tmodel, TSearchObject> where Tmodel : class where TSearchObject : BaseSearchObject where TDatabase:class
     {
         protected IMapper _mapper;
 
@@ -32,6 +33,13 @@ namespace eCinema.Services
             query = AddFilter(query, search);
 
             query= AddInclude(query, search);
+
+           
+            if (search?.PageNumber.HasValue == true && search?.PageSize.HasValue == true)
+            {
+                query = query.Skip((int)((search.PageNumber - 1) * search.PageSize)).Take((int)search.PageSize);
+            }
+
 
             var list=query.ToList();
             

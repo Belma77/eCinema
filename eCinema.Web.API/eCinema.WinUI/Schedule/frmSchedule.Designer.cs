@@ -44,6 +44,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.dtmDate = new System.Windows.Forms.DateTimePicker();
             this.dtmTime = new System.Windows.Forms.DateTimePicker();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cmbPageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedules)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,7 +67,7 @@
             this.dgvSchedules.RowHeadersWidth = 51;
             this.dgvSchedules.RowTemplate.Height = 29;
             this.dgvSchedules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSchedules.Size = new System.Drawing.Size(936, 210);
+            this.dgvSchedules.Size = new System.Drawing.Size(890, 210);
             this.dgvSchedules.TabIndex = 0;
             this.dgvSchedules.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedules_CellContentClick);
             this.dgvSchedules.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -141,7 +145,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(806, 351);
+            this.btnAdd.Location = new System.Drawing.Point(760, 24);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(142, 29);
             this.btnAdd.TabIndex = 2;
@@ -169,7 +173,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(333, 80);
+            this.label3.Location = new System.Drawing.Point(304, 79);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 7;
@@ -178,7 +182,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(653, 78);
+            this.label4.Location = new System.Drawing.Point(607, 78);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 20);
             this.label4.TabIndex = 9;
@@ -186,7 +190,7 @@
             // 
             // dtmDate
             // 
-            this.dtmDate.Location = new System.Drawing.Point(380, 74);
+            this.dtmDate.Location = new System.Drawing.Point(351, 74);
             this.dtmDate.Name = "dtmDate";
             this.dtmDate.Size = new System.Drawing.Size(250, 27);
             this.dtmDate.TabIndex = 10;
@@ -197,18 +201,60 @@
             // 
             this.dtmTime.CustomFormat = "HH:mm";
             this.dtmTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtmTime.Location = new System.Drawing.Point(736, 73);
+            this.dtmTime.Location = new System.Drawing.Point(690, 73);
             this.dtmTime.Name = "dtmTime";
             this.dtmTime.ShowUpDown = true;
             this.dtmTime.Size = new System.Drawing.Size(212, 27);
             this.dtmTime.TabIndex = 11;
             this.dtmTime.ValueChanged += new System.EventHandler(this.dtmTime_ValueChanged);
             // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(12, 355);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(142, 29);
+            this.btnPrevious.TabIndex = 12;
+            this.btnPrevious.Text = "Previous Page";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(760, 355);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(142, 29);
+            this.btnNext.TabIndex = 13;
+            this.btnNext.Text = "Next Page";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(351, 364);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Items per Page";
+            // 
+            // cmbPageSize
+            // 
+            this.cmbPageSize.FormattingEnabled = true;
+            this.cmbPageSize.Location = new System.Drawing.Point(464, 356);
+            this.cmbPageSize.Name = "cmbPageSize";
+            this.cmbPageSize.Size = new System.Drawing.Size(80, 28);
+            this.cmbPageSize.TabIndex = 15;
+            this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
+            // 
             // frmSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(965, 402);
+            this.ClientSize = new System.Drawing.Size(920, 406);
+            this.Controls.Add(this.cmbPageSize);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnNext);
+            this.Controls.Add(this.btnPrevious);
             this.Controls.Add(this.dtmTime);
             this.Controls.Add(this.dtmDate);
             this.Controls.Add(this.label4);
@@ -246,5 +292,9 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn Seats;
         private DataGridViewButtonColumn Remove;
+        private Button btnPrevious;
+        private Button btnNext;
+        private Label label5;
+        private ComboBox cmbPageSize;
     }
 }

@@ -13,7 +13,7 @@ namespace eCinema.Services.CRUDservice
 {
     public class BaseCRUDService<Tmodel, TDatabase, TSearchObject, TInsert, TUpdate>
         :BaseService<Tmodel, TDatabase, TSearchObject>, IBaseCRUDService<Tmodel,TSearchObject, TInsert, TUpdate>
-        where Tmodel:class where TDatabase:class where TSearchObject:class where TInsert : class where TUpdate : class
+        where Tmodel:class where TDatabase:class where TSearchObject:BaseSearchObject where TInsert : class where TUpdate : class
     {
       
         public BaseCRUDService(eCinemaContext context, IMapper mapper) : base(context, mapper)

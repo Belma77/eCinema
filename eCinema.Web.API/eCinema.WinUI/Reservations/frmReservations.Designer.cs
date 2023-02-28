@@ -42,6 +42,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.txtMovie = new System.Windows.Forms.TextBox();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cmbPageSize = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,12 +60,12 @@
             this.NumberTickets,
             this.Status,
             this.Cancel});
-            this.dgvReservations.Location = new System.Drawing.Point(23, 135);
+            this.dgvReservations.Location = new System.Drawing.Point(23, 132);
             this.dgvReservations.Name = "dgvReservations";
             this.dgvReservations.RowHeadersWidth = 51;
             this.dgvReservations.RowTemplate.Height = 29;
             this.dgvReservations.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvReservations.Size = new System.Drawing.Size(967, 240);
+            this.dgvReservations.Size = new System.Drawing.Size(930, 240);
             this.dgvReservations.TabIndex = 0;
             this.dgvReservations.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dgvReservations.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
@@ -137,7 +141,7 @@
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(896, 396);
+            this.btnAdd.Location = new System.Drawing.Point(859, 29);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(94, 29);
             this.btnAdd.TabIndex = 2;
@@ -149,7 +153,7 @@
             // 
             this.txtFirstName.Location = new System.Drawing.Point(78, 89);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(371, 27);
+            this.txtFirstName.Size = new System.Drawing.Size(297, 27);
             this.txtFirstName.TabIndex = 3;
             this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
@@ -165,7 +169,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(520, 96);
+            this.label3.Location = new System.Drawing.Point(400, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 20);
             this.label3.TabIndex = 5;
@@ -173,17 +177,59 @@
             // 
             // txtMovie
             // 
-            this.txtMovie.Location = new System.Drawing.Point(584, 89);
+            this.txtMovie.Location = new System.Drawing.Point(456, 89);
             this.txtMovie.Name = "txtMovie";
-            this.txtMovie.Size = new System.Drawing.Size(406, 27);
+            this.txtMovie.Size = new System.Drawing.Size(497, 27);
             this.txtMovie.TabIndex = 6;
             this.txtMovie.TextChanged += new System.EventHandler(this.txtMovie_TextChanged);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(829, 394);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(124, 29);
+            this.btnNext.TabIndex = 7;
+            this.btnNext.Text = "Next Page";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_ClickAsync);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(23, 394);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(126, 29);
+            this.btnPrevious.TabIndex = 8;
+            this.btnPrevious.Text = "Previous Page";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(378, 398);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(109, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Items per page";
+            // 
+            // cmbPageSize
+            // 
+            this.cmbPageSize.FormattingEnabled = true;
+            this.cmbPageSize.Location = new System.Drawing.Point(493, 390);
+            this.cmbPageSize.Name = "cmbPageSize";
+            this.cmbPageSize.Size = new System.Drawing.Size(79, 28);
+            this.cmbPageSize.TabIndex = 10;
+            this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
             // frmReservations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1002, 437);
+            this.ClientSize = new System.Drawing.Size(975, 441);
+            this.Controls.Add(this.cmbPageSize);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.btnPrevious);
+            this.Controls.Add(this.btnNext);
             this.Controls.Add(this.txtMovie);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -217,5 +263,9 @@
         private DataGridViewTextBoxColumn NumberTickets;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewButtonColumn Cancel;
+        private Button btnNext;
+        private Button btnPrevious;
+        private Label label4;
+        private ComboBox cmbPageSize;
     }
 }
