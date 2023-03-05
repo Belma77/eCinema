@@ -36,7 +36,7 @@ namespace eCinema.Services.MoviesServices
         private IWriterService _writerService;
         IProducerService _producerService;
         IHttpContextAccessor _accessor;
-
+        private List<ProductEntry> data;
         public MoviesService(
 
             eCinemaContext context,
@@ -185,65 +185,47 @@ namespace eCinema.Services.MoviesServices
             return GetById(entity.Id);
         }
 
+        static object isLocked = new object();
         static MLContext mlContext = null;
         static ITransformer model = null;
-        public List<GetMoviesDto> Recommend(int id)
+        public async Task<List<GetMoviesDto>> Recommend(int id)
         {
+            TrainData();
             var user = _accessor.HttpContext.User.Identity.Name;
-            var dbUser = _context.Customers.FirstOrDefault(x => x.UserName == user).Id;
+            var customerId = _context.Customers.FirstOrDefault(x => x.UserName == user).Id;
+            TrainData();
+            var result=PredictMovies(customerId, id);
+       
+            return _mapper.Map<List<GetMoviesDto>>(result);
+        }
 
-            var tmpData = _context.Reservations.Include(x => x.Customer).Include(x => x.Schedule).ThenInclude(y => y.Movie).ToList();
+        private List<Movies> PredictMovies(int customerId, int movieId)
+        {
+            List<uint> allItems = new List<uint>();
 
-            var data = new List<ProductEntry>();
-            foreach (var res in tmpData)
-            {
-
-                data.Add(new ProductEntry()
-                {
-                    MovieId = (uint)res.Schedule.MovieId,
-                    UserId = (uint)res.CustomerId
-
-                });
-            }
-            mlContext = new MLContext();
-            var traindata = mlContext.Data.LoadFromEnumerable(data);
-            MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options();
-            options.MatrixColumnIndexColumnName = nameof(ProductEntry.UserId);
-            options.MatrixRowIndexColumnName = nameof(ProductEntry.MovieId);
-            options.LabelColumnName = "Label";
-            options.LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass;
-            options.Alpha = 0.01;
-            options.Lambda = 0.025;
-            // For better results use the following parameters
-            options.NumberOfIterations = 100;
-            options.C = 0.00001;
-
-
-            var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
-
-            ITransformer model = est.Fit(traindata);
-
-            List<Movies> allItems = new List<Movies>();
-
-            var users = data.Where(x => x.MovieId == id).Select(x => x.UserId).ToList();
+            var users = data.Where(x => x.MovieId == movieId).Select(x => x.UserId).ToList();
 
             var movies_list = new List<uint>();
             foreach (var item in users)
             {
-                movies_list = data.Where(x => x.UserId == item && x.MovieId != id).Select(x => x.MovieId).Distinct().ToList();
+                movies_list = data.Where(x => x.UserId == item && x.MovieId != movieId).Select(x => x.MovieId).Distinct().ToList();
 
+            }
+            for(int i=0; i<1000; i++)
+            {
+                allItems.AddRange(movies_list);
             }
 
             var predictionResult = new List<Tuple<Movies, float>>();
 
-            foreach (var item in movies_list)
+            foreach (var item in allItems)
 
             {
                 var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
                 var prediction = predictionEngine.Predict(new ProductEntry()
                 {
-                    UserId = (uint)dbUser,
-                    MovieId = (uint)id
+                    UserId = (uint)customerId,
+                    MovieId = (uint)movieId,
 
                 });
                 var dbMovie = _context.Movies.FirstOrDefault(x => x.Id == item);
@@ -252,9 +234,50 @@ namespace eCinema.Services.MoviesServices
 
             var finalResult = predictionResult.OrderByDescending(x => x.Item2)
                 .Select(x => x.Item1).Take(3).ToList();
-
-            return _mapper.Map<List<GetMoviesDto>>(finalResult);
+            return finalResult;
         }
+
+        private void TrainData()
+        {
+            lock (isLocked)
+            {
+                if (mlContext == null)
+                {
+                    mlContext = new MLContext();
+                    var tmpData = _context.Reservations.Include(x => x.Customer).Include(x => x.Schedule).ThenInclude(y => y.Movie).ToList();
+
+                    data = new List<ProductEntry>();
+                    foreach (var res in tmpData)
+                    {
+
+                        data.Add(new ProductEntry()
+                        {
+                            MovieId = (uint)res.Schedule.MovieId,
+                            UserId = (uint)res.CustomerId
+
+                        });
+                    }
+                    mlContext = new MLContext();
+                    var traindata = mlContext.Data.LoadFromEnumerable(data);
+                    MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options();
+                    options.MatrixColumnIndexColumnName = nameof(ProductEntry.UserId);
+                    options.MatrixRowIndexColumnName = nameof(ProductEntry.MovieId);
+                    options.LabelColumnName = "Label";
+                    options.LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass;
+                    options.Alpha = 0.01;
+                    options.Lambda = 0.025;
+                    // For better results use the following parameters
+                    options.NumberOfIterations = 100;
+                    options.C = 0.00001;
+
+
+                    var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
+
+                    ITransformer model = est.Fit(traindata);
+                }
+            }
+        }
+
 
         public List<MovieSales> SalesByMovie()
         {

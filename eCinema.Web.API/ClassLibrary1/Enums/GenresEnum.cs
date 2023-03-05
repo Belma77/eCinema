@@ -28,6 +28,7 @@ namespace eCInema.Models.Enums
         History,
         Adventure,
         Biographical,
+        Family
        
         
     }

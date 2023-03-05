@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:ecinemamobile/models/Movies/movies.dart';
 
+import '../env.dart';
 import 'base.provider.dart';
 
 class MoviesProvider extends BaseProvider<Movies> {
   MoviesProvider() : super("Movies");
-  final _baseUrl = const String.fromEnvironment("baseUrl",
-      defaultValue: "https://10.0.2.2:7239/");
+  final _baseUrl =
+      const String.fromEnvironment("baseUrl", defaultValue: baseUrl);
   final _endpoint = "Movies";
 
   @override

@@ -21,7 +21,7 @@ class ScheduleScreen extends StatefulWidget {
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  //late ScheduleProvider? _scheduleProvider;
+  late ScheduleProvider? _scheduleProvider;
   late MoviesProvider? _moviesProvider;
   Movies? item;
   int? MovieId;
@@ -36,7 +36,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     MoviesProvider();
     _moviesProvider = context.read<MoviesProvider>();
     loadData();
-    // _scheduleProvider = context.read<ScheduleProvider>();
+    _scheduleProvider = context.read<ScheduleProvider>();
     // loadSchedule();
     //getRecommendations();
   }

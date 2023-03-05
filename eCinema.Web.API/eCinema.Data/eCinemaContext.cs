@@ -1,4 +1,5 @@
-﻿using eCInema.Data.Entities;
+﻿using eCinema.Data.DataSeeder;
+using eCInema.Data.Entities;
 using eCInema.Models;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
@@ -69,164 +70,32 @@ namespace eCinema.Data
             .HasIndex(u => u.UserName)
             .IsUnique();
 
-            SeedData(builder);
-            SeedActors(builder);
-            SeedMoviesActors(builder);
-            SeedDirectors(builder);
-            SeedMoviesDirectors(builder);
-            SeedProducers(builder);
-            SeedMoviesProducers(builder);
-            SeedWriters(builder);
-            SeedWritersMovies(builder);
-            SeedGenres(builder);
-            SeedMoviesGenres(builder);
-
-            SeedHalls(builder);
-            SeedSchedules(builder);
-            SeedMovies(builder);
-
-            SeedUsers(builder);
+            ////SeedData(builder);
+            ////SeedActorsData.SeedActors(builder);
+            ////SeedMoviesActorsData.SeedMoviesActors(builder);
+            ////SeedDirectorsData.SeedDirectors(builder);
+            ////SeedDirectorsMoviesData.SeedMoviesDirectors(builder);
+            ////SeedProducersData.SeedProducers(builder);
+            ////SeedMoviesProducersData.SeedMoviesProducers(builder);
+            ////SeedWritersData.SeedWriters(builder);
+            ////SeedWriterMovies.SeedWritersMovies(builder);
+            ////SeedGenresData.SeedGenres(builder);
+            ////SeedMoviesGenresData.SeedMoviesGenres(builder);
+            ////SeedHallsData.SeedHalls(builder);
+            ////SeedSchedules(builder);
+            ////SeedMoviesData.SeedMovies(builder);
+            ////SeedUsersData.SeedUsers(builder);
         }
-        public static string GenerateSalt()
-        {
-            RNGCryptoServiceProvider provider = new RNGCryptoServiceProvider();
-            var byteArray = new byte[16];
-            provider.GetBytes(byteArray);
-            return Convert.ToBase64String(byteArray);
-        }
+            
 
-        public static string GenerateHash(string salt, string password)
-        {
-            byte[] src = Convert.FromBase64String(salt);
-            byte[] bytes = Encoding.Unicode.GetBytes(password);
-            byte[] dst = new byte[src.Length + bytes.Length];
-
-            System.Buffer.BlockCopy(src, 0, dst, 0, src.Length);
-            System.Buffer.BlockCopy(bytes, 0, dst, src.Length, bytes.Length);
-
-            HashAlgorithm algorithm = HashAlgorithm.Create("SHA1");
-            byte[] inArray = algorithm.ComputeHash(dst);
-            return Convert.ToBase64String(inArray);
-        }
-        private void SeedUsers(ModelBuilder builder)
-        {
-            var password = "pass123";
-            var salt = GenerateSalt();
-            var passwordSalt = salt;
-            var passwordHash = GenerateHash(salt, password);
-            builder.Entity<User>().HasData(
-             new User() { Id = 1, FirstName = "Admin", LastName = "Admin", Email = "admin@gmail.com", UserRole = UserRole.Admin, UserName = "Admin", PasswordSalt = salt, PasswordHash = passwordHash, Phone = "041233234" }
-
-            );
-            builder.Entity<Customer>().HasData(
-               new Customer() { Id = 2, FirstName = "Customer", LastName = "Customer", Email = "customer@gmail.com", UserRole = UserRole.Customer, UserName = "Customer", PasswordSalt = salt, PasswordHash = passwordHash, Phone = "041233234" }
-                );
-        }
-
-        private void SeedWritersMovies(ModelBuilder builder)
-        {
-            builder.Entity<WritersMovies>().HasData(
-                new WritersMovies() { MovieId = 1, WriterId = 1 }
-                );
-        }
-
-        private void SeedMoviesProducers(ModelBuilder builder)
-        {
-            builder.Entity<ProducerMovies>().HasData(
-                new ProducerMovies() { MovieId = 1, ProducerId = 1 }
-                );
-
-        }
-
-        private void SeedMoviesDirectors(ModelBuilder builder)
-        {
-            builder.Entity<DirectorsMovies>().HasData(
-                new DirectorsMovies() { MovieId = 1, DirectorId = 1 }
-                );
-        }
-
-        private void SeedMoviesActors(ModelBuilder builder)
-        {
-            builder.Entity<ActorsMovies>().HasData(
-             new ActorsMovies() { MovieId = 1, ActorId = 1 }
-             );
-        }
-
-        private void SeedMoviesGenres(ModelBuilder builder)
-        {
-            builder.Entity<MoviesGenres>().HasData(
-                new MoviesGenres() { MovieId=1, GenreId=1}
-
-            );
-        }
-
-        private void SeedGenres(ModelBuilder builder)
-        {
-            builder.Entity<Genres>().HasData(
-                new Genres() { Id = 1, Genre = GenresEnum.Action },
-                new Genres() { Id = 2, Genre = GenresEnum.Comedy },
-                new Genres() { Id = 3, Genre = GenresEnum.Crime }
-                );
-        }
-
-        private void SeedWriters(ModelBuilder builder)
-        {
-            builder.Entity<Writer>().HasData(
-                new Writer() { Id = 1, FirstName = "Steve", LastName = "Kloves" });
-        }
-
-        private void SeedProducers(ModelBuilder builder)
-        {
-            builder.Entity<Producer>().HasData(
-               new Producer() { Id = 1, FirstName = "Duncan", LastName = "Henderson" });
-        }
-
-        private void SeedDirectors(ModelBuilder builder)
-        {
-            builder.Entity<Director>().HasData(
-             new Director() { Id = 1, FirstName = "Chris", LastName = "Columbus" });
-        }
-
-        private void SeedActors(ModelBuilder builder)
-        {
-            builder.Entity<Actor>().HasData(
-           new Actor() { Id = 1, FirstName = "Daniel", LastName = "Radcliffe" });
-        }
-
-        private void SeedMovies(ModelBuilder builder)
-        {
-
-            builder.Entity<Movies>().HasData(
-            new Movies()
-            {
-                Id = 1,
-                Title = "Harry Potter and the Philosopher's Stone",
-                ReleaseYear = 2001,
-                Duration = 120,
-                Country = "USA",
-                Synopsis = "Harry Potter, an eleven-year-old orphan, discovers that he is a wizard and is invited to study at Hogwarts. Even as he escapes a dreary life and enters a world of magic, he finds trouble awaiting him.",
-                
-            }
-           );
-        }
-
-        private void SeedSchedules(ModelBuilder builder)
+    private void SeedSchedules(ModelBuilder builder)
         {
             builder.Entity<Schedule>().HasData(
                 new Schedule() { Id = 1, Date = DateTime.Now, StartTime = DateTime.Now, HallId = 1, MovieId = 1, NoAvailableSeats = 50, TicketPrice = 7.50 }
                 );
         }
 
-        private void SeedHalls(ModelBuilder builder)
-        {
-            for (int i = 1; i <= 6; i++)
-            {
-                builder.Entity<Hall>().HasData(
-                    new Hall() { Id = i, NoOfHall = i, NumberOfColumns = 10, NumberOfRows = 5, NumberOfSeats = 50 }
-                    );
-            }
-        }
-
+      
         private void SeedData(ModelBuilder builder)
         {
             builder.Entity<Seat>().HasData(

@@ -15,7 +15,7 @@ namespace eCinema.Services.MoviesServices
 {
     public interface IMoviesService:IBaseCRUDService<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
-        List<GetMoviesDto> Recommend(int id);
+        Task<List<GetMoviesDto>> Recommend(int id);
         public List<MovieSales> SalesByMovie();
     }
 }

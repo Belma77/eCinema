@@ -1,13 +1,14 @@
 import 'dart:convert';
 
+import '../env.dart';
 import '../models/Users/customer.insert.dart';
 import '../models/Users/user.dart';
 import 'base.provider.dart';
 
 class UserProvider extends BaseProvider<Customer> {
   UserProvider() : super("Customer");
-  final _baseUrl = const String.fromEnvironment("baseUrl",
-      defaultValue: "https://10.0.2.2:7239/");
+  final _baseUrl =
+      const String.fromEnvironment("baseUrl", defaultValue: baseUrl);
   final _endpoint = "Customer";
 
   @override
@@ -22,6 +23,7 @@ class UserProvider extends BaseProvider<Customer> {
 
     Map<String, String> headers = createHeaders();
     var response = await http!.get(uri, headers: headers);
+    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       var map = fromJson(data);

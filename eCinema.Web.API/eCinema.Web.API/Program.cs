@@ -124,7 +124,11 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-
+        //using (var scope = app.Services.CreateScope())
+        //{
+        //    var dataContext = scope.ServiceProvider.GetRequiredService<eCinemaContext>();
+        //    dataContext.Database.Migrate();
+        //}
         app.Run();
     }
   

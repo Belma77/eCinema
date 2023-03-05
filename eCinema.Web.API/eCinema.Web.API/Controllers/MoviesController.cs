@@ -11,7 +11,7 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Movies")]
     [ApiController]
-    [Authorize(UserRole.Admin)]
+   // [Authorize(UserRole.Admin)]
     public class MoviesController : BaseCRUDController<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
         IMoviesService _service;
@@ -26,6 +26,7 @@ namespace eCinema.Web.API.Controllers
             return base.Get(search);
         }
 
+        [Authorize(UserRole.Customer, UserRole.Admin)]
         public override IActionResult GetById(int id)
         {
             return base.GetById(id);
@@ -33,9 +34,9 @@ namespace eCinema.Web.API.Controllers
 
         [HttpGet("{id}/Recommend")]
         [Authorize(UserRole.Customer)]
-        public List<GetMoviesDto> Recommend(int id)
+        public async Task<List<GetMoviesDto>> Recommend(int id)
         {
-            return _service.Recommend(id);
+            return await _service.Recommend(id);
         }
 
         [HttpGet("Sales")]

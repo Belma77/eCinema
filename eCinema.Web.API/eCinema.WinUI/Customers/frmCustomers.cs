@@ -34,7 +34,7 @@ namespace eCinema.WinUI.Customers
 
         private void LoadCmb()
         {
-            cmbPageSize.DataSource = service.ItemsPerPage;6
+            cmbPageSize.DataSource = service.ItemsPerPage;
         }
 
         private async Task LoadCustomers()

@@ -30,6 +30,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
   late UserProvider? _userProvider;
   late ReservationProvider? _reservationProvider;
   static Map<String, dynamic>? paymentIntent;
+  bool seatSelected = false;
   List<Seat>? seats;
   Hall? hall;
   int? scheduleId;
@@ -78,6 +79,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
     }
   }
 
+  void pay() {
+    if (chosenSeats!.isNotEmpty) {
+      makeTicketPayment();
+    }
+    throw Exception("Seats not chosen, payment not succeded");
+  }
+
   Future makeTicketPayment() async {
     try {
       price = (schedule!.ticketPrice! * 100) * chosenSeats!.length;
@@ -85,13 +93,11 @@ class _ReservationScreenState extends State<ReservationScreen> {
       paymentIntent = await _reservationProvider!
           .createPaymentIntent(round.toString(), 'BAM');
       displayPaymentSheet();
-    } catch (err) {
-      print(err.toString());
-    }
+    } catch (err) {}
   }
 
   void makeReservation(ReservationStatusEnum status) {
-    if (!chosenSeats!.isEmpty) {
+    if (chosenSeats!.isNotEmpty) {
       int? numberOfTickets = chosenSeats?.length;
       price = numberOfTickets! * schedule!.ticketPrice!;
       List<ScheduleSeat> seats = [];
@@ -105,6 +111,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
           Reservation(schedule!.id, numberOfTickets, seats, price, status);
       reserveTickets(reservation);
     }
+    throw Exception("Seats not chosen, reservation not succeded");
   }
 
   @override
@@ -288,7 +295,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
                           width: 20,
-                          //color: Colors.blue,
                           child: Center(
                               child: Text(columns[index].toString(),
                                   style: const TextStyle(fontSize: 16)))),
@@ -376,7 +382,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   width: double.infinity,
                   height: 35,
                   margin: const EdgeInsets.only(left: 20),
-                  //color: Colors.blue,
                   child: Align(
                     alignment: Alignment.topLeft,
                     child: ListView.builder(
@@ -401,7 +406,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                   alignment: Alignment.bottomCenter,
                   child: Container(
                     width: double.infinity,
-                    //color: Colors.red,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
@@ -447,7 +451,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: InkWell(
                                   onTap: () {
-                                    makeTicketPayment();
+                                    try {
+                                      pay();
+                                      showMessage(
+                                          "Successfuly added reservation");
+                                    } catch (e) {
+                                      showMessage(e.toString());
+                                    }
                                   },
                                   child: const Center(
                                       child: Text("Buy tickets",

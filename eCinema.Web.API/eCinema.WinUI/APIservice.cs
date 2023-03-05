@@ -1,4 +1,5 @@
-﻿using eCInema.Models;
+﻿using eCinema.WinUI.Properties;
+using eCInema.Models;
 using eCInema.Models.Dtos;
 using Flurl.Http;
 using MediaBrowser.Model.Services;
@@ -14,7 +15,7 @@ namespace eCinema.WinUI
     public class APIservice
     {
         private string _resource = null;
-        public string _endpoint = "https://localhost:7239/";
+        public string _endpoint = Settings.Default.ApiURL;    //"https://localhost:7239/";
 
         public static string Username = null;
         public static string Password = null;

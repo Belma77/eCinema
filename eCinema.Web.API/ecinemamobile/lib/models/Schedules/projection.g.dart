@@ -7,11 +7,15 @@ Projection _$ProjectionFromJson(Map<String, dynamic> json) {
   List<ActorsMovies> _actorsMovies = [];
   List<GenresMovies> _genresMovies = [];
 
-  var genresMovies = json['moviesGenres'] as List;
-  _genresMovies = genresMovies.map((x) => GenresMovies.fromJson(x)).toList();
+  if (json['moviesGenres'] != null) {
+    var genresMovies = json['moviesGenres'] as List;
+    _genresMovies = genresMovies.map((x) => GenresMovies.fromJson(x)).toList();
+  }
 
-  var actorsMovies = json['actorsMovies'] as List;
-  _actorsMovies = actorsMovies.map((x) => ActorsMovies.fromJson(x)).toList();
+  if (json['actorsMovies'] != null) {
+    var actorsMovies = json['actorsMovies'] as List;
+    _actorsMovies = actorsMovies.map((x) => ActorsMovies.fromJson(x)).toList();
+  }
 
   return Projection(
     json['id'] as int,

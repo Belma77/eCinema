@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:ecinemamobile/models/Schedules/projection.dart';
 import 'package:ecinemamobile/models/Schedules/schedule.dart';
@@ -121,10 +122,7 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                   height: 300,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
-                    child: Image.memory(
-                      base64Decode(item.movie!.poster!),
-                      fit: BoxFit.fill,
-                    ),
+                    child: Image.memory(base64Decode(item.movie!.poster!)),
                   ),
                 ),
                 Expanded(
