@@ -46,7 +46,7 @@ namespace eCinema.Services.LoyalCardServices
             customerUpdate.IdentificationNumber=insert.IdentificationNumber;
             customerUpdate.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Premium;
 
-            var update=_customerService.Update(insert.CustomerId, customerUpdate);
+            var update=_customerService.UpdateAsync(insert.CustomerId, customerUpdate);
 
             if(update!=null)
             {

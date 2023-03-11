@@ -17,6 +17,7 @@ namespace eCinema.WinUI.Helpers
         public const string AlreadyCanceled = "Reservation has been already canceled!";
         public const string OnlyNumbersAllowed = "Only numbers allowed!";
         public const string EmailFormat = "Email not in a right format!";
+        public const string SeatsNotSelected = "Please select seats to make reservation, reservation failed!";
 
     }
 }

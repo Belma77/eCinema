@@ -142,10 +142,11 @@ namespace eCinema.WinUI
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e)
+        private async void btnAdd_Click(object sender, EventArgs e)
         {
             frmAddReservation frm = new frmAddReservation();
             frm.ShowDialog();
+            await LoadReservations();
         }
 
         private async void button2_Click(object sender, EventArgs e)

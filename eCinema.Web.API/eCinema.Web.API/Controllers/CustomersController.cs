@@ -20,15 +20,15 @@ namespace eCinema.Web.API.Controllers
         }
 
         [AllowAnonymous]
-        public override IActionResult Insert(CustomerInsertDto insert)
+        public override async Task<IActionResult> Insert(CustomerInsertDto insert)
         {
-            return base.Insert(insert);
+            return Ok(await base.Insert(insert));
         }
 
         [AllowAnonymous]
-        public override IActionResult Get(CustomerSearchObject? search)
+        public override async Task<IActionResult> Get(CustomerSearchObject? search)
         {
-            return base.Get(search);
+            return await base.Get(search);
         }
 
 

@@ -21,15 +21,15 @@ namespace eCinema.Web.API.Controllers
         }
 
         [HttpGet]
-        public virtual IActionResult Get([FromQuery]TSearchObject? search=null)
+        public virtual async Task<IActionResult> Get([FromQuery]TSearchObject? search=null)
         {
             return Ok(_service.Get(search));
         }
 
         [HttpGet("{id}")]
-        public virtual IActionResult GetById(int id)
+        public async virtual Task<IActionResult> GetById(int id)
         {
-            return Ok(_service.GetById(id));
+            return  Ok(_service.GetById(id));
         }
         
     }

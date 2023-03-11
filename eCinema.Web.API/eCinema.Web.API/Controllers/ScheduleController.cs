@@ -24,7 +24,7 @@ namespace eCinema.Web.API.Controllers
 
         [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
-        public override IActionResult Get([FromQuery] ScheduleSearchObject? search = null)
+        public override Task<IActionResult> Get([FromQuery] ScheduleSearchObject? search = null)
         {
             return base.Get(search);
         }
@@ -32,9 +32,11 @@ namespace eCinema.Web.API.Controllers
         [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         [HttpGet("{id}")]
-        public override IActionResult GetById(int id)
+        public async override Task<IActionResult> GetById(int id)
         {
-            return base.GetById(id);
+            
+             return await base.GetById(id);
+            
         }
     }
 }

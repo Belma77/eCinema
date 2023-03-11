@@ -57,17 +57,19 @@ class _ReservationScreenState extends State<ReservationScreen> {
   Future loadSeats() async {
     scheduleId = int.parse(widget.id!);
     var tmpData = await _scheduleProvider?.getById(scheduleId!);
-    setState(() {
-      hall = tmpData?.hall;
-      seats = tmpData?.hall?.seats;
-      schedule = tmpData;
-      columns = new List<int>.generate(hall!.numberOfColumns!, (i) => i + 1);
-      if (schedule!.scheduleSeats!.isNotEmpty) {
-        for (var seat in tmpData!.scheduleSeats!) {
-          alreadyTaken?.add(seat.seatId!);
+    if (mounted) {
+      setState(() {
+        hall = tmpData?.hall;
+        seats = tmpData?.hall?.seats;
+        schedule = tmpData;
+        columns = new List<int>.generate(hall!.numberOfColumns!, (i) => i + 1);
+        if (schedule!.scheduleSeats!.isNotEmpty) {
+          for (var seat in tmpData!.scheduleSeats!) {
+            alreadyTaken?.add(seat.seatId!);
+          }
         }
-      }
-    });
+      });
+    }
   }
 
   Future reserveTickets(Reservation reservation) async {
@@ -82,8 +84,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
   void pay() {
     if (chosenSeats!.isNotEmpty) {
       makeTicketPayment();
+    } else {
+      throw Exception("Seats not chosen, payment not succeded");
     }
-    throw Exception("Seats not chosen, payment not succeded");
   }
 
   Future makeTicketPayment() async {
@@ -110,8 +113,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
       var reservation =
           Reservation(schedule!.id, numberOfTickets, seats, price, status);
       reserveTickets(reservation);
+    } else {
+      throw Exception("Seats not chosen, reservation not succeded");
     }
-    throw Exception("Seats not chosen, reservation not succeded");
   }
 
   @override

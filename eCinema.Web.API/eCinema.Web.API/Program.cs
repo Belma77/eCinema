@@ -36,6 +36,8 @@ using eCInema.Models.Enums;
 using System;
 using FluentValidation.AspNetCore;
 using System.Reflection;
+using File = System.IO.File;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 
 public class Program
 {
@@ -124,12 +126,19 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-        //using (var scope = app.Services.CreateScope())
-        //{
-        //    var dataContext = scope.ServiceProvider.GetRequiredService<eCinemaContext>();
-        //    dataContext.Database.Migrate();
-        //}
+        using (var scope = app.Services.CreateScope())
+        {
+            var dataContext = scope.ServiceProvider.GetRequiredService<eCinemaContext>();
+            dataContext.Database.Migrate();
+            //InsertData(dataContext);
+        }
         app.Run();
     }
-  
+    public static void InsertData(eCinemaContext context)
+    {
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "Script", "script2.sql");
+        var query = File.ReadAllText(path);
+        context.Database.ExecuteSqlRaw(query);
+    }
+
 }

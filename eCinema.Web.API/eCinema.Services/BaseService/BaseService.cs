@@ -30,9 +30,9 @@ namespace eCinema.Services
         {
             var query = _context.Set<TDatabase>().AsQueryable();
 
-            query = AddFilter(query, search);
+            query = AddInclude(query, search);
 
-            query= AddInclude(query, search);
+            query = AddFilter(query, search);
 
            
             if (search?.PageNumber.HasValue == true && search?.PageSize.HasValue == true)
@@ -42,7 +42,7 @@ namespace eCinema.Services
 
 
             var list=query.ToList();
-            
+
             return _mapper.Map<List<Tmodel>>(list);
         }
 
@@ -57,7 +57,7 @@ namespace eCinema.Services
             return query;
         }
 
-        public virtual Tmodel GetById(int id)
+        public  virtual Tmodel GetById(int id)
         {
             var set=_context.Set<TDatabase>();
             var entity = set.Find(id);

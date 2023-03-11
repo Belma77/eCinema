@@ -147,6 +147,7 @@
             this.cmbDate.Name = "cmbDate";
             this.cmbDate.Size = new System.Drawing.Size(177, 28);
             this.cmbDate.TabIndex = 21;
+            this.cmbDate.SelectedIndexChanged += new System.EventHandler(this.cmbDate_SelectedIndexChanged);
             // 
             // cmbTime
             // 

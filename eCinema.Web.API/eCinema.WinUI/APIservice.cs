@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace eCinema.WinUI
@@ -15,7 +16,8 @@ namespace eCinema.WinUI
     public class APIservice
     {
         private string _resource = null;
-        public string _endpoint = Settings.Default.ApiURL;    //"https://localhost:7239/";
+        public string _endpoint = "https://localhost:7239/";
+        //Settings.Default.ApiURL;    //"";
 
         public static string Username = null;
         public static string Password = null;

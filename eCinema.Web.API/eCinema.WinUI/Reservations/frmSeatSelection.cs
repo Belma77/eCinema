@@ -144,6 +144,10 @@ namespace eCinema.WinUI.Reservations
                 this.Close();
 
             }
+            else
+            {
+                MessageBox.Show(AlertMessages.SeatsNotSelected);
+            }
         }
 
         private void MyButton_Click(object? sender, EventArgs e)

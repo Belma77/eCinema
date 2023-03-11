@@ -21,7 +21,7 @@ namespace eCinema.Services.ActorService
             
         }
 
-        public override ActorDto Insert(ActorDto insert)
+        public override async Task<ActorDto> InsertAsync(ActorDto insert)
         {
             var actors = _mapper.Map<Actor>(insert);
             _context.Actor.AddIfNotExists(actors, _context);
@@ -53,12 +53,12 @@ namespace eCinema.Services.ActorService
         }
 
 
-        public ActorDto Update(int id, ActorDto actor)
+        public async Task<ActorDto> UpdateAsync(int id, ActorDto actor)
         {
             return actor;
         }
 
-        public void DeleteActorsMovies(List<ActorsMoviesDto> delete)
+        public async Task DeleteActorsMovies(List<ActorsMoviesDto> delete)
         {
             var mapped = _mapper.Map<List<ActorsMovies>>(delete);
             foreach (var item in mapped)
@@ -67,7 +67,7 @@ namespace eCinema.Services.ActorService
                 if (find != null)
                 {
                     _context.ActorsMovies.Remove(find);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
             }
             //_context.ActorsMovies.RemoveRangeIfExists(find, _context);

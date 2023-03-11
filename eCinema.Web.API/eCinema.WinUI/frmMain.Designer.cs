@@ -102,14 +102,14 @@
             // salesPerCustomerToolStripMenuItem
             // 
             this.salesPerCustomerToolStripMenuItem.Name = "salesPerCustomerToolStripMenuItem";
-            this.salesPerCustomerToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salesPerCustomerToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.salesPerCustomerToolStripMenuItem.Text = "Sales per Customer";
             this.salesPerCustomerToolStripMenuItem.Click += new System.EventHandler(this.salesPerCustomerToolStripMenuItem_Click);
             // 
             // salesPerMovieToolStripMenuItem
             // 
             this.salesPerMovieToolStripMenuItem.Name = "salesPerMovieToolStripMenuItem";
-            this.salesPerMovieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.salesPerMovieToolStripMenuItem.Size = new System.Drawing.Size(219, 26);
             this.salesPerMovieToolStripMenuItem.Text = "Sales per Movie";
             this.salesPerMovieToolStripMenuItem.Click += new System.EventHandler(this.salesPerMovieToolStripMenuItem_Click);
             // 

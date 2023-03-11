@@ -38,7 +38,7 @@ namespace eCinema.WinUI
                 MovieInsertDto movie = new MovieInsertDto();
                 movie.Title = txtTitle.Text;
                 movie.ReleaseYear = int.Parse(txtYear.Text);
-                movie.Duration = int.Parse(txtYear.Text);
+                movie.Duration = int.Parse(txtDuration.Text);
                 movie.Country = cmbCountries.SelectedItem.ToString();
                 movie.Synopsis = txtSynopsis.Text;
                 movie.Poster = ImageHelper.FromImageToByte(pbPoster.Image);

@@ -58,7 +58,7 @@ namespace eCinema.Services.UserServices
             base.BeforeInsert(insert, entity);
         }
 
-        public override UserDto Insert(UserInsertDto insert)
+        public async override Task<UserDto> InsertAsync(UserInsertDto insert)
         {
             var entity = _mapper.Map<User>(insert);
             var salt = PasswordHelper.GenerateSalt();

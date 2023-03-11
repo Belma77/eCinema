@@ -21,21 +21,21 @@ namespace eCinema.Web.API.Controllers
         }      
 
         [HttpPost]
-        public virtual IActionResult Insert(TInsert insert)
+        public virtual async Task<IActionResult> Insert(TInsert insert)
         {
-            return Ok(((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).Insert(insert));
+            return Ok(await ((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).InsertAsync(insert));
         }
 
         [HttpPut("{id}")]
         public virtual IActionResult Update(int id, TUpdate update)
         {
-            return Ok(((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).Update(id,update));
+            return Ok(((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).UpdateAsync(id,update));
         }
 
         [HttpDelete("{id}")]
         public virtual IActionResult Delete(int id)
         {
-            return Ok(((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).Delete(id));
+            return Ok(((IBaseCRUDService<Tmodel, TSearchObject, TInsert, TUpdate>)this._service).DeleteAsync(id));
         }
     }
 }

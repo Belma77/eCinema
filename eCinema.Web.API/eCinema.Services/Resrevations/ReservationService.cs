@@ -47,7 +47,7 @@ namespace eCinema.Services.Resrevations
             return query;
         }
 
-        public override ReservationDto Insert(ReservationInsertDto insert)
+        public async override Task<ReservationDto> InsertAsync(ReservationInsertDto insert)
         {
             var scheduleDb = _context.Schedules.First(x => x.Id == insert.ScheduleId);
             if (scheduleDb == null)

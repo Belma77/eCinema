@@ -36,7 +36,7 @@ namespace eCinema.Services.MoviesServices
         private IWriterService _writerService;
         IProducerService _producerService;
         IHttpContextAccessor _accessor;
-        private List<ProductEntry> data;
+        
         public MoviesService(
 
             eCinemaContext context,
@@ -102,9 +102,9 @@ namespace eCinema.Services.MoviesServices
 
         }
 
-        public override MovieDetailsDto Insert(MovieInsertDto insert)
+        public override async Task<MovieDetailsDto> InsertAsync(MovieInsertDto insert)
         {
-            var entity = base.Insert(insert);
+            var entity = await base.InsertAsync(insert);
             var movie = _mapper.Map<Movies>(entity);
 
 
@@ -182,18 +182,19 @@ namespace eCinema.Services.MoviesServices
             }
 
             _context.SaveChanges();
-            return GetById(entity.Id);
+            var response=GetById(entity.Id);
+            return response;
         }
 
         static object isLocked = new object();
         static MLContext mlContext = null;
         static ITransformer model = null;
+        static List<ProductEntry> data=null;
         public async Task<List<GetMoviesDto>> Recommend(int id)
         {
             TrainData();
             var user = _accessor.HttpContext.User.Identity.Name;
             var customerId = _context.Customers.FirstOrDefault(x => x.UserName == user).Id;
-            TrainData();
             var result=PredictMovies(customerId, id);
        
             return _mapper.Map<List<GetMoviesDto>>(result);
@@ -233,7 +234,7 @@ namespace eCinema.Services.MoviesServices
             }
 
             var finalResult = predictionResult.OrderByDescending(x => x.Item2)
-                .Select(x => x.Item1).Take(3).ToList();
+                .Select(x => x.Item1).DistinctBy(x=>x.Id).Take(3).ToList();
             return finalResult;
         }
 
@@ -273,7 +274,7 @@ namespace eCinema.Services.MoviesServices
 
                     var est = mlContext.Recommendation().Trainers.MatrixFactorization(options);
 
-                    ITransformer model = est.Fit(traindata);
+                    model = est.Fit(traindata);
                 }
             }
         }

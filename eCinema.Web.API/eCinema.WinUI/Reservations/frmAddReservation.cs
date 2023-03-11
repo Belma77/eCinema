@@ -20,12 +20,14 @@ namespace eCinema.WinUI.Reservations
 {
     public partial class frmAddReservation : Form
     {
-        private APIservice service = new APIservice("Schedule");
+        private APIservice scheduleService = new APIservice("Schedule");
         private APIservice customerService = new APIservice("Customer");
+        private APIservice movieService = new APIservice("Movies");
         private GetSchedulesDto schedule;
         private List<GetSchedulesDto> schedules;
         private List<CustomerDto>  customers;
         private CustomerDto  customer;
+        private MovieDetailsDto movie;
         private ReservationStatusEnum payStatus;
         bool isLoaded = false;
 
@@ -33,25 +35,19 @@ namespace eCinema.WinUI.Reservations
         {
             InitializeComponent();
         }
-
-       
+   
         private void frmAddReservation_Load(object sender, EventArgs e)
-        {
-            cmbFirstName.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbFirstName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            cmbLastName.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbLastName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+        {          
             LoadCmb();
-
         }
 
         private async void  LoadCmb()
         {
-            schedules = await service.Get<List<GetSchedulesDto>>();
+            schedules = await scheduleService.Get<List<GetSchedulesDto>>();
             if (schedules != null)
             {
-               
-                cmbMovie.DataSource = schedules;
+                var list = schedules.DistinctBy(x=>x.Movie.Title).ToList();
+                cmbMovie.DataSource = list;
                 cmbMovie.DisplayMember = "Movie";
                 cmbMovie.ValueMember = "Id";   
             }
@@ -60,7 +56,7 @@ namespace eCinema.WinUI.Reservations
             cmbStatus.DataSource = paymentStatus;
         }
 
-        private void cmbMovie_SelectedIndexChanged(object sender, EventArgs e)
+        private async void cmbMovie_SelectedIndexChanged(object sender, EventArgs e)
         {
             if(!isLoaded)
             {
@@ -69,14 +65,17 @@ namespace eCinema.WinUI.Reservations
             else
             {
                 schedule = cmbMovie.SelectedItem as GetSchedulesDto;
-                cmbDate.DataSource = schedules.Where(x => x.Id == schedule.Id).Select(y => y.DateOnly).ToList();
-                cmbTime.DataSource = schedules.Where(x => x.Id == schedule.Id).Select(x => x.TimeOnly).ToList();
+                movie = await movieService.GetById<MovieDetailsDto>(schedule.Movie.Id);
+                if (movie != null)
+                {
+                    cmbDate.DataSource = movie.Schedules.Select(x=>x.Date.Date).Distinct().ToList();
+                }
             }
         }
 
         private async void cmbFirstName_TextChanged(object sender, EventArgs e)
         {
-            if (cmbFirstName.Text.Length > 2)
+            if (cmbFirstName.Text.Length > 2&&cmbFirstName.DataSource==null)
             {
                 
                 var search = new CustomerSearchObject();
@@ -85,7 +84,7 @@ namespace eCinema.WinUI.Reservations
 
                 if(customers != null)
                 {
-                    cmbFirstName.DataSource = customers;
+                    cmbFirstName.DataSource=customers;
                     cmbFirstName.DisplayMember = "FirstName";
                 }
             }
@@ -95,18 +94,42 @@ namespace eCinema.WinUI.Reservations
         {
             if (cmbLastName.Text.Length > 2)
             {
-                cmbLastName.DataSource = customers;
+                if (cmbFirstName.SelectedItem != null)
+                {
+                var firstName = cmbFirstName.SelectedItem as CustomerDto;
+                cmbLastName.DataSource = customers.Where(x => x.FirstName == firstName?.FirstName).ToList();
+                }
+
+                else
+                {
+                    var search = new CustomerSearchObject();
+                    search.LastName = cmbLastName.Text;
+                    customers = await customerService.Get<List<CustomerDto>>(search);
+
+                    if (customers != null)
+                    {
+                        cmbLastName.DataSource = customers;
+                    }
+                }
                 cmbLastName.DisplayMember = "LastName";
 
             }
         }
 
-        private void btnSeats_Click(object sender, EventArgs e)
+        private async void btnSeats_Click(object sender, EventArgs e)
         {
             if(Validate())
             {
-                frmSeatSelection frm = new frmSeatSelection(schedule.Id, customer, payStatus);
+                var search = new ScheduleSearchObject();
+                var movie = cmbMovie.SelectedItem as GetSchedulesDto;
+                search.Title = movie.Movie.Title;
+                search.Date = (DateTime)cmbDate.SelectedItem;
+                search.StartTime = cmbTime.SelectedItem.ToString();
+                var schedule = await scheduleService.Get<List<GetSchedulesDto>>(search);
+                var id = schedule.Select(x => x.Id).FirstOrDefault();
+                frmSeatSelection frm = new frmSeatSelection(id, customer, payStatus);
                 frm.ShowDialog();
+                
             }
         }
 
@@ -135,6 +158,17 @@ namespace eCinema.WinUI.Reservations
         private void cmbStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
             payStatus =(ReservationStatusEnum)cmbStatus.SelectedItem;
+        }
+
+        private void cmbDate_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmbDate.SelectedItem != null)
+            {
+                var date = (DateTime)cmbDate.SelectedItem;
+                var datelist = movie.Schedules.Where(x => x.Date.Date.ToShortDateString() == date.Date.ToShortDateString()).ToList();
+                var list = datelist.Select(x => x.StartTime.ToShortTimeString()).ToList();
+                cmbTime.DataSource = list;
+            }
         }
     }
 }

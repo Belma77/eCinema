@@ -31,9 +31,9 @@ namespace eCinema.Services.CustomerServices
         public override IQueryable<Customer> AddFilter(IQueryable<Customer> query, CustomerSearchObject search = null)
         {
             if (!String.IsNullOrEmpty(search.Name))
-                query = query.Where(x => x.FirstName.ToLower().StartsWith(search.Name.ToLower())
-                || (x.LastName.ToLower().StartsWith(search.Name.ToLower()))
-                || (x.FirstName + " " + x.LastName).ToLower().StartsWith(search.Name.ToLower()));
+                query = query.Where(x => x.FirstName.ToLower().Contains(search.Name.ToLower())
+                || (x.LastName.ToLower().Contains(search.Name.ToLower()))
+                || (x.FirstName + " " + x.LastName).ToLower().Contains(search.Name.ToLower()));
 
             if (!String.IsNullOrEmpty(search.Username))
                 query = query.Where(x => x.UserName.ToLower()==search.Username.ToLower());
@@ -50,7 +50,7 @@ namespace eCinema.Services.CustomerServices
             return query;
         }
 
-        public override CustomerDto Insert(CustomerInsertDto insert)
+        public async override Task<CustomerDto> InsertAsync(CustomerInsertDto insert)
         {
             var customerExists = _context.Customers.FirstOrDefault(x => x.UserName == insert.UserName);
             if(customerExists != null)

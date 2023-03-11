@@ -37,7 +37,7 @@ namespace eCinema.Web.API.Controllers
         [HttpGet]
         public List<GenresDto> Get()
         {
-            return _service.Get();
+            return  _service.Get();
         }
 
     }

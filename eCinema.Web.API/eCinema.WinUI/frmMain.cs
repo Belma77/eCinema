@@ -60,5 +60,7 @@ namespace eCinema.WinUI
             frmSalesPerMovie frm= new frmSalesPerMovie();
             frm.ShowDialog();
         }
+
+      
     }
 }

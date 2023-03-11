@@ -80,6 +80,7 @@ namespace eCinema.WinUI
                 _insert.Actors = list;
 
                 await service.Post<MovieInsertDto>(_insert);
+                MessageBox.Show(AlertMessages.SuccessfulyAdded);
                 this.Close();
             }
 

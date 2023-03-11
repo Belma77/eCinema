@@ -21,7 +21,7 @@ namespace eCinema.Services.CRUDservice
             
         }
 
-        public virtual Tmodel Insert(TInsert insert)
+        public virtual async Task<Tmodel> InsertAsync(TInsert insert)
         {
             var set = _context.Set<TDatabase>();
 
@@ -31,7 +31,7 @@ namespace eCinema.Services.CRUDservice
 
             set.Add(entity);
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return _mapper.Map<Tmodel>(entity);           
         }
@@ -42,7 +42,7 @@ namespace eCinema.Services.CRUDservice
         }
 
 
-        public virtual List<Tmodel> Add(List<Tmodel> list)
+        public virtual async Task<List<Tmodel>> AddAsync(List<Tmodel> list)
         {
             var context = _context.Set<TDatabase>().ToList();
             var items = _mapper.Map<List<TDatabase>>(list);
@@ -51,14 +51,14 @@ namespace eCinema.Services.CRUDservice
                 if (!context.Contains(item))
                 {
                     context.Add(item);
-                    _context.SaveChanges();
+                    await _context.SaveChangesAsync();
                 }
             }
             return list;
         }
 
         
-        public virtual Tmodel Update(int id, TUpdate update)
+        public virtual async Task<Tmodel> UpdateAsync(int id, TUpdate update)
         {
             var set = _context.Set<TDatabase>();
 
@@ -73,12 +73,12 @@ namespace eCinema.Services.CRUDservice
                 return null;
             }
 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
 
             return _mapper.Map<Tmodel>(entity);
         }
 
-        public virtual List<Tmodel> Delete(int id)
+        public virtual async Task<List<Tmodel>> DeleteAsync(int id)
         {
             var set = _context.Set<TDatabase>();
 
@@ -87,7 +87,7 @@ namespace eCinema.Services.CRUDservice
             if(entity!=null)
             {
                 set.Remove(entity);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             return _mapper.Map<List<Tmodel>>(set);
            

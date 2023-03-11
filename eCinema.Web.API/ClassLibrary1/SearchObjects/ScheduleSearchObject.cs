@@ -11,7 +11,9 @@ namespace eCInema.Models.SearchObjects
         public string? Title { get; set; }
         public int? MovieId { get; set; }
         public DateTime? Date { get; set; }
-        public DateTime? StartTime { get; set; }
+        //public DateTime? StartTime { get; set; }
+        public string? StartTime { get; set; }
+
         public string? DayOfWeek { get; set; }
     }
 }

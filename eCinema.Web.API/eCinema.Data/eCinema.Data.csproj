@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Script\**" />
+    <EmbeddedResource Remove="Script\**" />
+    <None Remove="Script\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20230307114146_schedule.cs" />
+    <Compile Remove="Migrations\20230307114146_schedule.Designer.cs" />
+    <Compile Remove="Migrations\20230307114247_nullable.cs" />
+    <Compile Remove="Migrations\20230307114247_nullable.Designer.cs" />
+    <Compile Remove="Migrations\eCinemaContextModelSnapshot.cs" />
+    <Compile Remove="SeedMovies.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="CountryData.Standard" Version="1.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.3" />

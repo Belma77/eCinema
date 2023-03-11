@@ -21,15 +21,15 @@ namespace eCinema.Web.API.Controllers
         }
 
 
-        public override IActionResult Get([FromQuery] MoviesSearchObject? search = null)
+        public override async Task<IActionResult> Get([FromQuery] MoviesSearchObject? search = null)
         {
-            return base.Get(search);
+            return await base.Get(search);
         }
 
         [Authorize(UserRole.Customer, UserRole.Admin)]
-        public override IActionResult GetById(int id)
+        public async override Task<IActionResult> GetById(int id)
         {
-            return base.GetById(id);
+            return await base.GetById(id);
         }
 
         [HttpGet("{id}/Recommend")]

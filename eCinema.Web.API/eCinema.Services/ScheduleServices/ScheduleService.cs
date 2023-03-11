@@ -36,28 +36,35 @@ namespace eCinema.Services.ScheduleServices
                 query = query.Where(x => x.Movie.Title.StartsWith(search.Title));
             }
 
-            else if (search.Date.HasValue)
+            if (search.Date.HasValue)
             {
                 query = query.Where(x => x.Date.Date.Equals(search.Date.Value));
             }
-            else if (search.MovieId!=null)
+            if (search.MovieId != null)
             {
-                query = query.Where(x => x.MovieId==search.MovieId);
+                query = query.Where(x => x.MovieId == search.MovieId);
             }
 
-            else if (search.StartTime.HasValue)
-                query = query.Where(x => x.StartTime.Minute.Equals(search.StartTime.Value.Minute));
+            if (!string.IsNullOrEmpty(search.StartTime))
+            {
+                
+                var filter = query.AsEnumerable().Where(x => x.StartTime.ToShortTimeString().Equals(search.StartTime));
+                query = filter.AsQueryable();
+            }
+
+            if (!string.IsNullOrEmpty(search.DayOfWeek))
+            {
+                var filter = query.AsEnumerable().Where(x => x.Date.DayOfWeek.ToString().Equals(search.DayOfWeek)).Distinct();
+                query=filter.AsQueryable();     
+            }
 
             return query;
         }
 
         public override List<GetSchedulesDto> Get(ScheduleSearchObject? search = null)
         {
-            var list= base.Get(search);
-            if(!String.IsNullOrEmpty(search.DayOfWeek))
-            {
-                list = list.Where(x => x.DayOfWeek == search.DayOfWeek).ToList();
-            }
+            search.PageSize = null;
+            var list=base.Get(search);
             return list;
         }
 

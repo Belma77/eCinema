@@ -49,13 +49,11 @@ namespace eCinema.WinUI.ScheduleForms
             if (dateChanged)
             {
                 search.Date = dtmDate.Value;
-                dateChanged = false;
             }
 
             if (timeChanged)
             {
-                search.StartTime = dtmTime.Value;
-                timeChanged = false;
+                search.StartTime = dtmTime.Value.ToShortTimeString();
             }
 
             search.PageNumber = pageNumber;
@@ -155,11 +153,6 @@ namespace eCinema.WinUI.ScheduleForms
         {
             dateChanged = true;
             await LoadSchedules();         
-        }
-
-        private async void cmbHall_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            await LoadSchedules();
         }
 
         private async void dtmTime_ValueChanged(object sender, EventArgs e)

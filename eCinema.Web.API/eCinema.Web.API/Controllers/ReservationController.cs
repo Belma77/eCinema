@@ -21,9 +21,9 @@ namespace eCinema.Web.API.Controllers
         }
 
         [Authorize(UserRole.Customer, UserRole.Admin)]
-        public override IActionResult Insert(ReservationInsertDto reservation)
+        public override async Task<IActionResult> Insert(ReservationInsertDto reservation)
         {
-            return Ok(_service.Insert(reservation));
+            return Ok(await _service.InsertAsync(reservation));
         }
 
         [HttpGet("ByCustomer")]

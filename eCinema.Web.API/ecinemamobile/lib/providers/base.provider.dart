@@ -62,7 +62,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
     Map<String, String> headers = createHeaders();
     var response = await http!.get(uri, headers: headers);
 
-    print(response);
+    print(response.body);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return data.map((x) => fromJson(x)).cast<T>().toList();
