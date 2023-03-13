@@ -130,13 +130,13 @@ public class Program
         {
             var dataContext = scope.ServiceProvider.GetRequiredService<eCinemaContext>();
             dataContext.Database.Migrate();
-            //InsertData(dataContext);
+            InsertData(dataContext);
         }
         app.Run();
     }
     public static void InsertData(eCinemaContext context)
     {
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "Script", "script2.sql");
+        var path = Path.Combine(Directory.GetCurrentDirectory(), "Script", "script.sql");
         var query = File.ReadAllText(path);
         context.Database.ExecuteSqlRaw(query);
     }

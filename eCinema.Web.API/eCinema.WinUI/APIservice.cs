@@ -16,8 +16,7 @@ namespace eCinema.WinUI
     public class APIservice
     {
         private string _resource = null;
-        public string _endpoint = "https://localhost:7239/";
-        //Settings.Default.ApiURL;    //"";
+        public string _endpoint = Settings.Default.ApiURL;
 
         public static string Username = null;
         public static string Password = null;
