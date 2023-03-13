@@ -19,6 +19,7 @@
     <Compile Remove="Migrations\20230307114247_nullable.Designer.cs" />
     <Compile Remove="Migrations\eCinemaContextModelSnapshot.cs" />
     <Compile Remove="SeedMovies.cs" />
+    <Compile Remove="SeedUsers.cs" />
   </ItemGroup>
 
   <ItemGroup>

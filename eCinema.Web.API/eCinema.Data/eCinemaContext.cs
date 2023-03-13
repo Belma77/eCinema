@@ -1,5 +1,4 @@
-﻿using eCinema.Data.DataSeeder;
-using eCInema.Data.Entities;
+﻿using eCInema.Data.Entities;
 using eCInema.Models;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
@@ -69,7 +68,6 @@ namespace eCinema.Data
             builder.Entity<User>()
             .HasIndex(u => u.UserName)
             .IsUnique();
-            SeedUsersData.SeedUsers(builder);
 
         }
         
