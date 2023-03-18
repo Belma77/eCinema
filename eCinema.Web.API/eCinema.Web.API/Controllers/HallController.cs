@@ -12,7 +12,7 @@ namespace eCinema.Web.API.Controllers
     [Route("Hall")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class HallController : BaseController<HallDto, HallSearchObject> /*BaseCRUDController<HallDto, HallSearchObject, HallDto, HallUpdateDto>*/
+    public class HallController : BaseController<HallDto, HallSearchObject> 
     {
         public HallController(IHallService service):base(service)
         {

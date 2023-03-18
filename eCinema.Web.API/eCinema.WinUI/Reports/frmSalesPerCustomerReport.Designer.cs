@@ -32,6 +32,7 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSearch = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rpvSales
@@ -43,14 +44,14 @@
             this.rpvSales.Location = new System.Drawing.Point(0, 70);
             this.rpvSales.Name = "ReportViewer";
             this.rpvSales.ServerReport.BearerToken = null;
-            this.rpvSales.Size = new System.Drawing.Size(800, 490);
+            this.rpvSales.Size = new System.Drawing.Size(820, 450);
             this.rpvSales.TabIndex = 0;
             // 
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(134, 18);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(546, 27);
+            this.txtSearch.Size = new System.Drawing.Size(436, 27);
             this.txtSearch.TabIndex = 1;
             // 
             // label1
@@ -64,7 +65,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(694, 17);
+            this.btnSearch.Location = new System.Drawing.Point(585, 18);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(94, 29);
             this.btnSearch.TabIndex = 3;
@@ -72,17 +73,30 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
+            // btnClear
+            // 
+            this.btnClear.AutoSize = true;
+            this.btnClear.Location = new System.Drawing.Point(694, 17);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(113, 30);
+            this.btnClear.TabIndex = 4;
+            this.btnClear.Text = "Clear Search";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // frmSalesPerCustomerReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(821, 530);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.rpvSales);
             this.Name = "frmSalesPerCustomerReport";
-            this.Text = "frmSalesPerCustomerReport";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Sales Per Customer Report";
             this.Load += new System.EventHandler(this.frmSalesPerCustomerReport_LoadAsync);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -95,5 +109,6 @@
         private TextBox txtSearch;
         private Label label1;
         private Button btnSearch;
+        private Button btnClear;
     }
 }

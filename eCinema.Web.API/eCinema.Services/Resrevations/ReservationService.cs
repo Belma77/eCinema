@@ -37,9 +37,9 @@ namespace eCinema.Services.Resrevations
         public override IQueryable<Reservation> AddFilter(IQueryable<Reservation> query, ReservationSearchObject search = null)
         {
             if (!String.IsNullOrEmpty(search.CustomerName))
-                query = query.Where(x => x.Customer.FirstName.ToLower().Equals(search.CustomerName.ToLower())
-                || x.Customer.LastName.ToLower().Equals(search.CustomerName.ToLower())
-                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().StartsWith(search.CustomerName.ToLower()));
+                query = query.Where(x => x.Customer.FirstName.ToLower().Contains(search.CustomerName.ToLower())
+                || x.Customer.LastName.ToLower().Contains(search.CustomerName.ToLower())
+                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().Contains(search.CustomerName.ToLower()));
 
             if (!String.IsNullOrEmpty(search.Movie))
                 query = query.Where(x => x.Schedule.Movie.Title.ToLower().StartsWith(search.Movie.ToLower()));
@@ -47,7 +47,7 @@ namespace eCinema.Services.Resrevations
             return query;
         }
 
-        public async override Task<ReservationDto> InsertAsync(ReservationInsertDto insert)
+        public override ReservationDto Insert(ReservationInsertDto insert)
         {
             var scheduleDb = _context.Schedules.First(x => x.Id == insert.ScheduleId);
             if (scheduleDb == null)

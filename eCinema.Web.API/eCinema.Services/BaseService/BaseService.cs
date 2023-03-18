@@ -57,7 +57,7 @@ namespace eCinema.Services
             return query;
         }
 
-        public  virtual Tmodel GetById(int id)
+        public virtual Tmodel GetById(int id)
         {
             var set=_context.Set<TDatabase>();
             var entity = set.Find(id);

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ecinemamobile/models/Movies/movies.dart';
+import 'package:ecinemamobile/models/Schedules/projection.dart';
 
 import '../env.dart';
 import 'base.provider.dart';
@@ -13,11 +14,10 @@ class MoviesProvider extends BaseProvider<Movies> {
 
   @override
   Movies fromJson(data) {
-    // TODO: implement fromJson
     return Movies.fromJson(data);
   }
 
-  Future<List<Movies>> getRecommendation(int id, String path) async {
+  Future<List<Projection>> getRecommendation(int id, String path) async {
     var url = "$_baseUrl$_endpoint/$id/$path";
     var uri = Uri.parse(url);
 
@@ -25,7 +25,10 @@ class MoviesProvider extends BaseProvider<Movies> {
     var response = await http!.get(uri, headers: headers);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return data.map((x) => fromJson(x)).cast<Movies>().toList();
+      return data
+          .map((x) => Projection.fromJson(x))
+          .cast<Projection>()
+          .toList();
     } else {
       throw Exception("Ups.. something went wrong");
     }

@@ -76,6 +76,7 @@ namespace eCinema.Services.Profiles
             CreateMap<Hall, HallDto>();
 
             CreateMap<CustomerDto, Customer>();
+            CreateMap<CustomerDto, UpdateCustomerDto>();
             CreateMap<CustomerInsertDto, Customer>();
             CreateMap<CustomerDto, UserDto>();
             CreateMap<UpdateCustomerDto, Customer>();

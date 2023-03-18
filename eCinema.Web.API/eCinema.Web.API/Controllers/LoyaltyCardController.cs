@@ -13,7 +13,6 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("LoyaltyClub")]
     [ApiController]
-    [Authorize(UserRole.Admin, UserRole.Customer)]
     public class LoyaltyCardController : BaseController<LoyalCardDto, LoyalCardSearchObject>
     {
         ILoyalCardService _service;
@@ -22,13 +21,28 @@ namespace eCinema.Web.API.Controllers
             _service = service;
         }
 
-        [HttpPost]
         [Authorize(UserRole.Admin, UserRole.Customer)]
+        [HttpPost]
         public IActionResult Add(LoyalCardInsertDto insert)
         {
             return Ok(_service.Insert(insert));
 
         }
-       
+
+        [Authorize(UserRole.Admin)]
+        [HttpGet]
+        public override IActionResult Get(LoyalCardSearchObject? search)
+        {
+            return Ok(_service.Get(search));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpGet("{id}")]
+        public override IActionResult GetById(int id)
+        {
+            return Ok(_service.GetById(id));
+
+        }
+
     }
 }

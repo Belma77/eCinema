@@ -6,6 +6,7 @@ import 'package:ecinemamobile/screens/reservation.dart';
 import 'package:ecinemamobile/utils/date.formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/Schedules/projection.dart';
 import '../models/Schedules/schedule.dart';
 import '../models/Schedules/schedule.movie.dart';
 import '../providers/movies.provider.dart';
@@ -27,18 +28,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   int? MovieId;
   List<ScheduleMovie>? schedules;
   List<Schedule>? items;
-  List<Movies>? movies;
+  List<Projection>? movies;
 
-  int? current;
+  int? current = 0;
   @override
   void initState() {
     super.initState();
     MoviesProvider();
     _moviesProvider = context.read<MoviesProvider>();
     loadData();
-    _scheduleProvider = context.read<ScheduleProvider>();
-    // loadSchedule();
-    //getRecommendations();
+    //_scheduleProvider = context.read<ScheduleProvider>();
+    getRecommendations();
   }
 
   Future loadData() async {
@@ -58,11 +58,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Future getRecommendations() async {
+    movies = [];
     var tmpData =
         await _moviesProvider!.getRecommendation(MovieId!, "Recommend");
-    setState(() {
-      movies = tmpData;
-    });
+    if (mounted) {
+      setState(() {
+        movies = tmpData;
+      });
+    }
   }
 
   List<String> days = [
@@ -90,30 +93,17 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           builtProjectionInfo(),
         ])),
       ),
-      /*  bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.shopping_bag_outlined), label: 'Buy tickets')
-        ],
-        backgroundColor: Colors.blue,
-        fixedColor: Colors.white,
-        unselectedItemColor: Colors.red,
-      ), */
     );
   }
 
   Widget builtProjectionInfo() {
     if (item == null) {
-      return const Align(
-          alignment: Alignment.center,
-          child: Text(
-            "Loading..",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-          ));
+      return const Center(
+        child: Text(
+          "Loading..",
+          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        ),
+      );
     }
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -150,7 +140,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       Align(
                         alignment: Alignment.center,
                         child: Text(
-                          item!.title.toString() + "\n",
+                          "${item!.title}\n",
                           style: const TextStyle(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -219,7 +209,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   ),
                 )),
             buildProjectionSchedule(),
-            // buildRecommendation(),
+            buildRecommendation(),
           ])),
     );
   }
@@ -256,7 +246,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     },
                     child: Container(
                       margin: const EdgeInsets.all(5),
-                      width: 80,
+                      width: 95,
                       height: 45,
                       decoration: BoxDecoration(
                           color: current == index ? Colors.blue : Colors.grey,
@@ -266,7 +256,10 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               style: BorderStyle.solid),
                           borderRadius: BorderRadius.circular(10)),
                       child: Center(
-                        child: Text(days[index]),
+                        child: Text(
+                          days[index],
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ));
               },
@@ -300,7 +293,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     },
                     child: Container(
                         margin: const EdgeInsets.all(5),
-                        width: 80,
+                        width: 95,
                         height: 45,
                         decoration: BoxDecoration(
                             color: Colors.white,
@@ -311,7 +304,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                             child: Text(
-                                formatTime(schedules![index].startTime!)))));
+                          "${formatShortDate(schedules![index].date!)}, ${formatTime(schedules![index].startTime!)}",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ))));
               },
             ),
           ),
@@ -338,7 +333,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 
   Widget builtDirectorsMovies() {
     if (item!.directorsMovies == null) {
-      return Text("");
+      return const Text("");
     }
 
     return Expanded(
@@ -400,13 +395,16 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   }
 
   Widget buildRecommendation() {
-    if (movies == null) {
+    if (movies!.isEmpty) {
       return Align(
         alignment: Alignment.center,
         child: Container(
-            child: const Text(
-          "Loading...",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            child: const Padding(
+          padding: EdgeInsets.all(5),
+          child: Text(
+            "Loading...",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
         )),
       );
     }
@@ -430,22 +428,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 return Column(
                   children: [
                     Row(children: [
-                      Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                            // color: Colors.white,
-                            height: 250,
-                            width: 170,
-                            child: Image.memory(
-                              base64Decode(movies![index].poster!),
-                              fit: BoxFit.fill,
-                            ),
-                          ))
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context,
+                              "${ScheduleScreen.routeName}/${movies![index].id}");
+                        },
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              height: 250,
+                              width: 170,
+                              child: Image.memory(
+                                base64Decode(movies![index].poster!),
+                                fit: BoxFit.fill,
+                              ),
+                            )),
+                      )
                     ]),
-                    Text(
-                      movies![index].title!,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+                    Expanded(
+                      child: Text(
+                        movies![index].title!,
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     )
                   ],
                 );

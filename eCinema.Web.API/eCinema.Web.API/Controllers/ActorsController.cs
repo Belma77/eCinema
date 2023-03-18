@@ -13,7 +13,7 @@ namespace eCinema.Web.API.Controllers
     [Route("Actors")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class ActorsController : ControllerBase /*BaseCRUDController<ActorDto, CastSearchObject, ActorDto, ActorDto>*/
+    public class ActorsController : ControllerBase 
     {
         IActorService _service;
         public ActorsController(IActorService service) : base()

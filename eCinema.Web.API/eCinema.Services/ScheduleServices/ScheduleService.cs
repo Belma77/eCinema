@@ -2,6 +2,7 @@
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
 using eCInema.Models.Dtos.Schedules;
+using eCInema.Models.Dtos.SchedulesSeats;
 using eCInema.Models.Entities;
 using eCInema.Models.Exceptions;
 using eCInema.Models.SearchObjects;
@@ -23,10 +24,7 @@ namespace eCinema.Services.ScheduleServices
 
         public override IQueryable<Schedule> AddInclude(IQueryable<Schedule> query, ScheduleSearchObject searchObject = null)
         {
-            return query = query.Include(a => a.Movie).
-                ThenInclude(x => x.MoviesGenres).ThenInclude(x => x.Genre).         
-                Include(x => x.Movie).ThenInclude(y => y.ActorsMovies).ThenInclude(z => z.Actor)
-                .Include(x=>x.Hall);
+            return query = query.Include(a => a.Movie).Include(x=>x.Hall);
         }
 
         public override IQueryable<Schedule> AddFilter(IQueryable<Schedule> query, ScheduleSearchObject search = null)
@@ -63,7 +61,6 @@ namespace eCinema.Services.ScheduleServices
 
         public override List<GetSchedulesDto> Get(ScheduleSearchObject? search = null)
         {
-            search.PageSize = null;
             var list=base.Get(search);
             return list;
         }
@@ -72,13 +69,8 @@ namespace eCinema.Services.ScheduleServices
         {
             var schedule = _context.Schedules
                 .Include(x => x.Movie).
-                ThenInclude(x => x.MoviesGenres).ThenInclude(x => x.Genre).
-                Include(x => x.Movie).ThenInclude(y => y.WritersMovies).ThenInclude(z => z.Writer).
-                Include(x => x.Movie).ThenInclude(y => y.DirectorsMovies).ThenInclude(z => z.Director).
-                Include(x => x.Movie).ThenInclude(y => y.ActorsMovies).ThenInclude(z => z.Actor).
-                Include(x => x.Movie).ThenInclude(y => y.ProducersMovies).ThenInclude(z => z.Producer).
-                Include(y => y.Hall).ThenInclude(y=>y.Seats).Include(x=>x.ScheduleSeats).
-                FirstOrDefault(x => x.Id == id);
+            Include(y => y.Hall).ThenInclude(y => y.Seats).Include(x => x.ScheduleSeats)
+            .FirstOrDefault(x => x.Id == id);
 
             if (schedule == null)
                 throw new NotFoundException("Schedule not found");
@@ -86,6 +78,24 @@ namespace eCinema.Services.ScheduleServices
             return _mapper.Map<GetSchedulesDto>(schedule);
         }
 
+        public GetSchedulesDto GetSeats(int id)
+        {
+            var schedule = _context.Schedules.
+           Include(x => x.Movie).Include(y => y.Hall).ThenInclude(y => y.Seats).Include(x => x.ScheduleSeats);
+            var result = schedule.FirstOrDefault(x => x.Id == id);
+
+            if (result == null)
+                throw new NotFoundException("Schedule not found");
+
+            return _mapper.Map<GetSchedulesDto>(result);
+        }
+        public List<GetSchedulesDto> GetDistinct()
+        {
+            var schedules=_context.Schedules.Include(x=>x.Movie).ToList();
+            var result = schedules.DistinctBy(x => x.Movie.Title).ToList();
+            return _mapper.Map<List<GetSchedulesDto>>(result);
+        }
+       
         public override void BeforeInsert(ScheduleInsertDto insert, Schedule schedule)
         {
             var movie = _context.Movies.FirstOrDefault(x=>x.Title==insert.Title);

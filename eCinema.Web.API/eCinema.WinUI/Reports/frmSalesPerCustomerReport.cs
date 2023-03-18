@@ -24,33 +24,12 @@ namespace eCinema.WinUI.Reports
 
         private async Task LoadSales()
         {
-            sales = await service.GetSales<List<SalesPerCustomer>>("ByCustomer");
+            sales = await service.Get<List<SalesPerCustomer>>("ByCustomer");
         }
 
         private async void frmSalesPerCustomerReport_LoadAsync(object sender, EventArgs e)
         {
-            await LoadSales();
-            rpvSales.LocalReport.ReportEmbeddedResource = "eCinema.WinUI.Reports.SalesPerCustomer.rdlc";
-            rpvSales.RefreshReport();
-            rpvSales.LocalReport.DataSources.Clear();
-            var rds = new ReportDataSource();
-            var salesTable = new dsSales.SalesPerCustomerDataTable();
-            foreach (var sale in sales)
-            {
-                var row = salesTable.NewSalesPerCustomerRow();
-                row.CustomerId = sale.Customer.Id.ToString();
-                row.FirstName = sale.Customer.FirstName;
-                row.LastName = sale.Customer.LastName;
-                row.Sales = sale.Sales.ToString();
-                salesTable.Rows.Add(row);
-
-            }
-
-            rds.Name = "dsSales";
-            rds.Value = salesTable;
-            rpvSales.LocalReport.DataSources.Clear();
-            rpvSales.LocalReport.DataSources.Add(rds);
-            rpvSales.RefreshReport();
+            LoadReportData();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -80,6 +59,37 @@ namespace eCinema.WinUI.Reports
                 rpvSales.LocalReport.DataSources.Add(rds);
                 rpvSales.RefreshReport();
             }
+        }
+
+        private async void btnClear_Click(object sender, EventArgs e)
+        {
+            LoadReportData();
+        }
+
+        private async void LoadReportData()
+        {
+            await LoadSales();
+            rpvSales.LocalReport.ReportEmbeddedResource = "eCinema.WinUI.Reports.SalesPerCustomer.rdlc";
+            rpvSales.RefreshReport();
+            rpvSales.LocalReport.DataSources.Clear();
+            var rds = new ReportDataSource();
+            var salesTable = new dsSales.SalesPerCustomerDataTable();
+            foreach (var sale in sales)
+            {
+                var row = salesTable.NewSalesPerCustomerRow();
+                row.CustomerId = sale.Customer.Id.ToString();
+                row.FirstName = sale.Customer.FirstName;
+                row.LastName = sale.Customer.LastName;
+                row.Sales = sale.Sales.ToString();
+                salesTable.Rows.Add(row);
+
+            }
+
+            rds.Name = "dsSales";
+            rds.Value = salesTable;
+            rpvSales.LocalReport.DataSources.Clear();
+            rpvSales.LocalReport.DataSources.Add(rds);
+            rpvSales.RefreshReport();
         }
     }
 }

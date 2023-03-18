@@ -187,7 +187,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label4);
             this.Name = "frmLoyalClub";
-            this.Text = "frmLoyalClub";
+            this.Text = "Loyal Club";
             this.Load += new System.EventHandler(this.frmLoyalClub_Load);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);

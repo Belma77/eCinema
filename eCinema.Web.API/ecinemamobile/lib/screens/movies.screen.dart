@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/projection.provider.dart';
 import '../providers/schedule.provider.dart';
+import 'package:darq/darq.dart';
 
 class MoviesListScreen extends StatefulWidget {
   const MoviesListScreen({super.key});
@@ -32,9 +33,15 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
 
   Future loadData(String? day) async {
     ScheduleProvider();
+    data = [];
     var tmpData = await _scheduleProvider?.get({'DayOfWeek': day});
     setState(() {
-      data = tmpData!;
+      var result = tmpData!.toList();
+      for (var item in result) {
+        if (!data.contains(item)) {
+          data.add(item);
+        }
+      }
     });
   }
 
@@ -90,7 +97,11 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                                   width: 1.0,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10)),
-                          child: Center(child: Text(items[index])),
+                          child: Center(
+                              child: Text(
+                            items[index],
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          )),
                         ),
                       );
                     },

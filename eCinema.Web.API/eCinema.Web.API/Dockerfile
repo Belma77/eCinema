@@ -8,6 +8,7 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["eCinema.Web.API/eCinema.Web.API.csproj", "eCinema.Web.API/"]
+
 RUN dotnet restore "eCinema.Web.API/eCinema.Web.API.csproj"
 COPY . .
 WORKDIR "/src/eCinema.Web.API"
@@ -19,4 +20,5 @@ RUN dotnet publish "eCinema.Web.API.csproj" -c Release -o /app/publish /p:UseApp
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "eCinema.Web.API.dll"]

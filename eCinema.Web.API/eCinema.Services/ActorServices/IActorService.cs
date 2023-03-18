@@ -14,6 +14,6 @@ namespace eCinema.Services.ActorService
     public interface IActorService:IBaseCRUDService<ActorDto, CastSearchObject, ActorDto, ActorDto>
     {
         List<ActorDto> Add(int id, List<ActorDto> insert);
-        Task DeleteActorsMovies(List<ActorsMoviesDto> delete);
+        void DeleteActorsMovies(List<ActorsMoviesDto> delete);
     }
 }

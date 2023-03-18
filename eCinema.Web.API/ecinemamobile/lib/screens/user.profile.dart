@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:ecinemamobile/models/Authorization/authorization.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
@@ -11,6 +12,7 @@ import 'package:provider/provider.dart';
 
 import '../models/Users/user.dart';
 import '../providers/user.provider.dart';
+import '../utils/image.convertor.dart';
 
 class UserProfile extends StatefulWidget {
   static const String route = "/UserProfile";
@@ -34,7 +36,7 @@ class _UserProfileState extends State<UserProfile> {
   String? username;
   String? phone;
   String? email;
-
+  Uint8List? bytesPicture;
   Customer? user;
   @override
   void initState() {
@@ -58,6 +60,8 @@ class _UserProfileState extends State<UserProfile> {
     var tmpData = await _userProvider?.getUser();
     setState(() {
       user = tmpData;
+      List<int> list = user!.profilePicture!.codeUnits;
+      bytesPicture = Uint8List.fromList(list);
       FillControllers();
     });
   }
@@ -69,6 +73,7 @@ class _UserProfileState extends State<UserProfile> {
     edit.phone = phone;
     edit.email = email;
     edit.username = Authorization.username;
+    edit.profilePicture = _pickedImage.toString();
     try {
       await _userProvider!.update(user!.id!, edit);
       Navigator.pop(context);
@@ -199,13 +204,25 @@ class _UserProfileState extends State<UserProfile> {
                         )),
                   ),
                   Container(
+                      height: 200,
                       margin: const EdgeInsets.all(10),
-                      child: _pickedImage != null
+                      child: /*  _pickedImage != null
                           ? Image.file(
                               _pickedImage!,
                               fit: BoxFit.fill,
-                            )
-                          : null),
+                            ) */
+                          user?.profilePicture != null
+                              ? Image.memory(
+                                  errorBuilder: (BuildContext context,
+                                      Object exception,
+                                      StackTrace? stackTrace) {
+                                    // Handle the error by displaying an error message
+                                    return Text(
+                                        'Error loading image: $exception');
+                                  },
+                                  bytesPicture!,
+                                )
+                              : null),
                   Container(
                     child: Align(
                       alignment: Alignment.bottomCenter,

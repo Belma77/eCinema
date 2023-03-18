@@ -21,7 +21,7 @@ namespace eCinema.Services.CRUDservice
             
         }
 
-        public virtual async Task<Tmodel> InsertAsync(TInsert insert)
+        public virtual Tmodel Insert(TInsert insert)
         {
             var set = _context.Set<TDatabase>();
 
@@ -31,7 +31,7 @@ namespace eCinema.Services.CRUDservice
 
             set.Add(entity);
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return _mapper.Map<Tmodel>(entity);           
         }
@@ -40,29 +40,19 @@ namespace eCinema.Services.CRUDservice
         {
             
         }
-
-
-        public virtual async Task<List<Tmodel>> AddAsync(List<Tmodel> list)
+        public virtual void BeforeUpdate(TUpdate update, TDatabase entity)
         {
-            var context = _context.Set<TDatabase>().ToList();
-            var items = _mapper.Map<List<TDatabase>>(list);
-            foreach (var item in items)
-            {
-                if (!context.Contains(item))
-                {
-                    context.Add(item);
-                    await _context.SaveChangesAsync();
-                }
-            }
-            return list;
+
         }
 
         
-        public virtual async Task<Tmodel> UpdateAsync(int id, TUpdate update)
+        public virtual Tmodel Update(int id, TUpdate update)
         {
             var set = _context.Set<TDatabase>();
 
             var entity = set.Find(id);
+
+            BeforeUpdate(update, entity);
 
             if (entity != null)
             {
@@ -73,12 +63,12 @@ namespace eCinema.Services.CRUDservice
                 return null;
             }
 
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
             return _mapper.Map<Tmodel>(entity);
         }
 
-        public virtual async Task<List<Tmodel>> DeleteAsync(int id)
+        public virtual List<Tmodel> Delete(int id)
         {
             var set = _context.Set<TDatabase>();
 
@@ -87,7 +77,7 @@ namespace eCinema.Services.CRUDservice
             if(entity!=null)
             {
                 set.Remove(entity);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             return _mapper.Map<List<Tmodel>>(set);
            

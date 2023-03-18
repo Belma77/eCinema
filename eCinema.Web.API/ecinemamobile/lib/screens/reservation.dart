@@ -179,9 +179,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               borderRadius: BorderRadius.circular(4)),
                           width: 20,
                           height: 20)),
-                  Text("Taken seats"),
+                  const Text("Taken seats"),
                   Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Container(
                           decoration: BoxDecoration(
                               color: Colors.yellow,
@@ -192,9 +192,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               borderRadius: BorderRadius.circular(4)),
                           width: 20,
                           height: 20)),
-                  Text("Free seats"),
+                  const Text("Free seats"),
                   Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Container(
                           decoration: BoxDecoration(
                               color: Colors.red,
@@ -205,14 +205,13 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               borderRadius: BorderRadius.circular(4)),
                           width: 20,
                           height: 20)),
-                  Text("Selected seats"),
+                  const Text("Selected seats"),
                 ],
               ),
             ),
             Container(
               height: 183,
               width: double.infinity,
-              //color: Colors.pink,
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Row(
@@ -221,7 +220,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                       Container(
                           width: 30,
                           height: 170,
-                          // color: Colors.amber,
                           child: ListView.builder(
                             itemCount: hall?.numberOfRows,
                             scrollDirection: Axis.vertical,
@@ -229,7 +227,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                               return Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 8, 8, 9),
                                 child: Container(
-                                    //color: Colors.blue,
                                     width: 3,
                                     child: Text(
                                       alpha[index],
@@ -403,7 +400,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 60,
                 ),
                 Align(
@@ -505,8 +502,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
         showMessage("Successfuly paid");
       });
       paymentIntent = null;
-    } catch (err) {
-      print(err);
-    }
+    } catch (err) {}
   }
 }

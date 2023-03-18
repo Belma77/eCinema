@@ -14,29 +14,62 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Schedule")]
     [ApiController]
-    
     public class ScheduleController : BaseCRUDController<GetSchedulesDto, ScheduleSearchObject, ScheduleInsertDto, ScheduleUpdateDto>
     {
+        IScheduleService scheduleService;
         public ScheduleController(IScheduleService service):base(service)
         {
-
+            scheduleService = service;
         }
 
-        [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
-        public override Task<IActionResult> Get([FromQuery] ScheduleSearchObject? search = null)
+        [HttpGet]
+        public override IActionResult Get([FromQuery] ScheduleSearchObject? search = null)
         {
             return base.Get(search);
         }
 
-        [AllowAnonymous]
         [Authorize(UserRole.Admin, UserRole.Customer)]
         [HttpGet("{id}")]
-        public async override Task<IActionResult> GetById(int id)
+        public override IActionResult GetById(int id)
+        {           
+             return base.GetById(id);           
+        }
+
+        [Authorize(UserRole.Admin, UserRole.Customer)]
+        [HttpGet("{id}/Seats")]
+        public IActionResult GetSeats(int id)
         {
-            
-             return await base.GetById(id);
-            
+            return Ok(scheduleService.GetSeats(id));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpPost]
+        public override IActionResult Insert(ScheduleInsertDto insert)
+        {
+            return base.Insert(insert);
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpPut("{id}")]
+        public override IActionResult Update(int id, ScheduleUpdateDto update)
+        {
+            return base.Update(id, update);
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpDelete("{id}")]
+
+        public override IActionResult Delete(int id)
+        {
+            return base.Delete(id);
+        }
+
+        [HttpGet("Distinct")]
+        [Authorize(UserRole.Admin)]
+        public IActionResult GetDistinct()
+        {
+            return Ok(scheduleService.GetDistinct());
         }
     }
 }

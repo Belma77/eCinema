@@ -34,4 +34,9 @@ class Projection {
       _$ProjectionFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProjectionToJson(this);
+
+  bool equals(Projection item) {
+    if (item.title == title) return true;
+    return false;
+  }
 }

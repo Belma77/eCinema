@@ -180,7 +180,7 @@
             this.Controls.Add(this.cmbMovies);
             this.Name = "frmInsertSchedule";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmInsertSchedule";
+            this.Text = "Insert Schedule";
             this.Load += new System.EventHandler(this.frmInsertSchedule_Load);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);

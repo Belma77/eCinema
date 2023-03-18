@@ -34,28 +34,23 @@ namespace eCinema.WinUI.Reservations
         private ReservationStatusEnum _status;
         List<int> pickedSeats = new List<int>();
         List<int> alreadyReserved = new List<int>();
-
         bool seatSelected = false;
-        public frmSeatSelection(int scheduleId, CustomerDto customer, ReservationStatusEnum status)
+        
+        public frmSeatSelection(GetSchedulesDto schedule, CustomerDto customer, ReservationStatusEnum status)
         {
-            _scheduleId = scheduleId;
+            _schedule=schedule;
             _customer = customer;
-            _status=status;
+            _status = status;
             InitializeComponent();
 
         }
 
         private async void frmSeatSelection_Load(object sender, EventArgs e)
         {
-            await LoadSchedule();
             GenerateSeats();
 
         }
 
-        private async Task LoadSchedule()
-        {
-            _schedule = await _scheduleService.GetById<GetSchedulesDto>(_scheduleId);
-        }
 
         void GenerateSeats()
         {
@@ -64,7 +59,10 @@ namespace eCinema.WinUI.Reservations
             int y = 63;
             Size s = new Size(25, 22);
             int column = 1;
-            alreadyReserved = _schedule.ScheduleSeats.Select(x => x.SeatId).ToList();
+            if (_schedule.ScheduleSeats != null)
+            {
+                alreadyReserved = _schedule.ScheduleSeats.Select(x => x.SeatId).ToList();
+            }
             int id = 1;
 
             for (int i = 1; i <= _schedule.Hall.NumberOfRows; i++)

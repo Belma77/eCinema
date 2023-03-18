@@ -20,7 +20,8 @@ namespace eCInema.Models.Dtos.Schedules
         public string DateOnly { get => Date.ToShortDateString(); }
         public DateTime StartTime { get; set; }
         public string TimeOnly { get => StartTime.ToShortTimeString(); }
-        public DateTime? EndTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string EndTimeOnly { get => EndTime.ToShortTimeString(); }
         public HallDto Hall { get; set; }
         public List<ScheduleSeatDto> ScheduleSeats { get; set; }
         public int? NoAvailableSeats { get; set; }

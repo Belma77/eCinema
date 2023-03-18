@@ -2,7 +2,6 @@ FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 5239
 ENV ASPNETCORE_URLS=http://+:5239
-RUN sed -i 's/CipherString = DEFAULT@SECLEVEL=2/CipherString = DEFAULT@SECLEVEL=1/g' /etc/ssl/openssl.cnf
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
@@ -13,4 +12,6 @@ RUN dotnet publish "eCinema.Web.API/eCinema.Web.API/eCinema.Web.API.csproj" -c R
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+COPY ["eCinema.Web.API/eCinema.Web.API/Script/script.sql", "/app/Script/"]
+
 ENTRYPOINT ["dotnet", "eCinema.Web.API.dll"]

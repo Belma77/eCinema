@@ -27,4 +27,15 @@ class Schedule {
       _$ScheduleFromJson(json);
 
   Map<String, dynamic> toJson() => _$ScheduleToJson(this);
+
+  @override
+  bool operator ==(Object item) {
+    return identical(this, item) ||
+        item is Schedule &&
+            runtimeType == item.runtimeType &&
+            movie!.title == item.movie!.title;
+  }
+
+  @override
+  int get hashCode => movie!.title.hashCode;
 }

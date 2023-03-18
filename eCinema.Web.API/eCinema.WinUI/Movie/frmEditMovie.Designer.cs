@@ -359,7 +359,7 @@
             this.Controls.Add(this.txtYear);
             this.Name = "frmEditMovie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddEditMovie";
+            this.Text = "Edit Movie";
             this.Load += new System.EventHandler(this.frmEditMovie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();

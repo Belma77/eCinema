@@ -24,9 +24,10 @@ namespace eCinema.WinUI.Reports
         }
         private async Task LoadSalesPerMovie()
         {
-            salesMovies = await service.GetSales<List<MovieSales>>("Sales");
+            salesMovies = await service.Get<List<MovieSales>>("Sales");
         }
-        private async void frmSalesPerMovie_LoadAsync(object sender, EventArgs e)
+
+        private async void LoadReportData()
         {
             await LoadSalesPerMovie();
             rpvSalesMovie.LocalReport.ReportEmbeddedResource = "eCinema.WinUI.Reports.SalesPerMovie.rdlc";
@@ -42,12 +43,16 @@ namespace eCinema.WinUI.Reports
                 salesTable.Rows.Add(row);
 
             }
-           
+
             rds.Name = "dsMovie";
             rds.Value = salesTable;
             rpvSalesMovie.LocalReport.DataSources.Clear();
             rpvSalesMovie.LocalReport.DataSources.Add(rds);
             rpvSalesMovie.RefreshReport();
+        }
+        private async void frmSalesPerMovie_LoadAsync(object sender, EventArgs e)
+        {
+           LoadReportData();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -76,6 +81,11 @@ namespace eCinema.WinUI.Reports
                 rpvSalesMovie.LocalReport.DataSources.Add(rds);
                 rpvSalesMovie.RefreshReport();
             }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            LoadReportData();   
         }
     }
 }

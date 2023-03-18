@@ -30,9 +30,9 @@ namespace eCinema.WinUI.ScheduleForms
             InitializeComponent();
         }
 
-        private async void frmSchedule_Load(object sender, EventArgs e)
+        private void frmSchedule_Load(object sender, EventArgs e)
         {
-            await LoadSchedules();
+            LoadSchedules();
             LoadCmb();
         }
 
@@ -41,7 +41,7 @@ namespace eCinema.WinUI.ScheduleForms
             cmbPageSize.DataSource = service.ItemsPerPage;
         }
 
-        private async Task LoadSchedules()
+        private async void LoadSchedules()
         {
             var search = new ScheduleSearchObject();
             search.Title = txtTitle.Text;
@@ -58,23 +58,19 @@ namespace eCinema.WinUI.ScheduleForms
 
             search.PageNumber = pageNumber;
             search.PageSize = pageSize;
-            var schedules=await service.Get<List<GetSchedulesDto>>(search);
+            await LoadData(search);
+        }
+        private async Task LoadData(ScheduleSearchObject search=null)
+        {
+            var schedules = await service.Get<List<GetSchedulesDto>>(search);
 
-            if(schedules != null)
+            if (schedules != null)
             {
                 dgvSchedules.AutoGenerateColumns = false;
                 dgvSchedules.DataSource = schedules;
-                
+
             }
         }
-
-        private async void btnAdd_Click(object sender, EventArgs e)
-        {
-            frmInsertSchedule frm = new frmInsertSchedule();
-            frm.ShowDialog();
-            await LoadSchedules();
-        }
-
         private async void dgvSchedules_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             
@@ -87,7 +83,7 @@ namespace eCinema.WinUI.ScheduleForms
                         if (schedule != null)
                         {
                             await service.Delete(schedule.Id);
-                            await LoadSchedules();
+                            LoadSchedules();
 
                         }
                     }
@@ -145,20 +141,20 @@ namespace eCinema.WinUI.ScheduleForms
 
         private async void txtTitle_TextChanged(object sender, EventArgs e)
         {
-           await  LoadSchedules();
+            LoadSchedules();
 
         }
 
         private async void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             dateChanged = true;
-            await LoadSchedules();         
+            LoadSchedules();         
         }
 
         private async void dtmTime_ValueChanged(object sender, EventArgs e)
         {
             timeChanged = true;
-            await LoadSchedules();
+            LoadSchedules();
         }
 
         private async void btnPrevious_Click(object sender, EventArgs e)
@@ -166,14 +162,14 @@ namespace eCinema.WinUI.ScheduleForms
             if (pageNumber > 1)
             {
                 pageNumber--;
-                await LoadSchedules();
+                LoadSchedules();
             }
         }
 
         private async void btnNext_Click(object sender, EventArgs e)
         {
             pageNumber++;
-            await LoadSchedules();
+            LoadSchedules();
         }
 
         private async void cmbPageSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -185,8 +181,13 @@ namespace eCinema.WinUI.ScheduleForms
             else
             {
                 pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
-                await LoadSchedules();
+                LoadSchedules();
             }
+        }
+
+        private async void btnClear_Click(object sender, EventArgs e)
+        {
+            await LoadData();
         }
     }
 }

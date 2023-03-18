@@ -14,7 +14,7 @@ namespace eCInema.Models.Dtos.Customer
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? Phone { get; set; }
-        public byte[]? Picture { get; set; }
+        public string? Picture { get; set; }
         public string? City { get; set; }
         public string? IdentificationNumber { get; set; }
         public CustomerTypeEnum? CustomerType { get; set; }

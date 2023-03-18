@@ -93,6 +93,7 @@
             this.Movie.HeaderText = "Movie";
             this.Movie.MinimumWidth = 6;
             this.Movie.Name = "Movie";
+            this.Movie.ToolTipText = "Schedule.Movie.Title";
             // 
             // ProjectionDate
             // 
@@ -239,7 +240,7 @@
             this.Controls.Add(this.dgvReservations);
             this.Name = "frmReservations";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmReservations";
+            this.Text = "Reservations";
             this.Load += new System.EventHandler(this.frmReservations_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).EndInit();
             this.ResumeLayout(false);
@@ -256,6 +257,10 @@
         private Label label2;
         private Label label3;
         private TextBox txtMovie;
+        private Button btnNext;
+        private Button btnPrevious;
+        private Label label4;
+        private ComboBox cmbPageSize;
         private DataGridViewTextBoxColumn CustomerName;
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewTextBoxColumn Movie;
@@ -263,9 +268,5 @@
         private DataGridViewTextBoxColumn NumberTickets;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewButtonColumn Cancel;
-        private Button btnNext;
-        private Button btnPrevious;
-        private Label label4;
-        private ComboBox cmbPageSize;
     }
 }

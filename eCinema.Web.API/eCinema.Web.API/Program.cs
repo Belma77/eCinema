@@ -38,6 +38,7 @@ using FluentValidation.AspNetCore;
 using System.Reflection;
 using File = System.IO.File;
 using Microsoft.EntityFrameworkCore.Migrations.Operations;
+using eCinema.Web.API;
 
 public class Program
 {
@@ -128,7 +129,7 @@ public class Program
         app.MapControllers();
         using (var scope = app.Services.CreateScope())
         {
-            var dataContext = scope.ServiceProvider.GetRequiredService<eCinemaContext>();
+            var dataContext = scope.ServiceProvider.GetService<eCinemaContext>();
             dataContext.Database.Migrate();
             InsertData(dataContext);
         }

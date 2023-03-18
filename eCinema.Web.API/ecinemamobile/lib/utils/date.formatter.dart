@@ -36,3 +36,14 @@ String formatDate(DateTime date) {
 
   return f.format(date);
 }
+
+String formatShortDate(DateTime date) {
+  if (dynamic == null) {
+    return "";
+  }
+
+  var day = date.day.toString();
+  var month = date.month.toString();
+
+  return "$day.$month";
+}

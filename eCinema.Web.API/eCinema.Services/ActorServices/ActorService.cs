@@ -21,7 +21,7 @@ namespace eCinema.Services.ActorService
             
         }
 
-        public override async Task<ActorDto> InsertAsync(ActorDto insert)
+        public override ActorDto Insert(ActorDto insert)
         {
             var actors = _mapper.Map<Actor>(insert);
             _context.Actor.AddIfNotExists(actors, _context);
@@ -53,12 +53,12 @@ namespace eCinema.Services.ActorService
         }
 
 
-        public async Task<ActorDto> UpdateAsync(int id, ActorDto actor)
+        public ActorDto Update(int id, ActorDto actor)
         {
             return actor;
         }
 
-        public async Task DeleteActorsMovies(List<ActorsMoviesDto> delete)
+        public void DeleteActorsMovies(List<ActorsMoviesDto> delete)
         {
             var mapped = _mapper.Map<List<ActorsMovies>>(delete);
             foreach (var item in mapped)
@@ -67,41 +67,10 @@ namespace eCinema.Services.ActorService
                 if (find != null)
                 {
                     _context.ActorsMovies.Remove(find);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChangesAsync();
                 }
             }
-            //_context.ActorsMovies.RemoveRangeIfExists(find, _context);
         }
-
-        //public List<Actor> Update(List<ActorUpdateDto> list)
-        //{
-        //    var set = _context.Actor;
-
-        //    foreach(var item in list)
-        //    {
-        //       var entity= set.Find(item.Id);
-
-        //        if(entity!=null)
-        //        {
-        //            base.Update(item.Id, item);
-        //        }
-
-        //        else if(item.Id==0)
-        //        {
-        //            base.Insert(item);
-        //        }
-
-        //        else
-        //        {
-        //            throw new Exception("Not found");
-        //        }
-
-        //    }
-        //    return set.ToList();
-        //}
-
-
-
 
     }
 }

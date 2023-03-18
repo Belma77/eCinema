@@ -26,7 +26,6 @@ namespace eCinema.WinUI
             this.insert = insert;
             InitializeComponent();
             lblStep.Visible = true;
-            btnBack.Visible = true;
             btnSave.Visible = true;
             btnAdd.Visible = false;
 
@@ -38,7 +37,6 @@ namespace eCinema.WinUI
             _movie = movie;
             btnAdd.Visible = true;
             lblStep.Visible = false;
-            btnBack.Visible = false;
             btnSave.Visible = false;
         }
 
@@ -72,7 +70,6 @@ namespace eCinema.WinUI
                     this.Hide();
                     frmAddProducers frm = new frmAddProducers(insert);
                     frm.ShowDialog();
-                    this.Show();
                 }
             }
             else if (_movie != null)
@@ -110,10 +107,6 @@ namespace eCinema.WinUI
             
          }
 
-        private void btnBack_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {

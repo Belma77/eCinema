@@ -235,7 +235,7 @@
             this.Controls.Add(this.pbPoster);
             this.Name = "frmAddMovie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddMovie";
+            this.Text = "AddMovie";
             this.Load += new System.EventHandler(this.frmAddMovie_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbPoster)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();

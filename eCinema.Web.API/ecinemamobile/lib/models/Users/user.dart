@@ -12,16 +12,11 @@ class Customer {
   String? phone;
   String? email;
   String? username;
-  //String? picture;
+  String? profilePicture;
 
-  Customer(
-    this.id,
-    this.firstName,
-    this.lastName,
-    this.phone,
-    this.email,
-    this.username,
-  );
+  Customer(this.id, this.firstName, this.lastName, this.phone, this.email,
+      this.username,
+      [this.profilePicture]);
 
   Customer.paramterless();
   factory Customer.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

@@ -105,7 +105,7 @@
             this.Controls.Add(this.label1);
             this.Name = "frmSeatSelection";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmSeatSelection";
+            this.Text = "Select Seats";
             this.Load += new System.EventHandler(this.frmSeatSelection_Load);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);

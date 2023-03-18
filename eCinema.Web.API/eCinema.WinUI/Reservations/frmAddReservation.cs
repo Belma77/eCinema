@@ -36,17 +36,17 @@ namespace eCinema.WinUI.Reservations
             InitializeComponent();
         }
    
-        private void frmAddReservation_Load(object sender, EventArgs e)
+        private async void frmAddReservation_LoadAsync(object sender, EventArgs e)
         {          
-            LoadCmb();
+            await LoadCmb();
         }
 
-        private async void  LoadCmb()
+        private async Task  LoadCmb()
         {
-            schedules = await scheduleService.Get<List<GetSchedulesDto>>();
+            schedules = await scheduleService.Get<List<GetSchedulesDto>>("Distinct");
             if (schedules != null)
             {
-                var list = schedules.DistinctBy(x=>x.Movie.Title).ToList();
+                var list = schedules.ToList();
                 cmbMovie.DataSource = list;
                 cmbMovie.DisplayMember = "Movie";
                 cmbMovie.ValueMember = "Id";   
@@ -65,10 +65,13 @@ namespace eCinema.WinUI.Reservations
             else
             {
                 schedule = cmbMovie.SelectedItem as GetSchedulesDto;
-                movie = await movieService.GetById<MovieDetailsDto>(schedule.Movie.Id);
-                if (movie != null)
+                var filter = new ScheduleSearchObject();
+                filter.Title = schedule.Movie.Title;
+                schedules = await scheduleService.Get<List<GetSchedulesDto>>(filter);
+                
+                if (schedules != null)
                 {
-                    cmbDate.DataSource = movie.Schedules.Select(x=>x.Date.Date).Distinct().ToList();
+                    cmbDate.DataSource = schedules.Select(x=>x.DateOnly).Distinct().ToList();
                 }
             }
         }
@@ -123,11 +126,12 @@ namespace eCinema.WinUI.Reservations
                 var search = new ScheduleSearchObject();
                 var movie = cmbMovie.SelectedItem as GetSchedulesDto;
                 search.Title = movie.Movie.Title;
-                search.Date = (DateTime)cmbDate.SelectedItem;
                 search.StartTime = cmbTime.SelectedItem.ToString();
-                var schedule = await scheduleService.Get<List<GetSchedulesDto>>(search);
-                var id = schedule.Select(x => x.Id).FirstOrDefault();
-                frmSeatSelection frm = new frmSeatSelection(id, customer, payStatus);
+                var dateonly = cmbDate.SelectedItem.ToString();
+                var selected=schedules.Where(x=>x.Movie.Title.Equals(movie.Movie.Title)&&x.DateOnly.Equals(dateonly)&&x.TimeOnly.Equals(search.StartTime)).First();
+                var getId = await scheduleService.GetById<GetSchedulesDto>(selected.Id, "Seats");
+                frmSeatSelection frm = new frmSeatSelection(getId, customer, payStatus);
+
                 frm.ShowDialog();
                 
             }
@@ -164,9 +168,8 @@ namespace eCinema.WinUI.Reservations
         {
             if (cmbDate.SelectedItem != null)
             {
-                var date = (DateTime)cmbDate.SelectedItem;
-                var datelist = movie.Schedules.Where(x => x.Date.Date.ToShortDateString() == date.Date.ToShortDateString()).ToList();
-                var list = datelist.Select(x => x.StartTime.ToShortTimeString()).ToList();
+                var date = cmbDate.SelectedItem.ToString();
+                var list = schedules.Where(x => x.DateOnly.Equals(date)).Select(x => x.TimeOnly).ToList();
                 cmbTime.DataSource = list;
             }
         }

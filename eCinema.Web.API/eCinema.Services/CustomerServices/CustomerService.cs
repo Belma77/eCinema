@@ -50,7 +50,7 @@ namespace eCinema.Services.CustomerServices
             return query;
         }
 
-        public async override Task<CustomerDto> InsertAsync(CustomerInsertDto insert)
+        public override CustomerDto Insert(CustomerInsertDto insert)
         {
             var customerExists = _context.Customers.FirstOrDefault(x => x.UserName == insert.UserName);
             if(customerExists != null)
@@ -61,16 +61,19 @@ namespace eCinema.Services.CustomerServices
             var salt = PasswordHelper.GenerateSalt();
             entity.PasswordSalt = salt;
             entity.PasswordHash = PasswordHelper.GenerateHash(salt, insert.Password);
-
-           
-            var customer = _mapper.Map<Customer>(entity);
-            customer.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
-            _context.Customers.Add(customer);
+            entity.CustomerType = eCInema.Models.Enums.CustomerTypeEnum.Regular;
+            _context.Customers.Add(entity);
           
             _context.SaveChanges();
             return _mapper.Map<CustomerDto>(entity);
         }
-
+        public override void BeforeUpdate(UpdateCustomerDto update, Customer entity)
+        {
+            if(update.Picture!=null)
+            {
+                entity.ProfilePicture = Encoding.ASCII.GetBytes(update.Picture);
+            }
+        }
         public CustomerDto getCurrent()
         {
             var user=_accessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;
@@ -82,6 +85,14 @@ namespace eCinema.Services.CustomerServices
 
             return _mapper.Map<CustomerDto>(customer);
 
+        }
+
+        public bool usernameExists(string username)
+        {
+            var usernameDb = _context.Customers.FirstOrDefault(x=>x.UserName==username);
+            if (usernameDb != null)
+                return true;
+            return false;
         }
         
     }

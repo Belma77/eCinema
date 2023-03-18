@@ -18,12 +18,12 @@ namespace eCinema.WinUI
         private APIservice service = new APIservice("Producers");
         MovieInsertDto _insert;
         MovieDetailsDto _movie;
+
         public frmAddProducers(MovieInsertDto insert)
         {
             InitializeComponent();
             _insert = insert;
             lblStep.Visible = true;
-            btnBack.Visible = true;
             btnSave.Visible = true;
             btnAdd.Visible = false;
 
@@ -34,12 +34,10 @@ namespace eCinema.WinUI
             InitializeComponent();
             _movie = movie;
             lblStep.Visible = false;
-            btnBack.Visible = false;
             btnSave.Visible = false;
             btnAdd.Visible = true;
 
         }
-
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -56,26 +54,17 @@ namespace eCinema.WinUI
                     if (producer != null)
                         list.Add(producer);
 
-
-                    //service.Post<ActorDto>(actor);
                 }
-                // await service.PostArray<ProducersMoviesDto>(, list);
                 _insert.Producers = list;
                 this.Hide();
                 frmAddWriters frm = new frmAddWriters(_insert);
                 frm.ShowDialog();
-                this.Show();
             }
         }
 
         private bool Validate()
         {
             return Helpers.Validator.Validate(dataGridView1, err, Helpers.AlertMessages.CastNotEmptyField);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
         }
 
 

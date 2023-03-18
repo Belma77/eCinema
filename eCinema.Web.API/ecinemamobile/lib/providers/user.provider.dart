@@ -43,6 +43,7 @@ class UserProvider extends BaseProvider<Customer> {
     };
     var response = await http!.post(uri, headers: headers, body: jsonRequest);
 
+    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return CustomerInsert.fromJson(data);
@@ -51,11 +52,11 @@ class UserProvider extends BaseProvider<Customer> {
     }
   }
 
-  Future<List<Customer>> getByUsername([dynamic search]) async {
-    var url = "$_baseUrl$_endpoint";
+  Future<bool> usernameExists(dynamic username) async {
+    var url = "$_baseUrl$_endpoint/UsernameExists";
 
-    if (search != null) {
-      String queryString = getQueryString(search);
+    if (username != null) {
+      String queryString = getQueryString(username);
       url = url + "?" + queryString;
     }
 
@@ -65,10 +66,9 @@ class UserProvider extends BaseProvider<Customer> {
     };
     var response = await http!.get(uri, headers: headers);
 
-    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
-      return data.map((x) => fromJson(x)).cast<Customer>().toList();
+      return data;
     } else {
       throw Exception("Exception... handle this gracefully");
     }

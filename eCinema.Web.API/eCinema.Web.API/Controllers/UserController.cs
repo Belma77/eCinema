@@ -20,9 +20,10 @@ namespace eCinema.Web.API.Controllers
         }
 
         [AllowAnonymous]
-        public override async Task<IActionResult> Insert(UserInsertDto insert)
+        [HttpPost]
+        public override IActionResult Insert(UserInsertDto insert)
         {
-            return Ok(await base.Insert(insert));
+            return Ok(base.Insert(insert));
         }  
 
     }

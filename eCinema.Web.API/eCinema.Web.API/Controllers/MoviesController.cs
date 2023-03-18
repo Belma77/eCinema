@@ -11,7 +11,6 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Movies")]
     [ApiController]
-   // [Authorize(UserRole.Admin)]
     public class MoviesController : BaseCRUDController<MovieDetailsDto, MoviesSearchObject, MovieInsertDto, MovieUpdateDto>
     {
         IMoviesService _service;
@@ -20,16 +19,37 @@ namespace eCinema.Web.API.Controllers
             _service=service;
         }
 
-
-        public override async Task<IActionResult> Get([FromQuery] MoviesSearchObject? search = null)
+        [Authorize(UserRole.Admin)]
+        [HttpGet]
+        public override IActionResult Get([FromQuery] MoviesSearchObject? search = null)
         {
-            return await base.Get(search);
+            return base.Get(search);
         }
 
+        [HttpGet("{id}")]
         [Authorize(UserRole.Customer, UserRole.Admin)]
-        public async override Task<IActionResult> GetById(int id)
+        public override IActionResult GetById(int id)
         {
-            return await base.GetById(id);
+            return base.GetById(id);
+        }
+        [HttpPost]
+        [Authorize(UserRole.Customer, UserRole.Admin)]
+        public override IActionResult Insert(MovieInsertDto insert)
+        {
+            return base.Insert(insert);
+        }
+        [HttpPut("{id}")]
+        [Authorize(UserRole.Admin)]
+        public override IActionResult Update (int id, MovieUpdateDto update)
+        {
+            return base.Update(id, update);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize(UserRole.Admin)]
+        public override IActionResult Delete(int id)
+        {
+            return base.Delete(id);
         }
 
         [HttpGet("{id}/Recommend")]
@@ -40,7 +60,7 @@ namespace eCinema.Web.API.Controllers
         }
 
         [HttpGet("Sales")]
-        [AllowAnonymous]
+        [Authorize(UserRole.Admin)]
         public IActionResult SalesPerMovie()
         {
             return Ok(_service.SalesByMovie());

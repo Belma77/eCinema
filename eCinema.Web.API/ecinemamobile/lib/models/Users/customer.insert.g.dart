@@ -9,7 +9,7 @@ CustomerInsert _$CustomerInsertFromJson(Map<String, dynamic> json) {
       json['firstName'] as String?,
       json['lastName'] as String?,
       json['phone'] as String?,
-      json['email'] as String,
+      json['email'] as String?,
       null,
       null);
 }

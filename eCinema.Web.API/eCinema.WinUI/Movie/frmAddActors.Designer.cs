@@ -35,7 +35,6 @@
             this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.btnSave = new System.Windows.Forms.Button();
             this.lblStep = new System.Windows.Forms.Label();
-            this.btnBack = new System.Windows.Forms.Button();
             this.lbl = new System.Windows.Forms.Label();
             this.err = new System.Windows.Forms.ErrorProvider(this.components);
             this.btnAdd = new System.Windows.Forms.Button();
@@ -103,15 +102,6 @@
             this.lblStep.TabIndex = 3;
             this.lblStep.Text = "Step: 5 of 5";
             // 
-            // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(25, 331);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(94, 29);
-            this.btnBack.TabIndex = 4;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            // 
             // lbl
             // 
             this.lbl.AutoSize = true;
@@ -144,14 +134,12 @@
             this.ClientSize = new System.Drawing.Size(494, 387);
             this.Controls.Add(this.btnAdd);
             this.Controls.Add(this.lbl);
-            this.Controls.Add(this.btnBack);
             this.Controls.Add(this.lblStep);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.dataGridView1);
             this.Name = "frmAddActors";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddActors";
-            this.Load += new System.EventHandler(this.frmAddActors_Load);
+            this.Text = "Add Actors";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
@@ -167,7 +155,6 @@
         private DataGridViewTextBoxColumn LastName;
         private DataGridViewButtonColumn Remove;
         private Label lblStep;
-        private Button btnBack;
         private Label lbl;
         private ErrorProvider err;
         private Button btnAdd;

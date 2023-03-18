@@ -27,7 +27,6 @@ namespace eCinema.WinUI
             InitializeComponent();
             _movie = movie;
             lblStep.Visible = false;
-            btnBack.Visible = false;
             btnSave.Visible = false;
             btnAdd.Visible = true;
 
@@ -35,19 +34,15 @@ namespace eCinema.WinUI
 
         public frmAddWriters(MovieInsertDto insert)
         {
+            
             this.insert = insert;
             InitializeComponent();
             lblStep.Visible = true;
-            btnBack.Visible = true;
             btnSave.Visible = true;
             btnAdd.Visible = false;
 
         }
 
-        private void frmAddWriters_Load(object sender, EventArgs e)
-        {
-            
-        }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -88,11 +83,6 @@ namespace eCinema.WinUI
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
-
         private async void btnAdd_Click(object sender, EventArgs e)
         {
             if (Validate())
@@ -114,5 +104,7 @@ namespace eCinema.WinUI
                 this.Close();
             }
         }
+
+        
     }
 }

@@ -9,8 +9,8 @@ namespace eCinema.Services.CRUDservice
 {
     public interface IBaseCRUDService<Tmodel, TSearch, TInsert, TUpdate>:IBaseService<Tmodel, TSearch> where Tmodel : class where TSearch : class  where TInsert : class where TUpdate : class 
     {
-       Task<Tmodel> InsertAsync(TInsert insert);
-       Task<Tmodel> UpdateAsync(int id,TUpdate update);
-       Task<List<Tmodel>> DeleteAsync(int id);
+       Tmodel Insert(TInsert insert);
+       Tmodel Update(int id,TUpdate update);
+       List<Tmodel> Delete(int id);
     }
 }

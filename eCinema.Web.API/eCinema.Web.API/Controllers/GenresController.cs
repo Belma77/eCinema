@@ -14,7 +14,7 @@ namespace eCinema.Web.API.Controllers
     [Route("Genres")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class GenresController : ControllerBase /*BaseCRUDController<GenresDto, GenresSearchObject, GenresUpsertDto, GenresUpsertDto>*/
+    public class GenresController : ControllerBase 
     {
         IGenresSerice _service;
         public GenresController(IGenresSerice service) : base()

@@ -10,7 +10,6 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(UserRole.Admin)]
     public class BaseController<Tmodel, TSearchObject> : ControllerBase where Tmodel : class where TSearchObject : class
     {
         protected IBaseService<Tmodel, TSearchObject> _service;
@@ -21,15 +20,15 @@ namespace eCinema.Web.API.Controllers
         }
 
         [HttpGet]
-        public virtual async Task<IActionResult> Get([FromQuery]TSearchObject? search=null)
+        public virtual IActionResult Get([FromQuery]TSearchObject? search=null)
         {
             return Ok(_service.Get(search));
         }
 
         [HttpGet("{id}")]
-        public async virtual Task<IActionResult> GetById(int id)
+        public virtual IActionResult GetById(int id)
         {
-            return  Ok(_service.GetById(id));
+            return Ok(_service.GetById(id));
         }
         
     }

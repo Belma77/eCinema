@@ -80,9 +80,11 @@ namespace eCinema.WinUI
         }
         private async void btnDelete_Click(object sender, EventArgs e)
         {
-
-            await _service.Delete(_movie.Id);
-            this.Hide();
+            if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                await _service.Delete(_movie.Id);
+                this.Hide();
+            }
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
@@ -90,7 +92,7 @@ namespace eCinema.WinUI
             this.Hide();
             frmEditMovie frm =new frmEditMovie(_movie.Id);
             frm.ShowDialog();
-            LoadMovieDetails();
+            await LoadMovieDetails();
             this.Show();
         }
 

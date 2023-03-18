@@ -37,8 +37,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String? password;
   String? email;
   bool _obscureText = true;
-  List<Customer> usernameExists = [];
   Customer? customer;
+  bool customerExists = false;
   late UserProvider _userProvider;
 
   @override
@@ -60,16 +60,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Future getCustomerByUsername(String username) async {
     UserProvider();
-    usernameExists = await _userProvider.getByUsername({'Username': username});
+    var exists = await _userProvider.usernameExists({'username': username});
     setState(() {
-      customer = usernameExists[0];
+      customerExists = exists == true ? true : false;
     });
   }
 
   String? validateUsername(String? value) {
     if (value!.isEmpty) {
       return ErrorMessages.notEmptyValue;
-    } else if (customer != null) {
+    } else if (customerExists == true) {
       return ErrorMessages.usernameUnique;
     } else {
       return null;

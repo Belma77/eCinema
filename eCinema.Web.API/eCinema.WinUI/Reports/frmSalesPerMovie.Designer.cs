@@ -32,6 +32,7 @@
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rpvSalesMovie
@@ -42,19 +43,19 @@
             this.rpvSalesMovie.Location = new System.Drawing.Point(0, 70);
             this.rpvSalesMovie.Name = "ReportViewer";
             this.rpvSalesMovie.ServerReport.BearerToken = null;
-            this.rpvSalesMovie.Size = new System.Drawing.Size(800, 450);
+            this.rpvSalesMovie.Size = new System.Drawing.Size(820, 450);
             this.rpvSalesMovie.TabIndex = 0;
             // 
             // txtSearch
             // 
             this.txtSearch.Location = new System.Drawing.Point(101, 22);
             this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(587, 27);
+            this.txtSearch.Size = new System.Drawing.Size(486, 27);
             this.txtSearch.TabIndex = 1;
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(694, 20);
+            this.btnSearch.Location = new System.Drawing.Point(593, 21);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(94, 29);
             this.btnSearch.TabIndex = 2;
@@ -71,16 +72,28 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Movie Title";
             // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(694, 20);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(113, 29);
+            this.btnClear.TabIndex = 4;
+            this.btnClear.Text = "Clear Search";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // frmSalesPerMovie
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(822, 527);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.rpvSalesMovie);
             this.Name = "frmSalesPerMovie";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSalesPerMovie";
             this.Load += new System.EventHandler(this.frmSalesPerMovie_LoadAsync);
             this.ResumeLayout(false);
@@ -94,5 +107,6 @@
         private TextBox txtSearch;
         private Button btnSearch;
         private Label label1;
+        private Button btnClear;
     }
 }

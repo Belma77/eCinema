@@ -9,10 +9,9 @@ class ScheduleMovie {
   DateTime? date;
   String? dayOfWeek;
   DateTime? startTime;
-  Hall? hall;
+  //Hall? hall;
 
-  ScheduleMovie(
-      this.id, this.date, this.dayOfWeek, this.startTime, this.hall) {}
+  ScheduleMovie(this.id, this.date, this.dayOfWeek, this.startTime) {}
   factory ScheduleMovie.fromJson(Map<String, dynamic> json) =>
       _$ScheduleMovieFromJson(json);
 

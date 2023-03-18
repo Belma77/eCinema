@@ -200,8 +200,8 @@
             this.Controls.Add(this.cmbFirstName);
             this.Name = "frmAddReservation";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmAddReservation";
-            this.Load += new System.EventHandler(this.frmAddReservation_Load);
+            this.Text = "Add Reservation";
+            this.Load += new System.EventHandler(this.frmAddReservation_LoadAsync);
             ((System.ComponentModel.ISupportInitialize)(this.err)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

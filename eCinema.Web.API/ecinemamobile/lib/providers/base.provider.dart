@@ -45,7 +45,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
       var map = fromJson(data);
       return map;
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("Exception...");
     }
   }
 
@@ -67,7 +67,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
       var data = jsonDecode(response.body);
       return data.map((x) => fromJson(x)).cast<T>().toList();
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("Exception... ");
     }
   }
 
@@ -148,7 +148,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
       return data.map((x) => fromJson(x)).cast<T>().toList();
     } else {
-      throw Exception("Exception... handle this gracefully");
+      throw Exception("Exception...");
     }
   }
 

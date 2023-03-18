@@ -26,7 +26,6 @@ namespace eCinema.WinUI
             InitializeComponent();
             _movie = movie;
             lblStep.Visible = false;
-            btnBack.Visible = false;
             btnSave.Visible = false;
             btnAdd.Visible = true;
 
@@ -37,7 +36,6 @@ namespace eCinema.WinUI
             InitializeComponent();
             _insert = insert;
             lblStep.Visible = true;
-            btnBack.Visible = true;
             btnSave.Visible = true;
             btnAdd.Visible = false;
 
@@ -53,10 +51,6 @@ namespace eCinema.WinUI
 
         }
 
-        private void frmAddActors_Load(object sender, EventArgs e)
-        {
-
-        }
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
@@ -74,7 +68,6 @@ namespace eCinema.WinUI
                         list.Add(actor);
 
 
-                    //service.Post<ActorDto>(actor);
                 }
 
                 _insert.Actors = list;
@@ -112,5 +105,7 @@ namespace eCinema.WinUI
                 this.Close();
             }
         }
+
+        
     }
 }

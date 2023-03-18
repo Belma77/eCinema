@@ -12,18 +12,48 @@ namespace eCinema.Web.API.Controllers
 {
     [Route("Reservation")]
     [ApiController]
+    
     public class ReservationController : BaseCRUDController<ReservationDto, ReservationSearchObject, ReservationInsertDto, ReservationUpdateDto>
     {
-        IReservationService _service;
+        private IReservationService _service;
         public ReservationController(IReservationService service):base(service)
         {
             _service = service;
         }
 
         [Authorize(UserRole.Customer, UserRole.Admin)]
-        public override async Task<IActionResult> Insert(ReservationInsertDto reservation)
+        [HttpPost]
+        public override IActionResult Insert(ReservationInsertDto reservation)
         {
-            return Ok(await _service.InsertAsync(reservation));
+            return Ok(_service.Insert(reservation));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpPut("{id}")]
+        public override IActionResult Update(int id, ReservationUpdateDto reservation)
+        {
+            return Ok(_service.Update(id,reservation));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpDelete("{id}")]
+        public override IActionResult Delete(int id)
+        {
+            return Ok(_service.Delete(id));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpGet("{id}")]
+        public override IActionResult GetById(int id)
+        {
+            return Ok(_service.GetById(id));
+        }
+
+        [Authorize(UserRole.Admin)]
+        [HttpGet]
+        public override IActionResult Get(ReservationSearchObject search)
+        {
+            return Ok(_service.Get(search));
         }
 
         [HttpGet("ByCustomer")]

@@ -17,6 +17,7 @@ namespace eCinema.WinUI
     {
         private string _resource = null;
         public string _endpoint = Settings.Default.ApiURL;
+        /*"https://localhost:7239/";*/
 
         public static string Username = null;
         public static string Password = null;
@@ -36,7 +37,7 @@ namespace eCinema.WinUI
                 {
                     query = await search.ToQueryString();
                 }
-                var list = await $"{_endpoint}{_resource}?{query}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                var list = await $"{_endpoint}{_resource}?{query}".WithTimeout(TimeSpan.FromSeconds(30)).WithBasicAuth(Username, Password).GetJsonAsync<T>();
 
                 return list;
             }
@@ -68,9 +69,68 @@ namespace eCinema.WinUI
         
         public async Task<T> GetById<T>(object id)
         {
-            var result = await $"{_endpoint}{_resource}/{id}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
+            try
+            {
+                var result = await $"{_endpoint}{_resource}/{id}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
 
-            return result;
+                return result;
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                throw;
+
+            }
+        }
+
+        public async Task<T> GetById<T>(object id, string path)
+        {
+            try
+            {
+                var result = await $"{_endpoint}{_resource}/{id}/{path}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
+
+                return result;
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show("Unauthorized", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    MessageBox.Show("Forbidden", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("User not found", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                if (ex.Call.HttpResponseMessage.StatusCode == System.Net.HttpStatusCode.InternalServerError)
+                {
+                    MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                throw;
+
+            }
         }
         public async Task<T> Post<T>(object request)
         {
@@ -233,7 +293,7 @@ namespace eCinema.WinUI
 
             }
         }
-        public async Task<T> GetSales<T>(string path)
+        public async Task<T> Get<T>(string path)
         {
             try
             {
@@ -268,6 +328,7 @@ namespace eCinema.WinUI
             }
         }
 
+        
     }
     }
 

@@ -95,16 +95,16 @@ namespace eCinema.Services.MoviesServices
                 .Include(d => d.WritersMovies)
                 .ThenInclude(d => d.Writer).
                  Include(x => x.Schedules).
-                 ThenInclude(x => x.Hall).
+                 //ThenInclude(x => x.Hall).
                  FirstOrDefault(x => x.Id == id);
 
             return _mapper.Map<MovieDetailsDto>(movie);
 
         }
 
-        public override async Task<MovieDetailsDto> InsertAsync(MovieInsertDto insert)
+        public override MovieDetailsDto Insert(MovieInsertDto insert)
         {
-            var entity = await base.InsertAsync(insert);
+            var entity = base.Insert(insert);
             var movie = _mapper.Map<Movies>(entity);
 
 
@@ -287,7 +287,6 @@ namespace eCinema.Services.MoviesServices
                .GroupBy(y=>y.Schedule.Movie).
                     Select(x => new MovieSales
                     {
-                        //Movie = _mapper.Map<GetSchedulesDto>(x.Key),
                         Movie = x.Key,
                         Sales = x.Sum(y => y.Price)
                     }).

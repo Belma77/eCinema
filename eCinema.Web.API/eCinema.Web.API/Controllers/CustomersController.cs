@@ -20,15 +20,15 @@ namespace eCinema.Web.API.Controllers
         }
 
         [AllowAnonymous]
-        public override async Task<IActionResult> Insert(CustomerInsertDto insert)
+        public override IActionResult Insert(CustomerInsertDto insert)
         {
-            return Ok(await base.Insert(insert));
+            return Ok(base.Insert(insert));
         }
 
-        [AllowAnonymous]
-        public override async Task<IActionResult> Get(CustomerSearchObject? search)
+        [Authorize(UserRole.Admin)]
+        public override IActionResult Get(CustomerSearchObject? search)
         {
-            return await base.Get(search);
+            return base.Get(search);
         }
 
 
@@ -53,6 +53,13 @@ namespace eCinema.Web.API.Controllers
         public IActionResult GetCurrent()
         {
             return Ok(_service.getCurrent());
+        }
+
+        [HttpGet("UsernameExists")]
+        [AllowAnonymous]
+        public IActionResult UsernameExists([FromQuery] string username)
+        {
+            return Ok(_service.usernameExists(username));
         }
 
 

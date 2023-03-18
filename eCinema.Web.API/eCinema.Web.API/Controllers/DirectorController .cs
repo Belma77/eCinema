@@ -16,7 +16,7 @@ namespace eCinema.Web.API.Controllers
     [Route("Directors")]
     [ApiController]
     [Authorize(UserRole.Admin)]
-    public class DirectorsController : ControllerBase/*BaseCRUDController<DirectorDto, CastSearchObject, DirectorDto, DirectorDto>*/
+    public class DirectorsController : ControllerBase
     {
 
         IDirectorService _service;

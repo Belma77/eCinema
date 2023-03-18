@@ -20,18 +20,13 @@ namespace eCinema.WinUI
     {
         APIservice service = new APIservice("Movies");
 
-
         public frmAddMovie()
         {
             InitializeComponent();
         }
 
-        private void label9_Click(object sender, EventArgs e)
-        {
 
-        }
-
-        private async void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (Validate())
             {
@@ -48,15 +43,9 @@ namespace eCinema.WinUI
                     movie.Genres.Add(item as GenresDto);
                 }
 
-
-                if (movie != null)
-                {
-                    //var result = await service.Post<MovieDetailsDto>(movie);
-                    this.Hide();
-                    frmAddDirectors frm = new frmAddDirectors(movie);
-                    frm.ShowDialog();
-                    this.Show();
-                }
+                frmAddDirectors frm = new frmAddDirectors(movie);
+                frm.ShowDialog();
+                
             }
             
         }

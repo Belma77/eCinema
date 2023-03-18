@@ -42,7 +42,7 @@ namespace eCinema.WinUI
         }
 
 
-        private void dgvMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private async void dgvMovies_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var item = dgvMovies.SelectedRows[0].DataBoundItem as MovieDetailsDto;
             if(item != null)
@@ -50,6 +50,7 @@ namespace eCinema.WinUI
                 this.Hide();
                 frmMovieDetails frm = new frmMovieDetails(item.Id);
                 frm.ShowDialog();
+                await LoadMovies();
                 this.Show();
                 
             }          

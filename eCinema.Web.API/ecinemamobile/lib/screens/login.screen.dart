@@ -29,8 +29,20 @@ class _LoginScreenState extends State<LoginScreen> {
       ScheduleProvider();
       Authorization.username = _usernameController.text;
       Authorization.password = _passwordController.text;
-      await _scheduleProvider.get();
+      try {
+        await _scheduleProvider.get();
+      } catch (e) {
+        showMessage(e.toString());
+      }
+    }
+  }
+
+  Future<void> loginUser() async {
+    try {
+      await login();
       Navigator.pushNamed(context, MoviesListScreen.route);
+    } catch (e) {
+      showMessage(e.toString());
     }
   }
 
@@ -82,7 +94,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: TextFormField(
                 controller: _passwordController,
                 obscureText: _obscureText,
-                //validator: Validator.validatePassword,
+                validator: Validator.validatePassword,
                 keyboardType: TextInputType.text,
                 style: const TextStyle(
                     fontSize: 18.0, height: 1.0, color: Colors.black),
@@ -114,22 +126,11 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), color: Colors.blue),
               child: InkWell(
-                onTap: () async {
+                onTap: () {
                   try {
-                    login();
+                    loginUser();
                   } catch (e) {
-                    showDialog(
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                              title: const Text("Error"),
-                              content: Text(e.toString()),
-                              actions: [
-                                TextButton(
-                                  child: const Text("Ok"),
-                                  onPressed: () => Navigator.pop(context),
-                                )
-                              ],
-                            ));
+                    showMessage(e.toString());
                   }
                 },
                 child: const Center(
@@ -155,5 +156,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 ))
           ]),
         )));
+  }
+
+  showMessage(String message) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text("Message"),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () => Navigator.pop(context))
+              ],
+            ));
   }
 }

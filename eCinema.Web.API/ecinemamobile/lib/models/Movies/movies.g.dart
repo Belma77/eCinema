@@ -11,23 +11,33 @@ Movies _$MoviesFromJson(Map<String, dynamic> json) {
   List<GenresMovies> _genresMovies = [];
   List<ScheduleMovie> _schedules = [];
 
-  var genresMovies = json['moviesGenres'] as List;
-  _genresMovies = genresMovies.map((x) => GenresMovies.fromJson(x)).toList();
+  if (json['moviesGenres'] != null) {
+    var genresMovies = json['moviesGenres'] as List;
+    _genresMovies = genresMovies.map((x) => GenresMovies.fromJson(x)).toList();
+  }
 
-  var actorsMovies = json['actorsMovies'] as List;
-  _actorsMovies = actorsMovies.map((x) => ActorsMovies.fromJson(x)).toList();
+  if (json['actorsMovies'] != null) {
+    var actorsMovies = json['actorsMovies'] as List;
+    _actorsMovies = actorsMovies.map((x) => ActorsMovies.fromJson(x)).toList();
+  }
 
-  var directorsMovies = json['directorsMovies'] as List;
-  _directorsMovies =
-      directorsMovies.map((x) => DirectorsMovies.fromJson(x)).toList();
+  if (json['directorsMovies'] != null) {
+    var directorsMovies = json['directorsMovies'] as List;
+    _directorsMovies =
+        directorsMovies.map((x) => DirectorsMovies.fromJson(x)).toList();
+  }
 
-  var writersMovies = json['writersMovies'] as List;
-  _writersMovies = writersMovies.map((x) => WritersMovies.fromJson(x)).toList();
+  if (json['writersMovies'] != null) {
+    var writersMovies = json['writersMovies'] as List;
+    _writersMovies =
+        writersMovies.map((x) => WritersMovies.fromJson(x)).toList();
+  }
 
-  var producersMovies = json['producersMovies'] as List;
-  _producersMovies =
-      producersMovies.map((x) => ProducersMovies.fromJson(x)).toList();
-
+  if (json['producersMovies'] != null) {
+    var producersMovies = json['producersMovies'] as List;
+    _producersMovies =
+        producersMovies.map((x) => ProducersMovies.fromJson(x)).toList();
+  }
   if (json['schedules'] != null) {
     var schedules = json['schedules'] as List;
     _schedules = schedules.map((x) => ScheduleMovie.fromJson(x)).toList();
