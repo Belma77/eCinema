@@ -11,4 +11,18 @@ password: pass123
 
 Kredencijali za pristup mobilnoj aplikaciji:  
 username:Customer  
-password:pass123
+password:pass123  
+
+Pokretanje aplikacija: 
+
+1. Nakon kloniranja repozitorija otvoriti komandnu liniju, navigirati do foldera gdje je kloniran repozitorij te pokrenuti dockerizovani api i bazu prilikom cega se izvrsava i skripta za seeding podataka:  
+
+docker-compose up --build  
+
+ Mobile aplikacija:  
+ 1. flutter pub get (za dobavljanje dependencies)  
+ 2. flutter run  (pokretanje aplikacije)  
+ 
+ Desktop aplikacija:  
+ Pokrenuti kroz visual studio. 
+
