@@ -188,12 +188,12 @@
             // 
             // Title
             // 
+            this.Title.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Title.DataPropertyName = "Movie.Title";
             this.Title.HeaderText = "Title";
             this.Title.MinimumWidth = 6;
             this.Title.Name = "Title";
             this.Title.ToolTipText = "Title";
-            this.Title.Width = 200;
             // 
             // Date
             // 

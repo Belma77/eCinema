@@ -40,10 +40,6 @@ namespace eCinema.Services.CRUDservice
         {
             
         }
-        public virtual void BeforeUpdate(TUpdate update, TDatabase entity)
-        {
-
-        }
 
         
         public virtual Tmodel Update(int id, TUpdate update)
@@ -51,8 +47,6 @@ namespace eCinema.Services.CRUDservice
             var set = _context.Set<TDatabase>();
 
             var entity = set.Find(id);
-
-            BeforeUpdate(update, entity);
 
             if (entity != null)
             {

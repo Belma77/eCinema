@@ -5,13 +5,14 @@ import 'package:ecinemamobile/models/Authorization/authorization.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 import '../models/Users/user.dart';
 import '../providers/user.provider.dart';
 import '../utils/image.convertor.dart';
-import 'package:image/image.dart' as img;
 
 class UserProfile extends StatefulWidget {
   static const String route = "/UserProfile";
@@ -35,9 +36,9 @@ class _UserProfileState extends State<UserProfile> {
   String? username;
   String? phone;
   String? email;
-  Uint8List? bytesPicture;
   Customer? user;
-  img.Image? image;
+  String? picture;
+  File? imageFile;
   @override
   void initState() {
     super.initState();
@@ -45,31 +46,11 @@ class _UserProfileState extends State<UserProfile> {
     getUser();
   }
 
-  Future getImage() async {
-    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (image == null) {
-      return;
-    }
-    final imageTmp = File(image.path);
-    setState(() {
-      _pickedImage = imageTmp;
-    });
-  }
-
   Future getUser() async {
     var tmpData = await _userProvider?.getUser();
     setState(() {
       user = tmpData;
-      /* List<int> list = user!.profilePicture!.codeUnits;
-      bytesPicture = Uint8List.fromList(list);*/
       FillControllers();
-      if (user!.profilePicture != null && user!.profilePicture != "") {
-        List<int> imageBytes = base64.decode(user!.profilePicture!);
-// Decode the image data using the image package
-        image = img.decodeImage(imageBytes)!;
-// Convert the image to a Flutter Image widget
-        //Image flutterImage = Image.memory(img.encodePng(image));
-      }
     });
   }
 
@@ -80,7 +61,6 @@ class _UserProfileState extends State<UserProfile> {
     edit.phone = phone;
     edit.email = email;
     edit.username = Authorization.username;
-    edit.profilePicture = _pickedImage.toString();
     try {
       await _userProvider!.update(user!.id!, edit);
       Navigator.pop(context);
@@ -209,31 +189,6 @@ class _UserProfileState extends State<UserProfile> {
                                 color: Color.fromARGB(255, 131, 178, 215)),
                           ),
                         )),
-                  ),
-                  Container(
-                      margin: const EdgeInsets.all(10),
-                      child: _pickedImage != null
-                          ? Image.file(
-                              _pickedImage!,
-                              fit: BoxFit.fill,
-                            )
-                          : (user?.profilePicture != null &&
-                                  user?.profilePicture != "")
-                              ? Image.memory(height: 200, width: 100,
-                                  errorBuilder: (BuildContext context,
-                                      Object exception,
-                                      StackTrace? stackTrace) {
-                                  // Handle the error by displaying an error message
-                                  return Text(
-                                      'Error loading image: $exception');
-                                }, base64Decode(user!.profilePicture!))
-                              : null),
-                  Container(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: ElevatedButton(
-                          onPressed: getImage, child: const Text("Pick image")),
-                    ),
                   ),
                   Container(
                     child: Align(

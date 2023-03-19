@@ -67,13 +67,7 @@ namespace eCinema.Services.CustomerServices
             _context.SaveChanges();
             return _mapper.Map<CustomerDto>(entity);
         }
-        public override void BeforeUpdate(UpdateCustomerDto update, Customer entity)
-        {
-            if(update.Picture!=null)
-            {
-                entity.ProfilePicture = Encoding.ASCII.GetBytes(update.Picture);
-            }
-        }
+        
         public CustomerDto getCurrent()
         {
             var user=_accessor.HttpContext.User.FindFirst(ClaimTypes.Name).Value;

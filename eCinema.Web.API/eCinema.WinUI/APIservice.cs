@@ -17,7 +17,7 @@ namespace eCinema.WinUI
     {
         private string _resource = null;
         public string _endpoint = Settings.Default.ApiURL;
-        /*"https://localhost:7239/";*/
+        //"https://localhost:7239/";
 
         public static string Username = null;
         public static string Password = null;

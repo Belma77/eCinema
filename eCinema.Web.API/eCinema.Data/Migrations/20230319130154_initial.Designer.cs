@@ -12,7 +12,7 @@ using eCinema.Data;
 namespace eCinema.Data.Migrations
 {
     [DbContext(typeof(eCinemaContext))]
-    [Migration("20230316204828_initial")]
+    [Migration("20230319130154_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -371,9 +371,6 @@ namespace eCinema.Data.Migrations
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("UserName")
                         .IsRequired()

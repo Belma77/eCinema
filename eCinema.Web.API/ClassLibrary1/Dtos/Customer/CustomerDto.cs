@@ -15,7 +15,6 @@ namespace eCInema.Models.Dtos.Customer
         public string Username { get; set; }
         public string Email { get; set; }
         public string Phone { get; set; }
-        public byte[]? ProfilePicture { get; set; }
         public CustomerTypeEnum CustomerType { get; set; }
         public string? IdenticiationNumber { get; set; }
         public override string ToString()

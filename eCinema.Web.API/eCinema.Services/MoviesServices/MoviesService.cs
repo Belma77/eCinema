@@ -95,7 +95,6 @@ namespace eCinema.Services.MoviesServices
                 .Include(d => d.WritersMovies)
                 .ThenInclude(d => d.Writer).
                  Include(x => x.Schedules).
-                 //ThenInclude(x => x.Hall).
                  FirstOrDefault(x => x.Id == id);
 
             return _mapper.Map<MovieDetailsDto>(movie);

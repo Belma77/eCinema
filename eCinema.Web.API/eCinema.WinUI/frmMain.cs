@@ -69,7 +69,7 @@ namespace eCinema.WinUI
             var username = APIservice.Username;
             lblWelcome.Text = "Welcome " + username;
         }
-
+       
         private void showAllMoviesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmMovies frm = new frmMovies();
@@ -90,6 +90,12 @@ namespace eCinema.WinUI
         {
             frmReservations frm = new frmReservations();
             frm.ShowDialog();
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+
         }
     }
 }

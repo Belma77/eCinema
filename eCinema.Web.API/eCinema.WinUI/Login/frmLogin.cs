@@ -29,9 +29,11 @@ namespace eCinema.WinUI.Login
             try
             {
                 var result = await service.Get<dynamic>();
+                this.Hide();
                 frmMain frm = new frmMain();
                 frm.ShowDialog();
-                this.Hide();
+                this.Close();
+                Application.Exit();
             }
 
             catch (Exception ex)
@@ -39,6 +41,10 @@ namespace eCinema.WinUI.Login
                 
             }
         }
-       
+
+        private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
