@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
-
 import 'package:ecinemamobile/models/Authorization/authorization.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +8,10 @@ import 'package:flutter/widgets.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
 import '../models/Users/user.dart';
 import '../providers/user.provider.dart';
 import '../utils/image.convertor.dart';
+import 'package:image/image.dart' as img;
 
 class UserProfile extends StatefulWidget {
   static const String route = "/UserProfile";
@@ -38,6 +37,7 @@ class _UserProfileState extends State<UserProfile> {
   String? email;
   Uint8List? bytesPicture;
   Customer? user;
+  img.Image? image;
   @override
   void initState() {
     super.initState();
@@ -60,9 +60,16 @@ class _UserProfileState extends State<UserProfile> {
     var tmpData = await _userProvider?.getUser();
     setState(() {
       user = tmpData;
-      List<int> list = user!.profilePicture!.codeUnits;
-      bytesPicture = Uint8List.fromList(list);
+      /* List<int> list = user!.profilePicture!.codeUnits;
+      bytesPicture = Uint8List.fromList(list);*/
       FillControllers();
+      if (user!.profilePicture != null && user!.profilePicture != "") {
+        List<int> imageBytes = base64.decode(user!.profilePicture!);
+// Decode the image data using the image package
+        image = img.decodeImage(imageBytes)!;
+// Convert the image to a Flutter Image widget
+        //Image flutterImage = Image.memory(img.encodePng(image));
+      }
     });
   }
 
@@ -204,24 +211,22 @@ class _UserProfileState extends State<UserProfile> {
                         )),
                   ),
                   Container(
-                      height: 200,
                       margin: const EdgeInsets.all(10),
-                      child: /*  _pickedImage != null
+                      child: _pickedImage != null
                           ? Image.file(
                               _pickedImage!,
                               fit: BoxFit.fill,
-                            ) */
-                          user?.profilePicture != null
-                              ? Image.memory(
+                            )
+                          : (user?.profilePicture != null &&
+                                  user?.profilePicture != "")
+                              ? Image.memory(height: 200, width: 100,
                                   errorBuilder: (BuildContext context,
                                       Object exception,
                                       StackTrace? stackTrace) {
-                                    // Handle the error by displaying an error message
-                                    return Text(
-                                        'Error loading image: $exception');
-                                  },
-                                  bytesPicture!,
-                                )
+                                  // Handle the error by displaying an error message
+                                  return Text(
+                                      'Error loading image: $exception');
+                                }, base64Decode(user!.profilePicture!))
                               : null),
                   Container(
                     child: Align(

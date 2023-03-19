@@ -37,7 +37,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     MoviesProvider();
     _moviesProvider = context.read<MoviesProvider>();
     loadData();
-    //_scheduleProvider = context.read<ScheduleProvider>();
     getRecommendations();
   }
 
@@ -402,7 +401,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
             child: const Padding(
           padding: EdgeInsets.all(5),
           child: Text(
-            "Loading...",
+            "Loading recommendations..",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
           ),
         )),

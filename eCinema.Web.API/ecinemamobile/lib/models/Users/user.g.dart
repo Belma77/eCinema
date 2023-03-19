@@ -13,7 +13,7 @@ Customer _$UserFromJson(Map<String, dynamic> json) {
         json['phone'] as String?,
         json['email'] as String?,
         json['username'] as String?,
-        json['profilePicture'] as String?);
+        json['profilePicture'] as String);
   }
   return Customer(
       json['id'] as int?,
