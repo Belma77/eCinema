@@ -13,6 +13,9 @@ Kredencijali za pristup mobilnoj aplikaciji:
 username:Customer  
 password:pass123  
 
+Testni podaci za Stripe payment:  
+Broj kartice: 4242 4242 4242 4242
+
 Pokretanje aplikacija: 
 
 1. Nakon kloniranja repozitorija otvoriti komandnu liniju, navigirati do foldera gdje je kloniran repozitorij te pokrenuti dockerizovani api i bazu prilikom cega se izvrsava i skripta za seeding podataka:  
