@@ -23,7 +23,6 @@ class UserProvider extends BaseProvider<Customer> {
 
     Map<String, String> headers = createHeaders();
     var response = await http!.get(uri, headers: headers);
-    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       var map = fromJson(data);

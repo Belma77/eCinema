@@ -65,6 +65,7 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
         displayPaymentSheet();
         var loyal = joinLoyalty();
         await _loyaltyClubProvider?.insert(loyal);
+        Navigator.pop(context);
       } catch (err) {
         print(err.toString());
       }

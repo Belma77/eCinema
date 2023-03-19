@@ -6,10 +6,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using eCinema.Services.BaseService;
 namespace eCinema.Services.HallServices
 {
-    public interface IHallService:IBaseCRUDService<HallDto, HallSearchObject, HallDto, HallUpdateDto>
+    public interface IHallService:IBaseService<HallDto, HallSearchObject>
     {
         
     }

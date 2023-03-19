@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
     public class CastDto
     {
@@ -14,15 +14,15 @@ namespace eCInema.Models.Dtos
 
         public override bool Equals(object? obj)
         {
-            var item=obj as CastDto;
-             if(item==null) return false;
+            var item = obj as CastDto;
+            if (item == null) return false;
 
-            return this.FirstName.ToLower().Equals(item.FirstName.ToLower()) && this.LastName.ToLower().Equals(item.LastName.ToLower());
+            return FirstName.ToLower().Equals(item.FirstName.ToLower()) && LastName.ToLower().Equals(item.LastName.ToLower());
         }
 
         public override string ToString()
         {
-            return this.FirstName + " " + this.LastName;
+            return FirstName + " " + LastName;
         }
     }
 }

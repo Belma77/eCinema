@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
-using eCinema.Services.CastServices;
-using eCInema.Models.Dtos;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,24 +8,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eCInema.Models.SearchObjects;
+using eCInema.Models.Dtos.Movie;
 
 namespace eCinema.Services.ActorService
 {
-    public class ActorsService: BaseCRUDService<ActorDto, Actor, CastSearchObject, ActorDto, ActorUpdateDto>, IActorService
+    public class ActorsService: IActorService
     {
-       
-        public ActorsService(eCinemaContext context, IMapper mapper):base(context, mapper)
+        eCinemaContext _context;
+        IMapper _mapper;
+
+        public ActorsService(eCinemaContext context, IMapper mapper)
         {
-            
+            _context=context;
+            _mapper=mapper; 
         }
 
-        public override ActorDto Insert(ActorDto insert)
-        {
-            var actors = _mapper.Map<Actor>(insert);
-            _context.Actor.AddIfNotExists(actors, _context);
-
-            return insert;
-        }
 
         public List<ActorDto> Add(int id, List<ActorDto> insert)
         {
@@ -52,11 +47,6 @@ namespace eCinema.Services.ActorService
             return actors;
         }
 
-
-        public ActorDto Update(int id, ActorDto actor)
-        {
-            return actor;
-        }
 
         public void DeleteActorsMovies(List<ActorsMoviesDto> delete)
         {

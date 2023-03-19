@@ -62,13 +62,29 @@ class _UserProfileState extends State<UserProfile> {
     edit.email = email;
     edit.username = Authorization.username;
     try {
+      UserProvider();
       await _userProvider!.update(user!.id!, edit);
       Navigator.pop(context);
-    } catch (err) {}
+    } catch (err) {
+      showMessage(err.toString());
+    }
   }
 
   Future Delete() async {
-    await _userProvider!.delete(user!.id!);
+    try {
+      await _userProvider!.delete(user!.id!);
+    } catch (err) {
+      showMessage(err.toString());
+    }
+  }
+
+  void delete() {
+    try {
+      Delete();
+      Navigator.pushNamed(context, LoginScreen.route);
+    } catch (err) {
+      showMessage(err.toString());
+    }
   }
 
   FillControllers() {
@@ -208,8 +224,7 @@ class _UserProfileState extends State<UserProfile> {
                                       actions: [
                                         TextButton(
                                             onPressed: () {
-                                              Delete();
-                                              Navigator.of(context).pop();
+                                              delete();
                                             },
                                             child: const Text('Yes')),
                                         TextButton(
@@ -230,5 +245,19 @@ class _UserProfileState extends State<UserProfile> {
         ),
       ),
     );
+  }
+
+  showMessage(String message) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text("Message"),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () => Navigator.pop(context))
+              ],
+            ));
   }
 }

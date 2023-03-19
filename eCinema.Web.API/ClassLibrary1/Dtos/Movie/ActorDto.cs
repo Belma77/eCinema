@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
-    public  class ActorDto:CastDto
+    public class ActorDto : CastDto
     {
 
     }

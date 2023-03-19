@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using eCInema.Models.Dtos.Genres;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
-    public class MoviesGenresUpdateDto
+    public class WritersMoviesDto
     {
+        public WriterDto? Writer { get; set; }
         public int MovieId { get; set; }
-        public  GenresDto Genre { get; set; }
-
     }
 }

@@ -31,6 +31,13 @@ namespace eCinema.Web.API.Controllers
             return base.Get(search);
         }
 
+        [Authorize(UserRole.Admin)]
+        [HttpGet("{id}")]
+        public override IActionResult GetById(int id)
+        {
+            return base.GetById(id);
+        }
+
 
         [Authorize(UserRole.Customer)]
         [HttpPut("{id}")]

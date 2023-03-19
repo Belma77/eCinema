@@ -1,6 +1,5 @@
 ﻿using eCInema.Data.Entities;
 using eCInema.Models.Dtos.Genres;
-using eCInema.Models.Dtos.Movie;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,16 +8,15 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
     public class MoviesGenresDto
     {
         public GenresDto Genre { get; set; }
-       // public MovieDetailsDto Movie { get; set; }
         public int MovieId { get; set; }
         public override string ToString()
         {
-            return this.Genre.ToString();
+            return Genre.ToString();
         }
     }
 }

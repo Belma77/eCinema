@@ -1,6 +1,6 @@
 ﻿using eCinema.Services.ActorService;
 using eCinema.Services.WritersServices;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using eCInema.Models.Enums;
 using eCInema.Models.SearchObjects;

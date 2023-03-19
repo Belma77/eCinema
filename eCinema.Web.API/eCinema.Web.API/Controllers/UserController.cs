@@ -19,7 +19,6 @@ namespace eCinema.Web.API.Controllers
             
         }
 
-        [AllowAnonymous]
         [HttpPost]
         public override IActionResult Insert(UserInsertDto insert)
         {

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using eCInema.Data.Entities;
 using eCInema.Models;
-using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Customer;
 using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Dtos.Halls;
@@ -39,7 +38,6 @@ namespace eCinema.Services.Profiles
 
             CreateMap<Actor, ActorDto>();
             CreateMap<ActorDto, Actor>();
-            CreateMap<Actor, ActorUpdateDto>();
             CreateMap<ActorsMovies, ActorsMoviesDto>();
             CreateMap<ActorsMoviesDto, ActorsMovies>();
 

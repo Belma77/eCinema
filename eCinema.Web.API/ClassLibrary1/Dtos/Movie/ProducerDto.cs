@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
-    public  class ProducerDto:CastDto
+    public class ProducerDto : CastDto
     {
-     
+
     }
 }

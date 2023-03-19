@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
-using eCinema.Services.CastServices;
-using eCInema.Models.Dtos;
 using eCInema.Models.Entities;
 using System;
 using System.Collections.Generic;
@@ -10,15 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using eCInema.Models.SearchObjects;
+using eCInema.Models.Dtos.Movie;
 
 namespace eCinema.Services.ProducerServices
 {
-    public class ProducerService: BaseCRUDService<ProducersMoviesDto, Producer, CastSearchObject, ProducersMoviesDto, ProducersMoviesDto>, IProducerService
+    public class ProducerService: IProducerService
     {
         private eCinemaContext _context;
         private IMapper _mapper;
 
-        public ProducerService(eCinemaContext context, IMapper mapper):base(context, mapper)
+        public ProducerService(eCinemaContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -58,7 +57,6 @@ namespace eCinema.Services.ProducerServices
                     _context.SaveChanges();
                 }
             }
-            //_context.ProducersMovies.RemoveRangeIfExists(find, _context);
         }
 
     }

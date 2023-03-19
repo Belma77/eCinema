@@ -67,20 +67,6 @@ namespace eCinema.Services.MoviesServices
             return filteredQuery;
         }
 
-        public override IQueryable<Movies> AddInclude(IQueryable<Movies> query, MoviesSearchObject search = null)
-        {
-            return query = query.Include(x => x.MoviesGenres)
-                           .ThenInclude(s => s.Genre)
-                           .Include(z => z.ActorsMovies)
-                           .ThenInclude(a => a.Actor)
-                           .Include(b => b.DirectorsMovies)
-                           .ThenInclude(c => c.Director)
-                           .Include(c => c.ProducersMovies)
-                           .ThenInclude(c => c.Producer)
-                           .Include(d => d.WritersMovies)
-                           .ThenInclude(d => d.Writer);
-        }
-
         public override MovieDetailsDto GetById(int id)
         {
             var movie = _context.Movies.

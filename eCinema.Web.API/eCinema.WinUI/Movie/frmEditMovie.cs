@@ -1,6 +1,5 @@
 ﻿using eCinema.WinUI.Helpers;
 using eCInema.Models;
-using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Genres;
 using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;

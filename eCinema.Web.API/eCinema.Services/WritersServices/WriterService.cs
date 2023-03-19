@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using eCinema.Data;
-using eCinema.Services.CastServices;
-using eCInema.Models.Dtos;
 using eCinema.Services.CRUDservice;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
@@ -10,14 +8,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eCInema.Models.Dtos.Movie;
 
 namespace eCinema.Services.WritersServices
 {
-    public class WriterService: BaseCRUDService<WriterDto,Writer, CastSearchObject, WriterDto, WriterDto>, IWriterService
+    public class WriterService: IWriterService
     {
-        public WriterService(eCinemaContext context, IMapper mapper) : base(context, mapper)
+       private eCinemaContext _context;
+       private  IMapper _mapper;
+        public WriterService(eCinemaContext context, IMapper mapper)
         {
-
+            _context=context;   
+            _mapper=mapper; 
         }
 
         public List<WriterDto> Add(int id, List<WriterDto> insert)
@@ -55,7 +57,6 @@ namespace eCinema.Services.WritersServices
                     _context.SaveChanges();
                 }
             }
-            // _context.WritersMovies.RemoveRangeIfExists(find, _context);
         }
 
     }

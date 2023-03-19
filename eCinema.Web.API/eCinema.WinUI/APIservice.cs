@@ -17,7 +17,6 @@ namespace eCinema.WinUI
     {
         private string _resource = null;
         public string _endpoint = Settings.Default.ApiURL;
-        //"https://localhost:7239/";
 
         public static string Username = null;
         public static string Password = null;
@@ -37,7 +36,7 @@ namespace eCinema.WinUI
                 {
                     query = await search.ToQueryString();
                 }
-                var list = await $"{_endpoint}{_resource}?{query}".WithTimeout(TimeSpan.FromSeconds(30)).WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                var list = await $"{_endpoint}{_resource}?{query}".WithTimeout(TimeSpan.FromSeconds(40)).WithBasicAuth(Username, Password).GetJsonAsync<T>();
 
                 return list;
             }
@@ -71,7 +70,7 @@ namespace eCinema.WinUI
         {
             try
             {
-                var result = await $"{_endpoint}{_resource}/{id}".WithBasicAuth(Username, Password).GetJsonAsync<T>();
+                var result = await $"{_endpoint}{_resource}/{id}".WithTimeout(TimeSpan.FromSeconds(40)).WithBasicAuth(Username, Password).GetJsonAsync<T>();
 
                 return result;
             }

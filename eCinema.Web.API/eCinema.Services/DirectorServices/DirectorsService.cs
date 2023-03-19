@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using eCinema.Data;
-using eCinema.Services.CastServices;
 using eCinema.Services.CRUDservice;
 using eCInema.Models;
-using eCInema.Models.Dtos;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
 using Microsoft.EntityFrameworkCore;
@@ -16,12 +15,14 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.DirectorService
 {
-    public class DirectorsService: BaseCRUDService<DirectorDto, Director, CastSearchObject, DirectorDto, DirectorDto>, IDirectorService
+    public class DirectorsService: IDirectorService
     {
-        
-        public DirectorsService(eCinemaContext context,IMapper mapper):base(context, mapper)
+        private eCinemaContext _context;
+        private IMapper _mapper;
+        public DirectorsService(eCinemaContext context,IMapper mapper)
         {
-           
+            _context = context;
+            _mapper = mapper;
         }
 
         public List<DirectorDto> Add(int id, List<DirectorDto> insert)
@@ -42,17 +43,6 @@ namespace eCinema.Services.DirectorService
                 directorsMovies.MovieId = MovieId;
                 directorsMovies.Director = directors.FirstOrDefault(x=>x.Equals(director));
                 _context.DirectorsMovies.AddIfNotExists(directorsMovies, _context);
-            }
-        }
-
-        public void DeleteDirectorsMovies(DirectorsMoviesDto delete)
-        {
-            var find = _mapper.Map<DirectorsMovies>(delete);
-            var data = _context.DirectorsMovies.FirstOrDefault(x => x.MovieId == find.MovieId && x.Director.FirstName == find.Director.FirstName);
-            if (data != null)
-            {
-                _context.DirectorsMovies.Remove(data);
-                _context.SaveChanges();
             }
         }
 

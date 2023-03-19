@@ -38,7 +38,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
     Map<String, String> headers = createHeaders();
 
     var response = await http!.get(url, headers: headers);
-    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
 
@@ -62,7 +61,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
     Map<String, String> headers = createHeaders();
     var response = await http!.get(uri, headers: headers);
 
-    print(response.body);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return data.map((x) => fromJson(x)).cast<T>().toList();
@@ -127,7 +125,6 @@ abstract class BaseProvider<T> with ChangeNotifier {
 
     var response =
         await http!.put(uri, headers: headers, body: jsonEncode(request));
-    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return fromJson(data) as T;

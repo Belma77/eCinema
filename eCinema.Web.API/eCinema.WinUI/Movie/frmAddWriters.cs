@@ -1,5 +1,4 @@
-﻿using eCInema.Models.Dtos;
-using eCInema.Models;
+﻿using eCInema.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

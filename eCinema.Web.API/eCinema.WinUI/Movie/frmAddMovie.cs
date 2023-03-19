@@ -42,7 +42,7 @@ namespace eCinema.WinUI
                 {
                     movie.Genres.Add(item as GenresDto);
                 }
-
+                this.Close();
                 frmAddDirectors frm = new frmAddDirectors(movie);
                 frm.ShowDialog();
                 

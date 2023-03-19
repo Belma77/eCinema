@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
-    public  class ActorUpdateDto:CastDto
+    public class DirectorDto : CastDto
     {
-        public int Id { get; set; }
 
     }
 }

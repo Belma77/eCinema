@@ -31,7 +31,7 @@ namespace eCinema.Services.ScheduleServices
         {
             if (!String.IsNullOrEmpty(search.Title))
             {
-                query = query.Where(x => x.Movie.Title.StartsWith(search.Title));
+                query = query.Where(x => x.Movie.Title.ToLower().Contains(search.Title.ToLower()));
             }
 
             if (search.Date.HasValue)

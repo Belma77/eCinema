@@ -36,7 +36,7 @@ namespace eCinema.Web.API.Controllers
              return base.GetById(id);           
         }
 
-        [Authorize(UserRole.Admin, UserRole.Customer)]
+        [Authorize(UserRole.Admin)]
         [HttpGet("{id}/Seats")]
         public IActionResult GetSeats(int id)
         {

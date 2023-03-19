@@ -33,7 +33,7 @@ namespace eCinema.Web.API.Controllers
             return base.GetById(id);
         }
         [HttpPost]
-        [Authorize(UserRole.Customer, UserRole.Admin)]
+        [Authorize(UserRole.Admin)]
         public override IActionResult Insert(MovieInsertDto insert)
         {
             return base.Insert(insert);

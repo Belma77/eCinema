@@ -1,6 +1,5 @@
-﻿using eCinema.Services.CastServices;
-using eCinema.Services.CRUDservice;
-using eCInema.Models.Dtos;
+﻿using eCinema.Services.CRUDservice;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
 using System;
@@ -12,11 +11,9 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.DirectorService
 {
-    public interface IDirectorService:IBaseCRUDService<DirectorDto, CastSearchObject, DirectorDto, DirectorDto>
+    public interface IDirectorService
     {
         List<DirectorDto> Add(int id, List<DirectorDto> insert);
-        //void DeleteDirectorsToMovie(int movieId, List<DirectorDto> delete);
-        void DeleteDirectorsMovies(DirectorsMoviesDto delete);
         void DeleteDirectorsMovies(List<DirectorsMoviesDto> delete);
     }
 }

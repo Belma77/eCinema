@@ -51,7 +51,7 @@ namespace eCinema.Web.API.Controllers
 
         [Authorize(UserRole.Admin)]
         [HttpGet]
-        public override IActionResult Get(ReservationSearchObject search)
+        public override IActionResult Get(ReservationSearchObject? search=null)
         {
             return Ok(_service.Get(search));
         }

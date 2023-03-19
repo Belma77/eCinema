@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace eCInema.Models.Dtos
+namespace eCInema.Models.Dtos.Movie
 {
     public class ProducersMoviesDto
     {
@@ -12,12 +12,12 @@ namespace eCInema.Models.Dtos
         public int MovieId { get; set; }
         public override bool Equals(object obj)
         {
-            var item=obj as ProducersMoviesDto;
+            var item = obj as ProducersMoviesDto;
             if (item == null)
                 return false;
-            return this.Producer.Equals(item.Producer)&&this.MovieId==item.MovieId;
+            return Producer.Equals(item.Producer) && MovieId == item.MovieId;
         }
     }
 
-   
+
 }

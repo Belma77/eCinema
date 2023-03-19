@@ -2,8 +2,8 @@
 using eCinema.Data;
 using eCinema.Services.CRUDservice;
 using eCInema.Data.Entities;
-using eCInema.Models.Dtos;
 using eCInema.Models.Dtos.Genres;
+using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Entities;
 using eCInema.Models.SearchObjects;
 using System;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace eCinema.Services.GenresServices
 {
-    public class GenresService:BaseCRUDService<GenresDto, Genres, GenresSearchObject, GenresUpsertDto, GenresUpsertDto>, IGenresSerice
+    public class GenresService:BaseService<GenresDto, Genres, GenresSearchObject>, IGenresSerice
     {
 
         public GenresService(eCinemaContext context, IMapper mapper):base(context, mapper)
