@@ -24,5 +24,5 @@ docker-compose up --build
  2. flutter run  (pokretanje aplikacije)  
  
  Desktop aplikacija:  
- Pokrenuti kroz visual studio. 
+ Otvoriti solution unutar Visual studija, postaviti Startup projekat na eCinema.WinUI te pokrenuti. 
 
