@@ -66,18 +66,21 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  /* createPaymentSheet() async {
-    try {
-      Stripe.instance
-          .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-            paymentIntentClientSecret: paymentIntent!['client_secret'],
-            style: ThemeMode.dark,
-            merchantDisplayName: 'Merchant Name',
-          ))
-          .then((value) => {});
-    } catch (err) {}
-  } */
+  Future<bool> alreadyLoyal(int id) async {
+    var url = "$_baseUrl$_endpoint/AlreadyLoyal/$id";
+
+    var uri = Uri.parse(url);
+
+    Map<String, String> headers = createHeaders();
+    var response = await http!.get(uri, headers: headers);
+
+    if (isValidResponseCode(response)) {
+      var data = jsonDecode(response.body);
+      return data;
+    } else {
+      throw Exception("Exception... ");
+    }
+  }
 
   createPaymentIntent(String amount) async {
     try {

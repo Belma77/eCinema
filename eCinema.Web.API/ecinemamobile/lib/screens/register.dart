@@ -47,14 +47,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
     _userProvider = context.read<UserProvider>();
   }
 
-  Future registerUser() async {
+  registerUser() async {
     UserProvider();
-    await getCustomerByUsername(_usernameController.text);
+    if (_formKey.currentState!.validate()) {
+      await getCustomerByUsername(_usernameController.text);
+    }
     var customer =
         CustomerInsert(firstName, lastName, phone, email, username, password);
     if (_formKey.currentState!.validate()) {
-      await _userProvider.register(customer);
-      Navigator.pushNamed(context, LoginScreen.route);
+      try {
+        await _userProvider.register(customer);
+        Navigator.pushNamed(context, LoginScreen.route);
+      } catch (err) {
+        rethrow;
+      }
     }
   }
 
@@ -258,12 +264,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           borderRadius: BorderRadius.circular(10),
                           color: Colors.blue),
                       child: InkWell(
-                        onTap: () {
-                          try {
-                            registerUser();
-                          } catch (err) {
-                            showMessage(err.toString());
-                          }
+                        onTap: () async {
+                          await registerUser();
                         },
                         child: const Center(
                           child: Text(
@@ -305,11 +307,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               content: Text(message),
               actions: [
                 TextButton(
-                    child: const Text("Ok"),
-                    onPressed: () => Navigator.pushNamed(
-                          context,
-                          MoviesListScreen.route,
-                        ))
+                  child: const Text("Ok"),
+                  onPressed: () => Navigator.pop(context),
+                )
               ],
             ));
   }

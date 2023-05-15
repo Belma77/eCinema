@@ -58,11 +58,22 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
     });
   }
 
-  Future makePayment() async {
+  makePayment() async {
     if (_formKey.currentState!.validate()) {
+      var response = await _loyaltyClubProvider!.alreadyLoyal(user!.id!);
+      if (response == true) {
+        throw Exception("Customer already added to loyalty club!");
+      }
       try {
         paymentIntent = await _loyaltyClubProvider!.createPaymentIntent('2395');
         await displayPaymentSheet();
+      } on StripeException catch (e) {
+        showDialog(
+          context: context,
+          builder: (_) => const AlertDialog(
+            content: Text(ErrorMessages.paymentCanceled),
+          ),
+        );
       } catch (err) {
         rethrow;
       }
@@ -85,8 +96,13 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
       await _loyaltyClubProvider!.insert(loyalty);
       showDialog(
         context: context,
-        builder: (_) => const AlertDialog(
+        builder: (_) => AlertDialog(
           content: Text("Payment succesful"),
+          actions: [
+            TextButton(
+                child: const Text("Ok"),
+                onPressed: () => Navigator.pop(context))
+          ],
         ),
       );
     } catch (err) {
@@ -290,6 +306,12 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
                                   context: context,
                                   builder: (_) => AlertDialog(
                                     content: Text(err.toString()),
+                                    actions: [
+                                      TextButton(
+                                          child: const Text("Ok"),
+                                          onPressed: () =>
+                                              Navigator.pop(context))
+                                    ],
                                   ),
                                 );
                               }

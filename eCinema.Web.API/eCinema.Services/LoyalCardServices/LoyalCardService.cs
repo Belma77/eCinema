@@ -61,6 +61,17 @@ namespace eCinema.Services.LoyalCardServices
 
             throw new BadRequestException("Something went wrong");
         }
+        public bool Exists(int id)
+        {
+           
+            var loyalCustomers = _context.LoyalCards.FirstOrDefault(x => x.CustomerId == id);
+
+            if (loyalCustomers != null)
+            {
+                return true;
+            }
+            return false;
+        }
        
     }
 }

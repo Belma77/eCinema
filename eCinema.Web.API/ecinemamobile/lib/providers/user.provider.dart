@@ -42,7 +42,6 @@ class UserProvider extends BaseProvider<Customer> {
     };
     var response = await http!.post(uri, headers: headers, body: jsonRequest);
 
-    print(response);
     if (isValidResponseCode(response)) {
       var data = jsonDecode(response.body);
       return CustomerInsert.fromJson(data);

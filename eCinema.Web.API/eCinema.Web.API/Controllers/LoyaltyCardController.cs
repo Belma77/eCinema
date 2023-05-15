@@ -41,7 +41,14 @@ namespace eCinema.Web.API.Controllers
         public override IActionResult GetById(int id)
         {
             return Ok(_service.GetById(id));
+            
+        }
 
+        [Authorize(UserRole.Customer, UserRole.Admin)]
+        [HttpGet("AlreadyLoyal/{id}")]
+        public IActionResult AlreadyExists(int id)
+        {
+            return Ok(_service.Exists(id));
         }
 
     }

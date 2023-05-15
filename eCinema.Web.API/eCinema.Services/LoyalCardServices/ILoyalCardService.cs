@@ -16,5 +16,6 @@ namespace eCinema.Services.LoyalCardServices
     public interface ILoyalCardService:IBaseService<LoyalCardDto, LoyalCardSearchObject>
     {
         LoyalCardDto Insert(LoyalCardInsertDto insert);
+        bool Exists(int id);
     }
 }
