@@ -25,6 +25,7 @@ namespace eCinema.WinUI.ScheduleForms
         private int pageNumber = 1;
         private int pageSize = 10;
         private bool isLoaded = false;
+        private ScheduleSearchObject? search = null;
         public frmSchedule()
         {
             InitializeComponent();
@@ -43,17 +44,19 @@ namespace eCinema.WinUI.ScheduleForms
 
         private async void LoadSchedules()
         {
-            var search = new ScheduleSearchObject();
+            search = new ScheduleSearchObject();
             search.Title = txtTitle.Text;
 
             if (dateChanged)
             {
                 search.Date = dtmDate.Value;
+                dateChanged = false;
             }
 
             if (timeChanged)
             {
                 search.StartTime = dtmTime.Value.ToShortTimeString();
+                timeChanged = false;
             }
 
             search.PageNumber = pageNumber;
@@ -139,22 +142,14 @@ namespace eCinema.WinUI.ScheduleForms
             return retValue;
         }
 
-        private async void txtTitle_TextChanged(object sender, EventArgs e)
-        {
-            LoadSchedules();
-
-        }
-
         private async void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             dateChanged = true;
-            LoadSchedules();         
         }
 
         private async void dtmTime_ValueChanged(object sender, EventArgs e)
         {
             timeChanged = true;
-            LoadSchedules();
         }
 
         private async void btnPrevious_Click(object sender, EventArgs e)
@@ -188,6 +183,12 @@ namespace eCinema.WinUI.ScheduleForms
         private async void btnClear_Click(object sender, EventArgs e)
         {
             await LoadData();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            search = null;
+            LoadSchedules();
         }
     }
 }

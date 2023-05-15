@@ -17,15 +17,6 @@ class Validator {
   }
 
   static String? validatePassword(String? value) {
-    /* RegExp regex =
-        RegExp(r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$');
-    if (value!.isEmpty) {
-      return ErrorMessages.notEmptyValue;
-    } else if (!regex.hasMatch(value)) {
-      return ErrorMessages.passwordNotValid;
-    } else {
-      return null;
-    } */
     if (value!.isEmpty) {
       return ErrorMessages.notEmptyValue;
     } else if (value.length < 6) {

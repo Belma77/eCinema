@@ -10,8 +10,10 @@ class Reservation {
   List<ScheduleSeat>? scheduleSeats;
   double? price;
   ReservationStatusEnum? status;
+  String? paymentID;
   Reservation(this.scheduleId, this.numberOfTickets, this.scheduleSeats,
-      this.price, this.status);
+      this.price, this.status,
+      [this.paymentID]);
   factory Reservation.fromJson(Map<String, dynamic> json) =>
       _$ReservationFromJson(json);
 

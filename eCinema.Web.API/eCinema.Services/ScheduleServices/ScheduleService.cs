@@ -59,12 +59,6 @@ namespace eCinema.Services.ScheduleServices
             return query;
         }
 
-        public override List<GetSchedulesDto> Get(ScheduleSearchObject? search = null)
-        {
-            var list=base.Get(search);
-            return list;
-        }
-
         public override GetSchedulesDto GetById(int id)
         {
             var schedule = _context.Schedules

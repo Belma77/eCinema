@@ -20,7 +20,7 @@ namespace eCinema.WinUI.ScheduleForms
     {
         APIservice service = new APIservice("Schedule");
         List<MovieDetailsDto> listOfMovies=new List<MovieDetailsDto>();
-
+        APIservice moviesService = new APIservice("Movies");
         public frmInsertSchedule()
         {
             InitializeComponent();
@@ -41,26 +41,31 @@ namespace eCinema.WinUI.ScheduleForms
         private async Task LoadCmbs()
         {
             await LoadHalls();
-            cmbMovies.AutoCompleteMode = AutoCompleteMode.Suggest;
-            cmbMovies.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            await LoadMovies();
         }
 
-        private async void cmbMovies_TextChanged(object sender, EventArgs e)
+        private async Task LoadMovies()
         {
-            if (cmbMovies.Text.Length > 2)
-            {
-                APIservice moviesService = new APIservice("Movies");
-                var search = new MoviesSearchObject();
-                  search.Title=cmbMovies.Text;
-                  listOfMovies = await moviesService.Get<List<MovieDetailsDto>>(search);
-                  var list = listOfMovies.Select(x => x.Title).ToList();
-                  if(list!=null)
-                  cmbMovies.DataSource = list;
-            }
+            var search = new MoviesSearchObject();
+            search.PageSize = null;
+            listOfMovies = await moviesService.Get<List<MovieDetailsDto>>(search);
+            var list = listOfMovies.Select(x => x.Title).ToList();
+            if (list != null)
+                cmbMovies.DataSource = list;
         }
+
 
         private bool Validate()
         {
+            var startTime = dtStartTime.Value;
+            var endTime = dtEndTime.Value;
+            if (endTime <= startTime)
+            {
+                err.SetError(dtEndTime, AlertMessages.EndTimeNotValid);
+                return false;
+            }
+
+
             return Validator.Validate(cmbMovies, err, AlertMessages.RequiredField) &&
                 Validator.Validate(dtpDate, err, AlertMessages.RequiredField) &&
                 Validator.Validate(dtStartTime, err, AlertMessages.RequiredField) &&

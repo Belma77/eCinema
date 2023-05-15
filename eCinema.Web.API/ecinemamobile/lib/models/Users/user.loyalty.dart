@@ -14,6 +14,7 @@ class LoyalCard {
   String? username;
   String? city;
   String? identificationNumber;
+  String? paymentID;
   LoyalCard();
 
   factory LoyalCard.fromJson(Map<String, dynamic> json) =>

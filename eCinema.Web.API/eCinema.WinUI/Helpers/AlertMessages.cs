@@ -18,6 +18,7 @@ namespace eCinema.WinUI.Helpers
         public const string OnlyNumbersAllowed = "Only numbers allowed!";
         public const string EmailFormat = "Email not in a right format!";
         public const string SeatsNotSelected = "Please select seats to make reservation, reservation failed!";
+        public const string EndTimeNotValid = "End time must be larger than start time";
 
     }
 }

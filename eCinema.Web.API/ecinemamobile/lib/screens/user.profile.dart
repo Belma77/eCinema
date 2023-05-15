@@ -64,6 +64,7 @@ class _UserProfileState extends State<UserProfile> {
     try {
       UserProvider();
       await _userProvider!.update(user!.id!, edit);
+      showMessage("Sucessfuly edited");
       Navigator.pop(context);
     } catch (err) {
       showMessage(err.toString());

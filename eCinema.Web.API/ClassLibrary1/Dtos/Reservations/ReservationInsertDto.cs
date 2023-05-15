@@ -21,5 +21,6 @@ namespace eCInema.Models.Dtos.Reservations
         public int NumberOfTickets { get; set; }
         public List<ScheduleSeatDto> scheduleSeats { get; set; }
         public ReservationStatusEnum Status { get; set; }
+        public string? PaymentID { get; set; }
     }
 }

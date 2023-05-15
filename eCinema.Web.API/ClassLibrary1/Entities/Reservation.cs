@@ -17,8 +17,9 @@ namespace eCInema.Models.Entities
         public Schedule Schedule { get; set; }
         public int NumberOfTickets { get; set; }
         public double Price { get; set; }
-        public List<ScheduleSeat> ScheduleSeat { get; set; }
+        public List<ScheduleSeat> ScheduleSeats { get; set; }
         public ReservationStatusEnum Status { get; set; }
+        public string? PaymentID { get; set; }
 
     }
 }

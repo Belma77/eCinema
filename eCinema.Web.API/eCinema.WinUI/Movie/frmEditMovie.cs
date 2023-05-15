@@ -35,7 +35,6 @@ namespace eCinema.WinUI
 
         private async void frmEditMovie_Load(object sender, EventArgs e)
         {
-           // await GetMovieById(id);
             await LoadMovie();
             await LoadGenres();
         }
@@ -117,8 +116,8 @@ namespace eCinema.WinUI
 
         private async void Save_Click(object sender, EventArgs e)
         {
-            //if (Validate())
-            {
+           
+                
                 var update = new MovieUpdateDto();
                 update.Title = txtTitle.Text;
                 update.ReleaseYear = int.Parse(txtYear.Text);
@@ -126,7 +125,6 @@ namespace eCinema.WinUI
                 update.Country = cmbCountry.SelectedItem.ToString();
                 update.Synopsis = txtSynopsis.Text;
                 update.Poster = ImageHelper.FromImageToByte(pbPoster.Image);
-
                 var result = await _service.Put<MovieUpdateDto>(movie.Id, update);
                 await RemoveDirectorsMovies();
                 await RemoveProducersMovies();
@@ -135,7 +133,8 @@ namespace eCinema.WinUI
                 await UpdateGenres();
                 MessageBox.Show("Succesfully edited movie");
                 this.Close();
-            }
+
+            
         }
 
         private async Task UpdateGenres()
@@ -347,19 +346,6 @@ namespace eCinema.WinUI
             {
                 pbPoster.Image = Image.FromFile(openFileDialog1.FileName);
             }
-        }
-
-        private bool Validate()
-        {
-            return Validator.Validate(txtTitle, err, AlertMessages.RequiredField) &&
-                Validator.Validate(txtYear, err, AlertMessages.RequiredField) &&
-                Validator.Validate(cmbCountry, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbActors, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbDirectors, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbProducers, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbWriters, err, AlertMessages.RequiredField) &&
-                Validator.Validate(clbGenres, err, AlertMessages.RequiredField) &&
-                Validator.Validate(pbPoster, err, AlertMessages.RequiredField);
         }
 
       

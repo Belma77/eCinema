@@ -31,7 +31,7 @@ namespace eCinema.Services.CustomerServices
         public override IQueryable<Customer> AddFilter(IQueryable<Customer> query, CustomerSearchObject search = null)
         {
             if (!String.IsNullOrEmpty(search.Name))
-                query = query.Where(x => x.FirstName.ToLower().Contains(search.Name.ToLower())
+                query = query.Where(x => x.FirstName.ToLower().StartsWith(search.Name.ToLower())
                 || (x.LastName.ToLower().Contains(search.Name.ToLower()))
                 || (x.FirstName + " " + x.LastName).ToLower().Contains(search.Name.ToLower()));
 

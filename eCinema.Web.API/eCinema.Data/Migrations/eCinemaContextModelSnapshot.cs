@@ -146,6 +146,9 @@ namespace eCinema.Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<string>("PaymentID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("price")
                         .HasColumnType("float");
 
@@ -221,6 +224,9 @@ namespace eCinema.Data.Migrations
                     b.Property<int>("NumberOfTickets")
                         .HasColumnType("int");
 
+                    b.Property<string>("PaymentID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -291,7 +297,8 @@ namespace eCinema.Data.Migrations
                     b.Property<int>("ScheduleId")
                         .HasColumnType("int");
 
-                    b.Property<int>("SeatId")
+                    b.Property<int?>("SeatId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<bool>("isTaken")
@@ -564,7 +571,7 @@ namespace eCinema.Data.Migrations
             modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
                 {
                     b.HasOne("eCInema.Models.Entities.Customer", "Customer")
-                        .WithMany("Reservations")
+                        .WithMany()
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -572,7 +579,7 @@ namespace eCinema.Data.Migrations
                     b.HasOne("eCInema.Models.Entities.Schedule", "Schedule")
                         .WithMany()
                         .HasForeignKey("ScheduleId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Customer");
@@ -602,8 +609,9 @@ namespace eCinema.Data.Migrations
             modelBuilder.Entity("eCInema.Models.Entities.ScheduleSeat", b =>
                 {
                     b.HasOne("eCInema.Models.Entities.Reservation", null)
-                        .WithMany("ScheduleSeat")
-                        .HasForeignKey("ReservationId");
+                        .WithMany("ScheduleSeats")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("eCInema.Models.Entities.Schedule", "Schedule")
                         .WithMany("ScheduleSeats")
@@ -614,6 +622,7 @@ namespace eCinema.Data.Migrations
                     b.HasOne("eCInema.Models.Entities.Seat", "Seat")
                         .WithMany()
                         .HasForeignKey("SeatId")
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Schedule");
@@ -673,7 +682,7 @@ namespace eCinema.Data.Migrations
 
             modelBuilder.Entity("eCInema.Models.Entities.Reservation", b =>
                 {
-                    b.Navigation("ScheduleSeat");
+                    b.Navigation("ScheduleSeats");
                 });
 
             modelBuilder.Entity("eCInema.Models.Entities.Schedule", b =>
@@ -699,11 +708,6 @@ namespace eCinema.Data.Migrations
                     b.Navigation("Schedules");
 
                     b.Navigation("WritersMovies");
-                });
-
-            modelBuilder.Entity("eCInema.Models.Entities.Customer", b =>
-                {
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

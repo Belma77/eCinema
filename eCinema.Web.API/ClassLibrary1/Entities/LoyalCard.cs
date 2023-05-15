@@ -12,5 +12,6 @@ namespace eCInema.Models.Entities
         public Customer Customer { get; set; }
         public int CustomerId { get; set; }
         public double price { get; set; }
+        public string? PaymentID { get; set; }
     }
 }

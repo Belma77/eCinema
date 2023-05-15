@@ -17,7 +17,7 @@ namespace eCInema.Models.Entities
         public int HallId { get; set; }
         public double TicketPrice { get; set; }
         public Hall Hall { get; set; }
-        public List<ScheduleSeat>? ScheduleSeats { get; set; }
+        public List<ScheduleSeat> ScheduleSeats { get; set; }
         public int NoAvailableSeats { get; set; }
 
     }

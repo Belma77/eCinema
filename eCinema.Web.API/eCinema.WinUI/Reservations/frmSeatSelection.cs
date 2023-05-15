@@ -160,6 +160,12 @@ namespace eCinema.WinUI.Reservations
                 err.SetError((Button)sender, "Already taken");
             }
 
+            if(pickedSeats.Contains(seatId))
+            {
+                pickedSeats.Remove(seatId);
+                seatSelected = false;
+                (sender as Button).BackColor = Color.Yellow;
+            }
             else
             {
                 pickedSeats.Add(seatId);

@@ -29,6 +29,13 @@
         private void InitializeComponent()
         {
             this.dgvSchedules = new System.Windows.Forms.DataGridView();
+            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Seats = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtTitle = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,13 +48,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
             this.btnClear = new System.Windows.Forms.Button();
-            this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StartTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EndTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Seats = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Remove = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSchedules)).BeginInit();
             this.SuspendLayout();
             // 
@@ -67,124 +68,10 @@
             this.dgvSchedules.RowHeadersWidth = 51;
             this.dgvSchedules.RowTemplate.Height = 29;
             this.dgvSchedules.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSchedules.Size = new System.Drawing.Size(839, 210);
+            this.dgvSchedules.Size = new System.Drawing.Size(894, 210);
             this.dgvSchedules.TabIndex = 0;
             this.dgvSchedules.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSchedules_CellContentClick);
             this.dgvSchedules.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label1.Location = new System.Drawing.Point(12, 30);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(189, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Schedule of Projections";
-            // 
-            // txtTitle
-            // 
-            this.txtTitle.Location = new System.Drawing.Point(56, 74);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(242, 27);
-            this.txtTitle.TabIndex = 3;
-            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 80);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 20);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "Title";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(304, 79);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 20);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "Date";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(539, 78);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(77, 20);
-            this.label4.TabIndex = 9;
-            this.label4.Text = "Start Time";
-            // 
-            // dtmDate
-            // 
-            this.dtmDate.Location = new System.Drawing.Point(351, 74);
-            this.dtmDate.Name = "dtmDate";
-            this.dtmDate.Size = new System.Drawing.Size(182, 27);
-            this.dtmDate.TabIndex = 10;
-            this.dtmDate.Value = new System.DateTime(2023, 1, 22, 0, 0, 0, 0);
-            this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
-            // 
-            // dtmTime
-            // 
-            this.dtmTime.CustomFormat = "HH:mm";
-            this.dtmTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtmTime.Location = new System.Drawing.Point(622, 71);
-            this.dtmTime.Name = "dtmTime";
-            this.dtmTime.ShowUpDown = true;
-            this.dtmTime.Size = new System.Drawing.Size(84, 27);
-            this.dtmTime.TabIndex = 11;
-            this.dtmTime.ValueChanged += new System.EventHandler(this.dtmTime_ValueChanged);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Location = new System.Drawing.Point(12, 355);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(142, 29);
-            this.btnPrevious.TabIndex = 12;
-            this.btnPrevious.Text = "Previous Page";
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(714, 355);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(142, 29);
-            this.btnNext.TabIndex = 13;
-            this.btnNext.Text = "Next Page";
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(351, 364);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(107, 20);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Items per Page";
-            // 
-            // cmbPageSize
-            // 
-            this.cmbPageSize.FormattingEnabled = true;
-            this.cmbPageSize.Location = new System.Drawing.Point(464, 356);
-            this.cmbPageSize.Name = "cmbPageSize";
-            this.cmbPageSize.Size = new System.Drawing.Size(80, 28);
-            this.cmbPageSize.TabIndex = 15;
-            this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
-            // 
-            // btnClear
-            // 
-            this.btnClear.Location = new System.Drawing.Point(731, 72);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(125, 29);
-            this.btnClear.TabIndex = 16;
-            this.btnClear.Text = "Clear filters";
-            this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // Title
             // 
@@ -246,11 +133,135 @@
             this.Remove.UseColumnTextForButtonValue = true;
             this.Remove.Width = 125;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.label1.Location = new System.Drawing.Point(12, 30);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(189, 23);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Schedule of Projections";
+            // 
+            // txtTitle
+            // 
+            this.txtTitle.Location = new System.Drawing.Point(56, 74);
+            this.txtTitle.Name = "txtTitle";
+            this.txtTitle.Size = new System.Drawing.Size(242, 27);
+            this.txtTitle.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 80);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(38, 20);
+            this.label2.TabIndex = 6;
+            this.label2.Text = "Title";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(304, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Date";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(539, 78);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(77, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Start Time";
+            // 
+            // dtmDate
+            // 
+            this.dtmDate.Location = new System.Drawing.Point(351, 74);
+            this.dtmDate.Name = "dtmDate";
+            this.dtmDate.Size = new System.Drawing.Size(182, 27);
+            this.dtmDate.TabIndex = 10;
+            this.dtmDate.Value = new System.DateTime(2023, 1, 22, 0, 0, 0, 0);
+            this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
+            // 
+            // dtmTime
+            // 
+            this.dtmTime.CustomFormat = "HH:mm";
+            this.dtmTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtmTime.Location = new System.Drawing.Point(622, 71);
+            this.dtmTime.Name = "dtmTime";
+            this.dtmTime.ShowUpDown = true;
+            this.dtmTime.Size = new System.Drawing.Size(84, 27);
+            this.dtmTime.TabIndex = 11;
+            this.dtmTime.ValueChanged += new System.EventHandler(this.dtmTime_ValueChanged);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Location = new System.Drawing.Point(12, 355);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(142, 29);
+            this.btnPrevious.TabIndex = 12;
+            this.btnPrevious.Text = "Previous Page";
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Location = new System.Drawing.Point(769, 355);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(142, 29);
+            this.btnNext.TabIndex = 13;
+            this.btnNext.Text = "Next Page";
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(351, 364);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(107, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Items per Page";
+            // 
+            // cmbPageSize
+            // 
+            this.cmbPageSize.FormattingEnabled = true;
+            this.cmbPageSize.Location = new System.Drawing.Point(464, 356);
+            this.cmbPageSize.Name = "cmbPageSize";
+            this.cmbPageSize.Size = new System.Drawing.Size(80, 28);
+            this.cmbPageSize.TabIndex = 15;
+            this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Location = new System.Drawing.Point(807, 70);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(104, 29);
+            this.btnClear.TabIndex = 16;
+            this.btnClear.Text = "Clear filters";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(714, 71);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(87, 29);
+            this.btnSearch.TabIndex = 17;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // frmSchedule
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(879, 408);
+            this.ClientSize = new System.Drawing.Size(929, 403);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.cmbPageSize);
             this.Controls.Add(this.label5);
@@ -296,5 +307,6 @@
         private DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn Seats;
         private DataGridViewButtonColumn Remove;
+        private Button btnSearch;
     }
 }

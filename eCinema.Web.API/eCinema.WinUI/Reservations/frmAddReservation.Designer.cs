@@ -50,27 +50,25 @@
             // cmbFirstName
             // 
             this.cmbFirstName.FormattingEnabled = true;
-            this.cmbFirstName.Location = new System.Drawing.Point(148, 80);
+            this.cmbFirstName.Location = new System.Drawing.Point(148, 85);
             this.cmbFirstName.Name = "cmbFirstName";
             this.cmbFirstName.Size = new System.Drawing.Size(177, 28);
             this.cmbFirstName.TabIndex = 0;
-            this.cmbFirstName.SelectedIndexChanged += new System.EventHandler(this.cmbFirstName_SelectedIndexChanged);
-            this.cmbFirstName.TextChanged += new System.EventHandler(this.cmbFirstName_TextChanged);
+            this.cmbFirstName.SelectionChangeCommitted += new System.EventHandler(this.cmbFirstName_SelectedIndexChanged);
             // 
             // cmbLastName
             // 
             this.cmbLastName.FormattingEnabled = true;
-            this.cmbLastName.Location = new System.Drawing.Point(148, 127);
+            this.cmbLastName.Location = new System.Drawing.Point(148, 135);
             this.cmbLastName.Name = "cmbLastName";
             this.cmbLastName.Size = new System.Drawing.Size(177, 28);
             this.cmbLastName.TabIndex = 1;
             this.cmbLastName.SelectedIndexChanged += new System.EventHandler(this.cmbLastName_SelectedIndexChanged);
-            this.cmbLastName.TextChanged += new System.EventHandler(this.cmbLastName_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 88);
+            this.label1.Location = new System.Drawing.Point(12, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(80, 20);
             this.label1.TabIndex = 4;
@@ -79,7 +77,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 135);
+            this.label2.Location = new System.Drawing.Point(12, 143);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(79, 20);
             this.label2.TabIndex = 5;
@@ -97,7 +95,7 @@
             // cmbMovie
             // 
             this.cmbMovie.FormattingEnabled = true;
-            this.cmbMovie.Location = new System.Drawing.Point(148, 179);
+            this.cmbMovie.Location = new System.Drawing.Point(148, 187);
             this.cmbMovie.Name = "cmbMovie";
             this.cmbMovie.Size = new System.Drawing.Size(177, 28);
             this.cmbMovie.TabIndex = 14;
@@ -106,7 +104,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 235);
+            this.label3.Location = new System.Drawing.Point(12, 243);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(41, 20);
             this.label3.TabIndex = 17;
@@ -124,7 +122,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(12, 187);
+            this.label5.Location = new System.Drawing.Point(12, 195);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(50, 20);
             this.label5.TabIndex = 19;
@@ -143,7 +141,7 @@
             // cmbDate
             // 
             this.cmbDate.FormattingEnabled = true;
-            this.cmbDate.Location = new System.Drawing.Point(148, 227);
+            this.cmbDate.Location = new System.Drawing.Point(148, 235);
             this.cmbDate.Name = "cmbDate";
             this.cmbDate.Size = new System.Drawing.Size(177, 28);
             this.cmbDate.TabIndex = 21;
@@ -183,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(348, 442);
+            this.ClientSize = new System.Drawing.Size(346, 442);
             this.Controls.Add(this.cmbStatus);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.cmbTime);

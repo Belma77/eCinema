@@ -66,9 +66,11 @@ namespace eCinema.Services.MoviesServices
 
             return filteredQuery;
         }
-
+       
         public override MovieDetailsDto GetById(int id)
         {
+            _context.Database.SetCommandTimeout(120);
+
             var movie = _context.Movies.
                 Include(x => x.MoviesGenres)
                 .ThenInclude(s => s.Genre)

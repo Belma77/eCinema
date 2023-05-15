@@ -2,15 +2,12 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:async';
 import 'package:ecinemamobile/env.dart';
-import 'package:ecinemamobile/models/Users/customer.insert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
-import 'package:flutter/foundation.dart';
-
 import '../models/Authorization/authorization.dart';
-import '../models/Users/user.loyalty.dart';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
@@ -69,36 +66,47 @@ abstract class BaseProvider<T> with ChangeNotifier {
     }
   }
 
-  Future<void> makePayment() async {
+  /* createPaymentSheet() async {
     try {
-      await Stripe.instance
+      Stripe.instance
           .initPaymentSheet(
               paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  style: ThemeMode.dark,
-                  merchantDisplayName: 'Merchant Name'))
+            paymentIntentClientSecret: paymentIntent!['client_secret'],
+            style: ThemeMode.dark,
+            merchantDisplayName: 'Merchant Name',
+          ))
           .then((value) => {});
     } catch (err) {}
-  }
+  } */
 
-  createPaymentIntent(String amount, String currency) async {
+  createPaymentIntent(String amount) async {
     try {
       Map<String, dynamic> body = {
         'amount': amount,
-        'currency': currency,
+        'currency': 'BAM',
         'payment_method_types[]': 'card'
       };
       var url = "https://api.stripe.com/v1/payment_intents";
       var response = await http!.post(Uri.parse(url),
           headers: {
-            'Authorization': 'Bearer $SECRET_KEY',
+            'Authorization': 'Bearer ${dotenv.env['SECRET_KEY']}',
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           body: body);
       paymentIntent = jsonDecode(response.body);
-      await makePayment();
+      Stripe.instance
+          .initPaymentSheet(
+              paymentSheetParameters: SetupPaymentSheetParameters(
+            paymentIntentClientSecret: paymentIntent!['client_secret'],
+            style: ThemeMode.dark,
+            merchantDisplayName: 'Merchant Name',
+          ))
+          .then((value) => {});
+
       return jsonDecode(response.body);
-    } catch (err) {}
+    } catch (err) {
+      throw Exception(err.toString());
+    }
   }
 
   Future<T?> insert(dynamic request) async {

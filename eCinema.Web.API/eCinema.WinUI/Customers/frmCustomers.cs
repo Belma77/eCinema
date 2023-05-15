@@ -80,10 +80,6 @@ namespace eCinema.WinUI.Customers
             }
         }
 
-        private async void txtFirstName_TextChanged(object sender, EventArgs e)
-        {
-            await LoadCustomers();
-        }
 
         private async void btnNext_Click(object sender, EventArgs e)
         {
@@ -111,6 +107,11 @@ namespace eCinema.WinUI.Customers
                 pageSize = int.Parse(cmbPageSize.SelectedItem.ToString());
                 await LoadCustomers();
             }
+        }
+
+        private async void txtSearch_Click(object sender, EventArgs e)
+        {
+            await LoadCustomers();
         }
     }
 }

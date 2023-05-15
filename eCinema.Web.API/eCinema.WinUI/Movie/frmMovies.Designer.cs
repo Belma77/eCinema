@@ -46,6 +46,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).BeginInit();
             this.SuspendLayout();
             // 
@@ -160,9 +161,8 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(56, 72);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(662, 27);
+            this.txtTitle.Size = new System.Drawing.Size(558, 27);
             this.txtTitle.TabIndex = 3;
-            this.txtTitle.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -211,11 +211,22 @@
             this.cmbPageSize.TabIndex = 8;
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(620, 70);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(98, 29);
+            this.btnSearch.TabIndex = 9;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // frmMovies
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(743, 450);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cmbPageSize);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnNext);
@@ -254,5 +265,6 @@
         private Button btnNext;
         private Label label3;
         private ComboBox cmbPageSize;
+        private Button btnSearch;
     }
 }

@@ -48,11 +48,10 @@
             // cmbMovies
             // 
             this.cmbMovies.FormattingEnabled = true;
-            this.cmbMovies.Location = new System.Drawing.Point(138, 81);
+            this.cmbMovies.Location = new System.Drawing.Point(138, 85);
             this.cmbMovies.Name = "cmbMovies";
             this.cmbMovies.Size = new System.Drawing.Size(192, 28);
             this.cmbMovies.TabIndex = 0;
-            this.cmbMovies.TextChanged += new System.EventHandler(this.cmbMovies_TextChanged);
             // 
             // dtpDate
             // 
@@ -94,7 +93,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 89);
+            this.label1.Location = new System.Drawing.Point(25, 93);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 20);
             this.label1.TabIndex = 5;
@@ -141,7 +140,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI Semibold", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.SystemColors.Highlight;
-            this.label6.Location = new System.Drawing.Point(25, 27);
+            this.label6.Location = new System.Drawing.Point(25, 29);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(142, 23);
             this.label6.TabIndex = 10;

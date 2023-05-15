@@ -9,5 +9,7 @@ namespace eCInema.Models.SearchObjects
     public class MoviesSearchObject:BaseSearchObject
     {
         public string? Title { get; set; }
+       
+
     }
 }

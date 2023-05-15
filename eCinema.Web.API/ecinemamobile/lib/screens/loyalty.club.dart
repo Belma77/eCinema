@@ -1,7 +1,9 @@
 import 'package:ecinemamobile/models/Authorization/authorization.dart';
+import 'package:ecinemamobile/models/Payment/payment.dart';
 import 'package:ecinemamobile/models/Users/customer.type.dart';
 import 'package:ecinemamobile/models/Users/user.loyalty.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
+import 'package:ecinemamobile/utils/error.messages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -32,7 +34,6 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
   final TextEditingController _cityController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-
   String? firstName;
   String? lastName;
   String? identificationNumber;
@@ -57,22 +58,18 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
     });
   }
 
-  Future<void> makePayment() async {
+  Future makePayment() async {
     if (_formKey.currentState!.validate()) {
       try {
-        paymentIntent =
-            await _loyaltyClubProvider!.createPaymentIntent('2395', 'BAM');
-        displayPaymentSheet();
-        var loyal = joinLoyalty();
-        await _loyaltyClubProvider?.insert(loyal);
-        Navigator.pop(context);
+        paymentIntent = await _loyaltyClubProvider!.createPaymentIntent('2395');
+        await displayPaymentSheet();
       } catch (err) {
-        print(err.toString());
+        rethrow;
       }
-    }
+    } else {}
   }
 
-  joinLoyalty() {
+  joinLoyalty() async {
     LoyalCard loyalty = LoyalCard();
     loyalty.customerId = user!.id;
     loyalty.firstName = firstName;
@@ -82,7 +79,34 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
     loyalty.city = city;
     loyalty.username = Authorization.username;
     loyalty.identificationNumber = identificationNumber;
-    return loyalty;
+    loyalty.paymentID = Payment.fromJson(paymentIntent!).id;
+    _loyaltyClubProvider = LoyaltyClubProvider();
+    try {
+      await _loyaltyClubProvider!.insert(loyalty);
+      showDialog(
+        context: context,
+        builder: (_) => const AlertDialog(
+          content: Text("Payment succesful"),
+        ),
+      );
+    } catch (err) {
+      rethrow;
+    }
+  }
+
+  displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet().then((value) async {
+        try {
+          await joinLoyalty();
+        } catch (err) {
+          paymentIntent = null;
+          rethrow;
+        }
+      });
+    } catch (err) {
+      rethrow;
+    }
   }
 
   @override
@@ -258,8 +282,17 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
                         child: SizedBox(
                           width: 100,
                           child: ElevatedButton(
-                            onPressed: () {
-                              makePayment();
+                            onPressed: () async {
+                              try {
+                                await makePayment();
+                              } catch (err) {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                    content: Text(err.toString()),
+                                  ),
+                                );
+                              }
                             },
                             child: const Text("Pay"),
                           ),
@@ -274,23 +307,5 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
         ),
       ),
     );
-  }
-
-  void displayPaymentSheet() async {
-    try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
-        showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-            content: Container(
-              child: const Text("Payment succesful"),
-            ),
-          ),
-        );
-      });
-      paymentIntent = null;
-    } catch (err) {
-      print(err);
-    }
   }
 }

@@ -20,7 +20,7 @@ namespace eCinema.Data
     {
         public eCinemaContext(DbContextOptions<eCinemaContext> options) : base(options)
         {
-
+            
         }
         public DbSet<Movies> Movies { get; set; }
         public DbSet<Genres> Genres { get; set; }
@@ -53,11 +53,19 @@ namespace eCinema.Data
             builder.Entity<ProducerMovies>().HasKey(x => new { x.MovieId, x.ProducerId });
 
             builder.Entity<Schedule>().HasOne(x => x.Hall).WithMany().OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<ScheduleSeat>().HasOne(x => x.Seat).WithMany().OnDelete(DeleteBehavior.ClientSetNull);
+            builder.Entity<ScheduleSeat>().HasOne(x => x.Seat).WithMany().OnDelete(DeleteBehavior.NoAction);
+           // builder.Entity<ScheduleSeat>().HasOne(x => x.Schedule).WithMany().HasForeignKey(y=>y.ScheduleId).OnDelete(DeleteBehavior.NoAction);
 
+            builder.Entity<Reservation>().HasOne(x => x.Schedule).WithMany().HasForeignKey(x=>x.ScheduleId).OnDelete(DeleteBehavior.NoAction);
+            //builder.Entity<Reservation>().HasMany(x=>x.ScheduleSeats).WithOne().OnDelete(DeleteBehavior.NoAction);
+            builder.Entity<Reservation>().HasMany(x => x.ScheduleSeats).WithOne()
+                .OnDelete(DeleteBehavior.Cascade);
+
+          //  builder.Entity<ScheduleSeat>().HasOne(x => x.Reservation).WithMany().HasForeignKey(y => y.ReservationId);
+            
             builder.Entity<Seat>()
                         .HasOne(s => s.Hall)
-                        .WithMany(g => g.Seats).HasForeignKey(s => s.HallId).IsRequired().OnDelete(DeleteBehavior.ClientSetNull);
+                        .WithMany(g => g.Seats).HasForeignKey(s => s.HallId).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Hall>().HasMany(x => x.Seats).WithOne(x => x.Hall).OnDelete(DeleteBehavior.NoAction);
 

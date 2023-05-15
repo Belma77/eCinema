@@ -15,5 +15,6 @@ Map<String, dynamic> _$LoyalCardToJson(LoyalCard instance) => <String, dynamic>{
       'email': instance.email,
       'city': instance.city,
       'identificationNumber': instance.identificationNumber,
-      'username': instance.username
+      'username': instance.username,
+      'paymentID': instance.paymentID
     };

@@ -53,6 +53,7 @@ namespace eCinema.Services.LoyalCardServices
                 var loyalCard = new LoyalCard();
                 loyalCard.CustomerId = update.Id;
                 loyalCard.price = 23.90;
+                loyalCard.PaymentID=insert.PaymentID;
                 _context.LoyalCards.Add(loyalCard);
                 _context.SaveChanges();
                 return _mapper.Map<LoyalCardDto>(loyalCard);

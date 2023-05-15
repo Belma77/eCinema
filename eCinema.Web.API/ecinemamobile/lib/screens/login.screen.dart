@@ -24,25 +24,17 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _obscureText = true;
   final _formKey = GlobalKey<FormState>();
 
-  Future login() async {
+  login() async {
     if (_formKey.currentState!.validate()) {
       ScheduleProvider();
       Authorization.username = _usernameController.text;
       Authorization.password = _passwordController.text;
       try {
         await _scheduleProvider.get();
+        Navigator.pushNamed(context, MoviesListScreen.route);
       } catch (e) {
-        showMessage(e.toString());
+        rethrow;
       }
-    }
-  }
-
-  Future<void> loginUser() async {
-    try {
-      await login();
-      Navigator.pushNamed(context, MoviesListScreen.route);
-    } catch (e) {
-      showMessage(e.toString());
     }
   }
 
@@ -126,9 +118,9 @@ class _LoginScreenState extends State<LoginScreen> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10), color: Colors.blue),
               child: InkWell(
-                onTap: () {
+                onTap: () async {
                   try {
-                    loginUser();
+                    var response = await login();
                   } catch (e) {
                     showMessage(e.toString());
                   }

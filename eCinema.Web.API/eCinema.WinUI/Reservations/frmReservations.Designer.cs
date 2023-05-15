@@ -46,6 +46,7 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.cmbPageSize = new System.Windows.Forms.ComboBox();
+            this.btnSearch = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvReservations)).BeginInit();
             this.SuspendLayout();
             // 
@@ -156,7 +157,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(297, 27);
             this.txtFirstName.TabIndex = 3;
-            this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
+            //this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // label2
             // 
@@ -180,9 +181,9 @@
             // 
             this.txtMovie.Location = new System.Drawing.Point(456, 89);
             this.txtMovie.Name = "txtMovie";
-            this.txtMovie.Size = new System.Drawing.Size(497, 27);
+            this.txtMovie.Size = new System.Drawing.Size(370, 27);
             this.txtMovie.TabIndex = 6;
-            this.txtMovie.TextChanged += new System.EventHandler(this.txtMovie_TextChanged);
+            //this.txtMovie.TextChanged += new System.EventHandler(this.txtMovie_TextChanged);
             // 
             // btnNext
             // 
@@ -222,11 +223,22 @@
             this.cmbPageSize.TabIndex = 10;
             this.cmbPageSize.SelectedIndexChanged += new System.EventHandler(this.cmbPageSize_SelectedIndexChanged);
             // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(832, 87);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(121, 29);
+            this.btnSearch.TabIndex = 11;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
             // frmReservations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(975, 441);
+            this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.cmbPageSize);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnPrevious);
@@ -268,5 +280,6 @@
         private DataGridViewTextBoxColumn NumberTickets;
         private DataGridViewTextBoxColumn Status;
         private DataGridViewButtonColumn Cancel;
+        private Button btnSearch;
     }
 }

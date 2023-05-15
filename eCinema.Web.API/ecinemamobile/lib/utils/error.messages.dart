@@ -8,4 +8,6 @@ class ErrorMessages {
       "Password has to contains at least 6 digits";
   static const String usernameUnique =
       "Username already taken, please try different one";
+  static const String paymentCanceled = "Payment canceled";
+  static const String paymentFailed = "Payment failed";
 }

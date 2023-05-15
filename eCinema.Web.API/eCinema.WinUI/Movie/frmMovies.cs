@@ -63,10 +63,6 @@ namespace eCinema.WinUI
             frm.ShowDialog();
         }
 
-        private async void textBox1_TextChanged(object sender, EventArgs e)
-        {
-            await LoadMovies();
-        }
 
         private async void btnNext_Click(object sender, EventArgs e)
         {
@@ -94,6 +90,11 @@ namespace eCinema.WinUI
                 pageSize=int.Parse(cmbPageSize.SelectedItem.ToString());
                 await LoadMovies();
             }
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            await LoadMovies();
         }
     }
 }

@@ -1,12 +1,16 @@
+import 'package:ecinemamobile/models/Payment/payment.dart';
 import 'package:ecinemamobile/models/Reservations/reservation.dart';
 import 'package:ecinemamobile/models/Reservations/reservation.status.dart';
 import 'package:ecinemamobile/models/ScheduleSeats/schedule.seat.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
 import 'package:ecinemamobile/screens/schedule.dart';
 import 'package:ecinemamobile/utils/date.formatter.dart';
+import 'package:ecinemamobile/utils/error.messages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import '../models/Halls/hall.dart';
 import '../models/Halls/hall.seats.dart';
@@ -29,7 +33,8 @@ class _ReservationScreenState extends State<ReservationScreen> {
   late ScheduleProvider? _scheduleProvider;
   late UserProvider? _userProvider;
   late ReservationProvider? _reservationProvider;
-  static Map<String, dynamic>? paymentIntent;
+  static Map<String, dynamic>? paymentResponse;
+  Map<String, dynamic>? paymentIntent;
   bool seatSelected = false;
   List<Seat>? seats;
   Hall? hall;
@@ -62,7 +67,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
         hall = tmpData?.hall;
         seats = tmpData?.hall?.seats;
         schedule = tmpData;
-        columns = new List<int>.generate(hall!.numberOfColumns!, (i) => i + 1);
+        columns = List<int>.generate(hall!.numberOfColumns!, (i) => i + 1);
         if (schedule!.scheduleSeats!.isNotEmpty) {
           for (var seat in tmpData!.scheduleSeats!) {
             alreadyTaken?.add(seat.seatId!);
@@ -75,31 +80,49 @@ class _ReservationScreenState extends State<ReservationScreen> {
   Future reserveTickets(Reservation reservation) async {
     ReservationProvider();
     try {
-      var response = await _reservationProvider?.insert(reservation);
+      await _reservationProvider?.insert(reservation);
+      if (reservation.status == ReservationStatusEnum.Booked) {
+        showMessage("Succesfully reserved");
+      } else {
+        showMessage("Succesfully paid");
+      }
     } catch (err) {
       showMessage(err.toString());
     }
   }
 
-  void pay() {
+  void pay() async {
     if (chosenSeats!.isNotEmpty) {
-      makeTicketPayment();
+      price = (schedule!.ticketPrice! * 100) * chosenSeats!.length;
+      var round = price!.round().toString();
+      try {
+        paymentResponse =
+            await _reservationProvider!.createPaymentIntent(round);
+        displayPaymentSheet();
+      } on StripeException catch (e) {
+        showMessage(ErrorMessages.paymentFailed);
+      } catch (err) {
+        showMessage(err.toString());
+      }
     } else {
-      throw Exception("Seats not chosen, payment not succeded");
+      showMessage("Seats not chosen, payment not succeded");
     }
   }
 
-  Future makeTicketPayment() async {
+  displayPaymentSheet() async {
     try {
-      price = (schedule!.ticketPrice! * 100) * chosenSeats!.length;
-      var round = price!.round();
-      paymentIntent = await _reservationProvider!
-          .createPaymentIntent(round.toString(), 'BAM');
-      displayPaymentSheet();
-    } catch (err) {}
+      await Stripe.instance.presentPaymentSheet().then((value) async {
+        await makeReservation(ReservationStatusEnum.Paid);
+      });
+    } on StripeException catch (e) {
+      showMessage(ErrorMessages.paymentCanceled);
+    } catch (err) {
+      showMessage(ErrorMessages.paymentFailed);
+    }
+    paymentIntent = null;
   }
 
-  void makeReservation(ReservationStatusEnum status) {
+  Future makeReservation(ReservationStatusEnum status) async {
     if (chosenSeats!.isNotEmpty) {
       int? numberOfTickets = chosenSeats?.length;
       price = numberOfTickets! * schedule!.ticketPrice!;
@@ -110,11 +133,22 @@ class _ReservationScreenState extends State<ReservationScreen> {
         add.seatId = seat.id;
         seats.add(add);
       }
-      var reservation =
-          Reservation(schedule!.id, numberOfTickets, seats, price, status);
-      reserveTickets(reservation);
+      Reservation reservation;
+      if (status == ReservationStatusEnum.Paid) {
+        var decode = Payment.fromJson(paymentResponse!);
+        reservation = Reservation(
+            schedule!.id, numberOfTickets, seats, price, status, decode.id);
+      } else {
+        reservation =
+            Reservation(schedule!.id, numberOfTickets, seats, price, status);
+      }
+      try {
+        reserveTickets(reservation);
+      } catch (err) {
+        showMessage(err.toString());
+      }
     } else {
-      throw Exception("Seats not chosen, reservation not succeded");
+      showMessage("Seats not chosen, reservation not succeded");
     }
   }
 
@@ -164,7 +198,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
               width: double.infinity,
               height: 40,
               margin: EdgeInsets.only(left: 30),
-              //color: Colors.blue,
               child: Row(
                 children: [
                   Padding(
@@ -424,8 +457,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                     try {
                                       makeReservation(
                                           ReservationStatusEnum.Booked);
-                                      showMessage(
-                                          "Successfuly added reservation");
                                     } catch (e) {
                                       showMessage(e.toString());
                                     }
@@ -454,8 +485,6 @@ class _ReservationScreenState extends State<ReservationScreen> {
                                   onTap: () {
                                     try {
                                       pay();
-                                      showMessage(
-                                          "Successfuly added reservation");
                                     } catch (e) {
                                       showMessage(e.toString());
                                     }
@@ -493,15 +522,5 @@ class _ReservationScreenState extends State<ReservationScreen> {
                         ))
               ],
             ));
-  }
-
-  void displayPaymentSheet() async {
-    try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
-        makeReservation(ReservationStatusEnum.Paid);
-        showMessage("Successfuly paid");
-      });
-      paymentIntent = null;
-    } catch (err) {}
   }
 }

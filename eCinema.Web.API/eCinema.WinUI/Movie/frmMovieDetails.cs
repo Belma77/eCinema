@@ -93,7 +93,7 @@ namespace eCinema.WinUI
             frmEditMovie frm =new frmEditMovie(_movie.Id);
             frm.ShowDialog();
             await LoadMovieDetails();
-            this.Show();
+            this.Show();    
         }
 
        

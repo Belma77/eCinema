@@ -17,5 +17,6 @@ namespace eCInema.Models.Dtos.LoyaltyCard
         public string? Phone { get; set; }
         public string? City { get; set; }
         public string? IdentificationNumber { get; set; }
+        public string? PaymentID { get; set; }
     }
 }

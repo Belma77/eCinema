@@ -15,8 +15,12 @@ import 'package:ecinemamobile/screens/user.profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: "assets/.env");
+  Stripe.publishableKey = dotenv.env['stripePublishableKey']!;
+
   runApp(
     MultiProvider(
       providers: [
@@ -30,7 +34,6 @@ void main() {
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
-  Stripe.publishableKey = stripePublishableKey;
 }
 
 class MyApp extends StatelessWidget {

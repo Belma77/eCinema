@@ -36,10 +36,12 @@ namespace eCinema.Services.Resrevations
 
         public override IQueryable<Reservation> AddFilter(IQueryable<Reservation> query, ReservationSearchObject search = null)
         {
-            if (!String.IsNullOrEmpty(search.CustomerName))
-                query = query.Where(x => x.Customer.FirstName.ToLower().Contains(search.CustomerName.ToLower())
-                || x.Customer.LastName.ToLower().Contains(search.CustomerName.ToLower())
-                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().Contains(search.CustomerName.ToLower()));
+          if (!String.IsNullOrEmpty(search.CustomerName))
+            {
+                query = query.Where(x => x.Customer.FirstName.ToLower().StartsWith(search.CustomerName.ToLower())
+                || x.Customer.LastName.ToLower().StartsWith(search.CustomerName.ToLower())
+                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().StartsWith(search.CustomerName.ToLower()));
+            }
 
             if (!String.IsNullOrEmpty(search.Movie))
                 query = query.Where(x => x.Schedule.Movie.Title.ToLower().StartsWith(search.Movie.ToLower()));
@@ -95,8 +97,11 @@ namespace eCinema.Services.Resrevations
             reservation.Status=eCInema.Models.Enums.ReservationStatusEnum.Booked;
             reservation.NumberOfTickets = insert.NumberOfTickets;
             reservation.Price = insert.NumberOfTickets*scheduleDb.TicketPrice;
-            reservation.ScheduleSeat = scheduleSeats;
+            reservation.ScheduleSeats= scheduleSeats;
             reservation.Status = insert.Status;
+            if(insert.PaymentID!=null)
+            reservation.PaymentID=insert.PaymentID;
+
             _context.Reservations.Add(reservation);
             _context.SaveChanges();
             return _mapper.Map<ReservationDto>(reservation);
