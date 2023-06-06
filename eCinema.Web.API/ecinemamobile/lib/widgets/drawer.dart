@@ -50,7 +50,7 @@ class DrawerWidget extends StatelessWidget {
             leading: const Icon(
               Icons.logout,
             ),
-            title: const Text('Sing out'),
+            title: const Text('Log out'),
             onTap: () async {
               try {
                 Authorization.username = "";
