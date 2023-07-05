@@ -26,8 +26,7 @@ docker-compose up --build
  1. flutter pub get (za dobavljanje dependencies)  
  2. flutter run  (pokretanje aplikacije)  
  Za promjenu vrijednosti Stripe keys, kucati komandu: flutter run --dart-define stripePublishableKey=primjerPublishableKljuca --dart-define 
- stripeSecretKey=primjerSecretKeya  
- Za promjenu vrijednosti baseUrl-a, kucati komandu flutter run --dart-define baseUrl=VasUrl
+ stripeSecretKey=primjerSecretKeya    
 
  Desktop aplikacija:  
  Otvoriti solution unutar Visual studija, postaviti Startup projekat na eCinema.WinUI te pokrenuti. 
