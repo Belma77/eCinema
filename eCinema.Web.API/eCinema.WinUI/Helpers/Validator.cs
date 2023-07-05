@@ -20,7 +20,7 @@ namespace eCinema.WinUI.Helpers
             else if (control is ComboBox && (string.IsNullOrEmpty((control as ComboBox).Text) || (control as ComboBox).SelectedIndex < 0))
                 _setError = true;
 
-            else if (control is CheckedListBox && (string.IsNullOrEmpty((control as CheckedListBox).Text) || (control as CheckedListBox).SelectedIndex < 0))
+            else if (control is CheckedListBox && (string.IsNullOrEmpty((control as CheckedListBox).Text) || (control as CheckedListBox).SelectedIndex < 0 || (control as CheckedListBox).CheckedItems.Count<1))
                 _setError = true;
 
             else if (control is PictureBox && (control as PictureBox).Image == null)

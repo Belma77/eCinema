@@ -75,14 +75,14 @@
             // showAllMoviesToolStripMenuItem
             // 
             this.showAllMoviesToolStripMenuItem.Name = "showAllMoviesToolStripMenuItem";
-            this.showAllMoviesToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.showAllMoviesToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.showAllMoviesToolStripMenuItem.Text = "Show all movies";
             this.showAllMoviesToolStripMenuItem.Click += new System.EventHandler(this.showAllMoviesToolStripMenuItem_Click);
             // 
             // addNewMovieToolStripMenuItem
             // 
             this.addNewMovieToolStripMenuItem.Name = "addNewMovieToolStripMenuItem";
-            this.addNewMovieToolStripMenuItem.Size = new System.Drawing.Size(199, 26);
+            this.addNewMovieToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.addNewMovieToolStripMenuItem.Text = "Add new";
             this.addNewMovieToolStripMenuItem.Click += new System.EventHandler(this.addNewMovieToolStripMenuItem_Click);
             // 

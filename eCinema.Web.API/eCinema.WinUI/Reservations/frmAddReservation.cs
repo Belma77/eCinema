@@ -106,8 +106,9 @@ namespace eCinema.WinUI.Reservations
                 var selected=schedules.Where(x=>x.Movie.Title.Equals(movie.Movie.Title)&&x.DateOnly.Equals(dateonly)&&x.TimeOnly.Equals(search.StartTime)).First();
                 var getId = await scheduleService.GetById<GetSchedulesDto>(selected.Id, "Seats");
                 frmSeatSelection frm = new frmSeatSelection(getId, customer, payStatus);
-
+                this.Close();
                 frm.ShowDialog();
+                
                 
             }
         }

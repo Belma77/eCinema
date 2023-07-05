@@ -97,5 +97,7 @@ namespace eCinema.WinUI
             Application.Exit();
 
         }
+
+       
     }
 }

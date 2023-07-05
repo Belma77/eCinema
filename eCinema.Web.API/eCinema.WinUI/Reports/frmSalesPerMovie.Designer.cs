@@ -95,7 +95,7 @@
             this.Name = "frmSalesPerMovie";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmSalesPerMovie";
-            this.Load += new System.EventHandler(this.frmSalesPerMovie_LoadAsync);
+            this.Load += new System.EventHandler(this.frmSalesPerMovie_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

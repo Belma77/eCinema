@@ -42,11 +42,15 @@ namespace eCinema.WinUI
 
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-           
-            foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            if (Validator.Validate(dataGridView1, err, AlertMessages.CantDeleteEmptyRow))
             {
-                dataGridView1.Rows.RemoveAt(item.Index);
+                
+                foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                {
+                    dataGridView1.Rows.RemoveAt(item.Index);
+                }
             }
+           
 
         }
 

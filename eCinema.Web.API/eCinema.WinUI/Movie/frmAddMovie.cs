@@ -42,8 +42,8 @@ namespace eCinema.WinUI
                 {
                     movie.Genres.Add(item as GenresDto);
                 }
-                this.Close();
                 frmAddDirectors frm = new frmAddDirectors(movie);
+                Close();
                 frm.ShowDialog();
                 
             }
@@ -81,27 +81,38 @@ namespace eCinema.WinUI
 
         private bool Validate()
         {
-            int result;
-            if (!int.TryParse(txtYear.Text, out result))
-            {
-                err.SetError(txtYear, AlertMessages.OnlyNumbersAllowed);
-                return false;
-            }
 
-            else if (!int.TryParse(txtDuration.Text, out result))
-            {
-                err.SetError(txtDuration, AlertMessages.OnlyNumbersAllowed);
-                return false;
-            }
-
-            return
+            if(
                 Validator.Validate(txtTitle, err, AlertMessages.RequiredField) &&
                 Validator.Validate(txtYear, err, AlertMessages.RequiredField) &&
                 Validator.Validate(txtDuration, err, AlertMessages.RequiredField) &&
                 Validator.Validate(cmbCountries, err, AlertMessages.RequiredField) &&
                 Validator.Validate(clbGenres, err, AlertMessages.RequiredField) &&
                 Validator.Validate(txtSynopsis, err, AlertMessages.RequiredField) &&
-                Validator.Validate(pbPoster, err, AlertMessages.RequiredField);
+                Validator.Validate(pbPoster, err, AlertMessages.RequiredField))
+            {
+                int result;
+                if (!int.TryParse(txtYear.Text, out result))
+                {
+                    err.SetError(txtYear, AlertMessages.OnlyNumbersAllowed);
+                    return false;
+                }
+
+                else if (!int.TryParse(txtDuration.Text, out result))
+                {
+                    err.SetError(txtDuration, AlertMessages.OnlyNumbersAllowed);
+                    return false;
+                }
+                else
+                {
+                    err.Clear();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
 
         }
 

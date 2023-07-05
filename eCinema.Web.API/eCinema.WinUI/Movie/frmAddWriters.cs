@@ -43,7 +43,7 @@ namespace eCinema.WinUI
         }
 
 
-        private async void btnSave_Click(object sender, EventArgs e)
+        private void btnSave_Click(object sender, EventArgs e)
         {
             if (Validate())
             {
@@ -62,8 +62,8 @@ namespace eCinema.WinUI
                
                insert.Writers = list;
 
-                this.Hide();
                 frmAddActors frm = new frmAddActors(insert);
+                this.Close();
                 frm.ShowDialog();
             }
         }
@@ -76,10 +76,15 @@ namespace eCinema.WinUI
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            if (Validator.Validate(dataGridView1, errorProvider1, AlertMessages.CantDeleteEmptyRow))
             {
-                dataGridView1.Rows.RemoveAt(item.Index);
+
+                foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                {
+                    dataGridView1.Rows.RemoveAt(item.Index);
+                }
             }
+            
         }
 
         private async void btnAdd_Click(object sender, EventArgs e)

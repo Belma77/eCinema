@@ -61,10 +61,12 @@ namespace eCinema.Web.API.Controllers
 
         [HttpGet("Sales")]
         [Authorize(UserRole.Admin)]
-        public IActionResult SalesPerMovie()
+        public IActionResult SalesPerMovie([FromQuery]  SalesPerMovieSearchObject? search=null)
         {
-            return Ok(_service.SalesByMovie());
+            return Ok(_service.SalesByMovie(search));
         }
+
+       
 
     }
 }

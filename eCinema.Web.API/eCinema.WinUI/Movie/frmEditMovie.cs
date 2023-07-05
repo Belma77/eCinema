@@ -116,8 +116,10 @@ namespace eCinema.WinUI
 
         private async void Save_Click(object sender, EventArgs e)
         {
-           
-                
+
+            if(ValidateControls())
+            {
+
                 var update = new MovieUpdateDto();
                 update.Title = txtTitle.Text;
                 update.ReleaseYear = int.Parse(txtYear.Text);
@@ -133,8 +135,47 @@ namespace eCinema.WinUI
                 await UpdateGenres();
                 MessageBox.Show("Succesfully edited movie");
                 this.Close();
-
+            }
             
+        }
+
+        private bool ValidateControls()
+        {
+            if (Validator.Validate(txtTitle, err, AlertMessages.RequiredField) &&
+                Validator.Validate(txtYear, err, AlertMessages.RequiredField) &&
+                Validator.Validate(txtDuration, err, AlertMessages.RequiredField) &&
+                Validator.Validate(cmbCountry, err, AlertMessages.RequiredField) &&
+                Validator.Validate(txtSynopsis, err, AlertMessages.RequiredField) &&
+                Validator.Validate(pbPoster, err, AlertMessages.RequiredField) &&
+                Validator.Validate(clbGenres, err, AlertMessages.GenresNotValid) &&
+                Validator.Validate(clbDirectors, err, AlertMessages.DirectorsNotValid) &&
+                Validator.Validate(clbWriters, err, AlertMessages.WritersNotValid) &&
+                Validator.Validate(clbActors, err, AlertMessages.ActorsNotValid) &&
+                Validator.Validate(clbProducers, err, AlertMessages.ProducersNotValid))
+            {
+                int result;
+                if (!int.TryParse(txtYear.Text, out result))
+                {
+                    err.SetError(txtYear, AlertMessages.OnlyNumbersAllowed);
+                    return false;
+                }
+
+                else if (!int.TryParse(txtDuration.Text, out result))
+                {
+                    err.SetError(txtDuration, AlertMessages.OnlyNumbersAllowed);
+                    return false;
+                }
+                else
+                {
+                    err.Clear();
+                    return true;
+                }
+            }
+            else
+            {
+                return false;
+            }
+    
         }
 
         private async Task UpdateGenres()
@@ -199,7 +240,7 @@ namespace eCinema.WinUI
                 }
             }
 
-            if (addItem.Count > 0)
+            if (addItem.Count > 1)
             {
                 List<DirectorsMoviesDto> removeItems = new List<DirectorsMoviesDto>();  
                 
@@ -214,6 +255,7 @@ namespace eCinema.WinUI
                 APIservice _service = new APIservice("Directors");
                 await _service.DeleteFromMovie(removeItems);
             }
+            
             
         }
 

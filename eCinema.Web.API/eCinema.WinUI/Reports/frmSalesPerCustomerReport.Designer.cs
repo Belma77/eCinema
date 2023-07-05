@@ -97,7 +97,7 @@
             this.Name = "frmSalesPerCustomerReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sales Per Customer Report";
-            this.Load += new System.EventHandler(this.frmSalesPerCustomerReport_LoadAsync);
+            this.Load += new System.EventHandler(this.frmSalesPerCustomerReport_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

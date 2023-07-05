@@ -1,4 +1,5 @@
 ﻿using eCInema.Models.Dtos.Reservations;
+using eCInema.Models.SearchObjects;
 using Microsoft.Reporting.WinForms;
 using Microsoft.Win32;
 using System;
@@ -17,6 +18,7 @@ namespace eCinema.WinUI.Reports
     {
         private APIservice service = new APIservice("Reservation");
         List<SalesPerCustomer> sales = new List<SalesPerCustomer>();
+        SalesByCustomerSearchObject search = null;
         public frmSalesPerCustomerReport()
         {
             InitializeComponent();
@@ -24,49 +26,62 @@ namespace eCinema.WinUI.Reports
 
         private async Task LoadSales()
         {
-            sales = await service.Get<List<SalesPerCustomer>>("ByCustomer");
-        }
-
-        private async void frmSalesPerCustomerReport_LoadAsync(object sender, EventArgs e)
-        {
-            LoadReportData();
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
             if (!string.IsNullOrEmpty(txtSearch.Text))
             {
-                rpvSales.RefreshReport();
-                rpvSales.LocalReport.DataSources.Clear();
-                var rds = new ReportDataSource();
-                var salesTable = new dsSales.SalesPerCustomerDataTable();
-                var filter = txtSearch.Text.ToLower();
-                var data = sales.Where(x => x.Customer.FirstName.ToLower().Contains(filter) || x.Customer.LastName.ToLower().Contains(filter));
-                foreach (var sale in data)
-                {
-                    var row = salesTable.NewSalesPerCustomerRow();
-                    row.CustomerId = sale.Customer.Id.ToString();
-                    row.FirstName = sale.Customer.FirstName;
-                    row.LastName = sale.Customer.LastName;
-                    row.Sales = sale.Sales.ToString();
-                    salesTable.Rows.Add(row);
+                search = new SalesByCustomerSearchObject();
+                search.Name = txtSearch.Text;
+                sales = await service.Get<List<SalesPerCustomer>>("ByCustomer", search);
 
-                }
-
-                rds.Name = "dsSales";
-                rds.Value = salesTable;
-                rpvSales.LocalReport.DataSources.Clear();
-                rpvSales.LocalReport.DataSources.Add(rds);
-                rpvSales.RefreshReport();
             }
+            else
+            {
+                sales = await service.Get<List<SalesPerCustomer>>("ByCustomer");
+
+            }
+        }
+
+        private async void frmSalesPerCustomerReport_Load(object sender, EventArgs e)
+        {
+            await LoadReportData();
+        }
+
+        private async void btnSearch_Click(object sender, EventArgs e)
+        {
+            //if (!string.IsNullOrEmpty(txtSearch.Text))
+            //{
+            //    rpvSales.RefreshReport();
+            //    rpvSales.LocalReport.DataSources.Clear();
+            //    var rds = new ReportDataSource();
+            //    var salesTable = new dsSales.SalesPerCustomerDataTable();
+            //    var filter = txtSearch.Text.ToLower();
+            //    var data = sales.Where(x => x.Customer.FirstName.ToLower().Contains(filter) || x.Customer.LastName.ToLower().Contains(filter));
+            //    foreach (var sale in data)
+            //    {
+            //        var row = salesTable.NewSalesPerCustomerRow();
+            //        row.CustomerId = sale.Customer.Id.ToString();
+            //        row.FirstName = sale.Customer.FirstName;
+            //        row.LastName = sale.Customer.LastName;
+            //        row.Sales = sale.Sales.ToString();
+            //        salesTable.Rows.Add(row);
+
+            //    }
+
+            //    rds.Name = "dsSales";
+            //    rds.Value = salesTable;
+            //    rpvSales.LocalReport.DataSources.Clear();
+            //    rpvSales.LocalReport.DataSources.Add(rds);
+            //    rpvSales.RefreshReport();
+            //}
+            await LoadReportData();
         }
 
         private async void btnClear_Click(object sender, EventArgs e)
         {
-            LoadReportData();
+            txtSearch.Clear();
+            await LoadReportData();
         }
 
-        private async void LoadReportData()
+        private async Task LoadReportData()
         {
             await LoadSales();
             rpvSales.LocalReport.ReportEmbeddedResource = "eCinema.WinUI.Reports.SalesPerCustomer.rdlc";

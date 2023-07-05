@@ -45,7 +45,7 @@ namespace eCinema.WinUI.Reservations
 
         }
 
-        private async void frmSeatSelection_Load(object sender, EventArgs e)
+        private void frmSeatSelection_Load(object sender, EventArgs e)
         {
             GenerateSeats();
 

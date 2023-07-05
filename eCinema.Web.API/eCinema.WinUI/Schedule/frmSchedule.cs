@@ -50,20 +50,20 @@ namespace eCinema.WinUI.ScheduleForms
             if (dateChanged)
             {
                 search.Date = dtmDate.Value;
-                dateChanged = false;
+                //dateChanged = false;
             }
 
             if (timeChanged)
             {
                 search.StartTime = dtmTime.Value.ToShortTimeString();
-                timeChanged = false;
+                //timeChanged = false;
             }
 
             search.PageNumber = pageNumber;
             search.PageSize = pageSize;
             await LoadData(search);
         }
-        private async Task LoadData(ScheduleSearchObject search=null)
+        private async Task LoadData(ScheduleSearchObject? search=null)
         {
             var schedules = await service.Get<List<GetSchedulesDto>>(search);
 
@@ -142,12 +142,12 @@ namespace eCinema.WinUI.ScheduleForms
             return retValue;
         }
 
-        private async void dtmDate_ValueChanged(object sender, EventArgs e)
+        private void dtmDate_ValueChanged(object sender, EventArgs e)
         {
             dateChanged = true;
         }
 
-        private async void dtmTime_ValueChanged(object sender, EventArgs e)
+        private void dtmTime_ValueChanged(object sender, EventArgs e)
         {
             timeChanged = true;
         }
@@ -182,12 +182,20 @@ namespace eCinema.WinUI.ScheduleForms
 
         private async void btnClear_Click(object sender, EventArgs e)
         {
-            await LoadData();
+            txtTitle.Clear();
+            search.Title = null;
+            search.Date = null;
+            search.StartTime = null;
+            dtmDate.ResetText();
+            dtmTime.ResetText();
+            timeChanged = false;
+            dateChanged = false;
+            await LoadData(search);
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            search = null;
+           
             LoadSchedules();
         }
     }

@@ -10,7 +10,7 @@ namespace eCInema.Models.Entities
     {
         public int Id { get; set; }
         public int MovieId { get; set; }
-        public Movies Movie { get; set; } 
+        public Movies Movie { get; set; }
         public DateTime Date { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
@@ -18,6 +18,7 @@ namespace eCInema.Models.Entities
         public double TicketPrice { get; set; }
         public Hall Hall { get; set; }
         public List<ScheduleSeat> ScheduleSeats { get; set; }
+        public List<Reservation> Reservations { get; set; }
         public int NoAvailableSeats { get; set; }
 
     }

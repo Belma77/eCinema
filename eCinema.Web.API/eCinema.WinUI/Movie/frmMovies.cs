@@ -17,9 +17,9 @@ namespace eCinema.WinUI
             
         }
        
-        private async void frmMovies_Load(object sender, EventArgs e)
+        private async void frmMovies_LoadAsync(object sender, EventArgs e)
         {
-           await LoadMovies();
+            await LoadMovies();
             LoadCmb();
         }
 
@@ -47,11 +47,11 @@ namespace eCinema.WinUI
             var item = dgvMovies.SelectedRows[0].DataBoundItem as MovieDetailsDto;
             if(item != null)
             {
-                this.Hide();
                 frmMovieDetails frm = new frmMovieDetails(item.Id);
+                this.Hide();
                 frm.ShowDialog();
-                await LoadMovies();
                 this.Show();
+                await LoadMovies();
                 
             }          
         }
@@ -61,6 +61,7 @@ namespace eCinema.WinUI
             this.Hide();
             frmAddMovie frm = new frmAddMovie();
             frm.ShowDialog();
+            this.Show();
         }
 
 
@@ -96,5 +97,7 @@ namespace eCinema.WinUI
         {
             await LoadMovies();
         }
+
+       
     }
 }

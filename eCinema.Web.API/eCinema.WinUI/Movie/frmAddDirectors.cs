@@ -66,8 +66,9 @@ namespace eCinema.WinUI
                     }
 
                     insert.Directors = new List<DirectorDto>(list);
-                    this.Hide();
                     frmAddProducers frm = new frmAddProducers(insert);
+                    this.Close();
+
                     frm.ShowDialog();
                 }
             }
@@ -98,12 +99,15 @@ namespace eCinema.WinUI
 
          private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
          {
+            if (Validator.Validate(dataGridView1,errorProvider1, AlertMessages.CantDeleteEmptyRow))
+            {
 
                 foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
                 {
                     dataGridView1.Rows.RemoveAt(item.Index);
                 }
-            
+            }
+           
          }
 
 

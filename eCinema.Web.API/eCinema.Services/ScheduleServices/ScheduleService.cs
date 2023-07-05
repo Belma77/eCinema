@@ -36,7 +36,7 @@ namespace eCinema.Services.ScheduleServices
 
             if (search.Date.HasValue)
             {
-                query = query.Where(x => x.Date.Date.Equals(search.Date.Value));
+                query = query.Where(x => x.Date.Date.Equals(search.Date.Value.Date));
             }
             if (search.MovieId != null)
             {
@@ -71,7 +71,23 @@ namespace eCinema.Services.ScheduleServices
 
             return _mapper.Map<GetSchedulesDto>(schedule);
         }
+        public override List<GetSchedulesDto> Delete(int id)
+        {
+            var reservations = _context.Reservations.Where(x => x.ScheduleId == id);
+            var schedule = _context.Schedules.Find(id);
+            var seats = _context.ScheduleSeats.Where(x => x.ScheduleId == id);
+            if (schedule == null||reservations==null||seats==null)
+            {
+                throw new NotFoundException("Not found");
+            }
+            _context.ScheduleSeats.RemoveRange(seats);
+            _context.Reservations.RemoveRange(reservations);
+            _context.Schedules.Remove(schedule);
 
+            _context.SaveChanges();
+            var list = _context.Schedules.ToList();
+            return _mapper.Map<List<GetSchedulesDto>>(list);
+        }
         public GetSchedulesDto GetSeats(int id)
         {
             var schedule = _context.Schedules.

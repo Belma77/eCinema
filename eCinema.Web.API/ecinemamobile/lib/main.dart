@@ -15,12 +15,12 @@ import 'package:ecinemamobile/screens/user.profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:ecinemamobile/assets/.env';
 
 void main() async {
-  await dotenv.load(fileName: "assets/.env");
-  Stripe.publishableKey = dotenv.env['stripePublishableKey']!;
-
+  var stripeKey = const String.fromEnvironment("stripePublishableKey",
+      defaultValue: stripePublishableKey);
+  Stripe.publishableKey = stripeKey;
   runApp(
     MultiProvider(
       providers: [

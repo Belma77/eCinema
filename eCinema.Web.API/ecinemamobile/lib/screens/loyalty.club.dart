@@ -309,8 +309,8 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
                                     actions: [
                                       TextButton(
                                           child: const Text("Ok"),
-                                          onPressed: () =>
-                                              Navigator.pop(context))
+                                          onPressed: () => Navigator.pushNamed(
+                                              context, MoviesListScreen.route))
                                     ],
                                   ),
                                 );

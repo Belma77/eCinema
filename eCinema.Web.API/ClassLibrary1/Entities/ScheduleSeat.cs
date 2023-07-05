@@ -15,8 +15,6 @@ namespace eCInema.Models.Entities
         public int? SeatId { get; set; }
         public Seat Seat { get; set; }
         public bool isTaken { get; set; }
-       
-
         public override bool Equals(object? obj)
         {
             if (obj == null) return false;

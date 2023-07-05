@@ -54,20 +54,36 @@ namespace eCinema.Data
 
             builder.Entity<Schedule>().HasOne(x => x.Hall).WithMany().OnDelete(DeleteBehavior.NoAction);
             builder.Entity<ScheduleSeat>().HasOne(x => x.Seat).WithMany().OnDelete(DeleteBehavior.NoAction);
-           // builder.Entity<ScheduleSeat>().HasOne(x => x.Schedule).WithMany().HasForeignKey(y=>y.ScheduleId).OnDelete(DeleteBehavior.NoAction);
-
-            builder.Entity<Reservation>().HasOne(x => x.Schedule).WithMany().HasForeignKey(x=>x.ScheduleId).OnDelete(DeleteBehavior.NoAction);
-            //builder.Entity<Reservation>().HasMany(x=>x.ScheduleSeats).WithOne().OnDelete(DeleteBehavior.NoAction);
-            builder.Entity<Reservation>().HasMany(x => x.ScheduleSeats).WithOne()
-                .OnDelete(DeleteBehavior.Cascade);
-
-          //  builder.Entity<ScheduleSeat>().HasOne(x => x.Reservation).WithMany().HasForeignKey(y => y.ReservationId);
+           builder.Entity<Schedule>().HasMany(x => x.ScheduleSeats).WithOne(y => y.Schedule).HasForeignKey(y => y.ScheduleId).OnDelete(DeleteBehavior.NoAction);
             
+
+            builder.Entity<Schedule>().HasMany(x => x.Reservations).WithOne(y => y.Schedule).HasForeignKey(z=>z.ScheduleId).OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Seat>()
-                        .HasOne(s => s.Hall)
-                        .WithMany(g => g.Seats).HasForeignKey(s => s.HallId).IsRequired().OnDelete(DeleteBehavior.NoAction);
+                     .HasOne(s => s.Hall)
+                     .WithMany(g => g.Seats).HasForeignKey(s => s.HallId).IsRequired().OnDelete(DeleteBehavior.NoAction);
 
             builder.Entity<Hall>().HasMany(x => x.Seats).WithOne(x => x.Hall).OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.Entity<Reservation>()
+            .HasMany(r => r.ScheduleSeats)
+            .WithOne()
+            .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Movies>()
+            .HasMany(m => m.Schedules)
+            .WithOne(s => s.Movie)
+            .HasForeignKey(s => s.MovieId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+
+            builder.Entity<Schedule>()
+                 .HasOne(s => s.Movie)
+                 .WithMany(m => m.Schedules)
+                 .HasForeignKey(s => s.MovieId);
+
+           
 
             builder.Entity<User>().HasDiscriminator<UserRole>("Discriminator")
                 .HasValue<Customer>(UserRole.Customer)

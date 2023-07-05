@@ -26,20 +26,14 @@ namespace eCinema.WinUI.Login
             APIservice.Username = txtUsername.Text;
             APIservice.Password = txtPassword.Text;
            
-            try
-            {
+            
                 var result = await service.Get<dynamic>();
                 this.Hide();
                 frmMain frm = new frmMain();
                 frm.ShowDialog();
                 this.Close();
                 Application.Exit();
-            }
-
-            catch (Exception ex)
-            {
-                
-            }
+           
         }
 
         private void frmLogin_FormClosed(object sender, FormClosedEventArgs e)

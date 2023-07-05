@@ -48,7 +48,7 @@ namespace eCinema.Services.Resrevations
 
             return query;
         }
-
+      
         public override ReservationDto Insert(ReservationInsertDto insert)
         {
             var scheduleDb = _context.Schedules.First(x => x.Id == insert.ScheduleId);
@@ -57,7 +57,6 @@ namespace eCinema.Services.Resrevations
 
             var scheduleSeats=new List<ScheduleSeat>();
             var seats= _context.ScheduleSeats.Where(x=>x.ScheduleId==insert.ScheduleId).ToList();
-
             if(scheduleDb.NoAvailableSeats==0)
             {
                 throw new BadRequestException("All seats are taken, try reserve another projection");
@@ -107,17 +106,23 @@ namespace eCinema.Services.Resrevations
             return _mapper.Map<ReservationDto>(reservation);
 
         }
-        public List<SalesPerCustomer> GetReservationsByCustomer()
+        public List<SalesPerCustomer> GetReservationsByCustomer(SalesByCustomerSearchObject? search)
         {
-            var reservations = _context.Reservations.Where(x => x.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid).Include(x => x.Customer)  
-           .GroupBy(x=>x.Customer).
-                Select(x=>new SalesPerCustomer
-                {
-                    Customer=_mapper.Map<CustomerDto>(x.Key),
-                    Sales=x.Sum(y=>y.Price)
-                }).
-                ToList();
-            return reservations;
+            var reservations = _context.Reservations.Where(x => x.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid).Include(x => x.Customer).AsQueryable();
+
+            if (!string.IsNullOrEmpty(search?.Name))
+            {
+                reservations=reservations.Where(x => x.Customer.FirstName.ToLower().Contains(search.Name.ToLower()) || x.Customer.LastName.ToLower().Contains(search.Name.ToLower()));
+            }
+
+            var sales = reservations.GroupBy(x => x.Customer)
+           .Select(x => new SalesPerCustomer
+           {
+           Customer = _mapper.Map<CustomerDto>(x.Key),
+           Sales = x.Sum(y => y.Price)
+           });
+
+            return sales.ToList();
             
         }
         

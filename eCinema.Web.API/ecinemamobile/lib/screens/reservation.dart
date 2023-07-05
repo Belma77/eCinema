@@ -19,6 +19,7 @@ import '../models/Seats/seat.dart';
 import '../providers/reservation.provider.dart';
 import '../providers/schedule.provider.dart';
 import '../providers/user.provider.dart';
+import 'package:ecinemamobile/assets/.env';
 
 class ReservationScreen extends StatefulWidget {
   static const String route = "/ReservationScreen";
@@ -98,7 +99,7 @@ class _ReservationScreenState extends State<ReservationScreen> {
       try {
         paymentResponse =
             await _reservationProvider!.createPaymentIntent(round);
-        displayPaymentSheet();
+        await displayPaymentSheet();
       } on StripeException catch (e) {
         showMessage(ErrorMessages.paymentFailed);
       } catch (err) {
@@ -119,7 +120,9 @@ class _ReservationScreenState extends State<ReservationScreen> {
     } catch (err) {
       showMessage(ErrorMessages.paymentFailed);
     }
-    paymentIntent = null;
+    setState(() {
+      paymentIntent = null;
+    });
   }
 
   Future makeReservation(ReservationStatusEnum status) async {
@@ -142,8 +145,14 @@ class _ReservationScreenState extends State<ReservationScreen> {
         reservation =
             Reservation(schedule!.id, numberOfTickets, seats, price, status);
       }
+      ReservationProvider();
       try {
-        reserveTickets(reservation);
+        await _reservationProvider?.insert(reservation);
+        if (reservation.status == ReservationStatusEnum.Booked) {
+          showMessage("Succesfully reserved");
+        } else {
+          showMessage("Succesfully paid");
+        }
       } catch (err) {
         showMessage(err.toString());
       }

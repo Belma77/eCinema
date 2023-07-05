@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eCInema.Models.Dtos.Movie;
+using eCinema.WinUI.Helpers;
 
 namespace eCinema.WinUI
 {
@@ -55,8 +56,9 @@ namespace eCinema.WinUI
 
                 }
                 _insert.Producers = list;
-                this.Hide();
                 frmAddWriters frm = new frmAddWriters(_insert);
+                this.Close();
+
                 frm.ShowDialog();
             }
         }
@@ -89,5 +91,16 @@ namespace eCinema.WinUI
             }
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (Validator.Validate(dataGridView1, err, AlertMessages.CantDeleteEmptyRow))
+            {
+                foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                {
+                    dataGridView1.Rows.RemoveAt(item.Index);
+                }
+            }
+           
+        }
     }
 }

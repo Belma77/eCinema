@@ -83,14 +83,14 @@ namespace eCinema.WinUI
             if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
                 await _service.Delete(_movie.Id);
-                this.Hide();
+                this.Close();
             }
         }
 
         private async void btnEdit_Click(object sender, EventArgs e)
         {
-            this.Hide();
             frmEditMovie frm =new frmEditMovie(_movie.Id);
+            this.Hide();
             frm.ShowDialog();
             await LoadMovieDetails();
             this.Show();    

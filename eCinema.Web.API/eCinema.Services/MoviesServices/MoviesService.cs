@@ -13,6 +13,7 @@ using eCInema.Models.Dtos.Movie;
 using eCInema.Models.Dtos.Reservations;
 using eCInema.Models.Dtos.Schedules;
 using eCInema.Models.Entities;
+using eCInema.Models.Exceptions;
 using eCInema.Models.SearchObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
@@ -267,8 +268,9 @@ namespace eCinema.Services.MoviesServices
         }
 
 
-        public List<MovieSales> SalesByMovie()
+        public List<MovieSales> SalesByMovie(SalesPerMovieSearchObject? search)
         {
+            
             var sales = _context.Reservations.Where(x => x.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid)
                 .Include(x => x.Schedule).ThenInclude(y => y.Movie)
                .GroupBy(y=>y.Schedule.Movie).
@@ -277,11 +279,25 @@ namespace eCinema.Services.MoviesServices
                         Movie = x.Key,
                         Sales = x.Sum(y => y.Price)
                     }).
-                    ToList();
-            return sales;
+                    AsQueryable();
+            if (!String.IsNullOrEmpty(search?.Title))
+            {
+                sales = sales.Where(x => x.Movie.Title.ToLower().Contains(search.Title.ToLower()));
+            }
+            var list = sales.ToList();
+            return list;
         }
 
-        
+        //public override List<MovieDetailsDto> Delete(int id)
+        //{
+        //    var movie = _context.Movies.Include(x => x.Schedules).First(x => x.Id == id);
+        //    if (movie == null)
+        //        throw new NotFoundException("Not found");
+        //    _context.Movies.Remove(movie);
+        //    _context.SaveChanges();
+        //    var movies = _context.Movies.ToList();
+        //    return _mapper.Map<List<MovieDetailsDto>>(movies);
+        //}
 
         public class Copurchase_prediction
         {

@@ -13,6 +13,6 @@ namespace eCinema.Services.Resrevations
 {
     public interface IReservationService:IBaseCRUDService<ReservationDto, ReservationSearchObject, ReservationInsertDto, ReservationUpdateDto>
     {
-        List<SalesPerCustomer> GetReservationsByCustomer();
+        List<SalesPerCustomer> GetReservationsByCustomer(SalesByCustomerSearchObject search);
     }
 }

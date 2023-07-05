@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:ecinemamobile/models/Authorization/authorization.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
+import 'package:ecinemamobile/screens/movies.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -54,7 +55,7 @@ class _UserProfileState extends State<UserProfile> {
     });
   }
 
-  Future Edit() async {
+  Edit() async {
     Customer edit = Customer.paramterless();
     edit.firstName = firstName;
     edit.lastName = lastName;
@@ -65,7 +66,6 @@ class _UserProfileState extends State<UserProfile> {
       UserProvider();
       await _userProvider!.update(user!.id!, edit);
       showMessage("Sucessfuly edited");
-      Navigator.pop(context);
     } catch (err) {
       showMessage(err.toString());
     }
@@ -257,7 +257,8 @@ class _UserProfileState extends State<UserProfile> {
               actions: [
                 TextButton(
                     child: const Text("Ok"),
-                    onPressed: () => Navigator.pop(context))
+                    onPressed: () =>
+                        Navigator.pushNamed(context, MoviesListScreen.route))
               ],
             ));
   }

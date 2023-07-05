@@ -8,6 +8,7 @@ import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart';
 import 'package:http/io_client.dart';
 import '../models/Authorization/authorization.dart';
+import 'package:ecinemamobile/assets/.env';
 
 abstract class BaseProvider<T> with ChangeNotifier {
   static String? _baseUrl;
@@ -78,11 +79,14 @@ abstract class BaseProvider<T> with ChangeNotifier {
       var data = jsonDecode(response.body);
       return data;
     } else {
-      throw Exception("Exception... ");
+      throw Exception("Something went wrong ");
     }
   }
 
   createPaymentIntent(String amount) async {
+    String secret = const String.fromEnvironment("stripeSecretKey",
+        defaultValue: stripeSecretKey);
+
     try {
       Map<String, dynamic> body = {
         'amount': amount,
@@ -92,7 +96,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
       var url = "https://api.stripe.com/v1/payment_intents";
       var response = await http!.post(Uri.parse(url),
           headers: {
-            'Authorization': 'Bearer ${dotenv.env['SECRET_KEY']}',
+            'Authorization': 'Bearer $secret',
             'Content-Type': 'application/x-www-form-urlencoded'
           },
           body: body);

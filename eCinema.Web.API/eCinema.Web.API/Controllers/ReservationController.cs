@@ -58,9 +58,9 @@ namespace eCinema.Web.API.Controllers
 
         [HttpGet("ByCustomer")]
         [Authorize(UserRole.Admin)]
-        public IActionResult GetReservationsByCustomer()
+        public IActionResult GetReservationsByCustomer([FromQuery] SalesByCustomerSearchObject? search=null)
         {
-            return Ok(_service.GetReservationsByCustomer());
+            return Ok(_service.GetReservationsByCustomer(search));
         }
     }
 }

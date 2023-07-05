@@ -12,5 +12,6 @@ namespace eCInema.Models.Entities
         public string? City { get; set; }
         public string? IdentificationNumber { get; set; }
         public CustomerTypeEnum CustomerType { get; set; }
+        public List<Reservation> Reservations { get; set; }
     }
 }

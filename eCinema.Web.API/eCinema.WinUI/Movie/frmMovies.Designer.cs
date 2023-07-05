@@ -239,7 +239,7 @@
             this.Name = "frmMovies";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Movies";
-            this.Load += new System.EventHandler(this.frmMovies_Load);
+            this.Load += new System.EventHandler(this.frmMovies_LoadAsync);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMovies)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

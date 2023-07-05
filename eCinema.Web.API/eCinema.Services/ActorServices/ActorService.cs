@@ -57,7 +57,7 @@ namespace eCinema.Services.ActorService
                 if (find != null)
                 {
                     _context.ActorsMovies.Remove(find);
-                    _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
         }

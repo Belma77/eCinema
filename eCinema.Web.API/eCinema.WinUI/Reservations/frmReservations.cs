@@ -103,17 +103,7 @@ namespace eCinema.WinUI
             return retValue;
         }
 
-        //private async void txtFirstName_TextChanged(object sender, EventArgs e)
-        //{
-        //    await LoadReservations();
-        //}
-
-
-        //private async void txtMovie_TextChanged(object sender, EventArgs e)
-        //{
-        //    await LoadReservations();
-        //}
-
+       
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var data = dgvReservations.SelectedRows[0].DataBoundItem as ReservationDto;
