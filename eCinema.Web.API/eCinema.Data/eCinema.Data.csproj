@@ -7,8 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Script\**" />
+    <EmbeddedResource Remove="Script\**" />
+    <None Remove="Script\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Remove="SeedMovies.cs" />
     <Compile Remove="SeedUsers.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Script\script.sql" />
   </ItemGroup>
 
   <ItemGroup>

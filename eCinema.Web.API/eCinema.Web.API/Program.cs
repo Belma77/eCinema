@@ -133,11 +133,6 @@ public class Program
         }
         app.Run();
     }
-    public static void InsertData(eCinemaContext context)
-    {
-        var path = Path.Combine(Directory.GetCurrentDirectory(), "Script", "script.sql");
-        var query = File.ReadAllText(path);
-        context.Database.ExecuteSqlRaw(query);
-    }
+    
 
 }
