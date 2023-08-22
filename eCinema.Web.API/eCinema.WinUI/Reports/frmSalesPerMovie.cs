@@ -66,7 +66,7 @@ namespace eCinema.WinUI.Reports
         }
         private async void frmSalesPerMovie_Load(object sender, EventArgs e)
         {
-           LoadReportData();
+           await LoadReportData();
         }
 
         private async void button1_Click(object sender, EventArgs e)
@@ -75,10 +75,10 @@ namespace eCinema.WinUI.Reports
             await LoadReportData();
         }
 
-        private void btnClear_Click(object sender, EventArgs e)
+        private async void btnClear_Click(object sender, EventArgs e)
         {
             txtSearch.Clear();
-            LoadReportData();   
+            await LoadReportData();   
         }
     }
 }

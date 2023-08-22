@@ -18,7 +18,7 @@ namespace eCinema.WinUI.Reports
     {
         private APIservice service = new APIservice("Reservation");
         List<SalesPerCustomer> sales = new List<SalesPerCustomer>();
-        SalesByCustomerSearchObject search = null;
+        SalesByCustomerSearchObject? search = null;
         public frmSalesPerCustomerReport()
         {
             InitializeComponent();
@@ -47,31 +47,7 @@ namespace eCinema.WinUI.Reports
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
-            //if (!string.IsNullOrEmpty(txtSearch.Text))
-            //{
-            //    rpvSales.RefreshReport();
-            //    rpvSales.LocalReport.DataSources.Clear();
-            //    var rds = new ReportDataSource();
-            //    var salesTable = new dsSales.SalesPerCustomerDataTable();
-            //    var filter = txtSearch.Text.ToLower();
-            //    var data = sales.Where(x => x.Customer.FirstName.ToLower().Contains(filter) || x.Customer.LastName.ToLower().Contains(filter));
-            //    foreach (var sale in data)
-            //    {
-            //        var row = salesTable.NewSalesPerCustomerRow();
-            //        row.CustomerId = sale.Customer.Id.ToString();
-            //        row.FirstName = sale.Customer.FirstName;
-            //        row.LastName = sale.Customer.LastName;
-            //        row.Sales = sale.Sales.ToString();
-            //        salesTable.Rows.Add(row);
-
-            //    }
-
-            //    rds.Name = "dsSales";
-            //    rds.Value = salesTable;
-            //    rpvSales.LocalReport.DataSources.Clear();
-            //    rpvSales.LocalReport.DataSources.Add(rds);
-            //    rpvSales.RefreshReport();
-            //}
+            
             await LoadReportData();
         }
 

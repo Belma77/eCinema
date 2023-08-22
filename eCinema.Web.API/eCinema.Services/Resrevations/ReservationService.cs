@@ -38,9 +38,9 @@ namespace eCinema.Services.Resrevations
         {
           if (!String.IsNullOrEmpty(search.CustomerName))
             {
-                query = query.Where(x => x.Customer.FirstName.ToLower().StartsWith(search.CustomerName.ToLower())
-                || x.Customer.LastName.ToLower().StartsWith(search.CustomerName.ToLower())
-                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().StartsWith(search.CustomerName.ToLower()));
+                query = query.Where(x => x.Customer.FirstName.ToLower().Contains(search.CustomerName.ToLower())
+                || x.Customer.LastName.ToLower().Contains(search.CustomerName.ToLower())
+                || (x.Customer.FirstName + " " + x.Customer.LastName).ToLower().Contains(search.CustomerName.ToLower()));
             }
 
             if (!String.IsNullOrEmpty(search.Movie))

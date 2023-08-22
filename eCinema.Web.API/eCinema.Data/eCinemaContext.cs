@@ -83,7 +83,6 @@ namespace eCinema.Data
                  .WithMany(m => m.Schedules)
                  .HasForeignKey(s => s.MovieId);
 
-           
 
             builder.Entity<User>().HasDiscriminator<UserRole>("Discriminator")
                 .HasValue<Customer>(UserRole.Customer)
@@ -92,6 +91,8 @@ namespace eCinema.Data
             builder.Entity<User>()
             .HasIndex(u => u.UserName)
             .IsUnique();
+
+            
 
         }
         

@@ -130,7 +130,6 @@ public class Program
         {
             var dataContext = scope.ServiceProvider.GetService<eCinemaContext>();
             dataContext.Database.Migrate();
-            InsertData(dataContext);
         }
         app.Run();
     }

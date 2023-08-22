@@ -62,7 +62,7 @@ namespace eCinema.Services.MoviesServices
             var filteredQuery = base.AddFilter(query, search);
             if (!string.IsNullOrEmpty(search?.Title))
             {
-                filteredQuery = query.Where(x => x.Title.StartsWith(search.Title));
+                filteredQuery = query.Where(x => x.Title.ToLower().Contains(search.Title.ToLower()));
             }
 
             return filteredQuery;
@@ -177,7 +177,7 @@ namespace eCinema.Services.MoviesServices
         static object isLocked = new object();
         static MLContext mlContext = null;
         static ITransformer model = null;
-        static List<ProductEntry> data=null;
+        static List<MovieEntry> data=null;
         public async Task<List<GetMoviesDto>> Recommend(int id)
         {
             TrainData();
@@ -210,8 +210,8 @@ namespace eCinema.Services.MoviesServices
             foreach (var item in allItems)
 
             {
-                var predictionEngine = mlContext.Model.CreatePredictionEngine<ProductEntry, Copurchase_prediction>(model);
-                var prediction = predictionEngine.Predict(new ProductEntry()
+                var predictionEngine = mlContext.Model.CreatePredictionEngine<MovieEntry, Copurchase_prediction>(model);
+                var prediction = predictionEngine.Predict(new MovieEntry()
                 {
                     UserId = (uint)customerId,
                     MovieId = (uint)movieId,
@@ -235,11 +235,11 @@ namespace eCinema.Services.MoviesServices
                     mlContext = new MLContext();
                     var tmpData = _context.Reservations.Include(x => x.Customer).Include(x => x.Schedule).ThenInclude(y => y.Movie).ToList();
 
-                    data = new List<ProductEntry>();
+                    data = new List<MovieEntry>();
                     foreach (var res in tmpData)
                     {
 
-                        data.Add(new ProductEntry()
+                        data.Add(new MovieEntry()
                         {
                             MovieId = (uint)res.Schedule.MovieId,
                             UserId = (uint)res.CustomerId
@@ -249,8 +249,8 @@ namespace eCinema.Services.MoviesServices
                     mlContext = new MLContext();
                     var traindata = mlContext.Data.LoadFromEnumerable(data);
                     MatrixFactorizationTrainer.Options options = new MatrixFactorizationTrainer.Options();
-                    options.MatrixColumnIndexColumnName = nameof(ProductEntry.UserId);
-                    options.MatrixRowIndexColumnName = nameof(ProductEntry.MovieId);
+                    options.MatrixColumnIndexColumnName = nameof(MovieEntry.UserId);
+                    options.MatrixRowIndexColumnName = nameof(MovieEntry.MovieId);
                     options.LabelColumnName = "Label";
                     options.LossFunction = MatrixFactorizationTrainer.LossFunctionType.SquareLossOneClass;
                     options.Alpha = 0.01;
@@ -280,7 +280,7 @@ namespace eCinema.Services.MoviesServices
                         Sales = x.Sum(y => y.Price)
                     }).
                     AsQueryable();
-            if (!String.IsNullOrEmpty(search?.Title))
+            if (!string.IsNullOrEmpty(search?.Title))
             {
                 sales = sales.Where(x => x.Movie.Title.ToLower().Contains(search.Title.ToLower()));
             }
@@ -288,23 +288,13 @@ namespace eCinema.Services.MoviesServices
             return list;
         }
 
-        //public override List<MovieDetailsDto> Delete(int id)
-        //{
-        //    var movie = _context.Movies.Include(x => x.Schedules).First(x => x.Id == id);
-        //    if (movie == null)
-        //        throw new NotFoundException("Not found");
-        //    _context.Movies.Remove(movie);
-        //    _context.SaveChanges();
-        //    var movies = _context.Movies.ToList();
-        //    return _mapper.Map<List<MovieDetailsDto>>(movies);
-        //}
 
         public class Copurchase_prediction
         {
             public float Score { get; set; }
         }
 
-        public class ProductEntry
+        public class MovieEntry
         {
             [KeyType(count: 10)]
             public uint UserId { get; set; }
@@ -312,7 +302,6 @@ namespace eCinema.Services.MoviesServices
             [KeyType(count: 10)]
             public uint MovieId { get; set; }
 
-            public float Label { get; set; }
         }
     }
 }

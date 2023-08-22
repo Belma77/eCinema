@@ -13,6 +13,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace eCinema.Services.UserServices
 {
@@ -25,7 +26,7 @@ namespace eCinema.Services.UserServices
 
         public UserDto Login(UserLoginDto login)
         {
-            var entity = _context.Users.FirstOrDefault(x => x.UserName==login.UserName);
+            var entity = _context.Users.Where(u => u.UserName == login.UserName).FirstOrDefault();
 
             if (entity == null)
                 throw new NotFoundException("User not found");
@@ -33,7 +34,7 @@ namespace eCinema.Services.UserServices
             var hash = PasswordHelper.GenerateHash(entity.PasswordSalt, login.Password);
 
             if (hash != entity.PasswordHash)
-                return null;
+                throw new NotFoundException("Password not correct!");
 
             return _mapper.Map<UserDto>(entity);
         }

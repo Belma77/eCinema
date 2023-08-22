@@ -30,21 +30,21 @@ namespace eCinema.Services.CustomerServices
 
         public override IQueryable<Customer> AddFilter(IQueryable<Customer> query, CustomerSearchObject search = null)
         {
-            if (!String.IsNullOrEmpty(search.Name))
-                query = query.Where(x => x.FirstName.ToLower().StartsWith(search.Name.ToLower())
+            if (!string.IsNullOrEmpty(search.Name))
+                query = query.Where(x => x.FirstName.ToLower().Contains(search.Name.ToLower())
                 || (x.LastName.ToLower().Contains(search.Name.ToLower()))
                 || (x.FirstName + " " + x.LastName).ToLower().Contains(search.Name.ToLower()));
 
-            if (!String.IsNullOrEmpty(search.Username))
+            if (!string.IsNullOrEmpty(search.Username))
                 query = query.Where(x => x.UserName.ToLower()==search.Username.ToLower());
 
-            if(!String.IsNullOrEmpty(search.FirstName))
+            if(!string.IsNullOrEmpty(search.FirstName))
             {
-                query = query.Where(x => x.FirstName.ToLower().StartsWith(search.FirstName.ToLower()));
+                query = query.Where(x => x.FirstName.ToLower().Contains(search.FirstName.ToLower()));
             }
-            if (!String.IsNullOrEmpty(search.LastName))
+            if (!string.IsNullOrEmpty(search.LastName))
             {
-                query = query.Where(x => x.LastName.ToLower().StartsWith(search.LastName.ToLower()));
+                query = query.Where(x => x.LastName.ToLower().Contains(search.LastName.ToLower()));
             }
 
             return query;

@@ -6,6 +6,7 @@ using MediaBrowser.Model.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Net.WebRequestMethods;
@@ -63,7 +64,10 @@ namespace eCinema.WinUI
                     MessageBox.Show("Something went wrong", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 throw;
+                
+                
             }
+           
         }
         
         public async Task<T> GetById<T>(object id)

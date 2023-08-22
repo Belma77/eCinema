@@ -378,7 +378,8 @@ namespace eCinema.Data.Migrations
 
                     b.Property<string>("UserName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(450)")
+                        .UseCollation("SQL_Latin1_General_CP1_CS_AS");
 
                     b.Property<int>("UserRole")
                         .HasColumnType("int");
