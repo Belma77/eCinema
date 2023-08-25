@@ -27,7 +27,7 @@ docker-compose up --build
  2. flutter run  (pokretanje aplikacije)
  Za pokretanje na mobilnom telefonu, ukucati flutter run --dart-define baseUrl=http://vasaIpAdresa:5239/
  Za promjenu vrijednosti Stripe keys, kucati komandu: flutter run --dart-define stripePublishableKey=primjerPublishableKljuca --dart-define 
- stripeSecretKey=primjerSecretKeya    
+ stripeSecretKey=primjerSecretKeya  
 
  Desktop aplikacija:  
  Otvoriti solution unutar Visual studija, postaviti Startup projekat na eCinema.WinUI te pokrenuti. 
