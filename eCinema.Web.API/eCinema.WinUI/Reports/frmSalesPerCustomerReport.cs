@@ -71,7 +71,7 @@ namespace eCinema.WinUI.Reports
                 row.CustomerId = sale.Customer.Id.ToString();
                 row.FirstName = sale.Customer.FirstName;
                 row.LastName = sale.Customer.LastName;
-                row.Sales = sale.Sales.ToString();
+                row.Sales = sale.Sales.ToString("0.00");
                 salesTable.Rows.Add(row);
 
             }

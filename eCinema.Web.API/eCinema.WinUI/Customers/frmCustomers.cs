@@ -39,13 +39,30 @@ namespace eCinema.WinUI.Customers
 
         private async Task LoadCustomers()
         {
+            btnNext.Enabled = true;
+            if(pageNumber==1)
+            {
+                btnPrevoius.Enabled = false;
+            }
+            else
+            {
+                btnPrevoius.Enabled = true;
+            }
             var search = new CustomerSearchObject();
             search.Name = txtName.Text;
             search.PageNumber = pageNumber;
             search.PageSize = pageSize;
             var customers = await service.Get<List<CustomerDto>>(search);
             dgvCustomers.AutoGenerateColumns = false;
-            dgvCustomers.DataSource = customers.ToList();
+            if (customers != null)
+            {
+                dgvCustomers.DataSource = customers.ToList();
+                if(customers.Count<pageSize)
+                {
+                    btnNext.Enabled = false;
+                }    
+            }
+
 
         }
 
@@ -85,6 +102,7 @@ namespace eCinema.WinUI.Customers
         {
             pageNumber++;
             await LoadCustomers();
+            btnPrevoius.Enabled = true;
         }
 
         private async void btnPrevoius_Click(object sender, EventArgs e)
@@ -93,6 +111,7 @@ namespace eCinema.WinUI.Customers
             {
                 pageNumber--;
                 await LoadCustomers();
+                btnNext.Enabled = true;
             }
         }
 
@@ -111,6 +130,7 @@ namespace eCinema.WinUI.Customers
 
         private async void txtSearch_Click(object sender, EventArgs e)
         {
+            pageNumber = 1;
             await LoadCustomers();
         }
     }

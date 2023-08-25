@@ -99,13 +99,25 @@ namespace eCinema.WinUI
 
          private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
          {
-            if (Validator.Validate(dataGridView1,errorProvider1, AlertMessages.CantDeleteEmptyRow))
-            {
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
 
-                foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+            if (selectedRow.IsNewRow)
+            {
+                errorProvider1.SetError(dataGridView1, AlertMessages.CantDeleteEmptyRow);
+
+            }
+            else
+            {
+                
+                if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(item.Index);
+
+                    foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                    {
+                        dataGridView1.Rows.RemoveAt(item.Index);
+                    }
                 }
+                
             }
            
          }

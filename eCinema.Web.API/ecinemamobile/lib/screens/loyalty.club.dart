@@ -68,12 +68,7 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
         paymentIntent = await _loyaltyClubProvider!.createPaymentIntent('2395');
         await displayPaymentSheet();
       } on StripeException catch (e) {
-        showDialog(
-          context: context,
-          builder: (_) => const AlertDialog(
-            content: Text(ErrorMessages.paymentCanceled),
-          ),
-        );
+        showMessage(ErrorMessages.paymentFailed);
       } catch (err) {
         rethrow;
       }
@@ -94,17 +89,7 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
     _loyaltyClubProvider = LoyaltyClubProvider();
     try {
       await _loyaltyClubProvider!.insert(loyalty);
-      showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-          content: Text("Payment succesful"),
-          actions: [
-            TextButton(
-                child: const Text("Ok"),
-                onPressed: () => Navigator.pop(context))
-          ],
-        ),
-      );
+      showMessage("Payment successful");
     } catch (err) {
       rethrow;
     }
@@ -270,15 +255,15 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
                           style: const TextStyle(
                               fontSize: 18.0, height: 1.5, color: Colors.black),
                           decoration: const InputDecoration(
-                            labelText: 'Phone',
-                            labelStyle: TextStyle(fontSize: 15),
-                            hintText: "Phone",
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                  width: 1,
-                                  color: Color.fromARGB(255, 131, 178, 215)),
-                            ),
-                          )),
+                              labelText: 'Phone',
+                              labelStyle: TextStyle(fontSize: 15),
+                              hintText: "Phone",
+                              enabledBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(
+                                    width: 1,
+                                    color: Color.fromARGB(255, 131, 178, 215)),
+                              ),
+                              errorMaxLines: 2)),
                     ),
                     Container(
                       margin: EdgeInsets.all(10),
@@ -300,7 +285,7 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
                           child: ElevatedButton(
                             onPressed: () async {
                               try {
-                                await makePayment();
+                                makePayment();
                               } catch (err) {
                                 showDialog(
                                   context: context,
@@ -329,5 +314,22 @@ class _LoyaltyClubScreenState extends State<LoyaltyClubScreen> {
         ),
       ),
     );
+  }
+
+  showMessage(String message) {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+              title: const Text("Message"),
+              content: Text(message),
+              actions: [
+                TextButton(
+                    child: const Text("Ok"),
+                    onPressed: () => Navigator.pushNamed(
+                          context,
+                          MoviesListScreen.route,
+                        ))
+              ],
+            ));
   }
 }

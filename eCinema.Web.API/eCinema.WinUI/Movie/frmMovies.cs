@@ -11,9 +11,14 @@ namespace eCinema.WinUI
         int pageSize = 10;
         int pageNumber = 1;
         bool isLoaded=false;
+
+        private List<MovieDetailsDto> searchList=new List<MovieDetailsDto>();
+        private MoviesSearchObject search=new MoviesSearchObject();
         public frmMovies()
         {
+           
             InitializeComponent();
+            
             
         }
        
@@ -30,14 +35,29 @@ namespace eCinema.WinUI
 
         public async Task LoadMovies()
         {
+            btnNext.Enabled = true;
+            if(pageNumber==1)
+            {
+                btnPrevious.Enabled = false;
+            }
+            else
+            {
+                btnPrevious.Enabled = true;
+            }
             var search = new MoviesSearchObject();
             search.Title=txtTitle.Text;
             search.PageNumber = pageNumber;
             search.PageSize=pageSize;
-            var list = await _service.Get<List<MovieDetailsDto>>(search);
+            var movies = await _service.Get<List<MovieDetailsDto>>(search);
             dgvMovies.AutoGenerateColumns = false;
-            if(list!= null)
-            dgvMovies.DataSource = list;
+            if (movies != null)
+            {
+                dgvMovies.DataSource = movies;
+                if(movies.Count<pageSize)
+                {
+                    btnNext.Enabled = false;
+                }
+            }
 
         }
 
@@ -67,8 +87,11 @@ namespace eCinema.WinUI
 
         private async void btnNext_Click(object sender, EventArgs e)
         {
-            pageNumber++;
-            await LoadMovies();
+            
+                pageNumber++;
+                await LoadMovies();
+                btnPrevious.Enabled = true;
+
         }
 
         private async void btnPrevious_Click(object sender, EventArgs e)
@@ -76,6 +99,7 @@ namespace eCinema.WinUI
             if(pageNumber>1)
             {
                 pageNumber--;
+                btnNext.Enabled = true;
                 await LoadMovies();
             }
         }
@@ -95,8 +119,12 @@ namespace eCinema.WinUI
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
+            pageNumber = 1;
             await LoadMovies();
+           
         }
+
+        
 
        
     }

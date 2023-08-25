@@ -107,6 +107,7 @@ abstract class BaseProvider<T> with ChangeNotifier {
             paymentIntentClientSecret: paymentIntent!['client_secret'],
             style: ThemeMode.dark,
             merchantDisplayName: 'Merchant Name',
+            customerId: paymentIntent!['customer'],
           ))
           .then((value) => {});
 

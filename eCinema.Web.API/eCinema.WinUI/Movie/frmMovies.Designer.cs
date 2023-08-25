@@ -161,7 +161,7 @@
             // 
             this.txtTitle.Location = new System.Drawing.Point(56, 72);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(558, 27);
+            this.txtTitle.Size = new System.Drawing.Size(528, 27);
             this.txtTitle.TabIndex = 3;
             // 
             // label2
@@ -213,9 +213,9 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(620, 70);
+            this.btnSearch.Location = new System.Drawing.Point(590, 70);
             this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(98, 29);
+            this.btnSearch.Size = new System.Drawing.Size(128, 29);
             this.btnSearch.TabIndex = 9;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;

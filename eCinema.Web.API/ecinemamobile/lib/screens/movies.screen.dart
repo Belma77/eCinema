@@ -87,7 +87,8 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                         },
                         child: Container(
                           margin: EdgeInsets.all(5),
-                          width: 80,
+                          //
+                          //width: 80,
                           height: 45,
                           decoration: BoxDecoration(
                               color:
@@ -97,11 +98,15 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                                   width: 1.0,
                                   style: BorderStyle.solid),
                               borderRadius: BorderRadius.circular(10)),
-                          child: Center(
-                              child: Text(
-                            items[index],
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          )),
+                          child: Container(
+                            margin: EdgeInsets.all(8),
+                            child: Center(
+                                child: Text(
+                              items[index],
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            )),
+                          ),
                         ),
                       );
                     },
@@ -133,13 +138,16 @@ class _MoviesListScreenState extends State<MoviesListScreen> {
                   height: 300,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(12.0),
-                    child: Image.memory(base64Decode(item.movie!.poster!)),
+                    child: Image.memory(
+                      base64Decode(item.movie!.poster!),
+                      fit: BoxFit.fill,
+                    ),
                   ),
                 ),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.fromLTRB(5, 10, 5, 5),
-                    height: 300,
+                    //height: 300,
                     child: Column(
                       children: [
                         Text(

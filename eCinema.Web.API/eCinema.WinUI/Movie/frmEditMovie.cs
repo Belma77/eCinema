@@ -159,10 +159,19 @@ namespace eCinema.WinUI
                     err.SetError(txtYear, AlertMessages.OnlyNumbersAllowed);
                     return false;
                 }
-
+                else if (int.Parse(txtYear.Text) > DateTime.Now.Year)
+                {
+                    err.SetError(txtYear, AlertMessages.InvalidReleaseYear);
+                    return false;
+                }
                 else if (!int.TryParse(txtDuration.Text, out result))
                 {
                     err.SetError(txtDuration, AlertMessages.OnlyNumbersAllowed);
+                    return false;
+                }
+                else if (int.Parse(txtDuration.Text) > 240)
+                {
+                    err.SetError(txtDuration, AlertMessages.InvalidDuration);
                     return false;
                 }
                 else
@@ -386,7 +395,16 @@ namespace eCinema.WinUI
         {
             if(openFileDialog1.ShowDialog()==DialogResult.OK)
             {
-                pbPoster.Image = Image.FromFile(openFileDialog1.FileName);
+                try
+                {
+                    pbPoster.Image = Image.FromFile(openFileDialog1.FileName);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(AlertMessages.ImageLoadingFailed, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
         }
 

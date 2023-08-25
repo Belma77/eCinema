@@ -34,6 +34,8 @@ namespace eCinema.WinUI.Reservations
         private ReservationStatusEnum _status;
         List<int> pickedSeats = new List<int>();
         List<int> alreadyReserved = new List<int>();
+        List<int> allSelectedSeats = new List<int>();
+
         bool seatSelected = false;
         
         public frmSeatSelection(GetSchedulesDto schedule, CustomerDto customer, ReservationStatusEnum status)
@@ -120,6 +122,7 @@ namespace eCinema.WinUI.Reservations
         {
             if (seatSelected)
             {
+                (sender as Button).Enabled=false;
                 var reservation = new ReservationInsertDto();
                 reservation.ScheduleId = _schedule.Id;
                 reservation.NumberOfTickets = pickedSeats.Count;
@@ -139,6 +142,7 @@ namespace eCinema.WinUI.Reservations
 
                 await _reservationService.Post<ReservationDto>(reservation);
                 MessageBox.Show(AlertMessages.SuccessfulyAdded);
+                (sender as Button).Enabled = true;
                 this.Close();
 
             }
@@ -153,31 +157,35 @@ namespace eCinema.WinUI.Reservations
 
             var tag = ((Button)sender).Tag;
             var seatId = (int)tag;
-
+            allSelectedSeats.Add(seatId);   
             err.Clear();
-            if (!Validate(seatId))
+            if (isTaken(seatId))
             {
                 err.SetError((Button)sender, "Already taken");
             }
-
-            if(pickedSeats.Contains(seatId))
-            {
-                pickedSeats.Remove(seatId);
-                seatSelected = false;
-                (sender as Button).BackColor = Color.Yellow;
-            }
             else
             {
-                pickedSeats.Add(seatId);
-                seatSelected = true;
-                (sender as Button).BackColor = Color.Red;
+                if (pickedSeats.Contains(seatId))
+                {
+                    pickedSeats.Remove(seatId);
+                    seatSelected = false;
+                    (sender as Button).BackColor = Color.Yellow;
+                }
+                else
+                {
+                    pickedSeats.Add(seatId);
+                    seatSelected = true;
+                    (sender as Button).BackColor = Color.Red;
+                }
             }
         }
 
-        private bool Validate(int seatId)
+        private bool isTaken(int seatId)
         {
-            return !alreadyReserved.Contains(seatId) ? true : false;
+            return alreadyReserved.Contains(seatId) ? true : false;
         }
+
+        
         
         }
     }

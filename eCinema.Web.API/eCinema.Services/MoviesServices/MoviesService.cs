@@ -301,6 +301,7 @@ namespace eCinema.Services.MoviesServices
 
             [KeyType(count: 10)]
             public uint MovieId { get; set; }
+            public float Label { get; set; }
 
         }
     }

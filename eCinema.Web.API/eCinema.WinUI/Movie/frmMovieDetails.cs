@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace eCinema.WinUI
 {
@@ -96,6 +97,55 @@ namespace eCinema.WinUI
             this.Show();    
         }
 
-       
+        private void cmbGenres_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void cmbGenres_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+            cmbGenres.SelectedIndex = 0;
+        }
+        private void cmbDirectors_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void cmbDirectors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            cmbDirectors.SelectedIndex = 0;
+        }
+
+        private void cmbActors_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void cmbActors_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            cmbActors.SelectedIndex = 0;
+        }
+
+        private void cmbProducers_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void cmbProducers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            cmbProducers.SelectedIndex = 0;
+        }
+
+        private void cmbWriters_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+        private void cmbWriters_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            cmbWriters.SelectedIndex = 0;
+        }
+
+
     }
 }

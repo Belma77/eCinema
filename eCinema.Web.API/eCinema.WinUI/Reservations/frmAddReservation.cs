@@ -34,8 +34,10 @@ namespace eCinema.WinUI.Reservations
         public frmAddReservation()
         {
             InitializeComponent();
+            labelLastName.Text = "Select first name to load data";
+
         }
-   
+
         private async void frmAddReservation_LoadAsync(object sender, EventArgs e)
         {          
             await LoadCmb();
@@ -98,6 +100,7 @@ namespace eCinema.WinUI.Reservations
         {
             if(Validate())
             {
+                btnSeats.Enabled = false;
                 var search = new ScheduleSearchObject();
                 var movie = cmbMovie.SelectedItem as GetSchedulesDto;
                 search.Title = movie.Movie.Title;
@@ -106,6 +109,7 @@ namespace eCinema.WinUI.Reservations
                 var selected=schedules.Where(x=>x.Movie.Title.Equals(movie.Movie.Title)&&x.DateOnly.Equals(dateonly)&&x.TimeOnly.Equals(search.StartTime)).First();
                 var getId = await scheduleService.GetById<GetSchedulesDto>(selected.Id, "Seats");
                 frmSeatSelection frm = new frmSeatSelection(getId, customer, payStatus);
+                btnSeats.Enabled = true;
                 this.Close();
                 frm.ShowDialog();
                 
@@ -131,6 +135,7 @@ namespace eCinema.WinUI.Reservations
                 if (cmbFirstName.SelectedIndex != -1)
                 {
                 customer = cmbFirstName.SelectedItem as CustomerDto;
+                labelLastName.Text = "Click to select last name";
                 cmbLastName.DisplayMember = "LastName";
                 cmbLastName.DataSource = customers.Where(x => x.FirstName == customer?.FirstName).ToList();
                 }
@@ -156,5 +161,7 @@ namespace eCinema.WinUI.Reservations
                 cmbTime.DataSource = list;
             }
         }
+
+        
     }
 }

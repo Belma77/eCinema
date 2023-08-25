@@ -77,6 +77,7 @@ namespace eCinema.WinUI.ScheduleForms
         {
             if (Validate())
             {
+                btnAdd.Enabled = false;
                 var insert = new ScheduleInsertDto();
                 var title = cmbMovies.SelectedItem.ToString();
                 insert.Title = title;
@@ -86,6 +87,8 @@ namespace eCinema.WinUI.ScheduleForms
                 insert.NoHall = int.Parse(cbHall.SelectedItem.ToString());
                 await service.Post<GetSchedulesDto>(insert);
                 MessageBox.Show(AlertMessages.SuccessfulyAdded);
+                btnAdd.Enabled = true;
+
                 this.Close();
             }
         }

@@ -34,12 +34,10 @@ namespace eCinema.Services
 
             query = AddFilter(query, search);
 
-           
             if (search?.PageNumber.HasValue == true && search?.PageSize.HasValue == true)
             {
                 query = query.Skip((int)((search.PageNumber - 1) * search.PageSize)).Take((int)search.PageSize);
             }
-
             _context.Database.SetCommandTimeout(120);
             var list=query.ToList();
 

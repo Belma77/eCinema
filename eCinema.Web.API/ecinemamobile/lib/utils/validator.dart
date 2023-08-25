@@ -26,9 +26,11 @@ class Validator {
   }
 
   static String? validatePhone(String? value) {
+    String regex = r'^\d{3}[- ]\d{3}[- ]\d{3}$';
+    var regExp = RegExp(regex);
     if (value!.isEmpty) {
       return ErrorMessages.notEmptyValue;
-    } else if (value.length != 9 || double.tryParse(value) == null) {
+    } else if (!regExp.hasMatch(value)) {
       return ErrorMessages.phoneNotValid;
     }
     return null;

@@ -44,6 +44,7 @@ namespace eCinema.WinUI.LoyalClub
         {
             if(Validated())
             {
+                btnAdd.Enabled = false;
                 var loyalty = new LoyalCardInsertDto();
                 loyalty.FirstName=txtFirst.Text;
                 loyalty.LastName = txtLast.Text;
@@ -54,6 +55,7 @@ namespace eCinema.WinUI.LoyalClub
                 loyalty.CustomerId = _customer.Id;
                 await _service.Post<LoyalCardDto>(loyalty);
                 MessageBox.Show(AlertMessages.SuccessfulyAdded);
+                btnAdd.Enabled = true;
                 this.Close();
             }
         }
@@ -61,9 +63,11 @@ namespace eCinema.WinUI.LoyalClub
         private bool Validated()
         {
             int result;
-            if(!int.TryParse(txtPhone.Text, out result))
+            
+            Regex phoneRegxExpression=new Regex(@"^\(?([0-9]{3})\)?[-\s ]?([0-9]{3})[-\s ]?([0-9]{3})$");
+            if(!phoneRegxExpression.IsMatch(txtPhone.Text))
             {
-                err.SetError(txtPhone, AlertMessages.OnlyNumbersAllowed);
+                err.SetError(txtPhone, AlertMessages.PhoneFormat);
                 return false;
             }
             Regex emailRegxExpression;

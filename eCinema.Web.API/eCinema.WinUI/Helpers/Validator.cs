@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -25,6 +26,8 @@ namespace eCinema.WinUI.Helpers
 
             else if (control is PictureBox && (control as PictureBox).Image == null)
                 _setError = true;
+            
+           
 
             else if (control is RichTextBox && string.IsNullOrEmpty(control.Text))
                 _setError = true;
@@ -36,20 +39,25 @@ namespace eCinema.WinUI.Helpers
 
                     foreach (DataGridViewRow row in (control as DataGridView).Rows)
                     {
+                       
 
-                        if (!row.IsNewRow)
-                        {
+                         if (!row.IsNewRow)
+                         {
                             foreach (DataGridViewCell cell in row.Cells)
                             {
                                 if (cell.Value == null)
                                     _setError = true;
                             }
-                        }
+                         }
+                        
 
                     }
                 }
+                
+
+
                 else
-                {
+                        {
                     foreach (DataGridViewRow row in (control as DataGridView).Rows)
                     {
                             foreach (DataGridViewCell cell in row.Cells)
@@ -61,6 +69,7 @@ namespace eCinema.WinUI.Helpers
                     }
                 }
             }
+
 
                 if (_setError)
                 {

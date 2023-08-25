@@ -125,6 +125,16 @@ namespace eCinema.Services.Resrevations
             return sales.ToList();
             
         }
-        
+        public override ReservationDto Update(int id, ReservationUpdateDto update)
+        {
+            if (update.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid)
+                throw new BadRequestException("Can't cancel paid reservation");
+
+            if(update.Status==eCInema.Models.Enums.ReservationStatusEnum.Canceled)
+            {
+                throw new BadRequestException("Already canceled reservation");
+            }
+            return base.Update(id, update);
+        }
     }
 }

@@ -155,14 +155,13 @@
             // 
             this.txtFirstName.Location = new System.Drawing.Point(78, 89);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(297, 27);
+            this.txtFirstName.Size = new System.Drawing.Size(316, 27);
             this.txtFirstName.TabIndex = 3;
-            //this.txtFirstName.TextChanged += new System.EventHandler(this.txtFirstName_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 92);
+            this.label2.Location = new System.Drawing.Point(23, 96);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(49, 20);
             this.label2.TabIndex = 4;
@@ -183,7 +182,6 @@
             this.txtMovie.Name = "txtMovie";
             this.txtMovie.Size = new System.Drawing.Size(370, 27);
             this.txtMovie.TabIndex = 6;
-            //this.txtMovie.TextChanged += new System.EventHandler(this.txtMovie_TextChanged);
             // 
             // btnNext
             // 

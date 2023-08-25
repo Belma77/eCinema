@@ -203,52 +203,53 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 ),
               ),
             ),
-            Container(
-              width: double.infinity,
-              height: 40,
-              margin: EdgeInsets.only(left: 30),
-              child: Row(
-                children: [
-                  Padding(
-                      padding: EdgeInsets.all(8),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(4)),
-                          width: 20,
-                          height: 20)),
-                  const Text("Taken seats"),
-                  Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.yellow,
-                              border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(4)),
-                          width: 20,
-                          height: 20)),
-                  const Text("Free seats"),
-                  Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.red,
-                              border: Border.all(
-                                  color: Colors.grey,
-                                  width: 1.0,
-                                  style: BorderStyle.solid),
-                              borderRadius: BorderRadius.circular(4)),
-                          width: 20,
-                          height: 20)),
-                  const Text("Selected seats"),
-                ],
+            SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                        padding: EdgeInsets.all(8),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                    style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(4)),
+                            width: 20,
+                            height: 20)),
+                    const Text("Taken seats"),
+                    Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.yellow,
+                                border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                    style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(4)),
+                            width: 20,
+                            height: 20)),
+                    const Text("Free seats"),
+                    Padding(
+                        padding: const EdgeInsets.all(8),
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.red,
+                                border: Border.all(
+                                    color: Colors.grey,
+                                    width: 1.0,
+                                    style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(4)),
+                            width: 20,
+                            height: 20)),
+                    const Text("Selected seats"),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -259,24 +260,27 @@ class _ReservationScreenState extends State<ReservationScreen> {
                 child: Row(
                   children: [
                     Column(children: [
-                      Container(
-                          width: 30,
-                          height: 170,
-                          child: ListView.builder(
-                            itemCount: hall?.numberOfRows,
-                            scrollDirection: Axis.vertical,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 9),
-                                child: Container(
-                                    width: 3,
-                                    child: Text(
-                                      alpha[index],
-                                      style: const TextStyle(fontSize: 16),
-                                    )),
-                              );
-                            },
-                          ))
+                      Expanded(
+                        child: Container(
+                            width: 30,
+                            height: 170,
+                            child: ListView.builder(
+                              itemCount: hall?.numberOfRows,
+                              scrollDirection: Axis.vertical,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 8, 8, 9),
+                                  child: Container(
+                                      width: 3,
+                                      child: Text(
+                                        alpha[index],
+                                        style: const TextStyle(fontSize: 15),
+                                      )),
+                                );
+                              },
+                            )),
+                      )
                     ]),
                     Expanded(
                       child: Container(
@@ -421,95 +425,95 @@ class _ReservationScreenState extends State<ReservationScreen> {
                     ),
                   ),
                 ),
-                Container(
-                  width: double.infinity,
-                  height: 35,
-                  margin: const EdgeInsets.only(left: 20),
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: ListView.builder(
-                      itemCount: chosenSeats?.length,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 8, 8, 9),
-                          child: Center(
-                            child: Text("${chosenSeats![index]},",
-                                style: const TextStyle(fontSize: 16)),
-                          ),
-                        );
-                      },
+                Padding(
+                  padding: EdgeInsets.fromLTRB(0, 8, 8, 5),
+                  child: Container(
+                    width: double.infinity,
+                    height: 35,
+                    margin: const EdgeInsets.only(left: 20),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: ListView.builder(
+                        itemCount: chosenSeats?.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 8, 8, 9),
+                            child: Center(
+                              child: Text("${chosenSeats![index]},",
+                                  style: const TextStyle(fontSize: 16)),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(
-                  height: 60,
+                  height: 10,
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: double.infinity,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Container(
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.blue),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    try {
-                                      makeReservation(
-                                          ReservationStatusEnum.Booked);
-                                    } catch (e) {
-                                      showMessage(e.toString());
-                                    }
-                                  },
-                                  child: const Center(
-                                      child: Text(
-                                    "Reserve tickets",
-                                    style: TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.bold),
-                                  )),
-                                ),
+                Container(
+                  width: double.infinity,
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            //width: 130,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  try {
+                                    makeReservation(
+                                        ReservationStatusEnum.Booked);
+                                  } catch (e) {
+                                    showMessage(e.toString());
+                                  }
+                                },
+                                child: const Center(
+                                    child: Text(
+                                  "Reserve tickets",
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold),
+                                )),
                               ),
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Container(
-                              width: 130,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.blue),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    try {
-                                      pay();
-                                    } catch (e) {
-                                      showMessage(e.toString());
-                                    }
-                                  },
-                                  child: const Center(
-                                      child: Text("Buy tickets",
-                                          style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.bold))),
-                                ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            //width: 130,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.blue),
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  try {
+                                    pay();
+                                  } catch (e) {
+                                    showMessage(e.toString());
+                                  }
+                                },
+                                child: const Center(
+                                    child: Text("Buy tickets",
+                                        style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold))),
                               ),
                             ),
                           ),
-                        ]),
-                  ),
-                )
+                        ),
+                      ]),
+                ),
               ],
             )
           ]));

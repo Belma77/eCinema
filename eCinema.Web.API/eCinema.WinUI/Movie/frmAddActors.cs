@@ -42,12 +42,22 @@ namespace eCinema.WinUI
 
         private async void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (Validator.Validate(dataGridView1, err, AlertMessages.CantDeleteEmptyRow))
+            DataGridViewRow selectedRow = dataGridView1.SelectedRows[0];
+            if (selectedRow.IsNewRow)
             {
-                
-                foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                err.SetError(dataGridView1, AlertMessages.CantDeleteEmptyRow);
+
+            }
+
+            else
+            {
+                if (MessageBox.Show(AlertMessages.Delete, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    dataGridView1.Rows.RemoveAt(item.Index);
+
+                    foreach (DataGridViewRow item in this.dataGridView1.SelectedRows)
+                    {
+                        dataGridView1.Rows.RemoveAt(item.Index);
+                    }
                 }
             }
            
@@ -57,8 +67,10 @@ namespace eCinema.WinUI
 
         private async void btnSave_Click(object sender, EventArgs e)
         {
+
             if (Validate())
             {
+                btnSave.Enabled = false;
                 List<ActorDto> list = new List<ActorDto>();
 
                 for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)
@@ -76,8 +88,11 @@ namespace eCinema.WinUI
                 _insert.Actors = list;
 
                 await service.Post<MovieInsertDto>(_insert);
+                
                 MessageBox.Show(AlertMessages.SuccessfulyAdded);
+                btnSave.Enabled = true;
                 this.Close();
+                
             }
 
         }

@@ -44,14 +44,37 @@ namespace eCinema.WinUI
 
         private async Task LoadReservations()
         {
-           
+            btnNext.Enabled = true;
+            if (pageNumber==1)
+            {
+                btnPrevious.Enabled = false;
+            }
+            else
+            {
+                btnPrevious.Enabled = true;
+            }
             search.CustomerName = txtFirstName.Text;
             search.Movie = txtMovie.Text;
             search.PageNumber = pageNumber;
             search.PageSize = pageSize;
             var res = await service.Get<List<ReservationDto>>(search);
             dgvReservations.AutoGenerateColumns = false;
-            dgvReservations.DataSource = res;
+            if (res != null)
+            {
+                dgvReservations.DataSource = res;
+                if (res.Count < pageSize)
+                {
+                    btnNext.Enabled = false;
+                }
+            }
+        }
+
+        private async Task Search()
+        {
+            pageNumber = 1;
+            await LoadReservations();
+            
+            
         }
 
 
@@ -111,11 +134,16 @@ namespace eCinema.WinUI
             if (data != null)
             {
                 if (data.Status == ReservationStatusEnum.Canceled)
-                    MessageBox.Show(AlertMessages.AlreadyCanceled);
+                    MessageBox.Show(AlertMessages.AlreadyCanceled, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                if(data.Status==ReservationStatusEnum.Paid)
+                {
+                    MessageBox.Show(AlertMessages.ReservationAlreadyPaid, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
 
                 else if (MessageBox.Show(AlertMessages.Cancel, "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
-                    if (data.Status != ReservationStatusEnum.Canceled)
+                    if (data.Status != ReservationStatusEnum.Canceled && data.Status!=ReservationStatusEnum.Paid)
                     {
                         var update = new ReservationUpdateDto();
                         update.Status = ReservationStatusEnum.Canceled;
@@ -141,15 +169,18 @@ namespace eCinema.WinUI
             {
                 pageNumber--;
                 await LoadReservations();
+                btnNext.Enabled = true;
+
             }
         }
 
         private async void btnNext_ClickAsync(object sender, EventArgs e)
         {
-            
+                
                 pageNumber++;
                 await LoadReservations();
-            
+                btnPrevious.Enabled = true;
+
         }
 
         private async void cmbPageSize_SelectedIndexChanged(object sender, EventArgs e)
@@ -167,7 +198,7 @@ namespace eCinema.WinUI
 
         private async void btnSearch_Click(object sender, EventArgs e)
         {
-            await LoadReservations();
+            await Search();
         }
     }
 }

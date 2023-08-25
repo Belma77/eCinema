@@ -56,6 +56,8 @@
             // 
             // txtTitle
             // 
+            this.txtTitle.Enabled = false;
+            this.txtTitle.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtTitle.Location = new System.Drawing.Point(467, 57);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(289, 27);
@@ -75,6 +77,8 @@
             // 
             // txtYear
             // 
+            this.txtYear.Enabled = false;
+            this.txtYear.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtYear.Location = new System.Drawing.Point(467, 103);
             this.txtYear.Name = "txtYear";
             this.txtYear.Size = new System.Drawing.Size(289, 27);
@@ -82,6 +86,8 @@
             // 
             // txtCountry
             // 
+            this.txtCountry.Enabled = false;
+            this.txtCountry.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtCountry.Location = new System.Drawing.Point(467, 191);
             this.txtCountry.Name = "txtCountry";
             this.txtCountry.Size = new System.Drawing.Size(289, 27);
@@ -89,6 +95,8 @@
             // 
             // txtDuration
             // 
+            this.txtDuration.Enabled = false;
+            this.txtDuration.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.txtDuration.Location = new System.Drawing.Point(467, 146);
             this.txtDuration.Name = "txtDuration";
             this.txtDuration.Size = new System.Drawing.Size(289, 27);
@@ -96,10 +104,13 @@
             // 
             // cmbActors
             // 
+            this.cmbActors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbActors.Location = new System.Drawing.Point(467, 413);
             this.cmbActors.Name = "cmbActors";
             this.cmbActors.Size = new System.Drawing.Size(289, 28);
             this.cmbActors.TabIndex = 9;
+            this.cmbActors.SelectedIndexChanged += new System.EventHandler(this.cmbActors_SelectedIndexChanged);
+            this.cmbActors.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbActors_KeyDown);
             // 
             // Title
             // 
@@ -242,35 +253,47 @@
             // 
             // cmbGenres
             // 
+            this.cmbGenres.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGenres.FormattingEnabled = true;
             this.cmbGenres.Location = new System.Drawing.Point(467, 234);
             this.cmbGenres.Name = "cmbGenres";
             this.cmbGenres.Size = new System.Drawing.Size(289, 28);
             this.cmbGenres.TabIndex = 23;
+            this.cmbGenres.SelectedIndexChanged += new System.EventHandler(this.cmbGenres_SelectedIndexChanged);
+            this.cmbGenres.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbGenres_KeyDown);
             // 
             // cmbDirectors
             // 
+            this.cmbDirectors.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDirectors.FormattingEnabled = true;
             this.cmbDirectors.Location = new System.Drawing.Point(467, 278);
             this.cmbDirectors.Name = "cmbDirectors";
             this.cmbDirectors.Size = new System.Drawing.Size(289, 28);
             this.cmbDirectors.TabIndex = 24;
+            this.cmbDirectors.SelectedIndexChanged += new System.EventHandler(this.cmbDirectors_SelectedIndexChanged);
+            this.cmbDirectors.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbDirectors_KeyDown);
             // 
             // cmbWriters
             // 
+            this.cmbWriters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbWriters.FormattingEnabled = true;
             this.cmbWriters.Location = new System.Drawing.Point(467, 327);
             this.cmbWriters.Name = "cmbWriters";
             this.cmbWriters.Size = new System.Drawing.Size(289, 28);
             this.cmbWriters.TabIndex = 25;
+            this.cmbWriters.SelectedIndexChanged += new System.EventHandler(this.cmbWriters_SelectedIndexChanged);
+            this.cmbWriters.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbWriters_KeyDown);
             // 
             // cmbProducers
             // 
+            this.cmbProducers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbProducers.FormattingEnabled = true;
             this.cmbProducers.Location = new System.Drawing.Point(467, 370);
             this.cmbProducers.Name = "cmbProducers";
             this.cmbProducers.Size = new System.Drawing.Size(289, 28);
             this.cmbProducers.TabIndex = 26;
+            this.cmbProducers.SelectedIndexChanged += new System.EventHandler(this.cmbProducers_SelectedIndexChanged);
+            this.cmbProducers.KeyDown += new System.Windows.Forms.KeyEventHandler(this.cmbProducers_KeyDown);
             // 
             // frmMovieDetails
             // 

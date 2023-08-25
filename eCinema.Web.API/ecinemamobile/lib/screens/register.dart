@@ -191,6 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             labelStyle: TextStyle(fontSize: 15),
                             labelText: 'Phone',
                             hintText: "Phone",
+                            errorMaxLines: 2,
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                   width: 1,

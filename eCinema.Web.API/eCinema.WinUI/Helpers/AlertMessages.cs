@@ -17,6 +17,7 @@ namespace eCinema.WinUI.Helpers
         public const string AlreadyCanceled = "Reservation has been already canceled!";
         public const string OnlyNumbersAllowed = "Only numbers allowed!";
         public const string EmailFormat = "Email not in a right format!";
+        public const string PhoneFormat = "Phone number not in a right format! Format of phone number could be '123456789, 123-456-789, 123 456 789 and (123)-456-789'";
         public const string SeatsNotSelected = "Please select seats to make reservation, reservation failed!";
         public const string EndTimeNotValid = "End time must be larger than start time";
         public const string GenresNotValid = "Movie must contain at least one genre!";
@@ -25,6 +26,12 @@ namespace eCinema.WinUI.Helpers
         public const string WritersNotValid = "Movie must contain at least one writer! Please add new ones by clicking button 'Add writers' and then deselect the ones you want to remove";
         public const string DirectorsNotValid = "Movie must contain at least one director! Please add new ones by clicking button 'Add directors' and then deselect the ones you want to remove";
         public const string CantDeleteEmptyRow = "Can't delete an empty row";
+        public const string InvalidReleaseYear = "Release year can't be greater than the current year";
+        public const string InvalidDuration = "Maximum duration allowed 240 minutes (4 hours)";
+        public const string InvalidImageFormat = "Unsuported image format";
+        public const string ImageLoadingFailed = "Failed to load image";
+        public const string ReservationAlreadyPaid = "Can't cancel paid reservation";
+
 
     }
 }

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:ecinemamobile/models/Authorization/authorization.dart';
 import 'package:ecinemamobile/screens/login.screen.dart';
 import 'package:ecinemamobile/screens/movies.screen.dart';
+import 'package:ecinemamobile/utils/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -31,6 +32,7 @@ class _UserProfileState extends State<UserProfile> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   String? firstName;
   String? lastName;
@@ -56,18 +58,20 @@ class _UserProfileState extends State<UserProfile> {
   }
 
   Edit() async {
-    Customer edit = Customer.paramterless();
-    edit.firstName = firstName;
-    edit.lastName = lastName;
-    edit.phone = phone;
-    edit.email = email;
-    edit.username = Authorization.username;
-    try {
-      UserProvider();
-      await _userProvider!.update(user!.id!, edit);
-      showMessage("Sucessfuly edited");
-    } catch (err) {
-      showMessage(err.toString());
+    if (_formKey.currentState!.validate()) {
+      Customer edit = Customer.paramterless();
+      edit.firstName = firstName;
+      edit.lastName = lastName;
+      edit.phone = phone;
+      edit.email = email;
+      edit.username = Authorization.username;
+      try {
+        UserProvider();
+        await _userProvider!.update(user!.id!, edit);
+        showMessage("Sucessfuly edited");
+      } catch (err) {
+        showMessage(err.toString());
+      }
     }
   }
 
@@ -114,132 +118,138 @@ class _UserProfileState extends State<UserProfile> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(25, 20, 25, 20),
             child: Expanded(
-              child: Column(
-                children: [
-                  Container(
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Edit();
-                        },
-                        child: const Text("Save changes"),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Edit();
+                          },
+                          child: const Text("Save changes"),
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                        controller: _firstNameController,
-                        onChanged: (String value) {
-                          firstName = value;
-                        },
-                        style: const TextStyle(
-                            fontSize: 18.0, height: 2.0, color: Colors.black),
-                        decoration: const InputDecoration(
-                          labelText: 'First name',
-                          labelStyle: TextStyle(fontSize: 15),
-                          hintText: "First name",
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: Color.fromARGB(255, 131, 178, 215)),
-                          ),
-                        )),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                        controller: _lastNameController,
-                        onChanged: (String value) {
-                          lastName = value;
-                        },
-                        style: const TextStyle(
-                            fontSize: 18.0, height: 1.5, color: Colors.black),
-                        decoration: const InputDecoration(
-                          labelStyle: TextStyle(fontSize: 15),
-                          labelText: 'Last name',
-                          hintText: "Last name",
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: Color.fromARGB(255, 131, 178, 215)),
-                          ),
-                        )),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                        controller: _emailController,
-                        onChanged: (String value) {
-                          email = value;
-                        },
-                        style: const TextStyle(
-                            fontSize: 18.0, height: 1.5, color: Colors.black),
-                        decoration: const InputDecoration(
-                          labelText: 'Email',
-                          labelStyle: TextStyle(fontSize: 15),
-                          hintText: "Email",
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: Color.fromARGB(255, 131, 178, 215)),
-                          ),
-                        )),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.all(10),
-                    child: TextField(
-                        controller: _phoneController,
-                        onChanged: (String value) {
-                          phone = value;
-                        },
-                        style: const TextStyle(
-                            fontSize: 18.0, height: 1.5, color: Colors.black),
-                        decoration: const InputDecoration(
-                          labelText: 'Phone',
-                          labelStyle: TextStyle(fontSize: 15),
-                          hintText: "Phone",
-                          enabledBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(
-                                width: 1,
-                                color: Color.fromARGB(255, 131, 178, 215)),
-                          ),
-                        )),
-                  ),
-                  Container(
-                    child: Align(
-                        alignment: Alignment.bottomCenter,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.red, // Background color
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextField(
+                          controller: _firstNameController,
+                          onChanged: (String value) {
+                            firstName = value;
+                          },
+                          style: const TextStyle(
+                              fontSize: 18.0, height: 2.0, color: Colors.black),
+                          decoration: const InputDecoration(
+                            labelText: 'First name',
+                            labelStyle: TextStyle(fontSize: 15),
+                            hintText: "First name",
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color.fromARGB(255, 131, 178, 215)),
                             ),
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext ctx) {
-                                    return AlertDialog(
-                                      title: const Text('Please Confirm'),
-                                      content: const Text(
-                                          'Are you sure to delete your account?'),
-                                      actions: [
-                                        TextButton(
-                                            onPressed: () {
-                                              delete();
-                                            },
-                                            child: const Text('Yes')),
-                                        TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text('No'))
-                                      ],
-                                    );
-                                  });
-                            },
-                            child: const Text("DELETE ACCOUNT"))),
-                  ),
-                ],
+                          )),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextField(
+                          controller: _lastNameController,
+                          onChanged: (String value) {
+                            lastName = value;
+                          },
+                          style: const TextStyle(
+                              fontSize: 18.0, height: 1.5, color: Colors.black),
+                          decoration: const InputDecoration(
+                            labelStyle: TextStyle(fontSize: 15),
+                            labelText: 'Last name',
+                            hintText: "Last name",
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color.fromARGB(255, 131, 178, 215)),
+                            ),
+                          )),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextFormField(
+                          controller: _emailController,
+                          onChanged: (String value) {
+                            email = value;
+                          },
+                          validator: Validator.validateEmail,
+                          style: const TextStyle(
+                              fontSize: 18.0, height: 1.5, color: Colors.black),
+                          decoration: const InputDecoration(
+                            labelText: 'Email',
+                            labelStyle: TextStyle(fontSize: 15),
+                            hintText: "Email",
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color.fromARGB(255, 131, 178, 215)),
+                            ),
+                          )),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10),
+                      child: TextFormField(
+                          controller: _phoneController,
+                          onChanged: (String value) {
+                            phone = value;
+                          },
+                          validator: Validator.validatePhone,
+                          style: const TextStyle(
+                              fontSize: 18.0, height: 1.5, color: Colors.black),
+                          decoration: const InputDecoration(
+                            labelText: 'Phone',
+                            labelStyle: TextStyle(fontSize: 15),
+                            hintText: "Phone",
+                            errorMaxLines: 2,
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1,
+                                  color: Color.fromARGB(255, 131, 178, 215)),
+                            ),
+                          )),
+                    ),
+                    Container(
+                      child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.red, // Background color
+                              ),
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext ctx) {
+                                      return AlertDialog(
+                                        title: const Text('Please Confirm'),
+                                        content: const Text(
+                                            'Are you sure to delete your account?'),
+                                        actions: [
+                                          TextButton(
+                                              onPressed: () {
+                                                delete();
+                                              },
+                                              child: const Text('Yes')),
+                                          TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: const Text('No'))
+                                        ],
+                                      );
+                                    });
+                              },
+                              child: const Text("DELETE ACCOUNT"))),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

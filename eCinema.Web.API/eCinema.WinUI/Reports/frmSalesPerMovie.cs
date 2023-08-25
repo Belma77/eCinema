@@ -53,7 +53,7 @@ namespace eCinema.WinUI.Reports
                 var row = salesTable.NewSalesPerMovieRow();
                 row.MovieId = sale.Movie.Id.ToString();
                 row.Title = sale.Movie.Title;
-                row.Sales = sale.Sales.ToString();
+                row.Sales = sale.Sales.ToString("0.00");
                 salesTable.Rows.Add(row);
 
             }
