@@ -24,7 +24,8 @@ docker-compose up --build
 
  Mobile aplikacija:  
  1. flutter pub get (za dobavljanje dependencies)  
- 2. flutter run  (pokretanje aplikacije)  
+ 2. flutter run  (pokretanje aplikacije)
+ Za pokretanje na mobilnom telefonu, ukucati flutter run --dart-define baseUrl=http://vasaIpAdresa:5239/
  Za promjenu vrijednosti Stripe keys, kucati komandu: flutter run --dart-define stripePublishableKey=primjerPublishableKljuca --dart-define 
  stripeSecretKey=primjerSecretKeya    
 
