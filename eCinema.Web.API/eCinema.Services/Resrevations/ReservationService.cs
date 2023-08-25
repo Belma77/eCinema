@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
@@ -127,14 +128,25 @@ namespace eCinema.Services.Resrevations
         }
         public override ReservationDto Update(int id, ReservationUpdateDto update)
         {
-            if (update.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid)
-                throw new BadRequestException("Can't cancel paid reservation");
 
-            if(update.Status==eCInema.Models.Enums.ReservationStatusEnum.Canceled)
+            var res = _context.Reservations.Where(x => x.Id == id).FirstOrDefault();
+            if (res != null)
             {
-                throw new BadRequestException("Already canceled reservation");
+                if (update.Status == eCInema.Models.Enums.ReservationStatusEnum.Canceled && res.Status == eCInema.Models.Enums.ReservationStatusEnum.Paid)
+                    throw new BadRequestException("Can't cancel paid reservation");
+
+                if (update.Status == eCInema.Models.Enums.ReservationStatusEnum.Canceled&&res.Status==eCInema.Models.Enums.ReservationStatusEnum.Canceled)
+                {
+                    throw new BadRequestException("Already canceled reservation");
+                }
+
+                    return base.Update(id, update);
+                
             }
-            return base.Update(id, update);
+            else
+            {
+                throw new BadRequestException("Reservation not found");
+            }
         }
     }
 }
